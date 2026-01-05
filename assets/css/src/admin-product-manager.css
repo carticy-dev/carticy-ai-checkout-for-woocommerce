@@ -1,0 +1,386 @@
+/**
+ * Product Feed Manager Admin Styles
+ *
+ * All styles are scoped under .carticy-ai-checkout-products parent class
+ * to avoid conflicts with WordPress core, themes, and other plugins.
+ *
+ * @package Carticy\AiCheckout
+ */
+
+/* ===== Statistics Dashboard ===== */
+.carticy-ai-checkout-products .feed-statistics {
+	background: var(--carticy-base, #fff);
+	border: 1px solid var(--carticy-grey-light, #F3F4F6);
+	border-radius: var(--carticy-radius, 4px);
+	padding: 20px;
+	margin: 20px 0;
+}
+
+.carticy-ai-checkout-products .stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 20px;
+	margin-bottom: 20px;
+}
+
+.carticy-ai-checkout-products .stat-box {
+	text-align: center;
+	padding: 20px;
+	background: var(--carticy-shade-50, #F3F4FF);
+	border-radius: var(--carticy-radius, 4px);
+	border: 1px solid var(--carticy-grey-light, #F3F4F6);
+}
+
+.carticy-ai-checkout-products .stat-number {
+	font-size: 36px;
+	font-weight: 600;
+	color: var(--carticy-primary, #1A0E6D);
+	line-height: 1.2;
+}
+
+.carticy-ai-checkout-products .stat-label {
+	font-size: 13px;
+	color: var(--carticy-grey-dark, #6B7280);
+	margin-top: 5px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.carticy-ai-checkout-products .feed-actions {
+	padding-top: 15px;
+	border-top: 1px solid var(--carticy-grey-light, #F3F4F6);
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.carticy-ai-checkout-products .feed-last-updated {
+	margin: 0;
+	padding: 5px 10px;
+	background: var(--carticy-shade-100, #E6E8FF);
+	border-radius: var(--carticy-radius, 4px);
+	font-size: 12px;
+	color: var(--carticy-grey-dark, #6B7280);
+}
+
+/* ===== Quality Score Badges ===== */
+.carticy-ai-checkout-products .quality-badge {
+	display: inline-block;
+	padding: 4px 10px;
+	border-radius: 3px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.carticy-ai-checkout-products .quality-excellent {
+	background: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+}
+
+.carticy-ai-checkout-products .quality-good {
+	background: #d1ecf1;
+	color: #0c5460;
+	border: 1px solid #bee5eb;
+}
+
+.carticy-ai-checkout-products .quality-fair {
+	background: #fff3cd;
+	color: #856404;
+	border: 1px solid #ffeaa7;
+}
+
+.carticy-ai-checkout-products .quality-poor {
+	background: #f8d7da;
+	color: #721c24;
+	border: 1px solid #f5c6cb;
+}
+
+.carticy-ai-checkout-products .quality-issues-toggle {
+	display: block;
+	margin-top: 5px;
+	font-size: 11px;
+	color: #d63638;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.carticy-ai-checkout-products .quality-issues-toggle:hover {
+	color: #a00;
+}
+
+/* ===== ChatGPT Status Column ===== */
+.carticy-ai-checkout-products .chatgpt-status {
+	display: inline-block;
+	padding: 3px 8px;
+	border-radius: 3px;
+	font-size: 12px;
+	text-decoration: none;
+	transition: all 0.2s;
+}
+
+.carticy-ai-checkout-products .chatgpt-status.enabled {
+	background: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+}
+
+.carticy-ai-checkout-products .chatgpt-status.disabled {
+	background: #f8d7da;
+	color: #721c24;
+	border: 1px solid #f5c6cb;
+}
+
+.carticy-ai-checkout-products .chatgpt-status:hover {
+	opacity: 0.8;
+}
+
+/* ===== Product List Table ===== */
+.carticy-ai-checkout-products .widefat td.image {
+	width: 60px;
+}
+
+.carticy-ai-checkout-products .widefat td.image img {
+	max-width: 50px;
+	height: auto;
+	border-radius: 3px;
+}
+
+.carticy-ai-checkout-products .widefat td.sku {
+	font-family: monospace;
+	font-size: 12px;
+	color: var(--carticy-grey-dark, #6B7280);
+}
+
+.carticy-ai-checkout-products .widefat td.chatgpt_status {
+	width: 120px;
+}
+
+.carticy-ai-checkout-products .widefat td.quality {
+	width: 180px;
+}
+
+/* ===== Product Meta Box ===== */
+/* This section loads on product edit screens (not scoped under .carticy-ai-checkout-products) */
+
+.carticy-ai-checkout-product-meta-box {
+	padding: 0;
+	font-size: 13px;
+}
+
+/* Checkbox label */
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-checkbox {
+	display: block;
+	cursor: pointer;
+	padding: 8px 0;
+	margin: 0;
+	font-size: 13px;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-checkbox input[type="checkbox"] {
+	margin: 0 6px 0 0;
+}
+
+/* Divider */
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-divider {
+	height: 1px;
+	background: #dcdcde;
+	margin: 12px 0;
+}
+
+/* Quality section */
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-quality {
+	padding: 8px 0;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-label {
+	font-size: 12px;
+	color: #646970;
+	font-weight: 500;
+}
+
+/* Small, subtle quality score badge */
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-quality-score {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 3px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-quality-score.quality-excellent {
+	background: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-quality-score.quality-good {
+	background: #d1ecf1;
+	color: #0c5460;
+	border: 1px solid #bee5eb;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-quality-score.quality-fair {
+	background: #fff3cd;
+	color: #856404;
+	border: 1px solid #ffeaa7;
+}
+
+/* Collapsible details */
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-details {
+	margin-top: 8px;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-details summary {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	cursor: pointer;
+	font-size: 12px;
+	color: #d63638;
+	padding: 4px 0;
+	list-style: none;
+	user-select: none;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-details summary::-webkit-details-marker {
+	display: none;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-details summary .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-details summary:hover {
+	color: #a00;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-details[open] summary {
+	margin-bottom: 6px;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-issues-list {
+	margin: 0;
+	padding-left: 24px;
+	list-style: disc;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-issues-list li {
+	font-size: 11px;
+	color: #646970;
+	line-height: 1.5;
+	margin-bottom: 3px;
+}
+
+/* Footer link */
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-footer {
+	padding-top: 12px;
+	margin-top: 12px;
+	border-top: 1px solid #dcdcde;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-footer a {
+	font-size: 11px;
+	color: #646970;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 2px;
+}
+
+.carticy-ai-checkout-product-meta-box .carticy-ai-checkout-meta-footer a:hover {
+	color: #2271b1;
+}
+
+/* ===== Responsive ===== */
+@media screen and (max-width: 782px) {
+	.carticy-ai-checkout-products .stats-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.carticy-ai-checkout-products .feed-actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.carticy-ai-checkout-products .feed-actions .button {
+		width: 100%;
+	}
+
+	.carticy-ai-checkout-products .carticy-modal-content {
+		margin: 20px;
+		max-height: calc(100vh - 40px);
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.carticy-ai-checkout-products .stats-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ===== Loading States ===== */
+.carticy-ai-checkout-products .button.loading {
+	position: relative;
+	pointer-events: none;
+	opacity: 0.6;
+}
+
+.carticy-ai-checkout-products .button.loading::after {
+	content: '';
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	top: 50%;
+	right: 10px;
+	margin-top: -8px;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	border-top-color: transparent;
+	animation: carticy-spin 0.6s linear infinite;
+}
+
+@keyframes carticy-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* ===== Global Tooltips ===== */
+/* Note: Tooltip appended to body, so must be outside scoped container */
+.carticy-ai-quality-tooltip {
+	position: absolute;
+	background: #1d2327;
+	color: #fff;
+	padding: 8px 12px;
+	border-radius: 3px;
+	font-size: 12px;
+	line-height: 1.4;
+	z-index: 1000;
+	max-width: 300px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	pointer-events: none;
+}
+
+.carticy-ai-quality-tooltip::after {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border: 5px solid transparent;
+	border-top-color: #1d2327;
+}

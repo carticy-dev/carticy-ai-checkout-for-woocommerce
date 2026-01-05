@@ -1,0 +1,44 @@
+{
+    "name": "carticy-ai-checkout-for-woocommerce",
+    "version": "1.0.0",
+    "description": "AI Checkout for WooCommerce - ChatGPT Instant Checkout Integration",
+    "scripts": {
+        "build": "webpack --mode production && npm run i18n:pot",
+        "dev": "webpack --mode development --watch",
+        "lint:php": "composer run lint",
+        "fix:php": "composer run format",
+        "test:php": "composer run test",
+        "test:coverage": "composer run test:coverage",
+        "compat:php": "composer run compat",
+        "analyze": "vendor/bin/phpstan analyze",
+        "i18n:pot": "wp i18n make-pot . languages/carticy-ai-checkout-for-woocommerce.pot --exclude=node_modules,vendor,tests --domain=carticy-ai-checkout-for-woocommerce",
+        "build:production": "npm run build && npm run lint:php && npm run analyze",
+        "install:tools": "composer install && composer dump-autoload -o && npm install"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bomsn/carticy-ai-checkout-for-woocommerce"
+    },
+    "keywords": [
+        "woocommerce",
+        "chatgpt",
+        "openai",
+        "checkout",
+        "stripe",
+        "agentic-commerce"
+    ],
+    "author": "Carticy",
+    "license": "GPL-2.0-or-later",
+    "devDependencies": {
+        "@babel/core": "^7.22.10",
+        "@babel/preset-env": "^7.22.10",
+        "babel-loader": "^9.1.3",
+        "css-loader": "^6.8.1",
+        "css-minimizer-webpack-plugin": "^5.0.1",
+        "mini-css-extract-plugin": "^2.7.6",
+        "terser-webpack-plugin": "^5.3.14",
+        "webpack": "^5.102.1",
+        "webpack-cli": "^5.1.4",
+        "webpack-remove-empty-scripts": "^1.1.1"
+    }
+}

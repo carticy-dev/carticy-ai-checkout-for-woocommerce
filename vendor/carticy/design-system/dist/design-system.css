@@ -1,0 +1,62 @@
+/**
+ * Carticy Design System
+ *
+ * Foundation CSS variables for all Carticy products
+ * Provides brand colors, spacing scale, typography, and visual tokens
+ *
+ * @package Carticy\DesignSystem
+ * @version 1.0.0
+ */
+
+/* ========================================
+   Carticy Design System - CSS Variables
+   ======================================== */
+
+:root {
+	/* Primary Colors */
+	--carticy-primary: #1A0E6D;
+	--carticy-accent-1: #361CBB;
+	--carticy-accent-2: #8A87FE;
+
+	/* Purple Shades */
+	--carticy-shade-50: #F3F4FF;
+	--carticy-shade-100: #E6E8FF;
+	--carticy-shade-200: #C4C8FF;
+	--carticy-shade-300: #A2A9FF;
+	--carticy-shade-400: #808AFF;
+	--carticy-shade-500: #5E6BFF;
+	--carticy-shade-600: #4B56CC;
+	--carticy-shade-700: #384199;
+	--carticy-shade-800: #252B66;
+	--carticy-shade-950: #1A0E6D;
+
+	/* Greys */
+	--carticy-grey-light: #F3F4F6;
+	--carticy-grey: #9CA3AF;
+	--carticy-grey-dark: #6B7280;
+
+	/* Base */
+	--carticy-base: #FFFFFF;
+
+	/* Spacing Scale (8px base) */
+	--carticy-spacing-xs: 8px;
+	--carticy-spacing-sm: 16px;
+	--carticy-spacing-md: 24px;
+	--carticy-spacing-lg: 32px;
+	--carticy-spacing-xl: 40px;
+
+	/* Border Radius */
+	--carticy-radius: 4px;
+
+	/* Shadows */
+	--carticy-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+	--carticy-shadow-md: 0 2px 6px rgba(0, 0, 0, 0.1);
+	--carticy-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+	/* Typography */
+	--carticy-font-size-sm: 14px;
+	--carticy-font-size-base: 16px;
+	--carticy-font-size-lg: 20px;
+	--carticy-font-size-xl: 24px;
+	--carticy-line-height: 1.6;
+}

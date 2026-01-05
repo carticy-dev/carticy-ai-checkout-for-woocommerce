@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+<ruleset name="Carticy AI Checkout for WooCommerce" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+	<description>PHPCS ruleset for Carticy AI Checkout for WooCommerce plugin.</description>
+
+	<!-- ============================================ -->
+	<!-- SECTION 1: FILE SCANNING CONFIGURATION      -->
+	<!-- ============================================ -->
+
+	<!-- Directories and files to exclude from scanning -->
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/vendors/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+	<exclude-pattern>*/bin/*</exclude-pattern>
+
+	<!-- Build artifacts -->
+	<exclude-pattern>*/assets/dist/*</exclude-pattern>
+	<exclude-pattern>*/assets/js/dist/*</exclude-pattern>
+	<exclude-pattern>*/assets/css/dist/*</exclude-pattern>
+
+	<!-- Generated files -->
+	<exclude-pattern>*/languages/*.l10n.php</exclude-pattern>
+	<exclude-pattern>*/*.asset.php</exclude-pattern>
+	<exclude-pattern>*/index.php</exclude-pattern>
+
+	<!-- Third-party libraries -->
+	<exclude-pattern>*/tgm-plugin-activation/*</exclude-pattern>
+	<exclude-pattern>*/freemius/*</exclude-pattern>
+	<exclude-pattern>*/dompdf/*</exclude-pattern>
+	<exclude-pattern>*/cmb2/*</exclude-pattern>
+	<exclude-pattern>*/redux-framework/*</exclude-pattern>
+	<exclude-pattern>*/cherry-framework/*</exclude-pattern>
+	<exclude-pattern>*/titan-framework/*</exclude-pattern>
+	<exclude-pattern>*/guzzlehttp/*</exclude-pattern>
+	<exclude-pattern>*/plugin-update-checker/*</exclude-pattern>
+	<exclude-pattern>*/composer_directory/*</exclude-pattern>
+
+	<!-- Scanner arguments -->
+	<arg value="sp"/>
+	<arg name="colors"/>
+	<arg name="parallel" value="8"/>
+	<arg name="extensions" value="php"/>
+
+	<!-- ============================================ -->
+	<!-- SECTION 2: PHP COMPATIBILITY                -->
+	<!-- ============================================ -->
+
+	<rule ref="PHPCompatibilityWP"/>
+	<config name="testVersion" value="8.0-"/>
+
+	<!-- ============================================ -->
+	<!-- SECTION 3: WORDPRESS CODING STANDARDS       -->
+	<!-- ============================================ -->
+
+	<rule ref="WordPress-Extra">
+		<!-- Allow PSR-4 class file naming -->
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+	</rule>
+
+	<config name="minimum_wp_version" value="5.8"/>
+
+	<rule ref="WordPress-Docs">
+		<!-- Class docblock is sufficient -->
+		<exclude name="Squiz.Commenting.FileComment.Missing"/>
+		<!-- Allow inline comments without period -->
+		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+	</rule>
+
+	<!-- ============================================ -->
+	<!-- SECTION 4: DATABASE SECURITY                -->
+	<!-- ============================================ -->
+
+	<rule ref="WordPress.DB.PreparedSQL"/>
+	<rule ref="WordPress.DB.PreparedSQL.InterpolatedNotPrepared">
+		<type>warning</type>
+	</rule>
+	<rule ref="WordPress.DB.PreparedSQLPlaceholders"/>
+	<rule ref="WordPress.DB.RestrictedClasses">
+		<severity>7</severity>
+	</rule>
+	<rule ref="WordPress.DB.RestrictedFunctions">
+		<severity>7</severity>
+	</rule>
+
+	<!-- ============================================ -->
+	<!-- SECTION 5: INPUT SECURITY                   -->
+	<!-- ============================================ -->
+
+	<rule ref="WordPress.Security.NonceVerification">
+		<type>warning</type>
+	</rule>
+	<rule ref="WordPress.Security.ValidatedSanitizedInput">
+		<type>warning</type>
+	</rule>
+	<rule ref="WordPress.Security.PluginMenuSlug">
+		<severity>6</severity>
+	</rule>
+
+	<!-- ============================================ -->
+	<!-- SECTION 6: FORBIDDEN CONSTRUCTS             -->
+	<!-- ============================================ -->
+
+	<rule ref="Generic.PHP.BacktickOperator">
+		<severity>7</severity>
+	</rule>
+	<rule ref="Generic.PHP.DiscourageGoto.Found">
+		<type>error</type>
+		<severity>7</severity>
+		<message>The "goto" language construct should not be used.</message>
+	</rule>
+	<rule ref="Generic.PHP.DisallowShortOpenTag"/>
+	<rule ref="Generic.PHP.DisallowShortOpenTag.Found">
+		<severity>7</severity>
+	</rule>
+	<rule ref="Generic.PHP.DisallowShortOpenTag.EchoFound">
+		<severity>7</severity>
+	</rule>
+	<rule ref="Generic.PHP.DisallowAlternativePHPTags">
+		<severity>7</severity>
+	</rule>
+	<rule ref="Generic.Files.ByteOrderMark">
+		<severity>7</severity>
+	</rule>
+
+	<!-- ============================================ -->
+	<!-- SECTION 7: FORBIDDEN FUNCTIONS              -->
+	<!-- ============================================ -->
+
+	<rule ref="Generic.PHP.ForbiddenFunctions">
+		<properties>
+			<property name="forbiddenFunctions" type="array">
+				<element key="eval" value="null"/>
+				<element key="create_function" value="null"/>
+				<element key="passthru" value="null"/>
+				<element key="proc_open" value="null"/>
+				<element key="move_uploaded_file" value="null"/>
+				<element key="str_rot13" value="null"/>
+				<element key="_cleanup_header_comment" value="null"/>
+				<element key="_get_plugin_data_markup_translate" value="null"/>
+				<element key="_transition_post_status" value="null"/>
+				<element key="_wp_post_revision_fields" value="null"/>
+				<element key="do_shortcode_tag" value="null"/>
+				<element key="get_post_type_labels" value="null"/>
+				<element key="wp_get_sidebars_widgets" value="null"/>
+				<element key="wp_get_widget_defaults" value="null"/>
+			</property>
+		</properties>
+		<type>error</type>
+		<severity>7</severity>
+	</rule>
+
+	<rule ref="Squiz.PHP.DiscouragedFunctions">
+		<properties>
+			<property name="forbiddenFunctions" type="array">
+				<element key="set_time_limit" value="null"/>
+				<element key="ini_set" value="null"/>
+				<element key="ini_alter" value="null"/>
+				<element key="dl" value="null"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- ============================================ -->
+	<!-- SECTION 8: DEPRECATION RULES                -->
+	<!-- ============================================ -->
+
+	<rule ref="WordPress.WP.DeprecatedClasses"/>
+	<rule ref="WordPress.WP.DeprecatedFunctions"/>
+	<rule ref="WordPress.WP.DeprecatedParameters"/>
+	<rule ref="WordPress.DateTime.RestrictedFunctions"/>
+	<rule ref="WordPress.WP.DiscouragedConstants">
+		<type>error</type>
+		<severity>7</severity>
+	</rule>
+	<rule ref="WordPress.WP.DiscouragedFunctions">
+		<severity>6</severity>
+	</rule>
+	<rule ref="WordPress.WP.DeprecatedParameterValues">
+		<severity>7</severity>
+	</rule>
+	<rule ref="WordPress.PHP.DevelopmentFunctions">
+		<type>warning</type>
+	</rule>
+
+	<!-- ============================================ -->
+	<!-- SECTION 9: ALTERNATIVE FUNCTIONS            -->
+	<!-- ============================================ -->
+
+	<rule ref="WordPress.WP.AlternativeFunctions">
+		<type>error</type>
+		<exclude name="WordPress.WP.AlternativeFunctions.json_encode_json_encode"/>
+		<exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"/>
+		<exclude name="WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents"/>
+	</rule>
+
+	<!-- ============================================ -->
+	<!-- SECTION 10: PLUGIN CONFIGURATION            -->
+	<!-- ============================================ -->
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="carticy-ai-checkout-for-woocommerce"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="carticy_ai_checkout"/>
+				<element value="Carticy\AiCheckout"/>
+			</property>
+		</properties>
+		<exclude-pattern>*/templates/*</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.WP.Capabilities">
+		<properties>
+			<property name="custom_capabilities" type="array">
+				<element value="manage_woocommerce"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- ============================================ -->
+	<!-- SECTION 11: EXCLUSIONS                      -->
+	<!-- ============================================ -->
+
+	<!-- WordPress/WooCommerce hooks often require parameters we don't use -->
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.Found"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInExtendedClass"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInExtendedClassAfterLastUsed"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInImplementedInterface"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInImplementedInterfaceAfterLastUsed"/>
+	</rule>
+
+	<!-- ============================================ -->
+	<!-- SECTION 12: FORMATTING                      -->
+	<!-- ============================================ -->
+
+	<rule ref="WordPress.NamingConventions.ValidHookName">
+		<properties>
+			<property name="additionalWordDelimiters" value="/"/>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
+		<properties>
+			<property name="blank_line_check" value="true"/>
+		</properties>
+	</rule>
+
+	<rule ref="Squiz.Commenting.FunctionComment">
+		<properties>
+			<property name="skipIfInheritdoc" value="true"/>
+		</properties>
+	</rule>
+
+</ruleset>

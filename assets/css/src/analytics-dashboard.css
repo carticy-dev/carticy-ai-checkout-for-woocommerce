@@ -1,0 +1,270 @@
+/**
+ * Analytics Dashboard Styles
+ *
+ * All selectors scoped under .carticy-ai-checkout to prevent conflicts
+ *
+ * @package Carticy\AiCheckout
+ */
+
+/* Date Filter */
+.carticy-ai-checkout .date-filter {
+	margin: 20px 0;
+	padding: 15px;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.carticy-ai-checkout .date-filter .filter-form {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.carticy-ai-checkout .date-filter label {
+	font-weight: 600;
+	margin: 0;
+}
+
+.carticy-ai-checkout .date-filter select {
+	max-width: 200px;
+}
+
+/* Metrics Grid */
+.carticy-ai-checkout .analytics-metrics {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 20px;
+	margin: 20px 0;
+}
+
+.carticy-ai-checkout .metric-card {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 20px;
+	display: flex;
+	gap: 15px;
+	align-items: flex-start;
+	transition: box-shadow 0.3s ease;
+}
+
+.carticy-ai-checkout .metric-card:hover {
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carticy-ai-checkout .metric-card.chatgpt {
+	border-left: 4px solid #0073aa;
+}
+
+.carticy-ai-checkout .metric-card.regular {
+	border-left: 4px solid #46b450;
+}
+
+.carticy-ai-checkout .metric-card.conversion {
+	border-left: 4px solid #f56e28;
+}
+
+.carticy-ai-checkout .metric-card.aov {
+	border-left: 4px solid #826eb4;
+}
+
+.carticy-ai-checkout .metric-icon {
+	width: 48px;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.carticy-ai-checkout .metric-icon svg {
+	width: 36px;
+	height: 36px;
+	display: block;
+}
+
+/* Icon colors matching border colors */
+.carticy-ai-checkout .metric-card.chatgpt .metric-icon svg {
+	color: #0073aa;
+}
+
+.carticy-ai-checkout .metric-card.regular .metric-icon svg {
+	color: #46b450;
+}
+
+.carticy-ai-checkout .metric-card.conversion .metric-icon svg {
+	color: #f56e28;
+}
+
+.carticy-ai-checkout .metric-card.aov .metric-icon svg {
+	color: #826eb4;
+}
+
+.carticy-ai-checkout .metric-content {
+	flex: 1;
+}
+
+.carticy-ai-checkout .metric-value {
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 1.2;
+	color: #1e1e1e;
+	margin-bottom: 5px;
+}
+
+.carticy-ai-checkout .metric-label {
+	font-size: 14px;
+	font-weight: 600;
+	color: #646970;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-bottom: 5px;
+}
+
+.carticy-ai-checkout .metric-detail {
+	font-size: 13px;
+	color: #787c82;
+}
+
+/* Status Distribution */
+.carticy-ai-checkout .status-distribution {
+	margin: 30px 0;
+}
+
+.carticy-ai-checkout .status-distribution h2 {
+	margin-bottom: 15px;
+	font-size: 18px;
+}
+
+.carticy-ai-checkout .status-table {
+	background: #fff;
+}
+
+.carticy-ai-checkout .status-table th,
+.carticy-ai-checkout .status-table td {
+	padding: 12px;
+}
+
+.carticy-ai-checkout .status-table th {
+	background: #f9f9f9;
+	font-weight: 600;
+}
+
+/* Recent Orders */
+.carticy-ai-checkout .recent-orders {
+	margin: 30px 0;
+}
+
+.carticy-ai-checkout .recent-orders h2 {
+	margin-bottom: 15px;
+	font-size: 18px;
+}
+
+.carticy-ai-checkout .orders-table {
+	background: #fff;
+}
+
+.carticy-ai-checkout .orders-table th,
+.carticy-ai-checkout .orders-table td {
+	padding: 12px;
+}
+
+.carticy-ai-checkout .orders-table th {
+	background: #f9f9f9;
+	font-weight: 600;
+}
+
+.carticy-ai-checkout .orders-table a {
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.carticy-ai-checkout .orders-table a:hover {
+	text-decoration: underline;
+}
+
+.carticy-ai-checkout .no-orders {
+	padding: 40px 20px;
+	text-align: center;
+	background: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	color: #646970;
+	font-style: italic;
+}
+
+/* Status Badges */
+.carticy-ai-checkout .status-badge {
+	display: inline-block;
+	padding: 4px 10px;
+	border-radius: 3px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+.carticy-ai-checkout .status-badge.status-completed {
+	background: #c6e1c6;
+	color: #0e5c0e;
+}
+
+.carticy-ai-checkout .status-badge.status-processing {
+	background: #c8d7e1;
+	color: #2e4453;
+}
+
+.carticy-ai-checkout .status-badge.status-on-hold {
+	background: #f8dda7;
+	color: #94660c;
+}
+
+.carticy-ai-checkout .status-badge.status-cancelled {
+	background: #eba3a3;
+	color: #761919;
+}
+
+.carticy-ai-checkout .status-badge.status-refunded {
+	background: #e5e5e5;
+	color: #444;
+}
+
+.carticy-ai-checkout .status-badge.status-failed {
+	background: #eba3a3;
+	color: #761919;
+}
+
+.carticy-ai-checkout .status-badge.status-pending {
+	background: #e5e5e5;
+	color: #444;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+	.carticy-ai-checkout .analytics-metrics {
+		grid-template-columns: 1fr;
+	}
+
+	.carticy-ai-checkout .metric-icon {
+		width: 40px;
+		height: 40px;
+	}
+
+	.carticy-ai-checkout .metric-icon svg {
+		width: 28px;
+		height: 28px;
+	}
+
+	.carticy-ai-checkout .metric-value {
+		font-size: 24px;
+	}
+
+	.carticy-ai-checkout .orders-table {
+		font-size: 13px;
+	}
+
+	.carticy-ai-checkout .orders-table th,
+	.carticy-ai-checkout .orders-table td {
+		padding: 8px;
+	}
+}

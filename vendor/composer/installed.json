@@ -1,0 +1,153 @@
+{
+    "packages": [
+        {
+            "name": "carticy/admin-components",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:carticy-dev/admin-components.git",
+                "reference": "089d172dee8df885b2bb9a236701debe10cfe281"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/carticy-dev/admin-components/zipball/089d172dee8df885b2bb9a236701debe10cfe281",
+                "reference": "089d172dee8df885b2bb9a236701debe10cfe281",
+                "shasum": ""
+            },
+            "require": {
+                "carticy/admin-layout": "dev-master",
+                "carticy/design-system": "dev-master",
+                "php": ">=8.0"
+            },
+            "time": "2025-10-12T12:34:00+00:00",
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Carticy\\AdminComponents\\": "src/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Carticy Team",
+                    "email": "dev@carticy.com"
+                }
+            ],
+            "description": "Reusable JavaScript components and utilities for Carticy WordPress admin interfaces",
+            "support": {
+                "source": "https://github.com/carticy-dev/admin-components/tree/master",
+                "issues": "https://github.com/carticy-dev/admin-components/issues"
+            },
+            "install-path": "../carticy/admin-components"
+        },
+        {
+            "name": "carticy/admin-layout",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:carticy-dev/admin-layout.git",
+                "reference": "ae7f47cc78ced4e40c4e61b1b8ad1a19452fd0b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/carticy-dev/admin-layout/zipball/ae7f47cc78ced4e40c4e61b1b8ad1a19452fd0b5",
+                "reference": "ae7f47cc78ced4e40c4e61b1b8ad1a19452fd0b5",
+                "shasum": ""
+            },
+            "require": {
+                "carticy/design-system": "dev-master",
+                "php": ">=8.0"
+            },
+            "time": "2026-01-05T06:12:50+00:00",
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Carticy\\AdminLayout\\": "src/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Carticy Team",
+                    "email": "dev@carticy.com"
+                }
+            ],
+            "description": "Reusable WordPress admin layout framework for Carticy products with unified header, footer, navigation, and content structure",
+            "support": {
+                "source": "https://github.com/carticy-dev/admin-layout/tree/master",
+                "issues": "https://github.com/carticy-dev/admin-layout/issues"
+            },
+            "install-path": "../carticy/admin-layout"
+        },
+        {
+            "name": "carticy/design-system",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:carticy-dev/design-system.git",
+                "reference": "7318e4ad36fcabd72dae887023df0888cc1e0e3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/carticy-dev/design-system/zipball/7318e4ad36fcabd72dae887023df0888cc1e0e3e",
+                "reference": "7318e4ad36fcabd72dae887023df0888cc1e0e3e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "time": "2025-10-10T16:16:19+00:00",
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Carticy\\DesignSystem\\": "src/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Carticy Team",
+                    "email": "dev@carticy.com"
+                }
+            ],
+            "description": "Carticy brand design system with CSS variables for colors, spacing, typography, and visual tokens",
+            "support": {
+                "source": "https://github.com/carticy-dev/design-system/tree/master",
+                "issues": "https://github.com/carticy-dev/design-system/issues"
+            },
+            "install-path": "../carticy/design-system"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}

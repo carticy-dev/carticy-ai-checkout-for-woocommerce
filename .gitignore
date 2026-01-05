@@ -1,0 +1,112 @@
+# WordPress Plugin - Development Files to Ignore
+
+# Composer - Ignore dev dependencies, keep production (Carticy packages)
+/vendor/*
+!/vendor/carticy/
+!/vendor/composer/
+!/vendor/autoload.php
+composer.lock
+
+# Temporary package development (before publishing to GitHub)
+/.temp-packages/
+
+# Node
+node_modules/
+package-lock.json
+
+# Build directories
+/build/
+/dist/
+
+# IDE and Editor
+/.vscode/
+/.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+error_log
+debug.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# PHPUnit
+/coverage/
+.phpunit.result.cache
+
+# WordPress specific
+wp-config.php
+.htaccess
+
+# Environment
+.env
+.env.local
+
+# SVN (if using WordPress.org SVN)
+.svn/
+svn-repository/
+
+# ZIP files (built packages)
+*.zip
+
+# Test data
+/test-data/
+
+# Cache
+/.cache/
+/backup*
+
+# Documentation files (keep README only)
+*.md
+!README.md
+!readme.md
+
+# AI Assistant files
+CLAUDE.md
+.claude/
+.cursorrules
+.cursorignore
+.cursor/
+.aider*
+.aider/
+.continue/
+.codeium/
+.tabnine/
+.copilot/
+.github/copilot/
+.gemini/
+.openai/
+.windsurf/
+.bolt/
+.v0/
+.cody/
+.sourcegraph/
+.augment/
+.codegen/
+.ai/
+*.aider*
+.prompt
+.prompts/
+ai-instructions.md
+AI-INSTRUCTIONS.md
+AGENTS.md
+agents.md
+.amazonq/
+.aws-toolkit/
+.codewisperer/

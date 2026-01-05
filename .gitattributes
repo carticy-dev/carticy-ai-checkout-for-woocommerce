@@ -1,0 +1,48 @@
+# Git export-ignore attributes for WordPress plugin distribution
+# Files marked export-ignore are excluded from GitHub release archives
+
+# Development configuration
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.git export-ignore
+/.github export-ignore
+/.claude export-ignore
+
+# Development documentation (includes anti-theft implementation details)
+/*.md export-ignore
+
+# Build tools and dependency management
+/composer.lock export-ignore
+/package.json export-ignore
+/package-lock.json export-ignore
+/phpcs.xml export-ignore
+/.phpcs.xml export-ignore
+/phpstan.neon export-ignore
+/webpack.config.js export-ignore
+/babel.config.js export-ignore
+
+# Test infrastructure
+/tests export-ignore
+/phpunit.xml export-ignore
+
+# IDE configurations
+/.vscode export-ignore
+/.idea export-ignore
+*.sublime-project export-ignore
+*.sublime-workspace export-ignore
+
+# OS artifacts
+.DS_Store export-ignore
+Thumbs.db export-ignore
+
+# Logs and temporary files
+*.log export-ignore
+*.tmp export-ignore
+
+# Source files (only ship minified/dist versions)
+/assets/js/src export-ignore
+/assets/css/src export-ignore
+node_modules export-ignore
+
+# Composer - Keep production dependencies (Carticy packages)
+# Note: composer.json included for WordPress Plugin Directory compliance

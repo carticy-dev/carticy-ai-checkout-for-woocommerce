@@ -1,0 +1,18 @@
+parameters:
+    level: 6
+    paths:
+        - src
+    excludePaths:
+        - vendor
+        - tests
+    bootstrapFiles:
+        - carticy-ai-checkout-for-woocommerce.php
+    ignoreErrors:
+        # WordPress and WooCommerce functions may not be recognized
+        - '#Function (add_action|add_filter|register_rest_route|wc_get_product|wc_create_order) not found#'
+        - '#Access to an undefined property WC_Product#'
+        - '#Access to an undefined property WC_Order#'
+    scanDirectories:
+        - vendor
+    parallel:
+        maximumNumberOfProcesses: 4

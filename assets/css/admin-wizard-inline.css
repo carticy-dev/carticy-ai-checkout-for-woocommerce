@@ -1,0 +1,229 @@
+/**
+ * Admin Wizard Inline Styles
+ *
+ * Consolidated styles extracted from wizard templates for WordPress Plugin Directory compliance.
+ * All styles scoped under .carticy-ai-checkout to avoid conflicts.
+ *
+ * @package Carticy\AiCheckout
+ */
+
+/* ==========================================================================
+   Step 5: Prerequisites Checker
+   ========================================================================== */
+
+.carticy-ai-checkout .prerequisites-checker .prerequisite-passed {
+	background-color: #f0f9f0;
+}
+
+.carticy-ai-checkout .prerequisites-checker .prerequisite-failed {
+	background-color: #fff5f5;
+}
+
+.carticy-ai-checkout .prerequisites-checker .prerequisite-status {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.carticy-ai-checkout .prerequisites-checker .prerequisite-name {
+	vertical-align: middle;
+}
+
+.carticy-ai-checkout .prerequisites-checker .prerequisite-message {
+	vertical-align: middle;
+}
+
+.carticy-ai-checkout .prerequisites-checker .prerequisite-action {
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* ==========================================================================
+   Step 6: Test Setup Cards
+   ========================================================================== */
+
+.carticy-ai-checkout .setup-card {
+	transition: all 0.3s ease;
+}
+
+.carticy-ai-checkout .setup-card:hover {
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carticy-ai-checkout .setup-complete {
+	opacity: 0.9;
+}
+
+/* ==========================================================================
+   Step 8: Conformance Test Runner
+   ========================================================================== */
+
+.carticy-ai-checkout .test-group {
+	margin-bottom: 25px;
+}
+
+.carticy-ai-checkout .test-group-title {
+	margin: 0 0 10px 0;
+	padding: 10px 15px;
+	background: #f0f0f1;
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+}
+
+.carticy-ai-checkout .test-group-title .dashicons {
+	color: #2271b1;
+	margin-right: 5px;
+}
+
+.carticy-ai-checkout .test-items {
+	padding-left: 15px;
+}
+
+.carticy-ai-checkout .test-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 15px;
+	margin-bottom: 8px;
+	background: #fafafa;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+	transition: all 0.3s ease;
+}
+
+.carticy-ai-checkout .test-item:hover {
+	background: #f5f5f5;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.carticy-ai-checkout .test-status {
+	flex-shrink: 0;
+	width: 24px;
+	height: 24px;
+}
+
+.carticy-ai-checkout .test-status .dashicons {
+	font-size: 24px;
+	color: #999;
+}
+
+.carticy-ai-checkout .test-item.test-running .test-status .dashicons {
+	color: #2271b1;
+	animation: carticy-spin 1s linear infinite;
+}
+
+.carticy-ai-checkout .test-item.test-passed .test-status .dashicons {
+	color: #46b450;
+}
+
+.carticy-ai-checkout .test-item.test-failed .test-status .dashicons {
+	color: #dc3232;
+}
+
+.carticy-ai-checkout .test-item.test-warning .test-status .dashicons {
+	color: #d68a00;
+}
+
+.carticy-ai-checkout .test-name {
+	flex: 1;
+	font-size: 14px;
+	color: #333;
+}
+
+.carticy-ai-checkout .test-result {
+	font-size: 12px;
+	color: #666;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	max-width: 70%;
+}
+
+.carticy-ai-checkout .test-item.test-passed {
+	background: #f0f9f0;
+	border-color: #46b450;
+}
+
+.carticy-ai-checkout .test-item.test-failed {
+	background: #fff5f5;
+	border-color: #dc3232;
+}
+
+.carticy-ai-checkout .test-item.test-warning {
+	background: #fff9e6;
+	border-color: #d68a00;
+}
+
+/* Test Info Button */
+.carticy-ai-checkout .test-info-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+	margin: 0;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	color: #2271b1;
+	transition: color 0.2s ease;
+}
+
+.carticy-ai-checkout .test-info-btn:hover {
+	color: #135e96;
+}
+
+.carticy-ai-checkout .test-info-btn .dashicons {
+	width: 18px;
+	height: 18px;
+	font-size: 18px;
+}
+
+/* Test Action Button */
+.carticy-ai-checkout .test-action-btn {
+	display: inline-block;
+	padding: 4px 12px;
+	margin-left: 8px;
+	background: #2271b1;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	font-size: 12px;
+	cursor: pointer;
+	transition: background 0.2s ease;
+}
+
+.carticy-ai-checkout .test-action-btn:hover {
+	background: #135e96;
+}
+
+.carticy-ai-checkout .test-action-btn:disabled {
+	background: #ccc;
+	cursor: not-allowed;
+}
+
+/* Button dashicon alignment */
+.carticy-ai-checkout .button .dashicons {
+	vertical-align: middle;
+	margin-right: 4px;
+	line-height: 19px;
+}
+
+.carticy-ai-checkout .button-large .dashicons {
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes carticy-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

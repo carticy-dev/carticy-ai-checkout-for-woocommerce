@@ -1,0 +1,1045 @@
+/**
+ * Carticy Admin Layout Styles
+ *
+ * Unified layout structure for Carticy products
+ * All admin pages use this layout for consistency
+ *
+ * Depends on: carticy/design-system for CSS variables
+ *
+ * @package Carticy\AdminLayout
+ * @version 1.0.0
+ */
+
+/* ========================================
+   Layout Structure
+   ======================================== */
+
+.carticy-admin-layout {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background: var(--carticy-grey-light);
+}
+
+/* ========================================
+   Header Component
+   ======================================== */
+
+.carticy-admin-header {
+	background: var(--carticy-base);
+	border-bottom: 1px solid var(--carticy-grey-light);
+	box-shadow: var(--carticy-shadow-sm);
+}
+
+.carticy-admin-header-inner {
+	margin: 0 auto;
+	padding: var(--carticy-spacing-sm) var(--carticy-spacing-lg);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 70px;
+}
+
+.carticy-admin-header-left {
+	display: flex;
+	align-items: center;
+	gap: var(--carticy-spacing-sm);
+}
+
+.carticy-admin-title {
+	margin: 0;
+	font-size: var(--carticy-font-size-xl);
+	font-weight: 400;
+	color: var(--carticy-shade-800);
+	line-height: 1.2;
+}
+
+.carticy-admin-header-right {
+	display: flex;
+	align-items: center;
+	gap: var(--carticy-spacing-sm);
+}
+
+/* Hide WordPress notices that plugins inject inside header
+   Notices should only appear in .carticy-admin-notifications area */
+.carticy-admin-header .notice,
+.carticy-admin-header .error,
+.carticy-admin-header .warning,
+.carticy-admin-header .updated,
+.carticy-admin-header .update-nag,
+.carticy-admin-header .notice-error,
+.carticy-admin-header .notice-warning,
+.carticy-admin-header .notice-success,
+.carticy-admin-header .notice-info,
+.carticy-admin-header [class*="-message"] {
+	display: none !important;
+}
+
+/* ========================================
+   Notifications Area (Inside Content)
+   ======================================== */
+
+.carticy-admin-notifications {
+	padding: 0;
+	margin: 0 0 var(--carticy-spacing-md) 0;
+}
+
+.carticy-admin-notifications .notice {
+	margin: var(--carticy-spacing-sm) 0;
+	border-left-width: 4px;
+	border-left-style: solid;
+	padding: 12px 40px 12px 12px;
+	background: var(--carticy-base);
+	box-shadow: var(--carticy-shadow-sm);
+	border-radius: var(--carticy-radius);
+	position: relative;
+}
+
+.carticy-admin-notifications .notice:first-child {
+	margin-top: 0;
+}
+
+.carticy-admin-notifications .notice:last-child {
+	margin-bottom: 0;
+}
+
+/* Dismiss button positioning */
+.carticy-admin-notifications .notice .notice-dismiss {
+	position: absolute;
+	top: 0;
+	right: 1px;
+	padding: 9px;
+	border: none;
+	background: none;
+	color: var(--carticy-grey-dark);
+	cursor: pointer;
+	width: 36px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.carticy-admin-notifications .notice .notice-dismiss::before {
+	content: '\f153';
+	font-family: dashicons;
+	font-size: 16px;
+	line-height: 20px;
+	display: block;
+}
+
+.carticy-admin-notifications .notice .notice-dismiss:hover,
+.carticy-admin-notifications .notice .notice-dismiss:focus {
+	color: var(--carticy-primary);
+}
+
+.carticy-admin-notifications .notice .notice-dismiss:hover::before,
+.carticy-admin-notifications .notice .notice-dismiss:focus::before {
+	color: var(--carticy-shade-800);
+}
+
+.carticy-admin-notifications .notice.notice-success {
+	border-left-color: #00a32a;
+	background: #f0f6f0;
+}
+
+.carticy-admin-notifications .notice.notice-warning {
+	border-left-color: #f0b849;
+	background: #fcf9e8;
+}
+
+.carticy-admin-notifications .notice.notice-error {
+	border-left-color: #d63638;
+	background: #fcf0f1;
+}
+
+.carticy-admin-notifications .notice.notice-info {
+	border-left-color: var(--carticy-primary);
+	background: var(--carticy-shade-50);
+}
+
+.carticy-admin-notifications .notice p {
+	margin: 0.5em 0;
+}
+
+.carticy-admin-notifications .notice p:first-child {
+	margin-top: 0;
+}
+
+.carticy-admin-notifications .notice p:last-child {
+	margin-bottom: 0;
+}
+
+.carticy-admin-notifications .notice strong {
+	font-weight: 600;
+	display: inline;
+}
+
+/* ========================================
+   Inline Notifications (Inside Content)
+   ======================================== */
+
+/* Inline notices are smaller and more subtle than top-level notifications */
+.carticy-admin-layout .notice.inline {
+	margin: var(--carticy-spacing-sm) 0;
+	padding: 10px 14px;
+	border-left-width: 3px;
+	border-left-style: solid;
+	border-radius: var(--carticy-radius);
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.carticy-admin-layout .notice.inline.notice-success {
+	background: #e7f7ef;
+	border-left-color: #00a32a;
+	color: #155724;
+}
+
+.carticy-admin-layout .notice.inline.notice-warning {
+	background: #fcf9e8;
+	border-left-color: #f0b849;
+	color: #856404;
+}
+
+.carticy-admin-layout .notice.inline.notice-error {
+	background: #fcf0f1;
+	border-left-color: #d63638;
+	color: #721c24;
+}
+
+.carticy-admin-layout .notice.inline.notice-info {
+	background: var(--carticy-shade-50);
+	border-left-color: var(--carticy-primary);
+	color: var(--carticy-shade-800);
+}
+
+.carticy-admin-layout .notice.inline p {
+	margin: 0.4em 0;
+	font-size: 13px;
+}
+
+.carticy-admin-layout .notice.inline p:first-child {
+	margin-top: 0;
+}
+
+.carticy-admin-layout .notice.inline p:last-child {
+	margin-bottom: 0;
+}
+
+.carticy-admin-layout .notice.inline strong {
+	font-weight: 600;
+	display: block;
+	margin-bottom: 4px;
+}
+
+/* Remove WordPress default dismiss button from inline notices (but not in notification area) */
+.carticy-admin-layout .notice.inline .notice-dismiss:not(.carticy-admin-notifications *) {
+	display: none;
+}
+
+/* Exception: Show dismiss buttons in notification area even for inline notices */
+.carticy-admin-notifications .notice.inline .notice-dismiss {
+	display: flex;
+}
+
+/* General notice styling for non-inline notices within content */
+.carticy-admin-layout .notice:not(.inline) {
+	margin: var(--carticy-spacing-sm) 0;
+	padding: 12px 14px;
+	border-left-width: 3px;
+	border-left-style: solid;
+	border-radius: var(--carticy-radius);
+	background: var(--carticy-base);
+	box-shadow: var(--carticy-shadow-sm);
+}
+
+.carticy-admin-layout .notice:not(.inline).notice-success {
+	background: #e7f7ef;
+	border-left-color: #00a32a;
+}
+
+.carticy-admin-layout .notice:not(.inline).notice-warning {
+	background: #fcf9e8;
+	border-left-color: #f0b849;
+}
+
+.carticy-admin-layout .notice:not(.inline).notice-error {
+	background: #fcf0f1;
+	border-left-color: #d63638;
+}
+
+.carticy-admin-layout .notice:not(.inline).notice-info {
+	background: var(--carticy-shade-50);
+	border-left-color: var(--carticy-primary);
+}
+
+/* ========================================
+   Content Area
+   ======================================== */
+
+.carticy-admin-content {
+	flex: 1;
+	padding: var(--carticy-spacing-lg);
+}
+
+.carticy-admin-content-inner {
+	margin: 0 auto;
+	background: var(--carticy-base);
+	border-radius: var(--carticy-radius);
+	box-shadow: var(--carticy-shadow-sm);
+	min-height: 500px;
+	padding: var(--carticy-spacing-md) var(--carticy-spacing-lg);
+}
+
+/* ========================================
+   Unified Tab Navigation System
+   ======================================== */
+
+.carticy-tabs-wrapper {
+	display: flex;
+	gap: 0;
+	border-bottom: 2px solid var(--carticy-grey-light);
+	margin: 0;
+	padding: 0;
+	background: transparent;
+}
+
+.carticy-tabs-wrapper .carticy-tab {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 12px 20px;
+	background: transparent;
+	border: none;
+	border-bottom: 3px solid transparent;
+	color: var(--carticy-grey-dark);
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	margin-bottom: -2px;
+	outline: none !important;
+}
+
+.carticy-tabs-wrapper .carticy-tab:hover {
+	color: var(--carticy-primary);
+	background: var(--carticy-shade-50);
+	border-radius: var(--carticy-radius) var(--carticy-radius) 0 0;
+	outline: none !important;
+}
+
+.carticy-tabs-wrapper .carticy-tab:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+.carticy-tabs-wrapper .carticy-tab-active,
+.carticy-tabs-wrapper .carticy-tab.carticy-tab-active:hover,
+.carticy-tabs-wrapper .carticy-tab.carticy-tab-active:focus {
+	color: var(--carticy-primary);
+	border-bottom-color: var(--carticy-primary);
+	font-weight: 600;
+	background: transparent;
+	outline: none !important;
+}
+
+.carticy-tabs-wrapper .carticy-tab .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	line-height: 1;
+}
+
+/* Support for legacy nav-tab classes (backward compatibility) */
+.carticy-admin-layout .nav-tab-wrapper {
+	display: flex;
+	gap: 0;
+	border-bottom: 2px solid var(--carticy-grey-light);
+	margin: 0;
+	padding: 0;
+	background: transparent;
+}
+
+.carticy-admin-layout .nav-tab-wrapper .nav-tab {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 12px 20px;
+	background: transparent;
+	border: none;
+	border-bottom: 3px solid transparent;
+	color: var(--carticy-grey-dark);
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	margin-bottom: -2px;
+	outline: none !important;
+}
+
+.carticy-admin-layout .nav-tab-wrapper .nav-tab:hover {
+	color: var(--carticy-primary);
+	background: var(--carticy-shade-50);
+	border-radius: var(--carticy-radius) var(--carticy-radius) 0 0;
+	outline: none !important;
+}
+
+.carticy-admin-layout .nav-tab-wrapper .nav-tab:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+.carticy-admin-layout .nav-tab-wrapper .nav-tab-active,
+.carticy-admin-layout .nav-tab-wrapper .nav-tab-active:hover,
+.carticy-admin-layout .nav-tab-wrapper .nav-tab-active:focus {
+	color: var(--carticy-primary);
+	border-bottom-color: var(--carticy-primary);
+	font-weight: 600;
+	background: transparent;
+	outline: none !important;
+}
+
+.carticy-admin-layout .nav-tab-wrapper .nav-tab .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	line-height: 1;
+}
+
+/* ========================================
+   Unified Tab Content Area
+   ======================================== */
+
+.carticy-tab-content {
+	padding: var(--carticy-spacing-md) 0 0 0;
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	margin: 0;
+}
+
+/* Legacy support for existing .tab-content */
+.carticy-admin-layout .tab-content {
+	padding: var(--carticy-spacing-md) 0 0 0;
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	margin: 0;
+}
+
+/* ========================================
+   Carticy-Branded Tables
+   ======================================== */
+
+/* Base table styles - applies to both .carticy-table and .widefat within layout */
+.carticy-admin-layout .carticy-table,
+.carticy-admin-layout .widefat {
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid var(--carticy-grey-light);
+	border-radius: var(--carticy-radius);
+	background: var(--carticy-base);
+	margin: var(--carticy-spacing-sm) 0;
+}
+
+.carticy-admin-layout .carticy-table thead,
+.carticy-admin-layout .widefat thead {
+	background: var(--carticy-grey-light);
+	border-bottom: 2px solid var(--carticy-grey-light);
+}
+
+.carticy-admin-layout .carticy-table th,
+.carticy-admin-layout .widefat th {
+	padding: 12px 15px;
+	text-align: left;
+	font-weight: 600;
+	color: var(--carticy-shade-800);
+	font-size: 13px;
+	letter-spacing: 0.3px;
+	border-bottom: 1px solid var(--carticy-grey-light);
+}
+
+.carticy-admin-layout .carticy-table td,
+.carticy-admin-layout .widefat td {
+	padding: 12px 15px;
+	border-bottom: 1px solid var(--carticy-grey-light);
+	color: var(--carticy-grey-dark);
+	font-size: 14px;
+}
+
+/* Zebra striping for alternating rows */
+.carticy-admin-layout .carticy-table tbody tr:nth-child(odd),
+.carticy-admin-layout .widefat tbody tr:nth-child(odd) {
+	background: #fcfdff;
+}
+
+.carticy-admin-layout .carticy-table tbody tr:hover,
+.carticy-admin-layout .widefat tbody tr:hover {
+	background: var(--carticy-shade-50);
+}
+
+.carticy-admin-layout .carticy-table tbody tr:last-child td,
+.carticy-admin-layout .widefat tbody tr:last-child td {
+	border-bottom: none;
+}
+
+/* Table column width utilities */
+.carticy-admin-layout .carticy-table .col-fixed-xs,
+.carticy-admin-layout .widefat .col-fixed-xs {
+	width: 60px;
+	white-space: nowrap;
+}
+
+.carticy-admin-layout .carticy-table .col-fixed-sm,
+.carticy-admin-layout .widefat .col-fixed-sm {
+	width: 100px;
+	white-space: nowrap;
+}
+
+.carticy-admin-layout .carticy-table .col-fixed-md,
+.carticy-admin-layout .widefat .col-fixed-md {
+	width: 150px;
+	white-space: nowrap;
+}
+
+.carticy-admin-layout .carticy-table .col-fixed-lg,
+.carticy-admin-layout .widefat .col-fixed-lg {
+	width: 200px;
+	white-space: nowrap;
+}
+
+.carticy-admin-layout .carticy-table .col-constrained,
+.carticy-admin-layout .widefat .col-constrained {
+	min-width: 150px;
+	max-width: 300px;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+.carticy-admin-layout .carticy-table .col-constrained-lg,
+.carticy-admin-layout .widefat .col-constrained-lg {
+	min-width: 200px;
+	max-width: 400px;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+.carticy-admin-layout .carticy-table .col-actions,
+.carticy-admin-layout .widefat .col-actions {
+	width: 120px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+/* Table search box styling */
+.carticy-admin-layout .search-box {
+	margin: var(--carticy-spacing-sm) 0;
+}
+
+.carticy-admin-layout .search-box input[type="search"] {
+	border: 1px solid var(--carticy-grey-light);
+	border-radius: var(--carticy-radius);
+	padding: 6px 12px;
+	font-size: 14px;
+}
+
+.carticy-admin-layout .search-box input[type="search"]:focus {
+	border-color: var(--carticy-primary);
+	box-shadow: 0 0 0 1px var(--carticy-primary);
+	outline: none;
+}
+
+/* Tablenav (pagination and bulk actions) */
+.carticy-admin-layout .tablenav {
+	margin: var(--carticy-spacing-sm) 0;
+}
+
+.carticy-admin-layout .tablenav .button {
+	margin-right: 8px;
+}
+
+/* ========================================
+   Footer Component
+   ======================================== */
+
+.carticy-admin-footer {
+	background: var(--carticy-base);
+	border-top: 1px solid var(--carticy-grey-light);
+	padding: var(--carticy-spacing-sm) 0;
+	margin-top: auto;
+}
+
+.carticy-admin-footer-inner {
+	margin: 0 auto;
+	padding: 0 var(--carticy-spacing-lg);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.carticy-admin-footer-left {
+	display: flex;
+	align-items: center;
+}
+
+.carticy-admin-footer-text {
+	margin: 0;
+	font-size: var(--carticy-font-size-sm);
+	color: var(--carticy-grey-dark);
+	line-height: var(--carticy-line-height);
+}
+
+.carticy-admin-footer-right {
+	display: flex;
+	align-items: center;
+}
+
+.carticy-admin-footer-logo {
+	max-width: 80px;
+	height: auto;
+	display: block;
+}
+
+.carticy-admin-footer-link {
+	color: var(--carticy-primary);
+	text-decoration: none;
+	font-weight: 600;
+	transition: color 0.2s ease;
+}
+
+.carticy-admin-footer-link:hover,
+.carticy-admin-footer-link:focus {
+	color: var(--carticy-accent-1);
+	text-decoration: none;
+}
+
+.carticy-admin-footer-separator {
+	margin: 0 var(--carticy-spacing-xs);
+	color: var(--carticy-grey);
+}
+
+.carticy-admin-footer-version {
+	color: var(--carticy-grey);
+}
+
+/* ========================================
+   Responsive Layout
+   ======================================== */
+
+@media screen and (max-width: 1024px) {
+	.carticy-admin-header-inner,
+	.carticy-admin-footer-inner {
+		padding-left: var(--carticy-spacing-sm);
+		padding-right: var(--carticy-spacing-sm);
+	}
+
+	.carticy-admin-content {
+		padding-left: var(--carticy-spacing-sm);
+		padding-right: var(--carticy-spacing-sm);
+	}
+}
+
+@media screen and (max-width: 782px) {
+	.carticy-admin-header-inner {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--carticy-spacing-sm);
+		min-height: auto;
+		padding-top: var(--carticy-spacing-sm);
+		padding-bottom: var(--carticy-spacing-sm);
+	}
+
+	.carticy-admin-header-left {
+		flex-direction: column;
+		align-items: flex-start;
+		width: 100%;
+	}
+
+	.carticy-admin-title {
+		font-size: var(--carticy-font-size-lg);
+	}
+
+	.carticy-admin-header-right {
+		width: 100%;
+		justify-content: flex-start;
+	}
+
+	.carticy-admin-content {
+		padding: var(--carticy-spacing-sm) 0;
+	}
+
+	.carticy-admin-footer-inner {
+		flex-direction: column;
+		gap: var(--carticy-spacing-sm);
+	}
+
+	.carticy-admin-footer-text {
+		font-size: 12px;
+		text-align: center;
+	}
+
+	.carticy-admin-footer-logo {
+		max-width: 60px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.carticy-admin-footer-separator {
+		display: block;
+		margin: var(--carticy-spacing-xs) 0;
+	}
+
+	.carticy-admin-footer-version {
+		display: block;
+	}
+}
+
+/* ========================================
+   Unified Button System (Carticy Branding)
+   ======================================== */
+
+/* Primary Button */
+.carticy-admin-layout .button-primary,
+.carticy-admin-layout .wp-core-ui .button-primary,
+.carticy-admin-layout input[type="submit"].button-primary {
+	background: var(--carticy-primary) !important;
+	border-color: var(--carticy-primary) !important;
+	color: var(--carticy-base) !important;
+	text-shadow: none !important;
+	box-shadow: none !important;
+	border-radius: var(--carticy-radius);
+	padding: 8px 16px;
+	font-weight: 500;
+	transition: all 0.2s ease;
+}
+
+.carticy-admin-layout .button-primary:hover,
+.carticy-admin-layout .button-primary:focus,
+.carticy-admin-layout .button-primary:active,
+.carticy-admin-layout .wp-core-ui .button-primary:hover,
+.carticy-admin-layout .wp-core-ui .button-primary:focus,
+.carticy-admin-layout .wp-core-ui .button-primary:active,
+.carticy-admin-layout input[type="submit"].button-primary:hover {
+	background: var(--carticy-accent-1) !important;
+	border-color: var(--carticy-accent-1) !important;
+	color: var(--carticy-base) !important;
+	box-shadow: var(--carticy-shadow-sm) !important;
+}
+
+/* Secondary/Default Button */
+.carticy-admin-layout .button,
+.carticy-admin-layout .button-secondary,
+.carticy-admin-layout .wp-core-ui .button-secondary,
+.carticy-admin-layout input[type="submit"].button,
+.carticy-admin-layout input[type="button"].button {
+	background: var(--carticy-shade-50);
+	border: 1px solid var(--carticy-grey);
+	color: var(--carticy-shade-800);
+	text-shadow: none;
+	box-shadow: none;
+	border-radius: var(--carticy-radius);
+	padding: 8px 16px;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	text-decoration: none;
+}
+
+.carticy-admin-layout .button:hover,
+.carticy-admin-layout .button:focus,
+.carticy-admin-layout .button-secondary:hover,
+.carticy-admin-layout .button-secondary:focus,
+.carticy-admin-layout input[type="submit"].button:hover,
+.carticy-admin-layout input[type="button"].button:hover {
+	background: var(--carticy-shade-100);
+	border-color: var(--carticy-primary);
+	color: var(--carticy-primary);
+	box-shadow: var(--carticy-shadow-sm);
+	text-decoration: none;
+}
+
+/* Page Title Action (Back buttons, etc.) - HIDDEN by default */
+.carticy-admin-layout .page-title-action {
+	display: none !important;
+}
+
+/* Small Buttons */
+.carticy-admin-layout .button-small {
+	padding: 5px 10px;
+	font-size: 12px;
+}
+
+/* Button Groups */
+.carticy-admin-layout .button + .button {
+	margin-left: 8px;
+}
+
+/* ========================================
+   Carticy-Scoped Component Overrides
+   Apply Carticy design system to child content
+   ======================================== */
+
+/* Headings */
+.carticy-admin-layout h1,
+.carticy-admin-layout h2,
+.carticy-admin-layout h3 {
+	color: var(--carticy-shade-800);
+}
+
+/* Links */
+.carticy-admin-layout a {
+	color: var(--carticy-primary);
+	text-decoration: none;
+}
+
+.carticy-admin-layout a:hover,
+.carticy-admin-layout a:focus {
+	color: var(--carticy-accent-1);
+	text-decoration: underline;
+}
+
+/* Form Inputs */
+.carticy-admin-layout input[type="text"],
+.carticy-admin-layout input[type="email"],
+.carticy-admin-layout input[type="url"],
+.carticy-admin-layout input[type="number"],
+.carticy-admin-layout input[type="search"],
+.carticy-admin-layout textarea {
+	border: 1px solid var(--carticy-grey-light);
+	border-radius: var(--carticy-radius);
+	padding: 6px 14px;
+}
+
+/* Select elements - extra right padding for dropdown arrow */
+.carticy-admin-layout select {
+	border: 1px solid var(--carticy-grey-light);
+	border-radius: var(--carticy-radius);
+	padding: 6px 32px 6px 14px;
+}
+
+.carticy-admin-layout input[type="text"]:focus,
+.carticy-admin-layout input[type="email"]:focus,
+.carticy-admin-layout input[type="url"]:focus,
+.carticy-admin-layout input[type="number"]:focus,
+.carticy-admin-layout input[type="search"]:focus,
+.carticy-admin-layout textarea:focus,
+.carticy-admin-layout select:focus {
+	border-color: var(--carticy-primary);
+	box-shadow: 0 0 0 1px var(--carticy-primary);
+	outline: none;
+}
+
+/* Cards & Boxes */
+.carticy-admin-layout .content-box,
+.carticy-admin-layout .postbox {
+	background: var(--carticy-base);
+	border: 1px solid var(--carticy-grey-light);
+	border-radius: var(--carticy-radius);
+	box-shadow: var(--carticy-shadow-sm);
+	padding: var(--carticy-spacing-sm);
+	margin: var(--carticy-spacing-sm) 0;
+}
+
+/* ========================================
+   Modal System
+   ======================================== */
+
+.carticy-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.7);
+	z-index: 999999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out;
+	padding: 20px;
+}
+
+.carticy-modal-overlay.active {
+	opacity: 1;
+}
+
+.carticy-modal {
+	background: var(--carticy-base);
+	border-radius: var(--carticy-radius);
+	box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+	max-height: 90vh;
+	display: flex;
+	flex-direction: column;
+	transform: scale(0.95);
+	transition: transform 0.2s ease-in-out;
+}
+
+.carticy-modal-overlay.active .carticy-modal {
+	transform: scale(1);
+}
+
+/* Modal sizes */
+.carticy-modal-small {
+	width: 100%;
+	max-width: 400px;
+}
+
+.carticy-modal-medium {
+	width: 100%;
+	max-width: 600px;
+}
+
+.carticy-modal-large {
+	width: 100%;
+	max-width: 800px;
+}
+
+.carticy-modal-xlarge {
+	width: 100%;
+	max-width: 1000px;
+}
+
+/* Modal header */
+.carticy-modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 24px;
+	border-bottom: 1px solid var(--carticy-grey-light);
+	flex-shrink: 0;
+}
+
+.carticy-modal-header h2 {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--carticy-text);
+}
+
+.carticy-modal-close {
+	background: transparent;
+	border: none;
+	font-size: 32px;
+	line-height: 1;
+	color: var(--carticy-grey);
+	cursor: pointer;
+	padding: 0;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--carticy-radius);
+	transition: all 0.2s ease;
+	margin: -8px -8px -8px 0;
+}
+
+.carticy-modal-close:hover {
+	background: var(--carticy-grey-light);
+	color: var(--carticy-text);
+}
+
+/* Modal body */
+.carticy-modal-body {
+	padding: 24px;
+	overflow-y: auto;
+	flex: 1;
+}
+
+/* Content styling inside modal body */
+.carticy-modal-body h3 {
+	margin: 0 0 12px 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--carticy-text);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.carticy-modal-body h4 {
+	margin: 16px 0 8px 0;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--carticy-text);
+}
+
+.carticy-modal-body h4:first-child {
+	margin-top: 0;
+}
+
+.carticy-modal-body pre {
+	background: var(--carticy-grey-light);
+	border: 1px solid #ddd;
+	border-radius: var(--carticy-radius);
+	padding: 16px;
+	overflow-x: auto;
+	font-family: 'Courier New', monospace;
+	font-size: 12px;
+	line-height: 1.6;
+	max-height: 400px;
+	overflow-y: auto;
+	margin: 0;
+}
+
+.carticy-modal-body pre + h4 {
+	margin-top: 20px;
+}
+
+/* Modal footer */
+.carticy-modal-footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+	padding: 16px 24px;
+	border-top: 1px solid var(--carticy-grey-light);
+	background: var(--carticy-grey-lighter);
+	flex-shrink: 0;
+}
+
+.carticy-modal-footer .button {
+	margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.carticy-modal-overlay {
+		padding: 10px;
+	}
+
+	.carticy-modal-small,
+	.carticy-modal-medium,
+	.carticy-modal-large,
+	.carticy-modal-xlarge {
+		max-width: 100%;
+	}
+
+	.carticy-modal-header,
+	.carticy-modal-body {
+		padding: 16px;
+	}
+
+	.carticy-modal-body pre {
+		font-size: 11px;
+		padding: 12px;
+	}
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+	.carticy-modal {
+		background: #1d2327;
+		box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+	}
+
+	.carticy-modal-header {
+		border-bottom-color: #3c434a;
+	}
+
+	.carticy-modal-body pre {
+		background: #2c3338;
+		border-color: #3c434a;
+	}
+}

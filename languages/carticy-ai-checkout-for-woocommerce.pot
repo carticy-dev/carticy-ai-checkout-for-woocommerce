@@ -1,0 +1,2683 @@
+# Copyright (C) 2025 Carticy
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: AI Checkout for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/carticy-ai-checkout-for-woocommerce\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-12-14T08:54:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: carticy-ai-checkout-for-woocommerce\n"
+
+#. Plugin Name of the plugin
+#: C:\wamp64\www\woo\wp-content\plugins\carticy-ai-checkout-for-woocommerce\carticy-ai-checkout-for-woocommerce.php
+#: carticy-ai-checkout-for-woocommerce.php:104
+#: carticy-ai-checkout-for-woocommerce.php:126
+#: carticy-ai-checkout-for-woocommerce.php:160
+msgid "AI Checkout for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: C:\wamp64\www\woo\wp-content\plugins\carticy-ai-checkout-for-woocommerce\carticy-ai-checkout-for-woocommerce.php
+msgid "https://carticy.com/plugins/ai-checkout-for-woocommerce/"
+msgstr ""
+
+#. Description of the plugin
+#: C:\wamp64\www\woo\wp-content\plugins\carticy-ai-checkout-for-woocommerce\carticy-ai-checkout-for-woocommerce.php
+msgid "ChatGPT Instant Checkout integration for WooCommerce using OpenAI Agentic Commerce Protocol"
+msgstr ""
+
+#. Author of the plugin
+#: C:\wamp64\www\woo\wp-content\plugins\carticy-ai-checkout-for-woocommerce\carticy-ai-checkout-for-woocommerce.php
+msgid "Carticy"
+msgstr ""
+
+#. Author URI of the plugin
+#: C:\wamp64\www\woo\wp-content\plugins\carticy-ai-checkout-for-woocommerce\carticy-ai-checkout-for-woocommerce.php
+msgid "https://carticy.com"
+msgstr ""
+
+#: carticy-ai-checkout-for-woocommerce.php:105
+msgid "requires WooCommerce to be installed and active."
+msgstr ""
+
+#: carticy-ai-checkout-for-woocommerce.php:107
+msgid "Go to Plugins"
+msgstr ""
+
+#. translators: 1: Required WooCommerce version, 2: Current WooCommerce version
+#: carticy-ai-checkout-for-woocommerce.php:130
+msgid "requires WooCommerce version %1$s or higher. You are running version %2$s."
+msgstr ""
+
+#: carticy-ai-checkout-for-woocommerce.php:136
+msgid "Update WooCommerce"
+msgstr ""
+
+#: carticy-ai-checkout-for-woocommerce.php:163
+msgid "requires WooCommerce Stripe Gateway to be active. The plugin is installed but not activated."
+msgstr ""
+
+#: carticy-ai-checkout-for-woocommerce.php:165
+msgid "requires WooCommerce Stripe Gateway to be installed and active."
+msgstr ""
+
+#: carticy-ai-checkout-for-woocommerce.php:170
+msgid "Activate Plugin"
+msgstr ""
+
+#: carticy-ai-checkout-for-woocommerce.php:174
+msgid "Install Plugin"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:104
+msgid "Carticy AI Checkout"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:105
+msgid "AI Checkout"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:116
+#: src/Admin/AdminHandler.php:117
+#: src/Admin/AdminHandler.php:479
+#: src/Admin/ProductFeedManager.php:97
+msgid "Product Feed Manager"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:126
+#: src/Admin/AdminHandler.php:127
+msgid "Application Wizard"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:136
+#: src/Admin/AdminHandler.php:137
+msgid "Analytics"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:146
+#: src/Admin/AdminHandler.php:147
+#: src/Admin/AdminHandler.php:704
+msgid "Logs & Monitoring"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:215
+#: templates/admin/wizard/step-9-submit.php:356
+msgid "Copied!"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:216
+msgid "Copy failed"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:217
+msgid "Are you sure you want to regenerate? This will invalidate the current key."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:218
+msgid "Regenerating..."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:219
+msgid "Testing webhook..."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:220
+msgid "Webhook test successful!"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:221
+msgid "Webhook test failed. Check the logs for details."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:349
+#: src/Services/TestModeService.php:183
+#: templates/admin/settings-page.php:102
+msgid "Test Mode"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:376
+msgid "IP ranges refreshed successfully!"
+msgstr ""
+
+#. translators: %d: number of IP ranges loaded
+#: src/Admin/AdminHandler.php:379
+msgid "%d IP ranges loaded from OpenAI."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:388
+msgid "Failed to refresh IP ranges."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:389
+msgid "Unable to fetch fresh ranges from OpenAI. Using cached ranges."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:401
+#: templates/admin/logs/session-status.php:234
+msgid "WordPress Version"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:402
+#: templates/admin/logs/session-status.php:222
+msgid "PHP Version"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:403
+msgid "WooCommerce"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:404
+msgid "WooCommerce Stripe Gateway"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:405
+msgid "Stripe API Keys"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:406
+msgid "SSL Certificate"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:407
+msgid "Permalink Structure"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:408
+msgid "Stripe API Connection"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:417
+#: templates/admin/wizard/step-5-prerequisites.php:77
+msgid "Fix This"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:427
+msgid "AI Checkout Settings"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:590
+#: src/Admin/ApplicationWizard.php:102
+msgid "OpenAI Application Wizard"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:667
+msgid "Analytics Dashboard"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:740
+#: src/Admin/ApplicationWizard.php:231
+#: src/Admin/ApplicationWizard.php:344
+#: src/Admin/ApplicationWizard.php:389
+#: src/Admin/ApplicationWizard.php:416
+#: src/Admin/ApplicationWizard.php:448
+#: src/Admin/ApplicationWizard.php:479
+#: src/Admin/ProductFeedManager.php:187
+#: src/Admin/ProductFeedManager.php:262
+msgid "Security check failed"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:745
+#: src/Admin/AdminHandler.php:791
+#: src/Admin/AdminHandler.php:829
+#: src/Admin/AdminHandler.php:867
+#: src/Admin/ApplicationWizard.php:236
+#: src/Admin/ApplicationWizard.php:349
+#: src/Admin/ApplicationWizard.php:394
+#: src/Admin/ApplicationWizard.php:421
+#: src/Admin/ApplicationWizard.php:453
+#: src/Admin/ApplicationWizard.php:484
+#: src/Admin/ApplicationWizard.php:514
+#: src/Admin/ApplicationWizard.php:616
+#: src/Admin/ApplicationWizard.php:643
+#: src/Admin/ProductFeedManager.php:488
+#: src/Admin/ProductFeedManager.php:516
+#: src/Admin/ProductFeedManager.php:534
+msgid "Unauthorized"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:806
+msgid "API key regenerated successfully."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:844
+msgid "Webhook secret regenerated successfully."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:889
+msgid "Test webhook sent successfully! Check your webhook endpoint logs."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:893
+msgid "Failed to send test webhook. Verify your webhook URL and secret are configured."
+msgstr ""
+
+#: src/Admin/AdminHandler.php:917
+msgid "Source"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:949
+msgid "ChatGPT Instant Checkout"
+msgstr ""
+
+#: src/Admin/AdminHandler.php:951
+msgid "AI"
+msgstr ""
+
+#. translators: %s: template file path
+#: src/Admin/AnalyticsDashboard.php:147
+msgid "Template file not found: %s"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:103
+#: templates/admin/application-wizard.php:25
+msgid "This wizard will guide you through preparing your application for OpenAI ChatGPT integration."
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:138
+#: templates/admin/application-wizard.php:59
+msgid "About This Wizard:"
+msgstr ""
+
+#. translators: %s: URL to OpenAI merchant form
+#: src/Admin/ApplicationWizard.php:142
+#: templates/admin/application-wizard.php:63
+msgid "This wizard helps you prepare application data for OpenAI. Final submission is done manually through OpenAI's web form at %s - there is no automated submission API."
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:154
+#: templates/admin/application-wizard.php:75
+msgid "Are you sure you want to restart the wizard? All progress will be lost."
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:155
+#: templates/admin/application-wizard.php:76
+msgid "Restart Wizard"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:171
+msgid "Business Info"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:172
+msgid "Product Feed"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:173
+msgid "Policies"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:174
+msgid "Data Quality"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:175
+msgid "Prerequisites"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:176
+msgid "Test Setup"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:177
+msgid "Integration"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:178
+msgid "Run Tests"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:179
+msgid "Submit"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:304
+msgid "Please correct the following errors:"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:626
+msgid "Robots.txt filter enabled successfully"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:654
+msgid "Invalid results data"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:659
+msgid "Invalid results structure: missing summary"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:663
+msgid "Invalid results structure: missing tests"
+msgstr ""
+
+#: src/Admin/ApplicationWizard.php:671
+msgid "Test results saved successfully"
+msgstr ""
+
+#: src/Admin/LogsViewer.php:402
+msgid "API Logs"
+msgstr ""
+
+#: src/Admin/LogsViewer.php:406
+#: templates/admin/logs/error-logs.php:23
+msgid "Error Logs"
+msgstr ""
+
+#: src/Admin/LogsViewer.php:410
+#: templates/admin/logs/webhook-logs.php:23
+msgid "Webhook Activity"
+msgstr ""
+
+#: src/Admin/LogsViewer.php:414
+msgid "Session Status"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:99
+#: templates/admin/product-feed-manager.php:22
+msgid "Back to Settings"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:110
+#: templates/admin/product-feed-manager.php:30
+#: templates/admin/wizard/step-2-product-feed.php:45
+msgid "Total Products"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:114
+#: src/Admin/ProductsListTable.php:437
+#: templates/admin/product-feed-manager.php:34
+#: templates/admin/wizard/step-2-product-feed.php:49
+msgid "ChatGPT Enabled"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:118
+#: templates/admin/product-feed-manager.php:38
+msgid "Avg Quality Score"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:122
+#: templates/admin/product-feed-manager.php:42
+msgid "Products with Issues"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:128
+#: templates/admin/product-feed-manager.php:48
+msgid "Regenerate Feed"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:131
+#: templates/admin/product-feed-manager.php:51
+msgid "Recalculate Quality Scores"
+msgstr ""
+
+#. translators: %s: human-readable time difference
+#: src/Admin/ProductFeedManager.php:139
+#: templates/admin/product-feed-manager.php:59
+msgid "Feed last updated: %s ago"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:153
+#: templates/admin/product-feed-manager.php:73
+msgid "Search Products"
+msgstr ""
+
+#. translators: %d: number of products
+#: src/Admin/ProductFeedManager.php:202
+msgid "%d product enabled for ChatGPT."
+msgid_plural "%d products enabled for ChatGPT."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of products
+#: src/Admin/ProductFeedManager.php:223
+msgid "%d product disabled for ChatGPT."
+msgid_plural "%d products disabled for ChatGPT."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/ProductFeedManager.php:375
+msgid "ChatGPT Integration"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:403
+#: src/Admin/ProductsListTable.php:85
+msgid "Enable for ChatGPT"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:410
+msgid "Quality Score:"
+msgstr ""
+
+#. translators: %d: number of issues
+#: src/Admin/ProductFeedManager.php:423
+msgid "%d issue to fix"
+msgid_plural "%d issues to fix"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/ProductFeedManager.php:439
+msgid "Manage in Product Feed"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:493
+msgid "Invalid product ID"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:498
+msgid "Product not found"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:522
+msgid "Feed cache cleared successfully"
+msgstr ""
+
+#. translators: %d: number of products processed
+#: src/Admin/ProductFeedManager.php:543
+msgid "%d product quality score recalculated."
+msgid_plural "%d product quality scores recalculated."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/ProductFeedManager.php:605
+msgid "Are you sure you want to regenerate the product feed cache?"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:606
+msgid "Are you sure you want to recalculate all product quality scores? This may take a few moments."
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:607
+#: templates/admin/product-feed-manager.php:91
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: src/Admin/ProductFeedManager.php:608
+msgid "Copied to clipboard!"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:55
+msgid "Image"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:56
+#: templates/admin/wizard/step-4-data-quality.php:109
+msgid "Product"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:57
+msgid "SKU"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:58
+msgid "Price"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:59
+msgid "ChatGPT"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:60
+msgid "Quality Score"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:86
+msgid "Disable for ChatGPT"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:135
+msgid "Edit"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:140
+msgid "Preview Feed"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:202
+#: templates/admin/settings-page.php:175
+#: templates/admin/settings-page.php:225
+msgid "Enabled"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:209
+#: templates/admin/settings-page.php:230
+msgid "Disabled"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:226
+msgid "Excellent"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:229
+msgid "Good"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:232
+msgid "Fair"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:235
+msgid "Poor"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:251
+msgid "issue"
+msgid_plural "issues"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/ProductsListTable.php:419
+#: templates/admin/logs/error-logs.php:39
+msgid "All Categories"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:435
+msgid "All Products"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:440
+msgid "ChatGPT Disabled"
+msgstr ""
+
+#: src/Admin/ProductsListTable.php:444
+msgid "Filter"
+msgstr ""
+
+#: src/Init.php:463
+msgid "Every 15 Minutes"
+msgstr ""
+
+#: src/Services/ApplicationWizardService.php:140
+msgid "Business name is required."
+msgstr ""
+
+#: src/Services/ApplicationWizardService.php:144
+msgid "Business entity type is required."
+msgstr ""
+
+#: src/Services/ApplicationWizardService.php:148
+msgid "Contact name is required."
+msgstr ""
+
+#: src/Services/ApplicationWizardService.php:152
+msgid "Valid contact email is required."
+msgstr ""
+
+#: src/Services/ApplicationWizardService.php:156
+msgid "Valid store URL is required."
+msgstr ""
+
+#: src/Services/ApplicationWizardService.php:173
+#: templates/admin/wizard/step-3-policies.php:53
+#: templates/admin/wizard/step-9-submit.php:197
+msgid "Terms of Service URL"
+msgstr ""
+
+#: src/Services/ApplicationWizardService.php:174
+#: templates/admin/wizard/step-3-policies.php:77
+#: templates/admin/wizard/step-9-submit.php:201
+msgid "Privacy Policy URL"
+msgstr ""
+
+#: src/Services/ApplicationWizardService.php:179
+#: templates/admin/wizard/step-3-policies.php:101
+#: templates/admin/wizard/step-9-submit.php:205
+msgid "Return/Refund Policy URL"
+msgstr ""
+
+#. translators: %s: policy name
+#: src/Services/ApplicationWizardService.php:187
+msgid "%s is required."
+msgstr ""
+
+#. translators: %s: policy name
+#: src/Services/ApplicationWizardService.php:196
+#: src/Services/ApplicationWizardService.php:234
+msgid "%s must be a valid URL."
+msgstr ""
+
+#. translators: %s: policy name
+#: src/Services/ApplicationWizardService.php:207
+#: src/Services/ApplicationWizardService.php:245
+msgid "%s could not be reached. Please check the URL."
+msgstr ""
+
+#. translators: 1: policy name, 2: HTTP status code
+#: src/Services/ApplicationWizardService.php:216
+#: src/Services/ApplicationWizardService.php:253
+msgid "%1$s returned HTTP %2$d. Please ensure the page is publicly accessible."
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:58
+msgid "Has title"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:59
+msgid "Missing title (required)"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:76
+msgid "Has description"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:77
+msgid "Missing description (recommended)"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:94
+msgid "Has price"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:95
+msgid "Missing price (required)"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:112
+msgid "Has featured image"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:113
+msgid "Missing featured image (required)"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:130
+msgid "Has category"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:131
+msgid "Missing category (recommended)"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:167
+msgid "Has brand attribute"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:168
+msgid "Missing brand attribute (optional)"
+msgstr ""
+
+#. translators: %d: character count
+#: src/Services/ProductQualityChecker.php:189
+msgid "Description is %d characters"
+msgstr ""
+
+#. translators: 1: current count, 2: minimum count
+#: src/Services/ProductQualityChecker.php:194
+msgid "Description too short (%1$d/%2$d characters)"
+msgstr ""
+
+#. translators: %d: image count
+#: src/Services/ProductQualityChecker.php:217
+msgid "Has %d images"
+msgstr ""
+
+#: src/Services/ProductQualityChecker.php:220
+msgid "Only 1 image (multiple recommended)"
+msgstr ""
+
+#: src/Services/TestModeService.php:93
+msgid "Failed to update test mode. Please try again."
+msgstr ""
+
+#: src/Services/TestModeService.php:172
+msgid "TEST MODE ACTIVE - Using Test Stripe Keys"
+msgstr ""
+
+#: src/Services/TestModeService.php:186
+msgid "Production Mode"
+msgstr ""
+
+#: src/Services/TestModeService.php:197
+#: templates/admin/settings-page.php:111
+msgid "TEST"
+msgstr ""
+
+#: src/Services/TestModeService.php:197
+#: templates/admin/settings-page.php:111
+msgid "LIVE"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:30
+msgid "Track ChatGPT order performance, conversion metrics, and revenue analytics."
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:37
+msgid "Date Range:"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:40
+msgid "Last 7 Days"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:43
+msgid "Last 30 Days"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:46
+msgid "Last 90 Days"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:66
+msgid "ChatGPT Orders"
+msgstr ""
+
+#. translators: %s: formatted revenue amount
+#: templates/admin/analytics-dashboard.php:72
+#: templates/admin/analytics-dashboard.php:96
+msgid "Revenue: %s"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:90
+msgid "Regular Orders"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:115
+msgid "ChatGPT Conversion"
+msgstr ""
+
+#. translators: 1: ChatGPT orders, 2: total orders
+#: templates/admin/analytics-dashboard.php:121
+msgid "%1$d of %2$d total orders"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:143
+msgid "ChatGPT AOV"
+msgstr ""
+
+#. translators: %s: formatted AOV amount
+#: templates/admin/analytics-dashboard.php:149
+msgid "Regular: %s"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:161
+msgid "ChatGPT Order Status Distribution"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:165
+#: templates/admin/analytics-dashboard.php:209
+#: templates/admin/logs/api-logs.php:97
+#: templates/admin/logs/session-status.php:104
+#: templates/admin/logs/webhook-logs.php:119
+#: templates/admin/settings-page.php:65
+#: templates/admin/settings-page.php:164
+#: templates/admin/wizard/step-5-prerequisites.php:48
+msgid "Status"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:166
+#: templates/admin/logs/session-status.php:196
+msgid "Count"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:167
+msgid "Percentage"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:195
+msgid "Recent ChatGPT Orders"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:199
+msgid "No ChatGPT orders found in the selected date range."
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:205
+msgid "Order"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:206
+msgid "Date"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:207
+msgid "Customer"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:208
+msgid "Total"
+msgstr ""
+
+#: templates/admin/analytics-dashboard.php:226
+msgid "Guest"
+msgstr ""
+
+#: templates/admin/logs-viewer.php:64
+msgid "Logs are stored using WooCommerce Logger and are retained according to WooCommerce log retention settings."
+msgstr ""
+
+#: templates/admin/logs-viewer.php:66
+msgid "View raw logs in WooCommerce"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:32
+msgid "API Request Logs"
+msgstr ""
+
+#. translators: 1: start entry number, 2: end entry number, 3: total entries, 4: log file count.
+#: templates/admin/logs/api-logs.php:38
+msgid "Showing %1$d-%2$d of %3$d entries from %4$d log file(s)."
+msgstr ""
+
+#. translators: %d: number of log files.
+#: templates/admin/logs/api-logs.php:47
+msgid "%d log file(s) available."
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:56
+msgid "Show:"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:76
+msgid "entries"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:87
+msgid "No API logs found. Logs will appear here when API requests are made."
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:93
+#: templates/admin/logs/error-logs.php:115
+#: templates/admin/logs/webhook-logs.php:116
+msgid "Timestamp"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:94
+msgid "Level"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:95
+#: templates/admin/logs/session-status.php:195
+#: templates/admin/settings-page.php:365
+msgid "Endpoint"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:96
+#: templates/admin/settings-page.php:364
+msgid "Method"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:98
+msgid "Duration"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:99
+#: templates/admin/wizard/step-5-prerequisites.php:50
+msgid "Details"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:140
+msgid "View Context"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:143
+msgid "No data"
+msgstr ""
+
+#. translators: %s: number of items.
+#: templates/admin/logs/api-logs.php:158
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/logs/api-logs.php:188
+msgid "First page"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:194
+msgid "Previous page"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:198
+msgid "Current Page"
+msgstr ""
+
+#. translators: %s: total number of pages.
+#: templates/admin/logs/api-logs.php:209
+msgid "of %s"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:218
+msgid "Next page"
+msgstr ""
+
+#: templates/admin/logs/api-logs.php:224
+msgid "Last page"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:43
+msgid "Payment"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:44
+msgid "API"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:45
+msgid "Webhook"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:46
+msgid "Validation"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:47
+msgid "System"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:88
+#: templates/admin/logs/session-status.php:45
+#: templates/admin/logs/webhook-logs.php:42
+msgid "Refresh Statistics"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:95
+msgid "Error Statistics (Last 24 Hours)"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:109
+msgid "No errors found. This is good!"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:116
+msgid "Category"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:117
+#: templates/admin/settings-page.php:66
+msgid "Message"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:118
+msgid "Context"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:137
+#: templates/admin/wizard/step-8-conformance.php:594
+#: templates/admin/wizard/step-8-conformance.php:628
+msgid "View Details"
+msgstr ""
+
+#: templates/admin/logs/error-logs.php:140
+msgid "No additional context"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:26
+msgid "Session Status & Performance"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:51
+msgid "Session Status Overview"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:55
+msgid "Currently Active Checkout Sessions"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:61
+msgid "Session Status Breakdown"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:64
+msgid "Total Sessions"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:68
+#: templates/admin/logs/session-status.php:245
+#: templates/admin/logs/session-status.php:253
+#: templates/admin/settings-page.php:191
+#: templates/admin/settings-page.php:201
+#: templates/admin/settings-page.php:211
+msgid "Active"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:72
+msgid "Completed"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:76
+#: templates/admin/logs/webhook-logs.php:60
+#: templates/admin/logs/webhook-logs.php:135
+#: templates/admin/wizard/step-8-conformance.php:256
+msgid "Failed"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:80
+msgid "Cancelled"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:84
+msgid "Refunded"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:88
+#: templates/admin/logs/session-status.php:143
+msgid "Expired"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:92
+msgid "Unknown"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:99
+msgid "Recent Sessions"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:103
+msgid "Session ID"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:105
+msgid "Items"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:106
+msgid "Created"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:107
+#: templates/admin/settings-page.php:290
+msgid "Last Updated"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:108
+msgid "Expires"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:109
+msgid "Shipping"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:159
+msgid "No active sessions found. Sessions are created when customers start the checkout process via ChatGPT."
+msgstr ""
+
+#: templates/admin/logs/session-status.php:166
+msgid "API Performance (Last 24 Hours)"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:169
+msgid "Total Requests"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:173
+#: templates/admin/logs/session-status.php:197
+msgid "Avg Duration"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:177
+msgid "Slowest Request"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:181
+msgid "Avg Memory"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:185
+msgid "Avg DB Queries"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:191
+msgid "Performance by Endpoint"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:198
+msgid "Slowest"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:218
+msgid "System Health"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:226
+msgid "Memory Limit"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:230
+msgid "Max Execution Time"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:238
+msgid "WooCommerce Version"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:242
+msgid "Object Cache"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:245
+#: templates/admin/logs/session-status.php:253
+msgid "Inactive"
+msgstr ""
+
+#: templates/admin/logs/session-status.php:250
+msgid "OPCache"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:49
+msgid "Webhook Statistics (Last 24 Hours)"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:52
+msgid "Total Sent"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:56
+msgid "Successful"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:64
+msgid "Retry Rate"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:73
+msgid "Failed Webhooks (Retry Queue)"
+msgstr ""
+
+#. translators: %d: number of webhooks pending retry
+#: templates/admin/logs/webhook-logs.php:78
+msgid "%d webhook(s) pending retry"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:99
+msgid "Clear Queue"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:108
+msgid "No webhook activity found."
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:109
+msgid "Webhooks are only sent for orders created through ChatGPT Instant Checkout. Create a test order via the ChatGPT interface or use the Testing Tools to trigger webhooks."
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:117
+#: templates/admin/settings-page.php:465
+msgid "Event Type"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:118
+msgid "URL"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:120
+msgid "Attempt"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:121
+msgid "Result"
+msgstr ""
+
+#: templates/admin/logs/webhook-logs.php:135
+msgid "Success"
+msgstr ""
+
+#: templates/admin/product-feed-manager.php:83
+msgid "Product Feed Preview"
+msgstr ""
+
+#: templates/admin/product-feed-manager.php:87
+msgid "Loading..."
+msgstr ""
+
+#: templates/admin/product-feed-manager.php:92
+msgid "Close"
+msgstr ""
+
+#: templates/admin/settings-page.php:35
+msgid "Some prerequisites are not met."
+msgstr ""
+
+#: templates/admin/settings-page.php:36
+msgid "Please resolve the issues below before using ChatGPT integration."
+msgstr ""
+
+#: templates/admin/settings-page.php:43
+msgid "All prerequisites met!"
+msgstr ""
+
+#: templates/admin/settings-page.php:44
+msgid "Your store is ready for ChatGPT integration."
+msgstr ""
+
+#: templates/admin/settings-page.php:51
+msgid "Settings"
+msgstr ""
+
+#: templates/admin/settings-page.php:52
+msgid "Security"
+msgstr ""
+
+#: templates/admin/settings-page.php:53
+#: templates/admin/settings-page.php:317
+msgid "API Configuration"
+msgstr ""
+
+#: templates/admin/settings-page.php:54
+msgid "Uninstall"
+msgstr ""
+
+#: templates/admin/settings-page.php:60
+msgid "System Prerequisites"
+msgstr ""
+
+#: templates/admin/settings-page.php:64
+msgid "Check"
+msgstr ""
+
+#: templates/admin/settings-page.php:95
+msgid "General Settings"
+msgstr ""
+
+#: templates/admin/settings-page.php:107
+msgid "Enable plugin-wide test mode"
+msgstr ""
+
+#: templates/admin/settings-page.php:118
+msgid "Affects ALL API requests including real ChatGPT orders:"
+msgstr ""
+
+#: templates/admin/settings-page.php:121
+msgid "When enabled: Bypasses SSL/HTTPS and IP allowlist checks (allows localhost testing)"
+msgstr ""
+
+#: templates/admin/settings-page.php:122
+msgid "When disabled: Enforces SSL/HTTPS, validates OpenAI IP addresses (production mode)"
+msgstr ""
+
+#: templates/admin/settings-page.php:123
+msgid "Isolates test data with \"test_\" prefix in database"
+msgstr ""
+
+#: templates/admin/settings-page.php:124
+msgid "Controls which Stripe API keys are used (test vs live)"
+msgstr ""
+
+#: templates/admin/settings-page.php:128
+msgid "Warning: SSL/HTTPS Not Detected"
+msgstr ""
+
+#: templates/admin/settings-page.php:130
+msgid "Test mode is disabled but your site is not using HTTPS. All API requests will be rejected. Enable test mode for local development or install an SSL certificate."
+msgstr ""
+
+#: templates/admin/settings-page.php:135
+msgid "You can also configure test mode in the Application Wizard (Step 6)."
+msgstr ""
+
+#: templates/admin/settings-page.php:140
+msgid "OpenAI Webhook URL"
+msgstr ""
+
+#: templates/admin/settings-page.php:145
+msgid "Unique webhook URL provided by OpenAI during merchant onboarding (merchant-specific, required for production)."
+msgstr ""
+
+#: templates/admin/settings-page.php:156
+#: templates/admin/wizard/step-7-integration.php:96
+msgid "Security Settings"
+msgstr ""
+
+#: templates/admin/settings-page.php:159
+msgid "Security Status"
+msgstr ""
+
+#: templates/admin/settings-page.php:163
+#: templates/admin/wizard/step-9-submit.php:142
+msgid "Feature"
+msgstr ""
+
+#: templates/admin/settings-page.php:165
+#: templates/admin/settings-page.php:366
+#: templates/admin/settings-page.php:430
+msgid "Description"
+msgstr ""
+
+#: templates/admin/settings-page.php:170
+msgid "SSL/HTTPS"
+msgstr ""
+
+#: templates/admin/settings-page.php:180
+msgid "Not Enabled"
+msgstr ""
+
+#: templates/admin/settings-page.php:184
+msgid "Required for production API requests"
+msgstr ""
+
+#: templates/admin/settings-page.php:187
+msgid "Bearer Token Auth"
+msgstr ""
+
+#: templates/admin/settings-page.php:194
+msgid "All API requests require valid Bearer token"
+msgstr ""
+
+#: templates/admin/settings-page.php:197
+msgid "Rate Limiting"
+msgstr ""
+
+#: templates/admin/settings-page.php:204
+msgid "Prevents API abuse with per-endpoint limits"
+msgstr ""
+
+#: templates/admin/settings-page.php:207
+msgid "Idempotency"
+msgstr ""
+
+#: templates/admin/settings-page.php:214
+msgid "Prevents duplicate request processing"
+msgstr ""
+
+#: templates/admin/settings-page.php:217
+#: templates/admin/wizard/step-7-integration.php:106
+msgid "IP Allowlisting"
+msgstr ""
+
+#: templates/admin/settings-page.php:234
+msgid "Restricts API access to OpenAI IP ranges"
+msgstr ""
+
+#: templates/admin/settings-page.php:244
+msgid "IP Allowlisting Configuration"
+msgstr ""
+
+#: templates/admin/settings-page.php:247
+msgid "Enable IP Allowlisting"
+msgstr ""
+
+#: templates/admin/settings-page.php:252
+#: templates/admin/wizard/step-7-integration.php:111
+msgid "Only allow requests from OpenAI IP addresses"
+msgstr ""
+
+#: templates/admin/settings-page.php:255
+msgid "When enabled, only requests from verified OpenAI IP ranges will be accepted. Automatically bypassed in test mode."
+msgstr ""
+
+#: templates/admin/settings-page.php:261
+msgid "OpenAI IP Ranges"
+msgstr ""
+
+#: templates/admin/settings-page.php:268
+msgid "Current IP Ranges"
+msgstr ""
+
+#. translators: %d: number of additional IP ranges
+#: templates/admin/settings-page.php:279
+msgid "... and %d more ranges"
+msgstr ""
+
+#: templates/admin/settings-page.php:285
+msgid "No IP ranges loaded yet. Click \"Refresh IP Ranges\" to fetch from OpenAI."
+msgstr ""
+
+#. translators: %s: human-readable time difference
+#: templates/admin/settings-page.php:295
+msgid "%s ago"
+msgstr ""
+
+#: templates/admin/settings-page.php:297
+msgid "Never"
+msgstr ""
+
+#: templates/admin/settings-page.php:302
+msgid "Refresh IP Ranges Now"
+msgstr ""
+
+#: templates/admin/settings-page.php:306
+msgid "IP ranges are automatically updated hourly. Click to manually refresh now."
+msgstr ""
+
+#: templates/admin/settings-page.php:320
+msgid "Authentication & Secrets"
+msgstr ""
+
+#: templates/admin/settings-page.php:323
+#: templates/admin/wizard/step-7-integration.php:43
+msgid "API Key (Bearer Token)"
+msgstr ""
+
+#: templates/admin/settings-page.php:327
+#: templates/admin/settings-page.php:342
+#: templates/admin/settings-page.php:382
+#: templates/admin/wizard/step-7-integration.php:53
+#: templates/admin/wizard/step-7-integration.php:83
+#: templates/admin/wizard/step-9-submit.php:60
+msgid "Copy"
+msgstr ""
+
+#: templates/admin/settings-page.php:330
+#: templates/admin/settings-page.php:345
+#: templates/admin/wizard/step-7-integration.php:56
+#: templates/admin/wizard/step-7-integration.php:86
+msgid "Regenerate"
+msgstr ""
+
+#: templates/admin/settings-page.php:333
+msgid "Include this key in Authorization header: Bearer {key}"
+msgstr ""
+
+#: templates/admin/settings-page.php:338
+#: templates/admin/wizard/step-7-integration.php:73
+msgid "Webhook Secret (HMAC)"
+msgstr ""
+
+#: templates/admin/settings-page.php:348
+msgid "Used to sign outgoing webhooks to OpenAI with HMAC-SHA256."
+msgstr ""
+
+#: templates/admin/settings-page.php:355
+msgid "Available Endpoints"
+msgstr ""
+
+#: templates/admin/settings-page.php:357
+msgid "All endpoints use base namespace:"
+msgstr ""
+
+#: templates/admin/settings-page.php:379
+msgid "Retrieve product feed for ChatGPT integration"
+msgstr ""
+
+#: templates/admin/settings-page.php:385
+msgid "View"
+msgstr ""
+
+#: templates/admin/settings-page.php:393
+msgid "Checkout Session Endpoints (ACP)"
+msgstr ""
+
+#: templates/admin/settings-page.php:399
+msgid "Create new checkout session with items and addresses"
+msgstr ""
+
+#: templates/admin/settings-page.php:404
+msgid "Retrieve existing checkout session details"
+msgstr ""
+
+#: templates/admin/settings-page.php:409
+msgid "Update session (items, addresses, shipping method, coupons)"
+msgstr ""
+
+#: templates/admin/settings-page.php:414
+msgid "Complete checkout with SharedPaymentToken and create order"
+msgstr ""
+
+#: templates/admin/settings-page.php:419
+msgid "Cancel checkout session and clear session data"
+msgstr ""
+
+#: templates/admin/settings-page.php:425
+msgid "Required Headers"
+msgstr ""
+
+#: templates/admin/settings-page.php:429
+msgid "Header"
+msgstr ""
+
+#: templates/admin/settings-page.php:437
+msgid "Bearer token authentication (required for all endpoints)"
+msgstr ""
+
+#: templates/admin/settings-page.php:444
+msgid "Unique identifier to prevent duplicate processing (recommended for POST endpoints)"
+msgstr ""
+
+#: templates/admin/settings-page.php:449
+msgid "OpenAI ACP API version (optional, defaults to 2024-10-01)"
+msgstr ""
+
+#: templates/admin/settings-page.php:458
+msgid "Outgoing Webhooks"
+msgstr ""
+
+#: templates/admin/settings-page.php:460
+msgid "Webhook events sent to OpenAI for order status updates (ACP v1.0 compliant)."
+msgstr ""
+
+#: templates/admin/settings-page.php:466
+msgid "When Triggered"
+msgstr ""
+
+#: templates/admin/settings-page.php:472
+msgid "Sent immediately when order is created after successful payment"
+msgstr ""
+
+#: templates/admin/settings-page.php:476
+msgid "Sent when order status changes (completed, cancelled, refunded, disputed)"
+msgstr ""
+
+#: templates/admin/settings-page.php:481
+msgid "All webhooks include HMAC-SHA256 signature in Merchant-Signature header."
+msgstr ""
+
+#: templates/admin/settings-page.php:487
+msgid "Uninstall Options"
+msgstr ""
+
+#: templates/admin/settings-page.php:494
+msgid "Delete Data on Uninstall"
+msgstr ""
+
+#: templates/admin/settings-page.php:499
+msgid "Remove all plugin data when uninstalling"
+msgstr ""
+
+#: templates/admin/settings-page.php:502
+msgid "When enabled, all settings, transients, and metadata will be permanently deleted on uninstall."
+msgstr ""
+
+#: templates/admin/wizard/navigation.php:20
+msgid "Continue"
+msgstr ""
+
+#: templates/admin/wizard/navigation.php:28
+msgid "Previous"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:37
+msgid "Step 1: Business Information"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:39
+msgid "Provide your business information for OpenAI merchant application."
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:51
+#: templates/admin/wizard/step-9-submit.php:44
+msgid "Business Name"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:64
+msgid "Your legal business name or DBA (Doing Business As) name."
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:71
+msgid "Business Entity Type"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:81
+msgid "Select entity type..."
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:83
+msgid "Sole Proprietor"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:86
+msgid "Partnership"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:89
+msgid "LLC (Limited Liability Company)"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:92
+msgid "Corporation"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:95
+msgid "Non-Profit Organization"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:99
+msgid "Your legal business structure."
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:106
+msgid "Contact Name"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:119
+msgid "Primary contact person for this integration."
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:126
+#: templates/admin/wizard/step-9-submit.php:52
+msgid "Contact Email"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:139
+msgid "Email address for important notifications about your integration."
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:146
+msgid "Store URL"
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:159
+msgid "Your primary store URL (must be HTTPS for production)."
+msgstr ""
+
+#: templates/admin/wizard/step-1-business-info.php:167
+msgid "Save and Continue"
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:36
+msgid "Step 2: Product Feed Configuration"
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:38
+msgid "Select which products should be available in ChatGPT. You can configure individual products from the Product Feed Manager."
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:42
+msgid "Current Product Feed Status"
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:57
+msgid "No products enabled yet"
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:69
+#: templates/admin/wizard/step-9-submit.php:56
+msgid "Product Feed URL"
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:73
+msgid "Copy URL"
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:81
+msgid "Product Selection"
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:83
+msgid "You can manage which products appear in ChatGPT from the Product Feed Manager page."
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:87
+msgid "Open Product Feed Manager"
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:91
+msgid "Tip: For best results, enable products with complete information (images, descriptions, pricing, and brand)."
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:98
+msgid "Action Required:"
+msgstr ""
+
+#: templates/admin/wizard/step-2-product-feed.php:99
+msgid "You should enable at least some products for ChatGPT before submitting your application."
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:28
+msgid "Step 3: Business Policies"
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:30
+msgid "OpenAI requires publicly accessible policy URLs for merchant verification. Terms of Service and Privacy Policy are required. Return/Refund policy is optional."
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:34
+msgid "Policy Requirements"
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:36
+msgid "Policies must be publicly accessible (not password protected)"
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:37
+msgid "URLs must return a 2xx HTTP status code (200, 201, etc.)"
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:38
+msgid "You may use the same URL for multiple policies if they're on one page"
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:39
+msgid "Return/Refund policy is optional for digital-only stores"
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:40
+msgid "HTTPS is recommended for all policy pages"
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:67
+msgid "URL to your Terms of Service page. This will be verified for accessibility."
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:91
+msgid "URL to your Privacy Policy page. This will be verified for accessibility."
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:102
+msgid "(Optional)"
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:114
+msgid "URL to your Return/Refund Policy page. If provided, it will be verified for accessibility."
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:125
+msgid "Note:"
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:126
+msgid "When you click \"Validate and Continue\", the wizard will check if each URL is accessible and returns a valid response."
+msgstr ""
+
+#: templates/admin/wizard/step-3-policies.php:132
+msgid "Validate and Continue"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:61
+msgid "Step 4: Product Data Quality Review"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:63
+msgid "Review your product data quality for ChatGPT integration. OpenAI recommends complete product information for best results."
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:67
+msgid "Overall Quality Score"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:73
+msgid "Products Reviewed:"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:74
+msgid "Products with Issues:"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:75
+msgid "Total Issues Found:"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:83
+msgid "Excellent!"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:84
+msgid "Your product data quality is great. Your store is ready for ChatGPT integration."
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:90
+msgid "Good, but could be better."
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:91
+msgid "Consider fixing the issues below for optimal ChatGPT performance."
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:97
+msgid "Action Needed."
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:98
+msgid "Your product data has several issues that should be fixed before submitting your application."
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:105
+msgid "Issues to Fix"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:110
+msgid "Score"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:111
+msgid "Issues"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:112
+#: templates/admin/wizard/step-5-prerequisites.php:51
+msgid "Action"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:135
+msgid "Edit Product"
+msgstr ""
+
+#. translators: %d: number of additional products with issues
+#: templates/admin/wizard/step-4-data-quality.php:146
+msgid "... and %d more products with issues."
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:154
+msgid "Perfect!"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:155
+msgid "No issues found. All your products have complete information."
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:161
+msgid "Data Quality Best Practices"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:163
+msgid "High-quality product images (at least 800x800px)"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:164
+msgid "Detailed product descriptions (minimum 50 characters)"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:165
+msgid "Accurate pricing information"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:166
+msgid "Brand/manufacturer information when applicable"
+msgstr ""
+
+#: templates/admin/wizard/step-4-data-quality.php:167
+msgid "Proper categorization"
+msgstr ""
+
+#: templates/admin/wizard/step-5-prerequisites.php:23
+msgid "Step 5: System Prerequisites"
+msgstr ""
+
+#: templates/admin/wizard/step-5-prerequisites.php:25
+msgid "Before running tests, we need to verify that all system prerequisites are met. All checks must pass to continue."
+msgstr ""
+
+#: templates/admin/wizard/step-5-prerequisites.php:31
+msgid "✓ All Prerequisites Met!"
+msgstr ""
+
+#: templates/admin/wizard/step-5-prerequisites.php:32
+msgid "Your system is ready for testing and production deployment."
+msgstr ""
+
+#: templates/admin/wizard/step-5-prerequisites.php:38
+msgid "⚠ Some Prerequisites Not Met"
+msgstr ""
+
+#: templates/admin/wizard/step-5-prerequisites.php:39
+msgid "Please resolve the issues below before continuing to the testing phase."
+msgstr ""
+
+#: templates/admin/wizard/step-5-prerequisites.php:49
+msgid "Requirement"
+msgstr ""
+
+#: templates/admin/wizard/step-5-prerequisites.php:90
+msgid "Recheck All Prerequisites"
+msgstr ""
+
+#: templates/admin/wizard/step-5-prerequisites.php:93
+msgid "After resolving any issues, click \"Recheck\" to verify all prerequisites are met."
+msgstr ""
+
+#: templates/admin/wizard/step-5-prerequisites.php:104
+msgid "Continue to Test Setup"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:71
+msgid "Step 6: Test Environment Setup"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:73
+msgid "Configure your testing environment to run ACP conformance tests. Follow the checklist below to prepare for testing."
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:79
+msgid "✓ Test Environment Ready!"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:80
+msgid "Your testing environment is configured and ready for conformance tests."
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:86
+msgid "Setup Required"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:87
+msgid "Complete the setup steps below to prepare your test environment."
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:106
+msgid "1. Enable Test Mode"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:109
+msgid "Test mode bypasses SSL/HTTPS and IP allowlist checks, allowing you to run tests locally."
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:114
+msgid "✓ Test mode is currently enabled"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:124
+msgid "Disable Test Mode"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:125
+msgid "Enable Test Mode"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:145
+msgid "2. Configure Test Webhook URL"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:148
+msgid "Use a free testing URL from webhook.site to verify webhook delivery works correctly. This is NOT your production OpenAI webhook."
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:153
+msgid "ℹ️ Test Webhook vs OpenAI Webhook:"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:154
+msgid "This test webhook (webhook.site) is only for validating that your plugin can send webhooks with the correct format. Your actual OpenAI production webhook URL will be provided by OpenAI after your application is approved (Step 9)."
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:159
+msgid "How to get a test webhook URL:"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:161
+msgid "Visit webhook.site in a new tab"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:162
+msgid "Copy your unique URL (looks like: https://webhook.site/abc123...)"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:163
+msgid "Paste it in the field below"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:172
+msgid "Save Webhook URL"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:175
+msgid "Open webhook.site"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:181
+msgid "✓ Test webhook URL configured"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:201
+msgid "3. Enable Test Products"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:204
+msgid "Enable at least one product for ChatGPT checkout to run product feed tests."
+msgstr ""
+
+#. translators: %d: number of enabled products
+#: templates/admin/wizard/step-6-test-setup.php:212
+msgid "✓ %d product(s) enabled for ChatGPT"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:218
+msgid "⚠ No products enabled yet"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:223
+msgid "Manage Product Feed"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:228
+msgid "Recommended:"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:229
+msgid "Create at least one out-of-stock product to test error scenarios."
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:248
+msgid "4. Stripe Test API Keys"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:251
+msgid "Configure Stripe test API keys in WooCommerce Stripe Gateway settings."
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:256
+msgid "✓ Stripe test keys configured"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:260
+msgid "⚠ Stripe test keys not configured"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:265
+msgid "Configure Stripe Settings"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:280
+msgid "Continue to Integration Setup"
+msgstr ""
+
+#: templates/admin/wizard/step-6-test-setup.php:287
+msgid "Complete all setup steps above to continue."
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:25
+msgid "Step 7: Integration Configuration"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:27
+msgid "Configure the API keys and webhook settings for OpenAI integration. These credentials are automatically generated and secured."
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:32
+msgid "ℹ️ About These Credentials"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:33
+msgid "Your API key and webhook secret are automatically generated and secured. The API key will be included in your application submission (Step 9) that you provide to OpenAI."
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:46
+msgid "This key authenticates API requests from OpenAI. Include it in the Authorization header as: Bearer {key}"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:63
+#: templates/admin/wizard/step-9-submit.php:284
+msgid "⚠️ Important:"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:64
+msgid "Keep this key secure. Regenerating will invalidate the old key and require updating OpenAI configuration."
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:76
+msgid "Used to sign outgoing webhooks to OpenAI. This ensures webhook authenticity via HMAC-SHA256 signature."
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:114
+msgid "Recommended for production. Automatically bypassed in test mode. IP ranges are updated hourly from OpenAI."
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:121
+msgid "Save Security Settings"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:126
+msgid "Active Security Features:"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:128
+msgid "✓ SSL/HTTPS enforcement (production mode)"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:129
+msgid "✓ Bearer token authentication"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:130
+msgid "✓ Rate limiting per endpoint"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:131
+msgid "✓ Idempotency key validation"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:132
+msgid "✓ HMAC-SHA256 webhook signatures"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:146
+msgid "Continue to Conformance Tests"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:177
+msgid "Are you sure you want to regenerate the API key? This will invalidate the current key."
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:178
+msgid "Are you sure you want to regenerate the webhook secret?"
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:199
+msgid "Failed to regenerate. Please try again."
+msgstr ""
+
+#: templates/admin/wizard/step-7-integration.php:204
+#: templates/admin/wizard/step-8-conformance.php:833
+msgid "An error occurred. Please try again."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:28
+msgid "Step 8: ACP Conformance Tests"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:30
+msgid "Run the complete ACP conformance test suite to validate your integration. All 17 required tests must pass for production readiness."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:35
+msgid "About These Tests"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:36
+msgid "These tests validate compliance with the OpenAI Agentic Commerce Protocol (ACP) specification. They test your API endpoints, session management, payment processing, webhooks, and security requirements."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:43
+msgid "✓ All Tests Passed!"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:44
+msgid "Your integration is ACP-compliant and ready for production deployment."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:50
+msgid "✓ All Critical Tests Passed"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:51
+msgid "Your integration meets all required criteria. Some optional optimization tests have warnings - you may proceed or address them to improve your integration."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:57
+msgid "⚠ Some Critical Tests Failed"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:58
+msgid "Please resolve the failed critical tests (marked in red) to continue. Warning tests (marked in orange) are optional."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:69
+msgid "Test Suite Runner"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:73
+msgid "Run All Tests"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:81
+msgid "Preparing tests..."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:99
+msgid "Core Session Tests (1-3)"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:104
+msgid "Test 1: Session Creation With Shipping Address"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:109
+msgid "Test 2: Session Creation Without Shipping Address"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:114
+msgid "Test 3: Shipping Option Updates"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:124
+msgid "Payment & Completion Tests (4-5)"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:129
+msgid "Test 4: SharedPaymentToken Processing"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:134
+msgid "Test 5: Order Completion (201 Status)"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:144
+msgid "Webhook & Error Tests (6-7)"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:149
+msgid "Test 6: Webhook Emission"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:154
+msgid "Test 7: Error Scenarios"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:164
+msgid "Security Tests (8-9)"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:169
+msgid "Test 8: Idempotency Validation"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:174
+msgid "Test 9: Security Requirements"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:184
+msgid "Product Feed Tests (10-12)"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:189
+msgid "Test 10: Product Feed Endpoint Accessibility"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:194
+msgid "Test 11: Product Feed Data Quality"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:199
+msgid "Test 12: Feed Refresh Mechanism"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:209
+msgid "Advanced Tests (13-17)"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:214
+msgid "Test 13: API-Version Header Validation"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:219
+msgid "Test 14: Rate Limiting Enforcement"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:224
+msgid "Test 15: Robots.txt Configuration"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:229
+msgid "Test 16: IP Allowlist Validation"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:234
+msgid "Test 17: Production Prerequisites"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:244
+msgid "Test Results Summary"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:248
+msgid "Total Tests"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:252
+msgid "Passed"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:266
+msgid "⚠️ Important: Test Scope & Limitations"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:267
+msgid "Automated tests validate:"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:269
+msgid "✓ REST API endpoints and response formats"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:270
+msgid "✓ Session workflow and state management"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:271
+msgid "✓ Error handling and status codes"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:272
+msgid "✓ Webhook delivery to test endpoint"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:275
+msgid "For complete validation:"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:276
+msgid "Use real Stripe SharedPaymentTokens from the Stripe Test Helpers API. These tests simulate payment flow but do not create actual Stripe PaymentIntents."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:287
+msgid "Continue to Final Step"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:295
+msgid "All critical tests (marked in red if failed) must pass to continue. Warning tests (orange) are optional."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:512
+msgid "Running tests individually... (Test 1 of 17)"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:531
+msgid "Running test"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:531
+msgid "of"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:597
+#: templates/admin/wizard/step-8-conformance.php:827
+#: templates/admin/wizard/step-8-conformance.php:832
+msgid "Enable Filter"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:694
+msgid "All tests completed!"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:697
+msgid "Run All Tests Again"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:739
+msgid "Test Name:"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:748
+msgid "Error Message:"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:758
+msgid "Request Data:"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:781
+msgid "Response Data:"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:802
+msgid "Test Details"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:811
+msgid "Fixing..."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:822
+msgid "✓ Fixed"
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:825
+msgid "Robots.txt filter enabled. Re-run tests to verify."
+msgstr ""
+
+#: templates/admin/wizard/step-8-conformance.php:828
+msgid "Failed to enable filter. Please try manually."
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:25
+msgid "Step 9: Application Data & Submission"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:27
+msgid "Your application data has been generated. Review the information, download it, and submit your application to OpenAI."
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:32
+msgid "✓ Application Data Ready!"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:33
+msgid "Your store information has been compiled and is ready for submission to OpenAI."
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:39
+msgid "Application Summary"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:48
+msgid "Website"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:65
+msgid "Terms of Service"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:73
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:81
+msgid "Return Policy"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:89
+msgid "SSL Enabled"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:92
+msgid "Yes"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:94
+msgid "No"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:99
+msgid "Payment Processor"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:103
+msgid "Connected"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:114
+msgid "Export Application Data"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:116
+msgid "Download or copy the complete application data in JSON format for your records or OpenAI submission."
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:122
+msgid "Copy JSON to Clipboard"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:125
+msgid "Download JSON File"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:130
+msgid "JSON Preview"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:138
+msgid "Merchant Program Fees"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:143
+msgid "Cost"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:149
+msgid "Product Discovery in ChatGPT"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:150
+msgid "Your products will be searchable and discoverable in ChatGPT"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:152
+msgid "FREE"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:156
+msgid "Transaction Fee"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:157
+msgid "Small fee per completed purchase (refunded if order is returned)"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:159
+msgid "Per transaction"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:163
+msgid "Monthly/Setup Fees"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:164
+msgid "No subscription or setup charges"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:166
+msgid "NONE"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:174
+msgid "Application Requirements Checklist"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:185
+msgid "SSL Certificate (HTTPS)"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:189
+msgid "Stripe Account Configured"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:193
+msgid "Product Feed with Quality Data"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:209
+msgid "ACP Conformance Tests Passed"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:217
+msgid "Eligibility & Onboarding"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:219
+msgid "Merchants are onboarded on a rolling basis"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:220
+msgid "Shopify and Etsy merchants are automatically eligible (no integration needed)"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:221
+msgid "Other merchants must apply and implement the Agentic Commerce Protocol"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:222
+msgid "OpenAI will review your application and notify you of approval status"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:228
+msgid "Submit Your Application"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:233
+msgid "⚠ Prerequisites Not Met:"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:234
+msgid "Some prerequisites are not yet met. You should resolve these issues before submitting your application."
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:238
+msgid "View Prerequisites"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:245
+msgid "✓ Ready to Submit!"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:246
+msgid "All prerequisites are met and all tests have passed. You can now submit your application to OpenAI."
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:253
+msgid "Click the button below to open the OpenAI merchant application form. You will need to provide the information you generated above."
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:257
+msgid "Submit Application to OpenAI"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:261
+msgid "Opens in a new tab: https://chatgpt.com/merchants"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:268
+msgid "What Happens After Submission?"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:273
+msgid "OpenAI reviews your application"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:273
+msgid "typically takes 3-7 business days"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:274
+msgid "You receive approval notification"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:274
+msgid "via email with your approval status"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:275
+msgid "OpenAI provides your webhook URL"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:275
+msgid "a unique endpoint for receiving order updates"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:276
+msgid "Configure webhook in Settings"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:276
+msgid "go to AI Checkout → Settings → Integration"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:277
+msgid "Switch to production mode"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:277
+msgid "disable test mode and verify live Stripe keys"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:278
+msgid "Your store goes live"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:278
+msgid "customers can purchase via ChatGPT!"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:285
+msgid "You will need the webhook URL from OpenAI before you can go live. This will be provided after your application is approved. You can configure it later in Settings → Integration."
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:293
+msgid "Additional Resources"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:298
+msgid "OpenAI Commerce Developer Guide"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:303
+msgid "Product Feed Specification"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:308
+msgid "Checkout API Specification"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:322
+msgid "Complete Wizard"
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:344
+msgid "Failed to copy. Please copy manually."
+msgstr ""
+
+#: templates/admin/wizard/step-9-submit.php:364
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr ""
