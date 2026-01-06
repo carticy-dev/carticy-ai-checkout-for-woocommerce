@@ -33,7 +33,7 @@ Enable ChatGPT Instant Checkout for your WooCommerce store using OpenAI Agentic 
 
 ### Download from GitHub
 
-1. Download the latest release ZIP from [Releases](https://github.com/bomsn/carticy-ai-checkout-for-woocommerce/releases)
+1. Download the latest release ZIP from [Releases](https://github.com/carticy-dev/carticy-ai-checkout-for-woocommerce/releases)
 2. Go to WordPress Admin → Plugins → Add New
 3. Click "Upload Plugin" and select the ZIP file
 4. Activate the plugin
@@ -218,8 +218,11 @@ GNU General Public License for more details.
 
 ## 🔗 Links
 
-- **[GitHub Repository](https://github.com/bomsn/carticy-ai-checkout-for-woocommerce)**
-- **[Report Issues](https://github.com/bomsn/carticy-ai-checkout-for-woocommerce/issues)**
+- **[WordPress.org Plugin](https://wordpress.org/plugins/ai-checkout-for-woocommerce/)**
+- **[Plugin Homepage](https://carticy.com/plugins/ai-checkout-for-woocommerce/)**
+- **[Documentation](https://carticy.com/enable-chatgpt-instant-checkout-for-woocommerce-stores/)**
+- **[GitHub Repository](https://github.com/carticy-dev/carticy-ai-checkout-for-woocommerce)**
+- **[Report Issues](https://github.com/carticy-dev/carticy-ai-checkout-for-woocommerce/issues)**
 - **[OpenAI Merchant Application](https://chatgpt.com/merchants)**
 
 ## ⚡ Third-Party Services

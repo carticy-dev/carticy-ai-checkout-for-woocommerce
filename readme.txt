@@ -1,5 +1,6 @@
 === AI Checkout for WooCommerce ===
 Contributors: carticy, alikhallad
+Plugin URI: https://carticy.com/plugins/ai-checkout-for-woocommerce/
 Tags: chatgpt, woocommerce, checkout, stripe, openai
 Requires at least: 5.8
 Tested up to: 6.9
@@ -7,6 +8,7 @@ Requires PHP: 8.0
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://alikhallad.com/donations/donation-form/
 
 Enable ChatGPT Instant Checkout for your WooCommerce store using OpenAI Agentic Commerce Protocol.
 
@@ -26,6 +28,8 @@ AI Checkout for WooCommerce enables ChatGPT Instant Checkout integration for you
 * **Application Wizard** - Step-by-step guide for OpenAI merchant application
 * **Test Mode** - Comprehensive testing tools and sandbox environment
 * **Security First** - Bearer token authentication, HMAC signatures, IP allowlisting
+
+**[📖 Full Documentation & Setup Guide](https://carticy.com/enable-chatgpt-instant-checkout-for-woocommerce-stores/)**
 
 **Requirements:**
 
@@ -120,12 +124,10 @@ Refunds initiated in WooCommerce admin are automatically processed through Strip
 
 == Screenshots ==
 
-1. Settings page with API key configuration
-2. Product Feed Manager with quality checks
-3. Application Preparation Wizard
-4. Analytics Dashboard with ChatGPT order metrics
-5. Testing Tools with mock simulator
-6. Logs Viewer with API request inspection
+1. Analytics Dashboard with ChatGPT order metrics and conversion tracking
+2. Product Feed Manager with quality checks and category filtering
+3. System Requirements checker showing plugin prerequisites
+4. Example ChatGPT order in WooCommerce admin
 
 == Changelog ==
 
