@@ -1,58 +1,250 @@
 /**
  * Admin Styles for AI Checkout for WooCommerce
  *
- * Plugin-specific styles only. General layout, tabs, tables, and buttons
- * are handled by admin-layout.css (reusable across all Carticy plugins).
+ * Plugin-specific styles only. Layout, tokens, and shared components come
+ * from the unified Carticy admin design system (carticy/admin-ui,
+ * .cv-root-scoped tokens.css + components.css), which replaced the retired
+ * design-system/admin-layout/admin-components packages.
  *
  * @package Carticy\AiCheckout
  */
 
 /* All styles scoped under .carticy-ai-checkout to avoid conflicts */
 
-/* ========================================
-	Form Table Customizations (Plugin-Specific)
-	======================================== */
-
-.carticy-ai-checkout .form-table th {
-	width: 250px;
+/* Legacy-token bridge: --carticy-* references in this stylesheet and in the
+   page-scoped stylesheets rendered inside the .carticy-ai-checkout shell
+   (e.g. admin-product-manager.css) resolve to the unified design-system
+   tokens (with static fallbacks so a missing tokens.css cannot blank the
+   admin). Remove a mapping only after removing its last usage. */
+.carticy-ai-checkout {
+	--carticy-base: var(--cv-bg-surface, #ffffff);
+	--carticy-grey-light: var(--cv-border-1, #f3f4f6);
+	--carticy-primary: var(--cv-action, #0f172a);
+	--carticy-radius: var(--cv-radius-sm, 4px);
+	--carticy-shade-50: var(--cv-bg-subtle, #f3f4ff);
+	--carticy-shadow-sm: var(--cv-shadow-card, 0 1px 3px rgba(0, 0, 0, 0.1));
 }
 
-.carticy-ai-checkout .form-table input[type="text"].regular-text,
-.carticy-ai-checkout .form-table input[type="url"].regular-text {
+/* ========================================
+	React app shell (branded top bar + tabs + content)
+
+	Mirrors the shared Carticy admin pattern: a full-bleed .cv-root--app
+	surface with a surface-colored top bar carrying the brand and the
+	design-system Tabs, over a centered content column.
+	======================================== */
+
+.caic-app {
+	display: flex;
+	flex-direction: column;
+	min-height: calc(100vh - 32px);
+	background: var(--cv-bg-page);
+}
+
+.caic-topbar {
+	align-items: center;
+	background: var(--cv-bg-surface);
+	border-bottom: 1px solid var(--cv-border-1);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 28px;
+	padding: 0 28px;
+}
+
+.caic-topbar__brand {
+	align-items: center;
+	display: flex;
+	gap: 10px;
+	font-weight: var(--cv-weight-semibold);
+	padding: 14px 0;
+}
+
+.caic-topbar__mark {
+	display: inline-flex;
+	align-items: center;
+	line-height: 0;
+}
+
+.caic-topbar__mark svg {
+	display: block;
+	border-radius: var(--cv-radius-sm);
+}
+
+.caic-topbar__name {
+	font-size: 14px;
+	font-weight: var(--cv-weight-semibold);
+	color: var(--cv-fg-1);
+}
+
+.caic-topbar__tabs {
+	border-bottom: 0;
+}
+
+.caic-content {
+	flex: 1;
+	margin: 0 auto;
+	max-width: 1080px;
+	padding: 32px 28px 56px;
 	width: 100%;
-	max-width: 500px;
+}
+
+.caic-stack > section + section {
+	margin-top: 28px;
+}
+
+.caic-stats {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 12px;
+}
+
+@media (max-width: 900px) {
+	.caic-stats {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.caic-loading {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 32px 0;
+	color: var(--cv-fg-3);
+}
+
+/* Compact inline select used as a section filter (its cv-field wrapper has no
+   label here, so strip the stacking margins and let the control size to fit). */
+.caic-range {
+	width: auto;
+	min-width: 150px;
+}
+
+.cv-section__meta .cv-field {
+	margin: 0;
+}
+
+/* ---- Forms: field groups + action button rows ---- */
+
+/* A row of buttons under a field/control: give it air from the control above
+   and space the buttons from each other. */
+.caic-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 12px;
+}
+
+/* Space stacked field groups (a control followed by its action row, repeated). */
+.caic-actions + .cv-field,
+.caic-content .cv-field + .cv-field {
+	margin-top: 22px;
+}
+
+/* ---- Toolbars (search + filters + actions above a table) ---- */
+.caic-toolbar,
+.caic-feed__toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 16px;
+}
+
+.caic-feed__toolbar-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+}
+
+/* ---- Pagination ---- */
+.caic-pagination,
+.caic-feed__pagination {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 14px;
+}
+
+.caic-feed__page-label {
+	color: var(--cv-fg-3);
+	font-size: var(--cv-size-meta);
+}
+
+/* ---- Preformatted JSON blocks (log/feed detail modals) ---- */
+.caic-json,
+.caic-pre {
+	background: var(--cv-bg-subtle);
+	border: 1px solid var(--cv-border-1);
+	border-radius: var(--cv-radius-sm);
+	padding: 12px;
+	font-family: var(--cv-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+	font-size: 12px;
+	line-height: 1.5;
+	max-height: 60vh;
+	overflow: auto;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+/* ---- Product-feed table cells ---- */
+.caic-feed__image {
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+	display: block;
+	border: 1px solid var(--cv-border-1);
+	border-radius: var(--cv-radius-sm);
+}
+
+.caic-feed__status,
+.caic-feed__quality {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.caic-feed__actions {
+	display: flex;
+	gap: 6px;
+}
+
+.caic-feed__issues-toggle {
+	cursor: pointer;
+}
+
+.caic-feed__issues-list,
+.caic-issues {
+	margin: 8px 0 0 18px;
+}
+
+.caic-feed__issues-row td {
+	background: var(--cv-bg-subtle);
+}
+
+/* ========================================
+	Settings Page Layout (Plugin-Specific)
+	======================================== */
+
+/* Tab panels sit below the cv-tabs strip; cards inside stack vertically. */
+.carticy-ai-checkout .tab-content {
+	padding-top: 24px;
+}
+
+.carticy-ai-checkout .tab-content .cv-card {
+	margin-bottom: 24px;
+}
+
+/* Stacked field blocks inside settings cards (label + control + help). */
+.carticy-ai-checkout .carticy-field + .carticy-field {
+	margin-top: 20px;
 }
 
 /* Readonly Input Fields */
 .carticy-ai-checkout input[readonly] {
 	background-color: var(--carticy-shade-50, #F3F4FF);
 	cursor: not-allowed;
-}
-
-/* Security Settings */
-.carticy-ai-checkout .security-dashboard {
-	margin-bottom: 30px;
-}
-
-.carticy-ai-checkout .security-dashboard h3 {
-	margin-top: 0;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #ddd;
-}
-
-.carticy-ai-checkout .security-status-enabled {
-	color: #00a32a;
-	font-weight: 600;
-}
-
-.carticy-ai-checkout .security-status-warning {
-	color: #f0b849;
-	font-weight: 600;
-}
-
-.carticy-ai-checkout .security-status-disabled {
-	color: #999;
-	font-weight: 600;
 }
 
 /* IP Ranges List */
@@ -74,115 +266,3 @@
 	display: inline-block;
 	margin: 3px 5px 3px 0;
 }
-
-/* Global Consistency Styles */
-
-/* Content Boxes */
-.carticy-ai-checkout .content-box {
-	background: #fff;
-	border: 1px solid var(--carticy-grey-light, #F3F4F6);
-	box-shadow: var(--carticy-shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.1));
-	padding: 20px;
-	margin: 20px 0;
-	border-radius: var(--carticy-radius, 4px);
-}
-
-/* Button Groups */
-.carticy-ai-checkout .button-group {
-	display: flex;
-	gap: 10px;
-	align-items: center;
-}
-
-.carticy-ai-checkout .button-group.right {
-	justify-content: flex-end;
-}
-
-.carticy-ai-checkout .button-group.space-between {
-	justify-content: space-between;
-}
-
-/* Status Badges */
-.carticy-ai-checkout .status-badge {
-	display: inline-flex;
-	align-items: center;
-	gap: 4px;
-	padding: 4px 8px;
-	border-radius: 3px;
-	font-size: 12px;
-	font-weight: 600;
-}
-
-.carticy-ai-checkout .status-badge.success {
-	background: #e7f7ef;
-	color: #00a32a;
-}
-
-.carticy-ai-checkout .status-badge.warning {
-	background: #fcf9e8;
-	color: #f0b849;
-}
-
-.carticy-ai-checkout .status-badge.error {
-	background: #fcf0f1;
-	color: #d63638;
-}
-
-.carticy-ai-checkout .status-badge.info {
-	background: var(--carticy-shade-50, #F3F4FF);
-	color: var(--carticy-primary, #1A0E6D);
-}
-
-/* Inline Notices */
-.carticy-ai-checkout .notice.inline {
-	margin: 15px 0;
-}
-
-/* Test Mode Badge in Header (Plugin-Specific) */
-.carticy-ai-checkout .carticy-test-mode-badge,
-.carticy-admin-layout .carticy-test-mode-badge {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	padding: 6px 12px;
-	background: #FFF3CD;
-	color: #856404;
-	border: 1px solid #FFEAA7;
-	border-radius: 4px;
-	font-size: 12px;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
-}
-
-.carticy-ai-checkout .carticy-test-mode-badge svg,
-.carticy-admin-layout .carticy-test-mode-badge svg {
-	width: 14px;
-	height: 14px;
-	flex-shrink: 0;
-}
-
-/* Responsive Tables */
-@media (max-width: 782px) {
-	.carticy-ai-checkout .form-table th,
-	.carticy-ai-checkout .form-table td {
-		display: block;
-		width: 100%;
-		padding: 10px;
-	}
-
-	.carticy-ai-checkout .form-table th {
-		border-bottom: none;
-		padding-bottom: 0;
-	}
-
-	.carticy-ai-checkout .button-group {
-		flex-direction: column;
-		width: 100%;
-	}
-
-	.carticy-ai-checkout .button-group .button {
-		width: 100%;
-	}
-}
-

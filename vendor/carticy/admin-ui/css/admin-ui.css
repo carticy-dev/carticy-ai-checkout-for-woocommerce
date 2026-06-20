@@ -1,0 +1,8 @@
+/* Carticy Admin UI - single entry point.
+   Consumers with postcss-import / webpack css-loader can import this file;
+   plain enqueues should load tokens.css then components.css directly. */
+@import "./tokens.css";
+@import "./components.css";
+/* chrome.css (wp-admin takeover) is deliberately NOT imported here -
+   it styles host chrome outside .cv-root and must be enqueued/bundled
+   separately, gated by the body.cv-takeover class. */

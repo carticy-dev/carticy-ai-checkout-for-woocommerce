@@ -6,22 +6,12 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/carticy-dev/design-system"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/carticy-dev/admin-layout"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/carticy-dev/admin-components"
+            "url": "https://github.com/carticy-dev/admin-ui"
         }
     ],
     "require": {
         "php": ">=8.0",
-        "carticy/design-system": "dev-master",
-        "carticy/admin-layout": "dev-master",
-        "carticy/admin-components": "dev-master"
+        "carticy/admin-ui": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",

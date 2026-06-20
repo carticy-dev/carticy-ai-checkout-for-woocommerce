@@ -9,40 +9,20 @@ class ComposerStaticInita6e21aff272f91cc8d7f0fe7f0342f81
     public static $prefixLengthsPsr4 = array (
         'C' => 
         array (
-            'Carticy\\DesignSystem\\' => 21,
             'Carticy\\AiCheckout\\' => 19,
-            'Carticy\\AdminLayout\\' => 20,
-            'Carticy\\AdminComponents\\' => 24,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Carticy\\DesignSystem\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/carticy/design-system/src',
-        ),
         'Carticy\\AiCheckout\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
-        ),
-        'Carticy\\AdminLayout\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/carticy/admin-layout/src',
-        ),
-        'Carticy\\AdminComponents\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/carticy/admin-components/src',
         ),
     );
 
     public static $classMap = array (
         'Carticy\\AiCheckout\\Admin\\AdminHandler' => __DIR__ . '/../..' . '/src/Admin/AdminHandler.php',
         'Carticy\\AiCheckout\\Admin\\AdminNotices' => __DIR__ . '/../..' . '/src/Admin/AdminNotices.php',
-        'Carticy\\AiCheckout\\Admin\\AnalyticsDashboard' => __DIR__ . '/../..' . '/src/Admin/AnalyticsDashboard.php',
-        'Carticy\\AiCheckout\\Admin\\ApplicationWizard' => __DIR__ . '/../..' . '/src/Admin/ApplicationWizard.php',
-        'Carticy\\AiCheckout\\Admin\\LogsViewer' => __DIR__ . '/../..' . '/src/Admin/LogsViewer.php',
-        'Carticy\\AiCheckout\\Admin\\ProductFeedManager' => __DIR__ . '/../..' . '/src/Admin/ProductFeedManager.php',
-        'Carticy\\AiCheckout\\Admin\\ProductsListTable' => __DIR__ . '/../..' . '/src/Admin/ProductsListTable.php',
         'Carticy\\AiCheckout\\Api\\CheckoutSessionEndpoint' => __DIR__ . '/../..' . '/src/Api/CheckoutSessionEndpoint.php',
         'Carticy\\AiCheckout\\Api\\ProductFeedEndpoint' => __DIR__ . '/../..' . '/src/Api/ProductFeedEndpoint.php',
         'Carticy\\AiCheckout\\Core\\Activator' => __DIR__ . '/../..' . '/src/Core/Activator.php',
@@ -50,6 +30,13 @@ class ComposerStaticInita6e21aff272f91cc8d7f0fe7f0342f81
         'Carticy\\AiCheckout\\Core\\Deactivator' => __DIR__ . '/../..' . '/src/Core/Deactivator.php',
         'Carticy\\AiCheckout\\Init' => __DIR__ . '/../..' . '/src/Init.php',
         'Carticy\\AiCheckout\\Interfaces\\PaymentProcessorAdapter' => __DIR__ . '/../..' . '/src/Interfaces/PaymentProcessorAdapter.php',
+        'Carticy\\AiCheckout\\Rest\\AbstractAdminController' => __DIR__ . '/../..' . '/src/Rest/AbstractAdminController.php',
+        'Carticy\\AiCheckout\\Rest\\AdminRestApi' => __DIR__ . '/../..' . '/src/Rest/AdminRestApi.php',
+        'Carticy\\AiCheckout\\Rest\\AnalyticsController' => __DIR__ . '/../..' . '/src/Rest/AnalyticsController.php',
+        'Carticy\\AiCheckout\\Rest\\LogsController' => __DIR__ . '/../..' . '/src/Rest/LogsController.php',
+        'Carticy\\AiCheckout\\Rest\\ProductFeedController' => __DIR__ . '/../..' . '/src/Rest/ProductFeedController.php',
+        'Carticy\\AiCheckout\\Rest\\SettingsController' => __DIR__ . '/../..' . '/src/Rest/SettingsController.php',
+        'Carticy\\AiCheckout\\Rest\\WizardController' => __DIR__ . '/../..' . '/src/Rest/WizardController.php',
         'Carticy\\AiCheckout\\Services\\AnalyticsService' => __DIR__ . '/../..' . '/src/Services/AnalyticsService.php',
         'Carticy\\AiCheckout\\Services\\ApiDebugLogger' => __DIR__ . '/../..' . '/src/Services/ApiDebugLogger.php',
         'Carticy\\AiCheckout\\Services\\ApiKeyService' => __DIR__ . '/../..' . '/src/Services/ApiKeyService.php',

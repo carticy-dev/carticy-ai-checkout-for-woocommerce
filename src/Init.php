@@ -9,8 +9,6 @@ namespace Carticy\AiCheckout;
 
 use Carticy\AiCheckout\Core\Container;
 use Carticy\AiCheckout\Admin\AdminHandler;
-use Carticy\AiCheckout\Admin\ProductFeedManager;
-use Carticy\AiCheckout\Admin\ApplicationWizard;
 use Carticy\AiCheckout\Services\PrerequisitesChecker;
 use Carticy\AiCheckout\Services\ProductFeedService;
 use Carticy\AiCheckout\Services\ProductQualityChecker;
@@ -32,10 +30,14 @@ use Carticy\AiCheckout\Services\TestModeService;
 use Carticy\AiCheckout\Services\ApiDebugLogger;
 use Carticy\AiCheckout\Services\MockSimulator;
 use Carticy\AiCheckout\Services\ConformanceTestService;
-use Carticy\AiCheckout\Admin\AnalyticsDashboard;
-use Carticy\AiCheckout\Admin\LogsViewer;
 use Carticy\AiCheckout\Api\ProductFeedEndpoint;
 use Carticy\AiCheckout\Api\CheckoutSessionEndpoint;
+use Carticy\AiCheckout\Rest\AdminRestApi;
+use Carticy\AiCheckout\Rest\AnalyticsController;
+use Carticy\AiCheckout\Rest\SettingsController;
+use Carticy\AiCheckout\Rest\LogsController;
+use Carticy\AiCheckout\Rest\ProductFeedController;
+use Carticy\AiCheckout\Rest\WizardController;
 
 /**
  * Main plugin initialization class
@@ -239,31 +241,11 @@ final class Init {
 			}
 		);
 
-		// Register Product Feed Manager.
-		$this->container->register(
-			'product_feed_manager',
-			function ( Container $c ): ProductFeedManager {
-				return new ProductFeedManager( $c->get( 'product_feed' ), $c->get( 'product_quality' ) );
-			}
-		);
-
 		// Register Application Wizard Service.
 		$this->container->register(
 			'application_wizard_service',
 			function ( Container $c ): ApplicationWizardService {
 				return new ApplicationWizardService();
-			}
-		);
-
-		// Register Application Wizard.
-		$this->container->register(
-			'application_wizard',
-			function ( Container $c ): ApplicationWizard {
-				return new ApplicationWizard(
-					$c->get( 'application_wizard_service' ),
-					$c->get( 'product_quality' ),
-					$c->get( 'prerequisites' )
-				);
 			}
 		);
 
@@ -275,24 +257,71 @@ final class Init {
 			}
 		);
 
-		// Register Analytics Dashboard.
+		// Register the admin REST controllers + registrar (back the React admin
+		// screens). Add each new screen's controller to the registrar array.
 		$this->container->register(
-			'analytics_dashboard',
-			function ( Container $c ): AnalyticsDashboard {
-				return new AnalyticsDashboard( $c->get( 'analytics_service' ) );
+			'analytics_controller',
+			function ( Container $c ): AnalyticsController {
+				return new AnalyticsController( $c->get( 'analytics_service' ) );
 			}
 		);
 
-		// Register Logs Viewer.
 		$this->container->register(
-			'logs_viewer',
-			function ( Container $c ): LogsViewer {
-				return new LogsViewer(
+			'settings_controller',
+			function ( Container $c ): SettingsController {
+				return new SettingsController(
+					$c->get( 'prerequisites' ),
+					$c->get( 'api_key' ),
+					$c->get( 'ip_allowlist' ),
+					$c->get( 'webhook' )
+				);
+			}
+		);
+
+		$this->container->register(
+			'logs_controller',
+			function ( Container $c ): LogsController {
+				return new LogsController(
 					$c->get( 'logging' ),
 					$c->get( 'error_log' ),
 					$c->get( 'webhook_logger' ),
 					$c->get( 'performance_metrics' ),
 					$c->get( 'session' )
+				);
+			}
+		);
+
+		$this->container->register(
+			'product_feed_controller',
+			function ( Container $c ): ProductFeedController {
+				return new ProductFeedController( $c->get( 'product_feed' ), $c->get( 'product_quality' ) );
+			}
+		);
+
+		$this->container->register(
+			'wizard_controller',
+			function ( Container $c ): WizardController {
+				return new WizardController(
+					$c->get( 'application_wizard_service' ),
+					$c->get( 'conformance_test' ),
+					$c->get( 'product_quality' ),
+					$c->get( 'prerequisites' ),
+					$c->get( 'api_key' )
+				);
+			}
+		);
+
+		$this->container->register(
+			'admin_rest_api',
+			function ( Container $c ): AdminRestApi {
+				return new AdminRestApi(
+					array(
+						$c->get( 'analytics_controller' ),
+						$c->get( 'settings_controller' ),
+						$c->get( 'logs_controller' ),
+						$c->get( 'product_feed_controller' ),
+						$c->get( 'wizard_controller' ),
+					)
 				);
 			}
 		);
@@ -337,13 +366,10 @@ final class Init {
 	 * @return void
 	 */
 	private function init_hooks(): void {
-		// Initialize admin area.
+		// Initialize admin area (the React screens are backed by the admin REST
+		// controllers; AdminHandler registers the menu pages and mounts the app).
 		if ( is_admin() ) {
 			$this->container->get( 'admin' );
-			$this->container->get( 'product_feed_manager' );
-			$this->container->get( 'application_wizard' );
-			$this->container->get( 'analytics_dashboard' );
-			$this->container->get( 'logs_viewer' );
 		}
 
 		// Register REST API endpoints.
@@ -390,6 +416,9 @@ final class Init {
 	public function register_rest_routes(): void {
 		$this->container->get( 'product_feed_endpoint' );
 		$this->container->get( 'checkout_session_endpoint' );
+
+		// Admin screen REST routes (React admin app).
+		$this->container->get( 'admin_rest_api' )->register_routes();
 	}
 
 	/**

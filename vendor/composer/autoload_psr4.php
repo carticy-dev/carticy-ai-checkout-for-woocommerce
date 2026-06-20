@@ -6,8 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Carticy\\DesignSystem\\' => array($vendorDir . '/carticy/design-system/src'),
     'Carticy\\AiCheckout\\' => array($baseDir . '/src'),
-    'Carticy\\AdminLayout\\' => array($vendorDir . '/carticy/admin-layout/src'),
-    'Carticy\\AdminComponents\\' => array($vendorDir . '/carticy/admin-components/src'),
 );

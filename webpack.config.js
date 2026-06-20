@@ -8,14 +8,14 @@ module.exports = {
     mode: 'production',
 
     entry: {
-        'js/dist/admin': './assets/js/src/admin.js',
-        'js/dist/admin-product-manager': './assets/js/src/admin-product-manager.js',
-        'js/dist/admin-settings': './assets/js/src/admin-settings.js',
+        // React admin app: one bundle that renders the screen named in the
+        // PHP-localized boot object. React / i18n / api-fetch resolve to the
+        // WordPress script globals (see externals); @carticy/admin-ui is the
+        // shared design system compiled from the Composer-installed package.
+        'js/dist/admin-app': './assets/js/src/admin-app/index.jsx',
+        // Plugin-specific admin styles (app shell + screen helper classes). The
+        // design-system tokens/components/chrome ship from vendor/carticy/admin-ui.
         'css/dist/admin': './assets/css/src/admin.css',
-        'css/dist/admin-product-manager': './assets/css/src/admin-product-manager.css',
-        'css/dist/admin-wizard': './assets/css/src/admin-wizard.css',
-        'css/dist/analytics-dashboard': './assets/css/src/analytics-dashboard.css',
-        'css/dist/logs-viewer': './assets/css/src/logs-viewer.css',
     },
 
     output: {
@@ -24,15 +24,35 @@ module.exports = {
         clean: false, // Don't clean to preserve CSS output
     },
 
+    externals: {
+        '@wordpress/api-fetch': 'wp.apiFetch',
+        '@wordpress/element': 'wp.element',
+        '@wordpress/i18n': 'wp.i18n',
+    },
+
+    resolve: {
+        extensions: ['.js', '.jsx'],
+        alias: {
+            '@carticy/admin-ui': path.resolve(__dirname, 'vendor/carticy/admin-ui/js/src'),
+        },
+    },
+
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: [
+                            ['@babel/preset-env', { targets: 'defaults' }],
+                            ['@babel/preset-react', {
+                                runtime: 'classic',
+                                pragma: 'wp.element.createElement',
+                                pragmaFrag: 'wp.element.Fragment',
+                            }],
+                        ],
                     }
                 }
             },

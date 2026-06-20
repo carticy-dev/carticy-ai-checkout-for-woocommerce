@@ -1,0 +1,24 @@
+{
+  "name": "@carticy/admin-ui",
+  "version": "1.0.0",
+  "description": "Unified Carticy admin design system: mount-scoped cv-* tokens and components, React 18 primitives, and the server-validated onboarding framework.",
+  "license": "GPL-2.0-or-later",
+  "author": "Carticy Team",
+  "main": "js/src/index.js",
+  "style": "css/admin-ui.css",
+  "files": [
+    "css/",
+    "js/src/",
+    "composer.json",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "@wordpress/element": ">=5.0.0"
+  },
+  "keywords": [
+    "carticy",
+    "design-system",
+    "wordpress-admin",
+    "react"
+  ]
+}
