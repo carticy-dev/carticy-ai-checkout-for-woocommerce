@@ -27,6 +27,16 @@ final class AdminHandler {
 	private PrerequisitesChecker $prerequisites;
 
 	/**
+	 * The plugin's admin screens, keyed by the page hook WordPress returned when each was registered.
+	 *
+	 * The one source for "is this our screen": other Carticy plugins' screens share the
+	 * `carticy` prefix, so a name match would put this plugin's assets and notice rules on them.
+	 *
+	 * @var array<string, string> Page hook => React screen key.
+	 */
+	private array $screens = array();
+
+	/**
 	 * Constructor
 	 *
 	 * @param PrerequisitesChecker $prerequisites Prerequisites checker instance.
@@ -77,19 +87,7 @@ final class AdminHandler {
 	 * @return void
 	 */
 	public function hide_unrelated_notices(): void {
-		// Check if we're on a plugin page using the page parameter.
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( ! isset( $_GET['page'] ) ) {
-			return;
-		}
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$page = sanitize_text_field( wp_unslash( $_GET['page'] ) );
-
-		// Only hide notices on Carticy plugin pages. The prefix must cover
-		// every submenu slug (carticy-ai-checkout-logs, -product-feed,
-		// -analytics, -application-wizard), not just the main settings slug.
-		if ( ! str_starts_with( $page, 'carticy-ai-checkout' ) ) {
+		if ( null === $this->current_screen() ) {
 			return;
 		}
 
@@ -113,12 +111,17 @@ final class AdminHandler {
 	 * @return string
 	 */
 	public function add_takeover_body_class( string $classes ): string {
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-		if ( str_starts_with( $page, 'carticy-ai-checkout' ) ) {
-			$classes .= ' cv-takeover';
-		}
-		return $classes;
+		return null === $this->current_screen() ? $classes : $classes . ' cv-takeover';
+	}
+
+	/**
+	 * The React screen key of the current admin page, or null when it is not one of this plugin's pages.
+	 *
+	 * @return string|null
+	 */
+	private function current_screen(): ?string {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		return null === $screen ? null : ( $this->screens[ $screen->id ] ?? null );
 	}
 
 	/**
@@ -151,7 +154,7 @@ final class AdminHandler {
 	 * @return void
 	 */
 	public function add_menu_pages(): void {
-		add_menu_page(
+		$settings = add_menu_page(
 			__( 'Carticy AI Checkout', 'carticy-ai-checkout-for-woocommerce' ),
 			__( 'AI Checkout', 'carticy-ai-checkout-for-woocommerce' ),
 			'manage_options',
@@ -161,8 +164,10 @@ final class AdminHandler {
 			58
 		);
 
+		$this->screens[ $settings ] = 'settings';
+
 		// Add Product Feed Manager submenu.
-		add_submenu_page(
+		$feed = add_submenu_page(
 			'carticy-ai-checkout-for-woocommerce',
 			__( 'Product Feed Manager', 'carticy-ai-checkout-for-woocommerce' ),
 			__( 'Product Feed Manager', 'carticy-ai-checkout-for-woocommerce' ),
@@ -170,9 +175,12 @@ final class AdminHandler {
 			'carticy-ai-checkout-product-feed',
 			array( $this, 'render_product_feed_page' )
 		);
+		if ( false !== $feed ) {
+			$this->screens[ $feed ] = 'product-feed';
+		}
 
 		// Add Application Wizard submenu.
-		add_submenu_page(
+		$wizard = add_submenu_page(
 			'carticy-ai-checkout-for-woocommerce',
 			__( 'Application Wizard', 'carticy-ai-checkout-for-woocommerce' ),
 			__( 'Application Wizard', 'carticy-ai-checkout-for-woocommerce' ),
@@ -180,9 +188,12 @@ final class AdminHandler {
 			'carticy-ai-checkout-application-wizard',
 			array( $this, 'render_application_wizard_page' )
 		);
+		if ( false !== $wizard ) {
+			$this->screens[ $wizard ] = 'wizard';
+		}
 
 		// Add Analytics submenu.
-		add_submenu_page(
+		$analytics = add_submenu_page(
 			'carticy-ai-checkout-for-woocommerce',
 			__( 'Analytics', 'carticy-ai-checkout-for-woocommerce' ),
 			__( 'Analytics', 'carticy-ai-checkout-for-woocommerce' ),
@@ -190,9 +201,12 @@ final class AdminHandler {
 			'carticy-ai-checkout-analytics',
 			array( $this, 'render_analytics_page' )
 		);
+		if ( false !== $analytics ) {
+			$this->screens[ $analytics ] = 'analytics';
+		}
 
 		// Add Logs & Monitoring submenu.
-		add_submenu_page(
+		$logs = add_submenu_page(
 			'carticy-ai-checkout-for-woocommerce',
 			__( 'Logs & Monitoring', 'carticy-ai-checkout-for-woocommerce' ),
 			__( 'Logs & Monitoring', 'carticy-ai-checkout-for-woocommerce' ),
@@ -200,6 +214,9 @@ final class AdminHandler {
 			'carticy-ai-checkout-logs',
 			array( $this, 'render_logs_page' )
 		);
+		if ( false !== $logs ) {
+			$this->screens[ $logs ] = 'logs';
+		}
 	}
 
 	/**
@@ -209,8 +226,8 @@ final class AdminHandler {
 	 * @return void
 	 */
 	public function enqueue_assets( string $hook ): void {
-		// Only load on plugin pages.
-		if ( ! str_contains( $hook, 'carticy' ) ) {
+		$screen = $this->screens[ $hook ] ?? null;
+		if ( null === $screen ) {
 			return;
 		}
 
@@ -249,30 +266,7 @@ final class AdminHandler {
 			CARTICY_AI_CHECKOUT_VERSION
 		);
 
-		// Settings is a React screen (main page hook, excluding the submenus).
-		if ( str_contains( $hook, 'carticy-ai-checkout-for-woocommerce' ) && ! str_contains( $hook, 'logs' ) && ! str_contains( $hook, 'wizard' ) && ! str_contains( $hook, 'product-feed' ) && ! str_contains( $hook, 'analytics' ) ) {
-			$this->enqueue_admin_app( 'settings' );
-		}
-
-		// Product Feed Manager is a React screen.
-		if ( str_contains( $hook, 'carticy-ai-checkout-product-feed' ) ) {
-			$this->enqueue_admin_app( 'product-feed' );
-		}
-
-		// Application Wizard is a React screen.
-		if ( str_contains( $hook, 'carticy-ai-checkout-application-wizard' ) ) {
-			$this->enqueue_admin_app( 'wizard' );
-		}
-
-		// Analytics is a React screen.
-		if ( str_contains( $hook, 'carticy-ai-checkout-analytics' ) ) {
-			$this->enqueue_admin_app( 'analytics', array( 'defaultDays' => 30 ) );
-		}
-
-		// Logs & Monitoring is a React screen.
-		if ( str_contains( $hook, 'carticy-ai-checkout-logs' ) ) {
-			$this->enqueue_admin_app( 'logs' );
-		}
+		$this->enqueue_admin_app( $screen, 'analytics' === $screen ? array( 'defaultDays' => 30 ) : array() );
 	}
 
 	/**
