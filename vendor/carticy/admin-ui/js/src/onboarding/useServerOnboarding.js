@@ -1,12 +1,11 @@
 /**
  * useServerOnboarding — the server-validated onboarding state machine client.
  *
- * Generalized from the SiteVitals onboarding pattern: the SERVER owns the
- * state string and validates every transition; the client only renders the
- * current state and requests transitions. Reaching a "complete" state must
- * mean the server verified it (e.g. a wire-confirmed test purchase), never
- * that the client clicked through — components must not invent local
- * progress the server would reject.
+ * The SERVER owns the state string and validates every transition; the
+ * client only renders the current state and requests transitions. Reaching
+ * a "complete" state must mean the server verified it (e.g. a wire-confirmed
+ * test purchase), never that the client clicked through — components must
+ * not invent local progress the server would reject.
  *
  * Contract expected from the REST endpoint (path is plugin-specific):
  *   GET  {path}            -> { state: string, ...context }

@@ -11,7 +11,7 @@ import { useState, useEffect } from '@wordpress/element';
 import {
 	Card,
 	Chip,
-	Spinner,
+	LoadingPanel,
 	Banner,
 	Button,
 	Modal,
@@ -23,6 +23,7 @@ import {
 	EmptyState,
 } from '@carticy/admin-ui';
 import { apiGet, apiPost, t, useBusy } from '../api';
+import TablePagination from '../TablePagination';
 
 const SUB_TABS = [
 	{ id: 'api', label: 'API Logs' },
@@ -52,12 +53,12 @@ function levelTone( level ) {
 		case 'critical':
 		case 'emergency':
 		case 'alert':
-			return 'neg';
+			return 'critical';
 		case 'warning':
 		case 'notice':
-			return 'warn';
+			return 'warning';
 		default:
-			return 'flat';
+			return 'neutral';
 	}
 }
 
@@ -69,12 +70,12 @@ function levelTone( level ) {
  */
 function statusTone( code ) {
 	if ( code >= 500 ) {
-		return 'neg';
+		return 'critical';
 	}
 	if ( code >= 400 ) {
-		return 'warn';
+		return 'warning';
 	}
-	return 'pos';
+	return 'success';
 }
 
 /**
@@ -110,10 +111,8 @@ export default function Logs() {
 	return (
 		<div className="caic-stack">
 			<section className="cv-section">
-				<SectionHeader
-					title={ t( 'Logs & Monitoring' ) }
-					meta={ <Tabs tabs={ tabs } activeId={ tab } onChange={ setTab } /> }
-				/>
+				<SectionHeader title={ t( 'Logs & Monitoring' ) } />
+				<Tabs tabs={ tabs } activeId={ tab } onChange={ setTab } label={ t( 'Log types' ) } />
 				{ 'api' === tab && <ApiTab /> }
 				{ 'errors' === tab && <ErrorsTab /> }
 				{ 'webhooks' === tab && <WebhooksTab /> }
@@ -172,6 +171,7 @@ function ContextButton( { context, title } ) {
 				onClose={ () => setOpen( false ) }
 				title={ title || t( 'Context' ) }
 				size="lg"
+				closeLabel={ t( 'Close' ) }
 			>
 				<pre className="caic-json">{ JSON.stringify( context, null, 2 ) }</pre>
 			</Modal>
@@ -192,7 +192,7 @@ function TabShell( { loading, error, children } ) {
 		return <Banner tone="critical">{ error.message }</Banner>;
 	}
 	if ( loading ) {
-		return <div className="caic-loading"><Spinner /> { t( 'Loading…' ) }</div>;
+		return <LoadingPanel label={ t( 'Loading logs…' ) } />;
 	}
 	return children;
 }
@@ -212,7 +212,7 @@ function ApiTab() {
 		{
 			key: 'method',
 			header: t( 'Method' ),
-			render: ( row ) => <Chip tone="flat">{ String( row.context.method || '—' ).toUpperCase() }</Chip>,
+			render: ( row ) => <Chip>{ String( row.context.method || '—' ).toUpperCase() }</Chip>,
 		},
 		{
 			key: 'status',
@@ -236,41 +236,15 @@ function ApiTab() {
 					</EmptyState>
 				</Card>
 			) : (
-				<>
-					<Card flush>
-						<Table
-							columns={ columns }
-							rows={ withRowKey( data.entries ) }
-							getRowId={ ( row ) => row._key }
-							emptyLabel={ t( 'No API logs found.' ) }
-						/>
-					</Card>
-					{ data.pagination.total_pages > 1 && (
-						<div className="caic-pagination">
-							<Button
-								variant="secondary"
-								size="sm"
-								disabled={ page <= 1 }
-								onClick={ () => setPage( ( p ) => Math.max( 1, p - 1 ) ) }
-							>
-								{ t( 'Previous' ) }
-							</Button>
-							<span className="cv-help">
-								{ t( 'Page %1$d of %2$d' )
-									.replace( '%1$d', data.pagination.current_page )
-									.replace( '%2$d', data.pagination.total_pages ) }
-							</span>
-							<Button
-								variant="secondary"
-								size="sm"
-								disabled={ page >= data.pagination.total_pages }
-								onClick={ () => setPage( ( p ) => p + 1 ) }
-							>
-								{ t( 'Next' ) }
-							</Button>
-						</div>
-					) }
-				</>
+				<Card flush>
+					<Table
+						columns={ columns }
+						rows={ withRowKey( data.entries ) }
+						getRowId={ ( row ) => row._key }
+						emptyLabel={ t( 'No API logs found.' ) }
+					/>
+					<TablePagination page={ data.pagination.current_page } total={ data.pagination.total_pages } onChange={ setPage } />
+				</Card>
 			) ) }
 		</TabShell>
 	);
@@ -295,7 +269,7 @@ function ErrorsTab() {
 		{
 			key: 'category',
 			header: t( 'Category' ),
-			render: ( row ) => <Chip tone="warn">{ row.category.charAt( 0 ).toUpperCase() + row.category.slice( 1 ) }</Chip>,
+			render: ( row ) => <Chip tone="warning">{ row.category.charAt( 0 ).toUpperCase() + row.category.slice( 1 ) }</Chip>,
 		},
 		{ key: 'message', header: t( 'Message' ) },
 		{
@@ -305,9 +279,10 @@ function ErrorsTab() {
 		},
 	];
 
-	const meta = (
-		<div className="caic-toolbar">
+	const actions = (
+		<>
 			<SelectField
+				aria-label={ t( 'Error category' ) }
 				value={ category }
 				onChange={ ( e ) => setCategory( e.target.value ) }
 				options={ ERROR_CATEGORIES.map( ( c ) => ( { value: c.value, label: t( c.label ) } ) ) }
@@ -315,12 +290,12 @@ function ErrorsTab() {
 			<Button variant="secondary" size="sm" loading={ 'error' === busy } onClick={ clearCache }>
 				{ t( 'Clear cache' ) }
 			</Button>
-		</div>
+		</>
 	);
 
 	return (
 		<>
-			<SectionHeader title={ t( 'Error Statistics (Last 24 Hours)' ) } meta={ meta } />
+			<SectionHeader title={ t( 'Error Statistics (Last 24 Hours)' ) } headingLevel={ 3 } actions={ actions } />
 			{ notice && <Banner tone="success">{ notice }</Banner> }
 			<TabShell loading={ loading } error={ error }>
 				{ data && (
@@ -374,18 +349,18 @@ function WebhooksTab() {
 		{ key: 'timestamp', header: t( 'Timestamp' ) },
 		{ key: 'event_type', header: t( 'Event Type' ), render: ( row ) => <code>{ row.event_type }</code> },
 		{ key: 'url', header: t( 'URL' ), render: ( row ) => <small>{ row.url }</small> },
-		{ key: 'status_code', header: t( 'Status' ), render: ( row ) => <Chip tone="flat">{ row.status_code }</Chip> },
+		{ key: 'status_code', header: t( 'Status' ), render: ( row ) => <Chip>{ row.status_code }</Chip> },
 		{ key: 'attempt', header: t( 'Attempt' ) },
 		{
 			key: 'success',
 			header: t( 'Result' ),
 			render: ( row ) => (
-				<Chip tone={ row.success ? 'pos' : 'neg' }>{ row.success ? t( 'Success' ) : t( 'Failed' ) }</Chip>
+				<Chip tone={ row.success ? 'success' : 'critical' }>{ row.success ? t( 'Success' ) : t( 'Failed' ) }</Chip>
 			),
 		},
 	];
 
-	const meta = (
+	const actions = (
 		<Button variant="secondary" size="sm" loading={ 'webhook' === busy } onClick={ clearStats }>
 			{ t( 'Clear cache' ) }
 		</Button>
@@ -393,7 +368,7 @@ function WebhooksTab() {
 
 	return (
 		<>
-			<SectionHeader title={ t( 'Webhook Statistics (Last 24 Hours)' ) } meta={ meta } />
+			<SectionHeader title={ t( 'Webhook Statistics (Last 24 Hours)' ) } headingLevel={ 3 } actions={ actions } />
 			{ notice && <Banner tone="success">{ notice }</Banner> }
 			<TabShell loading={ loading } error={ error }>
 				{ data && (
@@ -466,7 +441,7 @@ function SessionsTab() {
 			key: 'status',
 			header: t( 'Status' ),
 			render: ( row ) => (
-				<Chip tone={ 'active' === row.status || 'completed' === row.status ? 'pos' : 'flat' }>
+				<Chip tone={ 'active' === row.status || 'completed' === row.status ? 'success' : 'neutral' }>
 					{ row.status.charAt( 0 ).toUpperCase() + row.status.slice( 1 ) }
 				</Chip>
 			),
@@ -489,7 +464,7 @@ function SessionsTab() {
 		{ key: 'slowest_duration', header: t( 'Slowest' ), render: ( row ) => row.slowest_duration + 's' },
 	];
 
-	const meta = (
+	const actions = (
 		<Button variant="secondary" size="sm" loading={ 'performance' === busy } onClick={ clearPerf }>
 			{ t( 'Clear cache' ) }
 		</Button>
@@ -499,7 +474,7 @@ function SessionsTab() {
 		<TabShell loading={ loading } error={ error }>
 			{ data && (
 				<>
-					<SectionHeader title={ t( 'Session Status Overview' ) } meta={ meta } />
+					<SectionHeader title={ t( 'Session Status Overview' ) } headingLevel={ 3 } actions={ actions } />
 					{ notice && <Banner tone="success">{ notice }</Banner> }
 					<div className="caic-stats">
 						<StatCard accent value={ data.active_count } label={ t( 'Active Sessions' ) } />
@@ -510,7 +485,7 @@ function SessionsTab() {
 						<StatCard value={ data.status_counts.expired || 0 } label={ t( 'Expired' ) } />
 					</div>
 
-					<SectionHeader title={ t( 'Recent Sessions' ) } />
+					<SectionHeader title={ t( 'Recent Sessions' ) } headingLevel={ 3 } />
 					<Card flush>
 						<Table
 							columns={ sessionColumns }
@@ -520,7 +495,7 @@ function SessionsTab() {
 						/>
 					</Card>
 
-					<SectionHeader title={ t( 'API Performance (Last 24 Hours)' ) } />
+					<SectionHeader title={ t( 'API Performance (Last 24 Hours)' ) } headingLevel={ 3 } />
 					<div className="caic-stats">
 						<StatCard value={ data.performance.api_requests.total || 0 } label={ t( 'Total Requests' ) } />
 						<StatCard value={ ( data.performance.api_requests.average_duration || 0 ) + 's' } label={ t( 'Avg Duration' ) } />
@@ -531,7 +506,7 @@ function SessionsTab() {
 
 					{ Object.keys( data.performance.by_endpoint || {} ).length > 0 && (
 						<>
-							<SectionHeader title={ t( 'Performance by Endpoint' ) } />
+							<SectionHeader title={ t( 'Performance by Endpoint' ) } headingLevel={ 3 } />
 							<Card flush>
 								<Table
 									columns={ endpointColumns }
@@ -545,7 +520,7 @@ function SessionsTab() {
 						</>
 					) }
 
-					<SectionHeader title={ t( 'System Health' ) } />
+					<SectionHeader title={ t( 'System Health' ) } headingLevel={ 3 } />
 					<Card>
 						<dl className="cv-dl">
 							<HealthRow label={ t( 'PHP Version' ) } value={ data.system_health.php_version } />
@@ -555,7 +530,7 @@ function SessionsTab() {
 							<div className="cv-dl__row">
 								<dt className="cv-dl__label">{ t( 'Object Cache' ) }</dt>
 								<dd className="cv-dl__value">
-									<Chip tone={ data.system_health.cache_status.object_cache ? 'pos' : 'flat' }>
+									<Chip tone={ data.system_health.cache_status.object_cache ? 'success' : 'neutral' }>
 										{ data.system_health.cache_status.object_cache ? t( 'Active' ) : t( 'Inactive' ) }
 									</Chip>
 								</dd>
@@ -563,7 +538,7 @@ function SessionsTab() {
 							<div className="cv-dl__row">
 								<dt className="cv-dl__label">{ t( 'OPCache' ) }</dt>
 								<dd className="cv-dl__value">
-									<Chip tone={ data.system_health.cache_status.opcode_cache ? 'pos' : 'flat' }>
+									<Chip tone={ data.system_health.cache_status.opcode_cache ? 'success' : 'neutral' }>
 										{ data.system_health.cache_status.opcode_cache ? t( 'Active' ) : t( 'Inactive' ) }
 									</Chip>
 								</dd>

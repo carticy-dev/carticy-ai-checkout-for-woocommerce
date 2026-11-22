@@ -12,7 +12,7 @@ import { useState, useEffect } from '@wordpress/element';
 import {
 	Card,
 	Banner,
-	Spinner,
+	LoadingPanel,
 	Tabs,
 	TextField,
 	ToggleRow,
@@ -124,7 +124,7 @@ export default function Settings() {
 		return (
 			<div className="caic-stack">
 				<section className="cv-section">
-					<div className="caic-loading"><Spinner /> { t( 'Loading…' ) }</div>
+					<LoadingPanel label={ t( 'Loading settings…' ) } />
 				</section>
 			</div>
 		);
@@ -163,7 +163,8 @@ export default function Settings() {
 	return (
 		<div className="caic-stack">
 			<section className="cv-section">
-				<SectionHeader title={ t( 'Settings' ) } meta={ <Tabs tabs={ subTabs } activeId={ active } onChange={ setActive } /> } />
+				<SectionHeader title={ t( 'Settings' ) } />
+				<Tabs tabs={ subTabs } activeId={ active } onChange={ setActive } label={ t( 'Settings sections' ) } />
 
 				{ notice && <Banner tone={ notice.tone }>{ notice.message }</Banner> }
 
@@ -182,10 +183,10 @@ export default function Settings() {
 					<Card>
 						<ToggleRow
 							label={ t( 'Enable plugin-wide test mode' ) }
+							help={ t( 'When enabled, SSL and IP allowlist checks are bypassed and Stripe test keys are used.' ) }
 							checked={ settings.test_mode }
 							onChange={ ( e ) => setOption( 'test_mode' )( e.target.checked ) }
 						/>
-						<p className="cv-help">{ t( 'When enabled, SSL and IP allowlist checks are bypassed and Stripe test keys are used.' ) }</p>
 						<TextField
 							type="url"
 							label={ t( 'OpenAI Webhook URL' ) }
@@ -204,12 +205,10 @@ export default function Settings() {
 					<Card>
 						<ToggleRow
 							label={ t( 'Only allow requests from OpenAI IP addresses' ) }
+							help={ t( 'OpenAI IP ranges loaded: %s' ).replace( '%s', String( data.ip_allowlist.count ) ) }
 							checked={ settings.enable_ip_allowlist }
 							onChange={ ( e ) => setOption( 'enable_ip_allowlist' )( e.target.checked ) }
 						/>
-						<p className="cv-help">
-							{ t( 'OpenAI IP ranges loaded: %s' ).replace( '%s', String( data.ip_allowlist.count ) ) }
-						</p>
 						<div className="caic-actions">
 							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ t( 'Save Changes' ) }</Button>
 							<Button loading={ 'ip' === busy } onClick={ refreshIpRanges }>{ t( 'Refresh IP Ranges' ) }</Button>
@@ -258,10 +257,10 @@ export default function Settings() {
 					<Card>
 						<ToggleRow
 							label={ t( 'Remove all plugin data when uninstalling' ) }
+							help={ t( 'When enabled, all settings, transients, and metadata are permanently deleted on uninstall.' ) }
 							checked={ settings.delete_data_on_uninstall }
 							onChange={ ( e ) => setOption( 'delete_data_on_uninstall' )( e.target.checked ) }
 						/>
-						<p className="cv-help">{ t( 'When enabled, all settings, transients, and metadata are permanently deleted on uninstall.' ) }</p>
 						<div className="caic-actions">
 							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ t( 'Save Changes' ) }</Button>
 						</div>

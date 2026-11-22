@@ -3,20 +3,11 @@
  *
  * variant: '' | 'critical' | 'active' | 'locked'
  */
-export function Card( { variant = '', size, flush = false, clickable = false, className = '', children, ...rest } ) {
-	const classes = [
-		'cv-card',
-		variant ? `cv-card--${ variant }` : '',
-		size ? `cv-card--${ size }` : '',
-		flush ? 'cv-card--flush' : '',
-		clickable ? 'cv-card--clickable' : '',
-		className,
-	]
-		.filter( Boolean )
-		.join( ' ' );
+import { classes } from './classes';
 
+export function Card( { variant = '', size, flush = false, clickable = false, className = '', children, ...rest } ) {
 	return (
-		<div className={ classes } { ...rest }>
+		<div className={ classes( 'cv-card', variant && `cv-card--${ variant }`, size && `cv-card--${ size }`, flush && 'cv-card--flush', clickable && 'cv-card--clickable', className ) } { ...rest }>
 			{ children }
 		</div>
 	);

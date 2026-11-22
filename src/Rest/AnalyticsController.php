@@ -40,15 +40,16 @@ final class AnalyticsController extends AbstractAdminController {
 	}
 
 	/**
-	 * WooCommerce statuses mapped to cv-chip tone modifiers (presentation only).
+	 * WooCommerce statuses mapped to Chip tones (presentation only); any other
+	 * status renders as the neutral tone.
 	 */
 	private const CHIP_TONES = array(
-		'completed'  => 'pos',
-		'paid'       => 'pos',
-		'pending'    => 'warn',
-		'processing' => 'warn',
-		'failed'     => 'neg',
-		'cancelled'  => 'neg',
+		'completed'  => 'success',
+		'paid'       => 'success',
+		'pending'    => 'warning',
+		'processing' => 'warning',
+		'failed'     => 'critical',
+		'cancelled'  => 'critical',
 	);
 
 	/**
@@ -127,7 +128,7 @@ final class AnalyticsController extends AbstractAdminController {
 				'label'  => ucfirst( (string) $status ),
 				'count'  => (int) $count,
 				'pct'    => $chatgpt_orders > 0 ? round( ( $count / $chatgpt_orders ) * 100, 1 ) : 0.0,
-				'tone'   => self::CHIP_TONES[ $status ] ?? 'cv-chip--flat',
+				'tone'   => self::CHIP_TONES[ $status ] ?? 'neutral',
 			);
 		}
 
@@ -158,7 +159,7 @@ final class AnalyticsController extends AbstractAdminController {
 				'total'        => html_entity_decode( wp_strip_all_tags( $order->get_formatted_order_total() ), ENT_QUOTES, 'UTF-8' ),
 				'status'       => $status,
 				'status_label' => wc_get_order_status_name( $status ),
-				'tone'         => self::CHIP_TONES[ $status ] ?? 'cv-chip--flat',
+				'tone'         => self::CHIP_TONES[ $status ] ?? 'neutral',
 			);
 		}
 

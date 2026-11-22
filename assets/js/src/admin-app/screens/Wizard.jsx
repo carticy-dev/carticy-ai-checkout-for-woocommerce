@@ -15,6 +15,7 @@ import {
 	Stepper,
 	Card,
 	Banner,
+	LoadingPanel,
 	Spinner,
 	Button,
 	Chip,
@@ -228,7 +229,7 @@ export default function Wizard() {
 		return (
 			<div className="caic-stack">
 				<section className="cv-section">
-					<div className="caic-loading"><Spinner /> { t( 'Loading…' ) }</div>
+					<LoadingPanel label={ t( 'Loading the wizard…' ) } />
 				</section>
 			</div>
 		);
@@ -242,9 +243,9 @@ export default function Wizard() {
 			<section className="cv-section">
 				<SectionHeader
 					title={ t( 'OpenAI Application Wizard' ) }
-					meta={ <Button variant="link" loading={ 'reset' === busy } onClick={ resetWizard }>{ t( 'Restart Wizard' ) }</Button> }
+					actions={ <Button variant="link" loading={ 'reset' === busy } onClick={ resetWizard }>{ t( 'Restart Wizard' ) }</Button> }
 				/>
-				<Stepper steps={ steps } activeId={ String( current ) } />
+				<Stepper steps={ steps } activeId={ String( current ) } doneLabel={ t( 'Completed' ) } />
 
 				{ notice && <Banner tone={ notice.tone }>{ notice.message }</Banner> }
 
@@ -313,7 +314,7 @@ export default function Wizard() {
 						<Table
 							columns={ [
 								{ key: 'label', header: t( 'Requirement' ) },
-								{ key: 'status', header: t( 'Status' ), render: ( row ) => <Chip tone={ row.passed ? 'pos' : 'neg' }>{ row.passed ? t( 'Pass' ) : t( 'Fail' ) }</Chip> },
+								{ key: 'status', header: t( 'Status' ), render: ( row ) => <Chip tone={ row.passed ? 'success' : 'critical' }>{ row.passed ? t( 'Pass' ) : t( 'Fail' ) }</Chip> },
 								{
 									key: 'message',
 									header: t( 'Details' ),
@@ -338,10 +339,10 @@ export default function Wizard() {
 					<Card>
 						<ToggleRow
 							label={ t( 'Enable test mode' ) }
+							help={ t( 'When test mode is on, conformance tests run against Stripe test keys and the test webhook URL.' ) }
 							checked={ !! form.test_mode }
 							onChange={ ( e ) => setForm( ( prev ) => ( { ...prev, test_mode: e.target.checked } ) ) }
 						/>
-						<p className="cv-help">{ t( 'When test mode is on, conformance tests run against Stripe test keys and the test webhook URL.' ) }</p>
 						<TextField
 							type="url"
 							label={ t( 'Test Webhook URL' ) }
@@ -437,28 +438,28 @@ export default function Wizard() {
 		const blocking = BLOCKING_TESTS.includes( n );
 
 		if ( ! state ) {
-			return <Chip tone="flat">{ blocking ? t( 'Blocking' ) : t( 'Optional' ) }</Chip>;
+			return <Chip>{ blocking ? t( 'Blocking' ) : t( 'Optional' ) }</Chip>;
 		}
 		if ( 'running' === state.status ) {
-			return <Chip tone="warn"><Spinner /> { t( 'Running…' ) }</Chip>;
+			return <Chip tone="warning"><Spinner /> { t( 'Running…' ) }</Chip>;
 		}
 		if ( 'error' === state.status ) {
-			return <Chip tone="neg">{ t( 'Error' ) }</Chip>;
+			return <Chip tone="critical">{ t( 'Error' ) }</Chip>;
 		}
-		return <Chip tone={ state.result.passed ? 'pos' : 'neg' }>{ state.result.passed ? t( 'Pass' ) : t( 'Fail' ) }</Chip>;
+		return <Chip tone={ state.result.passed ? 'success' : 'critical' }>{ state.result.passed ? t( 'Pass' ) : t( 'Fail' ) }</Chip>;
 	}
 
 	function renderTestModal( id ) {
 		const state = testResults[ id ];
 		const result = state && state.result ? state.result : null;
 		return (
-			<Modal open onClose={ () => setModalTest( null ) } title={ result ? result.name : id } size="lg">
+			<Modal open onClose={ () => setModalTest( null ) } title={ result ? result.name : id } size="lg" closeLabel={ t( 'Close' ) }>
 				{ result ? (
 					<>
 						{ result.message && <p>{ result.message }</p> }
-						<SectionHeader title={ t( 'Request' ) } />
+						<SectionHeader title={ t( 'Request' ) } headingLevel={ 3 } />
 						<pre className="caic-pre">{ JSON.stringify( result.request, null, 2 ) }</pre>
-						<SectionHeader title={ t( 'Response' ) } />
+						<SectionHeader title={ t( 'Response' ) } headingLevel={ 3 } />
 						<pre className="caic-pre">{ JSON.stringify( result.response, null, 2 ) }</pre>
 					</>
 				) : (
@@ -475,7 +476,7 @@ export default function Wizard() {
 		return (
 			<>
 				<Card>
-					<SectionHeader title={ t( 'Application Summary' ) } />
+					<SectionHeader title={ t( 'Application Summary' ) } headingLevel={ 3 } />
 					<Table
 						columns={ [
 							{ key: 'label', header: t( 'Field' ) },

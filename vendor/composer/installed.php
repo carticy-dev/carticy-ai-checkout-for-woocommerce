@@ -3,7 +3,7 @@
         'name' => 'carticy/ai-checkout-for-woocommerce',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '1ea69f12f5f2e4893d394ffbe50060c7b36447fe',
+        'reference' => '9b0d506d931af1c07a9666f3d3a839f86f280691',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'carticy/admin-ui' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '92770c71c4c6a8c92c226659ca0624b7442fbb05',
+            'reference' => '6fb573da51ded495870c9c2094099905442fe574',
             'type' => 'library',
             'install_path' => __DIR__ . '/../carticy/admin-ui',
             'aliases' => array(
@@ -24,7 +24,7 @@
         'carticy/ai-checkout-for-woocommerce' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '1ea69f12f5f2e4893d394ffbe50060c7b36447fe',
+            'reference' => '9b0d506d931af1c07a9666f3d3a839f86f280691',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

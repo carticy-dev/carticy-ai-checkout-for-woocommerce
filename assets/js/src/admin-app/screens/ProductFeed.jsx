@@ -12,7 +12,7 @@ import { useState, useEffect, useCallback } from '@wordpress/element';
 import {
 	Card,
 	Chip,
-	Spinner,
+	LoadingPanel,
 	Banner,
 	Button,
 	SectionHeader,
@@ -25,6 +25,7 @@ import {
 	EmptyState,
 } from '@carticy/admin-ui';
 import { apiGet, apiPost, useBusy, t } from '../api';
+import TablePagination from '../TablePagination';
 
 /**
  * Map a 0-100 quality score to a chip tone + label (mirrors the legacy table).
@@ -34,15 +35,15 @@ import { apiGet, apiPost, useBusy, t } from '../api';
  */
 function qualityChip( score ) {
 	if ( score >= 80 ) {
-		return { tone: 'pos', label: t( 'Excellent' ) };
+		return { tone: 'success', label: t( 'Excellent' ) };
 	}
 	if ( score >= 60 ) {
-		return { tone: 'warn', label: t( 'Good' ) };
+		return { tone: 'warning', label: t( 'Good' ) };
 	}
 	if ( score >= 40 ) {
-		return { tone: 'warn', label: t( 'Fair' ) };
+		return { tone: 'warning', label: t( 'Fair' ) };
 	}
-	return { tone: 'neg', label: t( 'Poor' ) };
+	return { tone: 'critical', label: t( 'Poor' ) };
 }
 
 export default function ProductFeed() {
@@ -127,11 +128,15 @@ export default function ProductFeed() {
 		await load();
 	} );
 
-	const openPreview = ( id ) =>
-		run( 'preview-' + id, async () => {
-			const res = await apiGet( '/products/preview?id=' + encodeURIComponent( id ) );
-			setPreview( res.feed );
-		} );
+	// The dialog opens at once and loads its feed inside, so focus moves into it
+	// from the Preview button and returns there on close. A reply that lands
+	// after the dialog closed is dropped.
+	const openPreview = ( id ) => () => {
+		setPreview( { loading: true } );
+		apiGet( '/products/preview?id=' + encodeURIComponent( id ) )
+			.then( ( res ) => setPreview( ( prev ) => prev && { feed: res.feed } ) )
+			.catch( ( e ) => setPreview( ( prev ) => prev && { error: e.message } ) );
+	};
 
 	const columns = [
 		{
@@ -155,7 +160,7 @@ export default function ProductFeed() {
 			header: t( 'ChatGPT' ),
 			render: ( row ) => (
 				<div className="caic-feed__status">
-					<Chip tone={ row.enabled ? 'pos' : 'flat' }>
+					<Chip tone={ row.enabled ? 'success' : 'neutral' }>
 						{ row.enabled ? t( 'Enabled' ) : t( 'Disabled' ) }
 					</Chip>
 					<Button
@@ -199,7 +204,6 @@ export default function ProductFeed() {
 				<Button
 					variant="secondary"
 					size="sm"
-					loading={ busy === 'preview-' + row.id }
 					onClick={ openPreview( row.id ) }
 				>
 					{ t( 'Preview' ) }
@@ -231,6 +235,7 @@ export default function ProductFeed() {
 	const chatgptFilter = (
 		<SelectField
 			className="caic-range"
+			aria-label={ t( 'ChatGPT status' ) }
 			value={ chatgpt }
 			onChange={ ( e ) => { setPaged( 1 ); setChatgpt( e.target.value ); } }
 			options={ [
@@ -312,9 +317,7 @@ export default function ProductFeed() {
 					</BulkActionBar>
 				) }
 
-				{ ! data && ! error && (
-					<div className="caic-loading"><Spinner /> { t( 'Loading…' ) }</div>
-				) }
+				{ ! data && ! error && <LoadingPanel label={ t( 'Loading products…' ) } /> }
 
 				{ data && data.rows.length === 0 && (
 					<Card flush>
@@ -337,33 +340,8 @@ export default function ProductFeed() {
 							renderRowExtra={ renderRowExtra }
 							emptyLabel={ t( 'No products found.' ) }
 						/>
+						<TablePagination page={ pagination.current_page } total={ pagination.total_pages } onChange={ setPaged } />
 					</Card>
-				) }
-
-				{ pagination && pagination.total_pages > 1 && (
-					<div className="caic-feed__pagination">
-						<Button
-							variant="secondary"
-							size="sm"
-							disabled={ pagination.current_page <= 1 }
-							onClick={ () => setPaged( pagination.current_page - 1 ) }
-						>
-							{ t( 'Previous' ) }
-						</Button>
-						<span className="caic-feed__page-label">
-							{ t( 'Page %1$d of %2$d' )
-								.replace( '%1$d', pagination.current_page )
-								.replace( '%2$d', pagination.total_pages ) }
-						</span>
-						<Button
-							variant="secondary"
-							size="sm"
-							disabled={ pagination.current_page >= pagination.total_pages }
-							onClick={ () => setPaged( pagination.current_page + 1 ) }
-						>
-							{ t( 'Next' ) }
-						</Button>
-					</div>
 				) }
 			</section>
 
@@ -372,8 +350,11 @@ export default function ProductFeed() {
 				onClose={ () => setPreview( null ) }
 				title={ t( 'Feed Preview' ) }
 				size="lg"
+				closeLabel={ t( 'Close' ) }
 			>
-				<pre className="caic-feed__preview">{ preview }</pre>
+				{ preview && preview.loading && <LoadingPanel label={ t( 'Loading the preview…' ) } /> }
+				{ preview && preview.error && <Banner tone="critical">{ preview.error }</Banner> }
+				{ preview && undefined !== preview.feed && <pre className="caic-pre">{ preview.feed }</pre> }
 			</Modal>
 		</div>
 	);

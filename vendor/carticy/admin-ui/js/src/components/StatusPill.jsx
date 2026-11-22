@@ -1,15 +1,16 @@
 /**
  * StatusPill — wraps .cv-status (pill with leading dot via ::before).
  *
- * The status prop maps to a .cv-status--{status} modifier; the CSS ships
- * the states the products actually use (connected, connecting, expired,
- * quota, stale, cancelled, disconnected, ...). Pass label text as children.
+ * The status prop maps to a .cv-status--{status} modifier: the connection
+ * states connected, connecting, disconnected, expired, stale and cancelled,
+ * and the tones by meaning success, info, neutral, warning and critical for
+ * every other state. Pass label text as children.
  */
-export function StatusPill( { status, className = '', children, ...rest } ) {
-	const classes = [ 'cv-status', status ? `cv-status--${ status }` : '', className ].filter( Boolean ).join( ' ' );
+import { classes } from './classes';
 
+export function StatusPill( { status, className = '', children, ...rest } ) {
 	return (
-		<span className={ classes } { ...rest }>
+		<span className={ classes( 'cv-status', status && `cv-status--${ status }`, className ) } { ...rest }>
 			{ children }
 		</span>
 	);

@@ -3,8 +3,8 @@
 
    On a Carticy plugin screen the design system must own the whole
    content area: no wp-admin gray gutter around a boxed app, no
-   "Thank you for creating with WordPress" footer, no third-party
-   notices above the app.
+   "Thank you for creating with WordPress" footer, and only the
+   plugin's own notices, shown below its header.
 
    This layer is OPT-IN per screen via a body class, never global:
    the consuming plugin adds `cv-takeover` through the
@@ -17,15 +17,18 @@
            return $classes;
        } );
 
-   and removes third-party notices in PHP (CSS hiding below is only
-   the fallback for late echoes):
+   and isolates notices in PHP: on its own screens, from
+   `in_admin_header` at the last priority, it removes every callback
+   from admin_notices, all_admin_notices, network_admin_notices and
+   user_admin_notices, then adds back one printer for its own notices.
+   That printer wraps them in
 
-       add_action( 'in_admin_header', function () {
-           if ( current-screen-is-ours ) {
-               remove_all_actions( 'admin_notices' );
-               remove_all_actions( 'all_admin_notices' );
-           }
-       }, 1000 );
+       <div id="myplugin-notices" class="cv-notice-area">
+           <hr class="wp-header-end"> ...notices...
+       </div>
+
+   and the app's NoticeSlot moves the area below its header (README,
+   "Notices").
 
    The admin sidebar and admin bar stay untouched — the takeover is
    the inner page only. Values are literals (tokens are scoped to
@@ -37,7 +40,7 @@
    paints edge to edge. Covers both desktop (20px) and the <=782px
    responsive (10px) paddings. */
 body.cv-takeover #wpcontent {
-	padding-left: 0;
+	padding-inline-start: 0;
 	/* Paint the full-height content column, not just #wpbody-content: when the
 	   wp-admin sidebar is taller than the app content, this is what keeps the
 	   app surface taking over the whole area instead of revealing wp-admin's
@@ -54,23 +57,19 @@ body.cv-takeover #wpfooter {
 	display: none;
 }
 
-/* Fallback for notices echoed after the PHP suppression ran (some
-   plugins print directly into in_admin_header output). Anything the
-   plugin itself wants to surface renders INSIDE .cv-root with cv-*
-   components, so hiding all top-level notices here is safe. */
+/* Notices printed outside the notice hooks (straight into the header
+   output) stay hidden until WordPress's common.js moves them. That
+   script places every `.notice` after the first `.wp-header-end`,
+   which is the one inside the plugin's notice area, so they show there
+   as ordinary notices instead of breaking the header. */
 body.cv-takeover #wpbody-content > .notice,
 body.cv-takeover #wpbody-content > .updated,
 body.cv-takeover #wpbody-content > .error,
 body.cv-takeover #wpbody-content > .update-nag,
-body.cv-takeover #wpbody-content > .wrap > .notice:not(.cv-persistent),
+body.cv-takeover #wpbody-content > .wrap > .notice,
 body.cv-takeover .update-nag {
 	display: none;
 }
-
-/* WP core moves `.notice` divs to just after the first h1/h2 via JS;
-   inside a takeover screen those land inside our shell — keep a slot
-   visible only when the plugin opted a notice in with .cv-persistent
-   (the WP-native shell the design system adopts). */
 
 /* ============================================================
    Host-chrome adoption — WP-core-generated UI inside .cv-root
@@ -177,7 +176,8 @@ body.cv-takeover .cv-root select:not([class*="cv-"]) {
 	background-color: var(--cv-bg-surface);
 	border: 1px solid var(--cv-border-2);
 	border-radius: var(--cv-radius-sm);
-	padding: 4px 32px 4px 12px;
+	padding: 4px 12px;
+	padding-inline-end: 32px;
 	min-height: 36px;
 	max-width: 100%;
 	appearance: none;
@@ -186,6 +186,7 @@ body.cv-takeover .cv-root select:not([class*="cv-"]) {
 	background-position: right 10px center;
 	background-size: 16px 16px;
 }
+body.cv-takeover .cv-root select:not([class*="cv-"]):dir(rtl) { background-position: left 10px center; }
 body.cv-takeover .cv-root input:not([class*="cv-"])[type="text"],
 body.cv-takeover .cv-root input:not([class*="cv-"])[type="search"],
 body.cv-takeover .cv-root input:not([class*="cv-"])[type="email"],
@@ -206,7 +207,7 @@ body.cv-takeover .cv-root input:not([class*="cv-"])[type="password"] {
 /* --- Bare checkboxes / radios ------------------------------------
    WP core skins these with its own appearance:none + blue ::before
    glyph; re-skin to the cv-check / cv-radio contract. */
-body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check),
+body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check, .cv-toggle__input),
 body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio) {
 	appearance: none;
 	-webkit-appearance: none;
@@ -223,29 +224,29 @@ body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio) {
 	box-shadow: none;
 	transition: background var(--cv-duration-quick), border-color var(--cv-duration-quick);
 }
-body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check) { border-radius: 4px; }
+body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check, .cv-toggle__input) { border-radius: 4px; }
 body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio) { border-radius: 999px; }
-body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check):hover,
+body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check, .cv-toggle__input):hover,
 body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio):hover {
 	border-color: var(--cv-border-3);
 }
-body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check):checked,
+body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check, .cv-toggle__input):checked,
 body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio):checked {
 	background: var(--cv-accent);
 	border-color: var(--cv-accent);
 }
-body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check)::before,
+body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check, .cv-toggle__input)::before,
 body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio)::before {
 	content: none;
 }
-body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check):checked::before {
+body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check, .cv-toggle__input):checked::before {
 	content: "";
 	width: 9px;
 	height: 5px;
 	margin: 0;
 	float: none;
-	border-left: 2px solid #fff;
-	border-bottom: 2px solid #fff;
+	border-left: 2px solid var(--cv-fg-on-action);
+	border-bottom: 2px solid var(--cv-fg-on-action);
 	transform: rotate(-45deg) translate(1px, -1px);
 }
 body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio):checked::before {
@@ -254,7 +255,7 @@ body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio):checked::before {
 	height: 6px;
 	margin: 0;
 	border-radius: 999px;
-	background: #fff;
+	background: var(--cv-fg-on-action);
 }
 
 /* --- WP_List_Table -----------------------------------------------
@@ -270,7 +271,7 @@ body.cv-takeover .cv-root .wp-list-table {
 }
 body.cv-takeover .cv-root .wp-list-table th,
 body.cv-takeover .cv-root .wp-list-table thead td {
-	text-align: left;
+	text-align: start;
 	padding: 12px 16px;
 	background: var(--cv-bg-subtle);
 	border-bottom: 1px solid var(--cv-border-1);
@@ -372,13 +373,14 @@ body.cv-takeover .cv-root .tablenav-pages {
 	display: inline-flex;
 	align-items: center;
 	gap: 4px;
-	margin: 0 0 0 auto;
+	margin: 0;
+	margin-inline-start: auto;
 	float: none;
 	font-size: var(--cv-size-meta);
 	color: var(--cv-fg-3);
 }
 body.cv-takeover .cv-root .tablenav-pages .displaying-num {
-	margin-right: 8px;
+	margin-inline-end: 8px;
 	font-size: var(--cv-size-meta);
 	color: var(--cv-fg-3);
 }
@@ -418,8 +420,8 @@ body.cv-takeover .cv-root a.cv-chip:hover { filter: brightness(0.94); }
 body.cv-takeover .cv-root a.cv-status--connected:hover    { color: var(--cv-success); }
 body.cv-takeover .cv-root a.cv-status--disconnected:hover { color: var(--cv-fg-3); }
 body.cv-takeover .cv-root a.cv-status--expired:hover      { color: var(--cv-warning); }
-body.cv-takeover .cv-root a.cv-chip--pos:hover  { color: var(--cv-success); }
-body.cv-takeover .cv-root a.cv-chip--neg:hover  { color: var(--cv-critical); }
-body.cv-takeover .cv-root a.cv-chip--warn:hover { color: var(--cv-warning); }
-body.cv-takeover .cv-root a.cv-chip--flat:hover { color: var(--cv-fg-3); }
+body.cv-takeover .cv-root a.cv-chip--success:hover  { color: var(--cv-success); }
+body.cv-takeover .cv-root a.cv-chip--critical:hover { color: var(--cv-critical); }
+body.cv-takeover .cv-root a.cv-chip--warning:hover  { color: var(--cv-warning); }
+body.cv-takeover .cv-root a.cv-chip--neutral:hover  { color: var(--cv-fg-3); }
 

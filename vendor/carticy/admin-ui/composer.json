@@ -1,6 +1,6 @@
 {
     "name": "carticy/admin-ui",
-    "description": "Unified Carticy admin design system: mount-scoped cv-* tokens and components, React 18 primitives, and the server-validated onboarding framework. Replaces carticy/design-system, carticy/admin-layout, and carticy/admin-components.",
+    "description": "Unified Carticy admin design system: mount-scoped cv-* tokens and components, React 18 primitives, and the server-validated onboarding framework.",
     "type": "library",
     "license": "GPL-2.0-or-later",
     "authors": [

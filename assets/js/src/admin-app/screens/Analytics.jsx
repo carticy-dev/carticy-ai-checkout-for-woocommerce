@@ -7,7 +7,7 @@
  */
 
 import { useState, useEffect } from '@wordpress/element';
-import { Card, Chip, Spinner, Banner, SectionHeader, StatCard, Table, SelectField } from '@carticy/admin-ui';
+import { Card, Chip, LoadingPanel, Banner, SectionHeader, StatCard, Table, SelectField } from '@carticy/admin-ui';
 import { boot, apiGet, t } from '../api';
 
 export default function Analytics() {
@@ -28,6 +28,7 @@ export default function Analytics() {
 	const rangePicker = (
 		<SelectField
 			className="caic-range"
+			aria-label={ t( 'Date range' ) }
 			value={ days }
 			onChange={ ( e ) => setDays( e.target.value ) }
 			options={ [
@@ -55,13 +56,11 @@ export default function Analytics() {
 	return (
 		<div className="caic-stack">
 			<section className="cv-section">
-				<SectionHeader title={ t( 'Performance' ) } meta={ rangePicker } />
+				<SectionHeader title={ t( 'Performance' ) } actions={ rangePicker } />
 
 				{ error && <Banner tone="critical">{ error.message }</Banner> }
 
-				{ ! data && ! error && (
-					<div className="caic-loading"><Spinner /> { t( 'Loading…' ) }</div>
-				) }
+				{ ! data && ! error && <LoadingPanel label={ t( 'Loading analytics…' ) } /> }
 
 				{ data && (
 					<div className="caic-stats">

@@ -1,13 +1,13 @@
 /**
  * Chip — wraps .cv-chip (compact tabular-numeric tag).
  *
- * tone: 'pos' | 'neg' | 'warn' | 'flat' | 'first'
+ * tone: 'neutral' (default) | 'success' | 'warning' | 'critical'
  */
-export function Chip( { tone = 'flat', className = '', children, ...rest } ) {
-	const classes = [ 'cv-chip', tone ? `cv-chip--${ tone }` : '', className ].filter( Boolean ).join( ' ' );
+import { classes } from './classes';
 
+export function Chip( { tone = 'neutral', className = '', children, ...rest } ) {
 	return (
-		<span className={ classes } { ...rest }>
+		<span className={ classes( 'cv-chip', tone && `cv-chip--${ tone }`, className ) } { ...rest }>
 			{ children }
 		</span>
 	);

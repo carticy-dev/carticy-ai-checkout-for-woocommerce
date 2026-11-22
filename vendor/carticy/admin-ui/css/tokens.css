@@ -1,8 +1,7 @@
 /* ============================================================
    Carticy Admin UI - Design tokens
-   Unified Carticy admin design system (carticy/admin-ui), adapted
-   from the SiteVitals v2 redesign language. Calm, dense, near-black
-   + sparing violet accent. System type stack only.
+   Calm, dense, near-black + sparing violet accent. System type
+   stack only.
 
    SCOPING: tokens live on .cv-root (the app mount root), never on
    the document root, so multiple Carticy plugins/versions can coexist
@@ -13,8 +12,8 @@
   /* ─────────────────────────────────────────────────────────
      ACTION / BRAND
      Primary action is near-black. Violet is the brand accent —
-     used SPARINGLY: logo mark, plan pill, active tab indicator,
-     toggle-on, focus ring. Never a button background.
+     used SPARINGLY: logo mark, active tab indicator, toggle-on,
+     focus ring. Never a button background.
      ───────────────────────────────────────────────────────── */
   --cv-action:           #0F172A;
   --cv-action-hover:     #1E293B;
@@ -22,139 +21,39 @@
   --cv-action-text:      #FFFFFF;
 
   --cv-accent:           #7C3AED;
-  --cv-accent-hover:     #6D28D9;
   --cv-accent-soft:      #EDE9FE;
   --cv-accent-border:    #DDD6FE;
 
   /* ─────────────────────────────────────────────────────────
-     SEVERITY (5 buckets — matches the real analyzer output)
-     The previous design system collapsed to 3; the analyzer
-     actually emits critical / high / medium / low / info.
-     Token names mirror assets/src/_variables.scss so PHP-side
-     CSS and React-side CSS share intent.
+     TONES BY MEANING
+     Each tone has an ink, a soft background, a border and a
+     dark text colour. "info" in components is the accent; the
+     info blue is for surfaces that must not read as the brand.
      ───────────────────────────────────────────────────────── */
-
-  /* Critical — score <60, "new" delta bucket, destructive UI */
   --cv-critical:         #B91C1C;
   --cv-critical-hover:   #991B1B;
   --cv-critical-soft:    #FEE2E2;
-  --cv-critical-border:  #FECACA;
   --cv-critical-text:    #7F1D1D;
 
-  /* High — orange, "severity_changed" delta bucket */
-  --cv-high:             #EA580C;
-  --cv-high-hover:       #C2410C;
-  --cv-high-soft:        #FFF7ED;
-  --cv-high-border:      #FB923C;
-  --cv-high-text:        #9A3412;
-
-  /* Medium — amber, score 60–79 */
-  --cv-warning:          #B45309;   /* canonical "medium" alias for back-compat */
-  --cv-warning-hover:    #92400E;
+  --cv-warning:          #B45309;
   --cv-warning-soft:     #FEF3C7;
   --cv-warning-border:   #FDE68A;
   --cv-warning-text:     #78350F;
-  --cv-medium-amber:     #F59E0B;
 
-  /* Low — sky blue, low-severity findings */
-  --cv-low:              #0284C7;
-  --cv-low-soft:         #F0F9FF;
-  --cv-low-border:       #93C5FD;
-  --cv-low-text:         #075985;
-
-  /* Info — true blue, used for "context, not regression" surfaces
-     (analyzer_coverage_changed delta bucket, neutral informational
-     notes). This is NOT violet — violet is brand-accent only.
-     The previous system aliased info → accent; that conflated
-     two distinct signals. */
-  --cv-info-blue:        #2563EB;
-  --cv-info-blue-strong: #1D4ED8;
-  --cv-info-blue-soft:   #EFF6FF;
-  --cv-info-blue-border: #BFDBFE;
-  --cv-info-blue-text:   #1E3A8A;
-
-  /* Success — score ≥80, "resolved" delta bucket, OK pills */
   --cv-success:          #15803D;
-  --cv-success-hover:    #166534;
   --cv-success-soft:     #DCFCE7;
   --cv-success-border:   #BBF7D0;
   --cv-success-text:     #166534;
 
-  /* ─────────────────────────────────────────────────────────
-     COMPARISON DELTA (5 buckets — real /audit/compare payload)
-     Each bucket has a foreground + soft background. The
-     coverage-changed bucket is deliberately info-blue, not
-     warning, so it reads as "context" rather than "regression".
-     ───────────────────────────────────────────────────────── */
-  --cv-delta-new:                       var(--cv-critical);
-  --cv-delta-new-bg:                    var(--cv-critical-soft);
-  --cv-delta-resolved:                  var(--cv-success);
-  --cv-delta-resolved-bg:               var(--cv-success-soft);
-  --cv-delta-unchanged:                 #6B7280;
-  --cv-delta-unchanged-bg:              #F3F4F6;
-  --cv-delta-severity-changed:          var(--cv-high);
-  --cv-delta-severity-changed-bg:       var(--cv-high-soft);
-  --cv-delta-coverage-changed:          var(--cv-info-blue);
-  --cv-delta-coverage-changed-bg:       var(--cv-info-blue-soft);
-
-  /* ─────────────────────────────────────────────────────────
-     CONNECTION STATE (5-value enum — services/connection-state.js)
-     Drives pill color + the reachability widget cluster. Each
-     enum value gets one ink token so an agent rendering a pill
-     reads the canonical color, not an educated guess.
-     ───────────────────────────────────────────────────────── */
-  --cv-conn-never:           var(--cv-fg-3);    /* slate, no dot */
-  --cv-conn-never-bg:        var(--cv-bg-subtle);
-  --cv-conn-reachable:       var(--cv-success);
-  --cv-conn-reachable-bg:    var(--cv-success-soft);
-  --cv-conn-unreachable:     var(--cv-warning);
-  --cv-conn-unreachable-bg:  var(--cv-warning-soft);
-  --cv-conn-quota:           var(--cv-warning);
-  --cv-conn-quota-bg:        var(--cv-warning-soft);
-  --cv-conn-disconnected:    var(--cv-fg-3);
-  --cv-conn-disconnected-bg: var(--cv-bg-subtle);
-
-  /* Dev-mode plan label uses accent so the developer sees it's a
-     non-production state at a glance. */
-  --cv-conn-devmode:         var(--cv-accent);
-  --cv-conn-devmode-bg:      var(--cv-accent-soft);
-
-  /* ─────────────────────────────────────────────────────────
-     AUDIT STATUS PALETTE (matches the lifecycle in
-     canonical-mappings.md §2). Three families:
-       progress  — in-flight states render with a progress-bar
-                   color
-       terminal-success — completed
-       terminal-warn    — report_failed (recoverable)
-       terminal-neutral — cancelled, aborted
-       terminal-crit    — failed, error
-     ───────────────────────────────────────────────────────── */
-  --cv-status-progress:      var(--cv-info-blue);
-  --cv-status-progress-soft: var(--cv-info-blue-soft);
-  --cv-status-success:       var(--cv-success);
-  --cv-status-success-soft:  var(--cv-success-soft);
-  --cv-status-warn:          var(--cv-warning);
-  --cv-status-warn-soft:     var(--cv-warning-soft);
-  --cv-status-neutral:       var(--cv-fg-3);
-  --cv-status-neutral-soft:  var(--cv-bg-subtle);
-  --cv-status-critical:      var(--cv-critical);
-  --cv-status-critical-soft: var(--cv-critical-soft);
-
-  /* ─────────────────────────────────────────────────────────
-     INFO (legacy alias — kept for any cv-banner --info variant
-     that intentionally uses violet for our own components.
-     Prefer --cv-info-blue for adopted-WP-style info surfaces.)
-     ───────────────────────────────────────────────────────── */
-  --cv-info:             var(--cv-accent);
-  --cv-info-soft:        var(--cv-accent-soft);
-  --cv-info-border:      var(--cv-accent-border);
+  --cv-info-blue:        #2563EB;
+  --cv-info-blue-soft:   #EFF6FF;
 
   /* ─────────────────────────────────────────────────────────
      NEUTRALS (slate scale)
      ───────────────────────────────────────────────────────── */
   --cv-fg-1:             #0F172A;  /* headings, primary body */
   --cv-fg-2:             #334155;  /* body, labels */
-  --cv-fg-3:             #6B7280;  /* meta, helper text */
+  --cv-fg-3:             #646B77;  /* meta, helper text: 4.5:1 or more on every light surface */
   --cv-fg-4:             #9CA3AF;  /* placeholder, disabled */
   --cv-fg-on-action:     #FFFFFF;
 
@@ -169,32 +68,15 @@
   --cv-border-3:         #9CA3AF;  /* hovered control */
 
   /* Lock — muted invitation, never red */
-  --cv-lock-bg:          #F3F4F6;
-  --cv-lock-border:      #E5E7EB;
-  --cv-lock-fg:          #6B7280;
-  --cv-lock-icon:        #9CA3AF;
+  --cv-lock-bg:          var(--cv-bg-subtle);
+  --cv-lock-border:      var(--cv-border-1);
+  --cv-lock-fg:          var(--cv-fg-3);
+  --cv-lock-icon:        var(--cv-fg-4);
 
-  /* Focus ring */
+  /* Focus ring: an outline colour, and a two-ring box-shadow for
+     controls that cannot take an outline. */
   --cv-focus-ring-color: var(--cv-accent);
   --cv-focus-ring:       0 0 0 2px #fff, 0 0 0 4px var(--cv-accent);
-  --cv-focus-ring-error: 0 0 0 2px #fff, 0 0 0 4px var(--cv-critical);
-
-  /* ─────────────────────────────────────────────────────────
-     PLAN TIERS (used by cv-plan-pill / cv-plan-tag)
-     Note: the real product gates on capability slugs
-     (base / forensic / wpt / ux_ai), not plan name — see
-     canonical-mappings.md §6. These tier tokens are for the
-     visual pill only, not for gating logic.
-     ───────────────────────────────────────────────────────── */
-  --cv-plan-free-bg:        var(--cv-bg-subtle);
-  --cv-plan-free-fg:        var(--cv-fg-2);
-  --cv-plan-starter-bg:     var(--cv-bg-surface);
-  --cv-plan-starter-fg:     var(--cv-fg-1);
-  --cv-plan-starter-border: var(--cv-border-1);
-  --cv-plan-pro-bg:         var(--cv-accent-soft);
-  --cv-plan-pro-fg:         var(--cv-accent);
-  --cv-plan-business-bg:    var(--cv-action);
-  --cv-plan-business-fg:    var(--cv-action-text);
 
   /* ─────────────────────────────────────────────────────────
      TYPE — Stack
@@ -212,27 +94,21 @@
   /* ─────────────────────────────────────────────────────────
      TYPE — Sizes / line-heights
      ───────────────────────────────────────────────────────── */
-  --cv-size-h1:          28px;  /* page title */
   --cv-size-h2:          22px;  /* section title */
   --cv-size-h3:          16px;  /* card title */
   --cv-size-body:        14px;  /* default body */
   --cv-size-meta:        13px;  /* secondary body */
   --cv-size-micro:       12px;  /* labels, helper, table head */
 
-  --cv-lh-h1:            36px;
   --cv-lh-h2:            30px;
   --cv-lh-h3:            24px;
   --cv-lh-body:          22px;
-  --cv-lh-meta:          20px;
-  --cv-lh-micro:         16px;
 
   /* ─────────────────────────────────────────────────────────
      TYPE — Weights
      ───────────────────────────────────────────────────────── */
-  --cv-weight-regular:   400;
   --cv-weight-medium:    500;
   --cv-weight-semibold:  600;
-  --cv-weight-bold:      700;
 
   /* ─────────────────────────────────────────────────────────
      SPACING (4px base)
@@ -244,8 +120,6 @@
   --cv-space-5:  20px;
   --cv-space-6:  24px;
   --cv-space-8:  32px;
-  --cv-space-10: 40px;
-  --cv-space-12: 48px;
 
   /* ─────────────────────────────────────────────────────────
      RADII
@@ -253,27 +127,35 @@
   --cv-radius-sm:    6px;   /* buttons, form controls, inline pills */
   --cv-radius-md:    10px;  /* cards (workhorse) */
   --cv-radius-lg:    14px;  /* large cards, modals */
-  --cv-radius-pill:  999px; /* toggle, plan pill, delta chip */
+  --cv-radius-pill:  999px; /* toggle, chip, status pill */
 
   /* ─────────────────────────────────────────────────────────
-     SHADOWS
+     SHADOWS AND SCRIM
      ───────────────────────────────────────────────────────── */
   --cv-shadow-card:   0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.02);
   --cv-shadow-raised: 0 4px 12px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
   --cv-shadow-modal:  0 16px 48px rgba(15, 23, 42, 0.18), 0 2px 4px rgba(15, 23, 42, 0.04);
   --cv-shadow-toggle: 0 1px 2px rgba(0, 0, 0, 0.18);
+  --cv-scrim:         rgba(15, 23, 42, 0.5); /* behind drawers and modals */
 
   /* ─────────────────────────────────────────────────────────
      LAYOUT
      ───────────────────────────────────────────────────────── */
   --cv-max-width:    1280px;
-  --cv-grid-cols:    12;
-  --cv-grid-gap:     24px;
-  --cv-pad-page:     32px;
+  --cv-pad-page:     32px; /* 16px at 782px and below (end of file) */
   --cv-pad-card:     24px;
   --cv-sidenav-width: 200px;
   --cv-sidenav-gap:   24px;
-  --cv-mobile-breakpoint: 768px;
+
+  /* ─────────────────────────────────────────────────────────
+     LAYERS (z-index)
+     Drawers and modals sit above the wp-admin toolbar (99999) and
+     menu (9990); toasts above every overlay.
+     ───────────────────────────────────────────────────────── */
+  --cv-z-sticky:   3;       /* sticky bars and buttons in the page */
+  --cv-z-popover:  50;      /* menus and listboxes over the content */
+  --cv-z-overlay:  100000;  /* drawers and modals */
+  --cv-z-toast:    100001;  /* toasts */
 
   /* ─────────────────────────────────────────────────────────
      MOTION
@@ -281,46 +163,11 @@
   --cv-easing:           cubic-bezier(0.4, 0, 0.2, 1);
   --cv-duration-quick:   120ms;
   --cv-duration-normal:  200ms;
-
-  /* ─────────────────────────────────────────────────────────
-     SKELETON (shimmer for boot states — Insights, Overview,
-     Audits-Dispatch, Audits-Running, Toolkit, Settings)
-     ───────────────────────────────────────────────────────── */
-  --cv-skel-bg:      #ECEEF0;
-  --cv-skel-shimmer: rgba(255, 255, 255, 0.6);
-
-  /* ─────────────────────────────────────────────────────────
-     FORENSIC WATERFALL (mono palette for waterfall rows)
-     Matches assets/src/_variables.scss exactly so the React
-     waterfall code can read either side without drift.
-     ───────────────────────────────────────────────────────── */
-  --cv-wf-php:       #E0A832;
-  --cv-wf-db:        #4A8FD6;
-  --cv-wf-http:      #52B788;
-  --cv-wf-hooks:     #E07A5F;
-  --cv-wf-duration:  #EF4444;
-  --cv-wf-queries:   #8B5CF6;
-  --cv-wf-row-h:     48px;
-  --cv-wf-phase-h:   32px;
-  --cv-wf-connector: #CBD5E1;
-  --cv-wf-bg-muted:  #F8FAFC;
-  --cv-wf-border:    #E2E8F0;
-  --cv-wf-text-muted:#94A3B8;
-  --cv-wf-text-dark: #334155;
 }
 
 /* ============================================================
    Semantic typography utilities
    ============================================================ */
-.cv-h1 {
-  font-family: var(--cv-font-sans);
-  font-size: var(--cv-size-h1);
-  line-height: var(--cv-lh-h1);
-  font-weight: var(--cv-weight-semibold);
-  color: var(--cv-fg-1);
-  letter-spacing: -0.015em;
-  margin: 0;
-}
 .cv-h2 {
   font-family: var(--cv-font-sans);
   font-size: var(--cv-size-h2);
@@ -338,37 +185,9 @@
   color: var(--cv-fg-1);
   margin: 0;
 }
-.cv-body {
-  font-family: var(--cv-font-sans);
-  font-size: var(--cv-size-body);
-  line-height: var(--cv-lh-body);
-  font-weight: var(--cv-weight-regular);
-  color: var(--cv-fg-2);
-  margin: 0;
-}
-.cv-meta {
-  font-family: var(--cv-font-sans);
-  font-size: var(--cv-size-meta);
-  line-height: var(--cv-lh-meta);
-  color: var(--cv-fg-3);
-  margin: 0;
-}
-.cv-micro {
-  font-family: var(--cv-font-sans);
-  font-size: var(--cv-size-micro);
-  line-height: var(--cv-lh-micro);
-  font-weight: var(--cv-weight-medium);
-  color: var(--cv-fg-3);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0;
-}
-.cv-mono {
-  font-family: var(--cv-font-mono);
-  font-size: 13px;
-  color: var(--cv-fg-2);
-}
-.cv-numeric {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
+.cv-numeric { font-variant-numeric: tabular-nums; }
+
+/* Narrow screens: the page gutter matches the app header and the save bar. */
+@media (max-width: 782px) {
+  .cv-root { --cv-pad-page: 16px; }
 }

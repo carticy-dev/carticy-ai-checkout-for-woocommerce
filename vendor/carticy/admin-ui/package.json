@@ -6,7 +6,11 @@
   "author": "Carticy Team",
   "main": "js/src/index.js",
   "style": "css/admin-ui.css",
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
+    "bin/",
     "css/",
     "js/src/",
     "composer.json",

@@ -1,16 +1,18 @@
 /**
  * Banner — wraps .cv-banner (page-level notice with left-edge severity).
  *
- * tone: 'info' | 'warning' | 'critical' | 'success' | 'persistent'
+ * tone: 'info' | 'success' | 'warning' | 'critical'
  * WP-native `.notice` shells remain valid alongside this component for
- * PHP-rendered admin notices (hybrid doctrine from the v2 audit).
+ * PHP-rendered admin notices (the icon doctrine in the README).
+ *
+ * icon: an inline SVG drawn before the text in the tone's colour.
  */
-export function Banner( { tone = 'info', title, icon = null, actions = null, className = '', children, ...rest } ) {
-	const classes = [ 'cv-banner', tone ? `cv-banner--${ tone }` : '', className ].filter( Boolean ).join( ' ' );
+import { classes } from './classes';
 
+export function Banner( { tone = 'info', title, icon = null, actions = null, className = '', children, ...rest } ) {
 	return (
-		<div className={ classes } role={ 'critical' === tone ? 'alert' : 'status' } { ...rest }>
-			{ icon }
+		<div className={ classes( 'cv-banner', tone && `cv-banner--${ tone }`, className ) } role={ 'critical' === tone ? 'alert' : 'status' } { ...rest }>
+			{ icon && <span className="cv-banner__icon" aria-hidden="true">{ icon }</span> }
 			<div className="cv-banner__body">
 				{ title && <p className="cv-banner__title">{ title }</p> }
 				{ children && <p className="cv-banner__desc">{ children }</p> }

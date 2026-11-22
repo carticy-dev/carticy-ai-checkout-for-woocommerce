@@ -7,18 +7,18 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:carticy-dev/admin-ui.git",
-                "reference": "92770c71c4c6a8c92c226659ca0624b7442fbb05"
+                "reference": "6fb573da51ded495870c9c2094099905442fe574"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/carticy-dev/admin-ui/zipball/92770c71c4c6a8c92c226659ca0624b7442fbb05",
-                "reference": "92770c71c4c6a8c92c226659ca0624b7442fbb05",
+                "url": "https://api.github.com/repos/carticy-dev/admin-ui/zipball/6fb573da51ded495870c9c2094099905442fe574",
+                "reference": "6fb573da51ded495870c9c2094099905442fe574",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0"
             },
-            "time": "2026-06-20T08:09:55+00:00",
+            "time": "2026-11-22T11:44:54+00:00",
             "default-branch": true,
             "type": "library",
             "extra": {
@@ -36,7 +36,7 @@
                     "email": "dev@carticy.com"
                 }
             ],
-            "description": "Unified Carticy admin design system: mount-scoped cv-* tokens and components, React 18 primitives, and the server-validated onboarding framework. Replaces carticy/design-system, carticy/admin-layout, and carticy/admin-components.",
+            "description": "Unified Carticy admin design system: mount-scoped cv-* tokens and components, React 18 primitives, and the server-validated onboarding framework.",
             "support": {
                 "source": "https://github.com/carticy-dev/admin-ui/tree/master",
                 "issues": "https://github.com/carticy-dev/admin-ui/issues"
