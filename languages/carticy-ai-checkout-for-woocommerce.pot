@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-22T14:24:27+00:00\n"
+"POT-Creation-Date: 2026-11-22T15:46:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: carticy-ai-checkout-for-woocommerce\n"
@@ -104,7 +104,7 @@ msgstr ""
 #: src/Admin/AdminHandler.php:211
 #: src/Admin/AdminHandler.php:212
 #: assets/js/src/admin-app/App.jsx:24
-#: assets/js/src/admin-app/screens/Logs.jsx:113
+#: assets/js/src/admin-app/screens/Logs.jsx:112
 msgid "Logs & Monitoring"
 msgstr ""
 
@@ -413,7 +413,7 @@ msgid "Settings"
 msgstr ""
 
 #: assets/js/src/admin-app/App.jsx:21
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:257
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:276
 msgid "Product Feed"
 msgstr ""
 
@@ -441,604 +441,607 @@ msgstr ""
 msgid "Last 90 Days"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Analytics.jsx:44
-#: assets/js/src/admin-app/screens/Analytics.jsx:54
-#: assets/js/src/admin-app/screens/Logs.jsx:218
-#: assets/js/src/admin-app/screens/Logs.jsx:351
-#: assets/js/src/admin-app/screens/Logs.jsx:445
-#: assets/js/src/admin-app/screens/Settings.jsx:138
-#: assets/js/src/admin-app/screens/Wizard.jsx:318
-msgid "Status"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Analytics.jsx:45
-#: assets/js/src/admin-app/screens/Logs.jsx:465
-msgid "Count"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Analytics.jsx:46
-msgid "Percentage"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Analytics.jsx:50
-msgid "Order"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Analytics.jsx:51
-msgid "Date"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Analytics.jsx:52
-msgid "Customer"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Analytics.jsx:53
-msgid "Total"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Analytics.jsx:60
-msgid "Performance"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Analytics.jsx:64
-msgid "Loading analytics…"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Analytics.jsx:71
+#: assets/js/src/admin-app/screens/Analytics.jsx:49
 msgid "ChatGPT Orders"
 msgstr ""
 
 #. translators: %s: revenue amount.
-#: assets/js/src/admin-app/screens/Analytics.jsx:73
-#: assets/js/src/admin-app/screens/Analytics.jsx:79
+#: assets/js/src/admin-app/screens/Analytics.jsx:52
+#: assets/js/src/admin-app/screens/Analytics.jsx:59
 msgid "Revenue: %s"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Analytics.jsx:77
+#: assets/js/src/admin-app/screens/Analytics.jsx:56
 msgid "Regular Orders"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Analytics.jsx:83
+#: assets/js/src/admin-app/screens/Analytics.jsx:63
 msgid "ChatGPT Conversion"
 msgstr ""
 
 #. translators: 1: orders placed through ChatGPT, 2: all orders.
-#: assets/js/src/admin-app/screens/Analytics.jsx:85
+#: assets/js/src/admin-app/screens/Analytics.jsx:66
 msgid "%1$d of %2$d order"
 msgid_plural "%1$d of %2$d orders"
 msgstr[0] ""
 msgstr[1] ""
 
-#: assets/js/src/admin-app/screens/Analytics.jsx:89
+#: assets/js/src/admin-app/screens/Analytics.jsx:70
 msgid "ChatGPT AOV"
 msgstr ""
 
 #. translators: %s: average order value of other orders.
-#: assets/js/src/admin-app/screens/Analytics.jsx:91
+#: assets/js/src/admin-app/screens/Analytics.jsx:73
 msgid "Regular: %s"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Analytics.jsx:100
+#: assets/js/src/admin-app/screens/Analytics.jsx:79
+#: assets/js/src/admin-app/screens/Analytics.jsx:89
+#: assets/js/src/admin-app/screens/Logs.jsx:217
+#: assets/js/src/admin-app/screens/Logs.jsx:350
+#: assets/js/src/admin-app/screens/Logs.jsx:444
+#: assets/js/src/admin-app/screens/Settings.jsx:138
+#: assets/js/src/admin-app/screens/Wizard.jsx:318
+msgid "Status"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:80
+#: assets/js/src/admin-app/screens/Logs.jsx:464
+msgid "Count"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:81
+msgid "Percentage"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:85
+msgid "Order"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:86
+msgid "Date"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:87
+msgid "Customer"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:88
+msgid "Total"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:95
+msgid "Performance"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:96
+msgid "Loading analytics…"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:116
 msgid "ChatGPT Order Status Distribution"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Analytics.jsx:106
+#: assets/js/src/admin-app/screens/Analytics.jsx:122
 msgid "No status data for the selected range."
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Analytics.jsx:112
+#: assets/js/src/admin-app/screens/Analytics.jsx:128
 msgid "Recent ChatGPT Orders"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Analytics.jsx:117
+#: assets/js/src/admin-app/screens/Analytics.jsx:133
 msgid "No ChatGPT orders found in the selected date range."
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:30
+#: assets/js/src/admin-app/screens/Logs.jsx:31
 msgid "API Logs"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:31
+#: assets/js/src/admin-app/screens/Logs.jsx:32
 msgid "Error Logs"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:32
+#: assets/js/src/admin-app/screens/Logs.jsx:33
 msgid "Webhook Activity"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:33
+#: assets/js/src/admin-app/screens/Logs.jsx:34
 msgid "Session Status"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:37
+#: assets/js/src/admin-app/screens/Logs.jsx:38
 msgid "All Categories"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:38
+#: assets/js/src/admin-app/screens/Logs.jsx:39
 msgid "Payment"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:39
+#: assets/js/src/admin-app/screens/Logs.jsx:40
 #: assets/js/src/admin-app/screens/Settings.jsx:31
 msgid "API"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:40
+#: assets/js/src/admin-app/screens/Logs.jsx:41
 msgid "Webhook"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:41
+#: assets/js/src/admin-app/screens/Logs.jsx:42
 msgid "Validation"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:42
+#: assets/js/src/admin-app/screens/Logs.jsx:43
 msgid "System"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:114
+#: assets/js/src/admin-app/screens/Logs.jsx:113
 msgid "Log types"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:160
+#: assets/js/src/admin-app/screens/Logs.jsx:159
 msgid "No data"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:166
+#: assets/js/src/admin-app/screens/Logs.jsx:165
 msgid "View context"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:171
-#: assets/js/src/admin-app/screens/Logs.jsx:276
+#: assets/js/src/admin-app/screens/Logs.jsx:170
+#: assets/js/src/admin-app/screens/Logs.jsx:275
 msgid "Context"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:173
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:359
+#: assets/js/src/admin-app/screens/Logs.jsx:172
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:381
 #: assets/js/src/admin-app/screens/Wizard.jsx:457
 msgid "Close"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:194
+#: assets/js/src/admin-app/screens/Logs.jsx:193
 msgid "Loading logs…"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:204
-#: assets/js/src/admin-app/screens/Logs.jsx:267
-#: assets/js/src/admin-app/screens/Logs.jsx:348
+#: assets/js/src/admin-app/screens/Logs.jsx:203
+#: assets/js/src/admin-app/screens/Logs.jsx:266
+#: assets/js/src/admin-app/screens/Logs.jsx:347
 msgid "Timestamp"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:207
+#: assets/js/src/admin-app/screens/Logs.jsx:206
 msgid "Level"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:210
-#: assets/js/src/admin-app/screens/Logs.jsx:464
+#: assets/js/src/admin-app/screens/Logs.jsx:209
+#: assets/js/src/admin-app/screens/Logs.jsx:463
 #: assets/js/src/admin-app/screens/Wizard.jsx:461
 msgid "Request"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:213
+#: assets/js/src/admin-app/screens/Logs.jsx:212
 msgid "Method"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:221
-#: assets/js/src/admin-app/screens/Logs.jsx:273
+#: assets/js/src/admin-app/screens/Logs.jsx:220
+#: assets/js/src/admin-app/screens/Logs.jsx:272
 #: assets/js/src/admin-app/screens/Settings.jsx:147
 msgid "Message"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:224
+#: assets/js/src/admin-app/screens/Logs.jsx:223
 #: assets/js/src/admin-app/screens/Wizard.jsx:321
 msgid "Details"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:225
+#: assets/js/src/admin-app/screens/Logs.jsx:224
 msgid "API Context"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:233
+#: assets/js/src/admin-app/screens/Logs.jsx:232
 msgid "No API logs found"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:234
+#: assets/js/src/admin-app/screens/Logs.jsx:233
 msgid "Logs will appear here when API requests are made."
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:243
+#: assets/js/src/admin-app/screens/Logs.jsx:242
 msgid "No API logs found."
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:270
+#: assets/js/src/admin-app/screens/Logs.jsx:269
 msgid "Category"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:277
+#: assets/js/src/admin-app/screens/Logs.jsx:276
 msgid "Error Details"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:284
+#: assets/js/src/admin-app/screens/Logs.jsx:283
 msgid "Error category"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:290
-#: assets/js/src/admin-app/screens/Logs.jsx:364
-#: assets/js/src/admin-app/screens/Logs.jsx:472
+#: assets/js/src/admin-app/screens/Logs.jsx:289
+#: assets/js/src/admin-app/screens/Logs.jsx:363
+#: assets/js/src/admin-app/screens/Logs.jsx:471
 msgid "Clear cache"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:297
+#: assets/js/src/admin-app/screens/Logs.jsx:296
 msgid "Error Statistics (Last 24 Hours)"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:313
-#: assets/js/src/admin-app/screens/Logs.jsx:319
+#: assets/js/src/admin-app/screens/Logs.jsx:312
+#: assets/js/src/admin-app/screens/Logs.jsx:318
 msgid "No errors found."
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:313
+#: assets/js/src/admin-app/screens/Logs.jsx:312
 msgid "This is good!"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:349
-msgid "Event Type"
+#: assets/js/src/admin-app/screens/Logs.jsx:348
+msgid "Event type"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:350
+#: assets/js/src/admin-app/screens/Logs.jsx:349
 msgid "URL"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:352
+#: assets/js/src/admin-app/screens/Logs.jsx:351
 msgid "Attempt"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:355
+#: assets/js/src/admin-app/screens/Logs.jsx:354
 #: assets/js/src/admin-app/screens/Wizard.jsx:410
 msgid "Result"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:357
+#: assets/js/src/admin-app/screens/Logs.jsx:356
 msgid "Success"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:357
-#: assets/js/src/admin-app/screens/Logs.jsx:378
-#: assets/js/src/admin-app/screens/Logs.jsx:486
+#: assets/js/src/admin-app/screens/Logs.jsx:356
+#: assets/js/src/admin-app/screens/Logs.jsx:377
+#: assets/js/src/admin-app/screens/Logs.jsx:485
 #: assets/js/src/admin-app/screens/Settings.jsx:141
 msgid "Failed"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:370
+#: assets/js/src/admin-app/screens/Logs.jsx:369
 msgid "Webhook Statistics (Last 24 Hours)"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:376
+#: assets/js/src/admin-app/screens/Logs.jsx:375
 msgid "Total Sent"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:377
+#: assets/js/src/admin-app/screens/Logs.jsx:376
 msgid "Successful"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:379
+#: assets/js/src/admin-app/screens/Logs.jsx:378
 msgid "Retry Rate"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:385
+#: assets/js/src/admin-app/screens/Logs.jsx:384
 msgid "Failed Webhooks (Retry Queue)"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:393
+#: assets/js/src/admin-app/screens/Logs.jsx:392
 msgid "Clear Queue"
 msgstr ""
 
 #. translators: %d: number of webhooks waiting to be sent again.
-#: assets/js/src/admin-app/screens/Logs.jsx:399
+#: assets/js/src/admin-app/screens/Logs.jsx:398
 msgid "%d webhook is waiting to be sent again"
 msgid_plural "%d webhooks are waiting to be sent again"
 msgstr[0] ""
 msgstr[1] ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:407
-#: assets/js/src/admin-app/screens/Logs.jsx:415
+#: assets/js/src/admin-app/screens/Logs.jsx:406
+#: assets/js/src/admin-app/screens/Logs.jsx:414
 msgid "No webhook activity found."
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:408
+#: assets/js/src/admin-app/screens/Logs.jsx:407
 msgid "Webhooks are only sent for orders created through ChatGPT Instant Checkout."
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:440
+#: assets/js/src/admin-app/screens/Logs.jsx:439
 msgid "Session ID"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:452
+#: assets/js/src/admin-app/screens/Logs.jsx:451
 msgid "Items"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:453
+#: assets/js/src/admin-app/screens/Logs.jsx:452
 msgid "Created"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:454
-msgid "Last Updated"
+#: assets/js/src/admin-app/screens/Logs.jsx:453
+msgid "Last updated"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:455
+#: assets/js/src/admin-app/screens/Logs.jsx:454
 msgid "Expires"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:458
+#: assets/js/src/admin-app/screens/Logs.jsx:457
 msgid "Shipping"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:459
+#: assets/js/src/admin-app/screens/Logs.jsx:458
 msgid "Yes"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:466
-#: assets/js/src/admin-app/screens/Logs.jsx:504
-msgid "Avg Duration"
+#: assets/js/src/admin-app/screens/Logs.jsx:465
+msgid "Avg duration"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:467
+#: assets/js/src/admin-app/screens/Logs.jsx:466
 msgid "Slowest"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:480
+#: assets/js/src/admin-app/screens/Logs.jsx:479
 msgid "Session Status Overview"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:483
+#: assets/js/src/admin-app/screens/Logs.jsx:482
 msgid "Active Sessions"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:484
+#: assets/js/src/admin-app/screens/Logs.jsx:483
 msgid "Total Sessions"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:485
+#: assets/js/src/admin-app/screens/Logs.jsx:484
 #: assets/js/src/admin-app/screens/Wizard.jsx:249
 msgid "Completed"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:487
+#: assets/js/src/admin-app/screens/Logs.jsx:486
 msgid "Cancelled"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:488
+#: assets/js/src/admin-app/screens/Logs.jsx:487
 msgid "Expired"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:491
+#: assets/js/src/admin-app/screens/Logs.jsx:490
 msgid "Recent Sessions"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:497
+#: assets/js/src/admin-app/screens/Logs.jsx:496
 msgid "No active sessions found."
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:501
+#: assets/js/src/admin-app/screens/Logs.jsx:500
 msgid "API Performance (Last 24 Hours)"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:503
+#: assets/js/src/admin-app/screens/Logs.jsx:502
 msgid "Total Requests"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:505
+#: assets/js/src/admin-app/screens/Logs.jsx:503
+msgid "Avg Duration"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:504
 msgid "Slowest Request"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:506
+#: assets/js/src/admin-app/screens/Logs.jsx:505
 msgid "Avg Memory"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:507
+#: assets/js/src/admin-app/screens/Logs.jsx:506
 msgid "Avg DB Queries"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:512
+#: assets/js/src/admin-app/screens/Logs.jsx:511
 msgid "Performance by request"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:526
+#: assets/js/src/admin-app/screens/Logs.jsx:525
 msgid "System Health"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:529
+#: assets/js/src/admin-app/screens/Logs.jsx:528
 msgid "PHP Version"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:530
+#: assets/js/src/admin-app/screens/Logs.jsx:529
 msgid "Memory Limit"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:531
+#: assets/js/src/admin-app/screens/Logs.jsx:530
 msgid "WordPress Version"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:532
+#: assets/js/src/admin-app/screens/Logs.jsx:531
 msgid "WooCommerce Version"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:534
+#: assets/js/src/admin-app/screens/Logs.jsx:533
 msgid "Object Cache"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:537
-#: assets/js/src/admin-app/screens/Logs.jsx:545
+#: assets/js/src/admin-app/screens/Logs.jsx:536
+#: assets/js/src/admin-app/screens/Logs.jsx:544
 msgid "Active"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:537
-#: assets/js/src/admin-app/screens/Logs.jsx:545
+#: assets/js/src/admin-app/screens/Logs.jsx:536
+#: assets/js/src/admin-app/screens/Logs.jsx:544
 msgid "Inactive"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/Logs.jsx:542
+#: assets/js/src/admin-app/screens/Logs.jsx:541
 msgid "OPCache"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:39
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:40
 msgid "Excellent"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:42
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:43
 msgid "Good"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:45
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:46
 msgid "Fair"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:47
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:48
 msgid "Poor"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:145
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:146
 msgid "Image"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:153
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:154
 msgid "Product"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:156
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:157
 msgid "SKU"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:157
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:160
 msgid "Price"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:160
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:167
 msgid "ChatGPT"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:164
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:171
 msgid "Enabled"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:164
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:171
 msgid "Disabled"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:172
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:179
 msgid "Disable"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:172
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:179
 msgid "Enable"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:179
-msgid "Quality Score"
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:186
+msgid "Quality score"
 msgstr ""
 
 #. translators: %d: number of problems found in the product's data.
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:196
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:203
 msgid "%d issue"
 msgid_plural "%d issues"
 msgstr[0] ""
 msgstr[1] ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:207
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:214
 #: assets/js/src/admin-app/screens/Wizard.jsx:413
 msgid "Actions"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:214
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:221
 msgid "Preview"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:243
-msgid "ChatGPT status"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:247
-msgid "All Products"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:248
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:265
-msgid "ChatGPT Enabled"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:249
-msgid "ChatGPT Disabled"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:264
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:251
 msgid "Total Products"
 msgstr ""
 
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:252
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:266
+msgid "ChatGPT Enabled"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:253
 msgid "Avg Quality"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:267
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:254
 msgid "With Issues"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:279
-msgid "Search by name or SKU…"
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:261
+msgid "ChatGPT status"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:280
-msgid "Search"
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:265
+msgid "All Products"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:281
-msgid "Clear"
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:267
+msgid "ChatGPT Disabled"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:290
-msgid "Regenerate Feed"
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:274
+msgid "Loading products…"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:297
+msgid "Search by name or SKU…"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:298
+msgid "Search"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:299
+msgid "Clear"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:308
+msgid "Regenerate Feed"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:315
 msgid "Recalculate Quality"
 msgstr ""
 
 #. translators: %d: number of selected products.
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:305
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:323
 msgid "%d selected"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:313
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:331
 msgid "Enable Selected"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:321
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:339
 msgid "Disable Selected"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:326
-msgid "Loading products…"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:330
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:352
 msgid "No products found"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:331
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:353
 msgid "No products match the current filters."
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:345
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:367
 msgid "Select product"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:347
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:369
 msgid "No products found."
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:357
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:379
 msgid "Feed Preview"
 msgstr ""
 
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:361
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:383
 msgid "Loading the preview…"
 msgstr ""
 

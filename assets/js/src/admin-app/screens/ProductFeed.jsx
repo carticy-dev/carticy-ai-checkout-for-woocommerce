@@ -8,7 +8,7 @@
  * design-system primitives so it matches every other Carticy admin screen.
  */
 
-import { useState, useEffect, useCallback } from '@wordpress/element';
+import { useState, useEffect, useCallback, RawHTML } from '@wordpress/element';
 import { __, _n, sprintf } from '@wordpress/i18n';
 import {
 	Card,
@@ -17,6 +17,7 @@ import {
 	Banner,
 	Button,
 	SectionHeader,
+	Skeleton,
 	StatCard,
 	Table,
 	SearchBar,
@@ -154,7 +155,13 @@ export default function ProductFeed() {
 			render: ( row ) => <strong>{ row.name }</strong>,
 		},
 		{ key: 'sku', header: __( 'SKU', 'carticy-ai-checkout-for-woocommerce' ), render: ( row ) => row.sku || '—' },
-		{ key: 'price', header: __( 'Price', 'carticy-ai-checkout-for-woocommerce' ) },
+		{
+			key: 'price',
+			header: __( 'Price', 'carticy-ai-checkout-for-woocommerce' ),
+			// WooCommerce's own price markup: struck-through regular prices, ranges,
+			// and the screen-reader text that reads them out.
+			render: ( row ) => <RawHTML className="caic-feed__price">{ row.price_html }</RawHTML>,
+		},
 		{
 			key: 'chatgpt',
 			header: __( 'ChatGPT', 'carticy-ai-checkout-for-woocommerce' ),
@@ -176,7 +183,7 @@ export default function ProductFeed() {
 		},
 		{
 			key: 'quality',
-			header: __( 'Quality Score', 'carticy-ai-checkout-for-woocommerce' ),
+			header: __( 'Quality score', 'carticy-ai-checkout-for-woocommerce' ),
 			render: ( row ) => {
 				const chip = qualityChip( row.quality_score );
 				const count = row.quality_issues.length;
@@ -236,6 +243,17 @@ export default function ProductFeed() {
 
 	const stats = data ? data.stats : null;
 	const pagination = data ? data.pagination : null;
+	const loading = ! data && ! error;
+
+	// The tile labels and table headers show at once; their values wait for the
+	// page of products.
+	const tiles = [
+		{ key: 'total', accent: true, label: __( 'Total Products', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.total_products },
+		{ key: 'enabled', label: __( 'ChatGPT Enabled', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.chatgpt_enabled },
+		{ key: 'quality', label: __( 'Avg Quality', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.avg_quality + '%' },
+		{ key: 'issues', label: __( 'With Issues', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.products_with_issues },
+	];
+	const placeholderColumns = columns.map( ( column ) => ( { ...column, render: () => <Skeleton /> } ) );
 
 	const chatgptFilter = (
 		<SelectField
@@ -252,19 +270,19 @@ export default function ProductFeed() {
 	);
 
 	return (
-		<div className="caic-stack">
+		<div className="caic-stack" aria-busy={ loading }>
+			<p className="cv-sr-only" role="status">{ loading ? __( 'Loading products…', 'carticy-ai-checkout-for-woocommerce' ) : '' }</p>
 			<section className="cv-section">
 				<SectionHeader title={ __( 'Product Feed', 'carticy-ai-checkout-for-woocommerce' ) } />
 
 				{ error && <Banner tone="critical">{ error.message }</Banner> }
 				{ notice && <Banner tone={ notice.tone }>{ notice.message }</Banner> }
 
-				{ stats && (
-					<div className="caic-stats">
-						<StatCard accent value={ stats.total_products } label={ __( 'Total Products', 'carticy-ai-checkout-for-woocommerce' ) } />
-						<StatCard value={ stats.chatgpt_enabled } label={ __( 'ChatGPT Enabled', 'carticy-ai-checkout-for-woocommerce' ) } />
-						<StatCard value={ stats.avg_quality + '%' } label={ __( 'Avg Quality', 'carticy-ai-checkout-for-woocommerce' ) } />
-						<StatCard value={ stats.products_with_issues } label={ __( 'With Issues', 'carticy-ai-checkout-for-woocommerce' ) } />
+				{ ! error && (
+					<div className="cv-kpi-strip">
+						{ tiles.map( ( tile ) => (
+							<StatCard key={ tile.key } accent={ tile.accent } label={ tile.label } value={ stats ? tile.value( stats ) : <Skeleton width="3ch" /> } />
+						) ) }
 					</div>
 				) }
 			</section>
@@ -323,7 +341,11 @@ export default function ProductFeed() {
 					</BulkActionBar>
 				) }
 
-				{ ! data && ! error && <LoadingPanel label={ __( 'Loading products…', 'carticy-ai-checkout-for-woocommerce' ) } /> }
+				{ loading && (
+					<Card flush>
+						<Table columns={ placeholderColumns } rows={ [ { id: 1 }, { id: 2 }, { id: 3 } ] } />
+					</Card>
+				) }
 
 				{ data && data.rows.length === 0 && (
 					<Card flush>

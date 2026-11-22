@@ -1,3 +1,8 @@
+# Line endings: text files are stored and checked out with LF on every
+# platform, whatever core.autocrlf is set to, so the working tree matches the
+# repository and the PHPCS line-ending sniff sees what is committed.
+* text=auto eol=lf
+
 # Git export-ignore attributes for WordPress plugin distribution
 # Files marked export-ignore are excluded from GitHub release archives
 

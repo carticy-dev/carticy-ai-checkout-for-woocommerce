@@ -594,7 +594,6 @@
   padding: 3px 10px;
   border-radius: var(--cv-radius-pill);
   font-size: var(--cv-size-micro); font-weight: 600;
-  text-transform: none; letter-spacing: 0;
   white-space: nowrap; max-width: 100%;
 }
 .cv-status::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: currentColor; flex: none; }
@@ -606,12 +605,11 @@
 .cv-status--expired, .cv-status--stale, .cv-status--warning { color: var(--cv-warning); background: var(--cv-warning-soft); }
 .cv-status--critical { color: var(--cv-critical); background: var(--cv-critical-soft); }
 
-/* A small "Required" tag beside a control's label. */
+/* A small accent tag beside a label, such as the plan a control needs. */
 .cv-required-tag {
   display: inline-flex; align-items: center;
   background: var(--cv-accent-soft); color: var(--cv-accent);
-  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: 11px; font-weight: 600;
   padding: 1px 6px;
   border-radius: var(--cv-radius-pill);
   cursor: help;
@@ -710,7 +708,7 @@
 .cv-field + .cv-field { margin-top: var(--cv-space-4); }
 .cv-root .cv-label { display: block; margin: 0 0 6px; font-size: var(--cv-size-meta); line-height: 18px; font-weight: 500; color: var(--cv-fg-1); }
 .cv-label__required { margin-inline-start: 8px; font-size: var(--cv-size-micro); font-weight: 400; color: var(--cv-fg-3); }
-.cv-root .cv-help { margin: 6px 0 0; font-size: var(--cv-size-micro); line-height: 18px; font-weight: 400; color: var(--cv-fg-3); text-transform: none; letter-spacing: 0; }
+.cv-root .cv-help { margin: 6px 0 0; font-size: var(--cv-size-micro); line-height: 18px; font-weight: 400; color: var(--cv-fg-3); }
 .cv-root .cv-error-msg {
   display: flex; align-items: flex-start; gap: 6px;
   margin: 6px 0 0;
@@ -869,7 +867,7 @@
   background: var(--cv-bg-subtle);
   border-bottom: 1px solid var(--cv-border-1);
   font-size: var(--cv-size-micro); font-weight: 500;
-  color: var(--cv-fg-3); text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--cv-fg-3);
 }
 /* Sortable header: a button inside the th that reads as the header text. */
 .cv-table th .cv-sort {
@@ -877,7 +875,6 @@
   margin: 0; margin-inline-start: -4px; padding: 2px 4px;
   background: none; border: 0; border-radius: var(--cv-radius-sm);
   font: inherit; color: inherit; text-align: inherit;
-  text-transform: inherit; letter-spacing: inherit;
   cursor: pointer;
 }
 .cv-table th .cv-sort:hover,
@@ -986,7 +983,7 @@
   overflow-y: auto;
 }
 .cv-sidenav__label {
-  font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  font-size: var(--cv-size-micro); font-weight: 500;
   color: var(--cv-fg-3); padding: 8px 12px;
 }
 .cv-sidenav__list { list-style: none; padding: 0; margin: 0; }
@@ -1053,7 +1050,7 @@
 .cv-stepper__num svg { width: 14px; height: 14px; }
 .cv-stepper__step.is-active .cv-stepper__num { background: var(--cv-accent); color: var(--cv-fg-on-action); border-color: var(--cv-accent); }
 .cv-stepper__step.is-done   .cv-stepper__num { background: var(--cv-success); color: var(--cv-fg-on-action); border-color: var(--cv-success); }
-.cv-stepper__label { font-size: var(--cv-size-micro); color: var(--cv-fg-3); text-transform: none; letter-spacing: 0; font-weight: 500; text-align: center; }
+.cv-stepper__label { font-size: var(--cv-size-micro); color: var(--cv-fg-3); font-weight: 500; text-align: center; }
 .cv-stepper__step.is-active .cv-stepper__label { color: var(--cv-fg-1); }
 .cv-stepper__connector { flex: 1; height: 1px; background: var(--cv-border-1); margin-inline: 12px; max-width: 80px; align-self: flex-start; margin-top: 12px; }
 .cv-stepper__summary { display: none; }
@@ -1110,7 +1107,7 @@
 .cv-toast--warning  { border-inline-start-color: var(--cv-warning); }
 .cv-toast--critical { border-inline-start-color: var(--cv-critical); }
 .cv-toast__title { font-size: var(--cv-size-meta); font-weight: 600; color: var(--cv-fg-1); margin: 0; }
-.cv-toast__desc  { font-size: var(--cv-size-micro); color: var(--cv-fg-2); margin: 2px 0 0; text-transform: none; letter-spacing: 0; font-weight: 400; }
+.cv-toast__desc  { font-size: var(--cv-size-micro); color: var(--cv-fg-2); margin: 2px 0 0; font-weight: 400; }
 .cv-toast__body { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .cv-toast__dismiss { width: 24px; height: 24px; flex-shrink: 0; margin-block-start: -2px; margin-inline-end: -4px; }
 .cv-toast__dismiss svg { width: 14px; height: 14px; }
@@ -1126,9 +1123,20 @@
 }
 
 /* ============================================================
-   KPI strip — a row of compact metric tiles
+   KPI strip — a row of equal metric tiles, compact .cv-kpi-tile
+   or StatCard, for any number of them: as many per row as fit,
+   two per row on phones, where a last tile on its own takes the
+   whole row.
    ============================================================ */
-.cv-kpi-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.cv-kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: var(--cv-space-3);
+}
+@media (max-width: 600px) {
+  .cv-kpi-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cv-kpi-strip > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
 .cv-kpi-tile {
   background: var(--cv-bg-surface);
   border: 1px solid var(--cv-border-1);
@@ -1138,10 +1146,7 @@
   display: flex; flex-direction: column; align-items: center; gap: 4px;
 }
 .cv-kpi-tile__num { font-size: 24px; font-weight: 600; color: var(--cv-fg-1); font-variant-numeric: tabular-nums; line-height: 28px; }
-.cv-kpi-tile__label { font-size: var(--cv-size-micro); color: var(--cv-fg-3); text-transform: none; letter-spacing: 0; font-weight: 400; }
-@media (max-width: 782px) {
-  .cv-kpi-strip { grid-template-columns: repeat(5, minmax(140px, 1fr)); overflow-x: auto; }
-}
+.cv-kpi-tile__label { font-size: var(--cv-size-micro); color: var(--cv-fg-3); font-weight: 400; }
 
 /* ============================================================
    Description list (key-value)
@@ -1173,8 +1178,8 @@
 }
 .cv-progress--warning .cv-progress__fill  { background: var(--cv-warning); }
 .cv-progress--critical .cv-progress__fill { background: var(--cv-critical); }
-.cv-progress__label  { display: flex; justify-content: space-between; font-size: var(--cv-size-micro); color: var(--cv-fg-3); margin-bottom: 6px; text-transform: none; letter-spacing: 0; font-weight: 400; }
-.cv-progress__meta   { font-size: var(--cv-size-micro); color: var(--cv-fg-3); margin-top: 4px; text-transform: none; letter-spacing: 0; font-weight: 400; }
+.cv-progress__label  { display: flex; justify-content: space-between; font-size: var(--cv-size-micro); color: var(--cv-fg-3); margin-bottom: 6px; font-weight: 400; }
+.cv-progress__meta   { font-size: var(--cv-size-micro); color: var(--cv-fg-3); margin-top: 4px; font-weight: 400; }
 /* Indeterminate: the amount of work is not known yet. The bar runs along the
    reading direction. */
 .cv-progress--indeterminate .cv-progress__fill {
@@ -1188,6 +1193,37 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .cv-progress--indeterminate .cv-progress__fill { animation: none; width: 100%; opacity: 0.4; }
+}
+
+/* ============================================================
+   Skeleton — placeholder shapes for content whose layout is
+   known while its data loads (card text, a stat value, table
+   cells, a chart area). The region around it carries the busy
+   state (README, "Loading").
+   ============================================================ */
+/* A flex column, so the lines' margins stay inside it instead of collapsing. */
+.cv-skeleton { display: flex; flex-direction: column; max-width: 100%; }
+.cv-skeleton__line,
+.cv-skeleton--block {
+  display: block;
+  background: var(--cv-bg-muted);
+  animation: cv-skeleton-pulse 1.6s var(--cv-easing) infinite;
+}
+/* A line fills the line box of the text it stands for, so the row keeps its
+   height when the text arrives. */
+.cv-skeleton__line {
+  height: 0.75em; margin-block: calc((1lh - 0.75em) / 2);
+  border-radius: var(--cv-radius-pill);
+}
+.cv-skeleton__line:last-child:not(:first-child) { width: 60%; }
+.cv-skeleton--block { height: 120px; border-radius: var(--cv-radius-sm); }
+@keyframes cv-skeleton-pulse { 50% { opacity: 0.5; } }
+@media (prefers-reduced-motion: reduce) {
+  .cv-skeleton__line, .cv-skeleton--block { animation: none; }
+}
+/* Forced colours drop backgrounds; the shapes stay visible in the system grey. */
+@media (forced-colors: active) {
+  .cv-skeleton__line, .cv-skeleton--block { forced-color-adjust: none; background: GrayText; }
 }
 
 /* ============================================================

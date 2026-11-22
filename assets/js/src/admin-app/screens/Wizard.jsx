@@ -296,7 +296,7 @@ export default function Wizard() {
 			case 4:
 				return (
 					<>
-						<div className="caic-stats">
+						<div className="cv-kpi-strip">
 							<StatCard accent value={ data.quality.score + '%' } label={ __( 'Average Product Quality', 'carticy-ai-checkout-for-woocommerce' ) } sublabel={ __( 'Across ChatGPT-enabled products', 'carticy-ai-checkout-for-woocommerce' ) } />
 						</div>
 						{ data.quality.issues.length > 0 && (

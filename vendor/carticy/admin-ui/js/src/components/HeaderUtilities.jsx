@@ -5,7 +5,8 @@
  * links: [ { href, label, icon?: 'contact'|'account'|'help'|'docs' } ]
  * Links without an href are left out, so a destination the current user cannot
  * open (for example an account screen without the right capability) is omitted
- * by passing an empty href.
+ * by passing an empty href. Each link is keyed by its place in `links`, so two
+ * links may share an address (Help and Upgrade both on the plugin's page).
  */
 import { classes } from './classes';
 
@@ -17,15 +18,16 @@ const ICONS = {
 };
 
 export function HeaderUtilities( { links = [], className = '', ...rest } ) {
-	const shown = links.filter( ( link ) => link && link.href );
+	// Keyed by position in `links`, which omitting a link does not change.
+	const shown = links.map( ( link, position ) => ( { ...link, position } ) ).filter( ( link ) => link.href );
 	if ( ! shown.length ) {
 		return null;
 	}
 
 	return (
 		<div className={ classes( 'cv-header-utilities', className ) } { ...rest }>
-			{ shown.map( ( { href, label, icon } ) => (
-				<a key={ href } className="cv-utility-link" href={ href }>
+			{ shown.map( ( { href, label, icon, position } ) => (
+				<a key={ position } className="cv-utility-link" href={ href }>
 					{ ICONS[ icon ] && (
 						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">{ ICONS[ icon ] }</svg>
 					) }

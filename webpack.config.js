@@ -9,7 +9,7 @@ module.exports = {
 
     entry: {
         // React admin app: one bundle that renders the screen named in the
-        // PHP-localized boot object. React / i18n / api-fetch resolve to the
+        // PHP-localized boot object. React / i18n / api-fetch / date resolve to the
         // WordPress script globals (see externals); @carticy/admin-ui is the
         // shared design system compiled from the Composer-installed package.
         'js/dist/admin-app': './assets/js/src/admin-app/index.jsx',
@@ -26,6 +26,7 @@ module.exports = {
 
     externals: {
         '@wordpress/api-fetch': 'wp.apiFetch',
+        '@wordpress/date': 'wp.date',
         '@wordpress/element': 'wp.element',
         '@wordpress/i18n': 'wp.i18n',
     },

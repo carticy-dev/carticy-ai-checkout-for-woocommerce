@@ -363,9 +363,9 @@ final class ProductFeedController extends AbstractAdminController {
 			'image'          => $image_url,
 			'name'           => $product->get_name(),
 			'sku'            => '' !== $sku ? $sku : '',
-			// wc_price() returns HTML with the currency as an entity; decode it so
-			// the plain string renders correctly in React.
-			'price'          => html_entity_decode( wp_strip_all_tags( $product->get_price_html() ), ENT_QUOTES, 'UTF-8' ),
+			// WooCommerce's price markup as it prints in its own product list:
+			// sale prices struck through, and screen-reader text that wp-admin hides.
+			'price_html'     => wp_kses_post( $product->get_price_html() ),
 			'enabled'        => 'yes' === get_post_meta( $id, '_carticy_ai_checkout_enabled', true ),
 			'quality_score'  => $this->quality_checker->get_cached_quality_score( $id ),
 			'quality_issues' => array_values( $this->quality_checker->get_cached_quality_issues( $id ) ),

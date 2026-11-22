@@ -5,7 +5,11 @@
  * `.cv-root` class so multiple Carticy plugins (and versions) can coexist
  * on one site without leaking styles into general wp-admin. Call this on
  * your plugin's mount element before rendering the React app.
+ *
+ * Importing this module also loads the focus helper, so the reader's input is
+ * followed from boot, before the first dialog or section link is used.
  */
+import './components/focus';
 
 /**
  * Mark an element as the design-system root.

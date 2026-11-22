@@ -3,6 +3,7 @@
  * buttons, moved with the arrow keys (Segmented, Tabs).
  */
 import { useRef } from '@wordpress/element';
+import { focusElement } from './focus';
 
 /**
  * Roving focus, as in the WAI-ARIA radio group (Segmented) and tabs (Tabs)
@@ -29,7 +30,10 @@ export function useRovingFocus( { keys, current, isEnabled, onSelect, upDown = f
 	const stop = stops.includes( current ) ? current : stops[ 0 ];
 
 	const select = ( key ) => {
-		nodes.current.get( key )?.focus();
+		const node = nodes.current.get( key );
+		if ( node ) {
+			focusElement( node );
+		}
 		onSelect( key );
 	};
 

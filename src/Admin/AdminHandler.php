@@ -273,8 +273,8 @@ final class AdminHandler {
 	 * Enqueue the React admin app for a given screen and pass its boot data.
 	 *
 	 * One bundle serves every migrated screen; the boot object names the screen
-	 * to render and carries any screen-specific config. React, api-fetch and i18n
-	 * resolve to the WordPress script globals declared as dependencies; the
+	 * to render and carries any screen-specific config. React, api-fetch, i18n and
+	 * date resolve to the WordPress script globals declared as dependencies; the
 	 * bundle's strings are translated through wp-i18n from the plugin's
 	 * languages folder or its translate.wordpress.org pack.
 	 *
@@ -285,7 +285,7 @@ final class AdminHandler {
 		wp_enqueue_script(
 			'carticy-ai-checkout-admin-app',
 			plugin_dir_url( dirname( __DIR__ ) ) . 'assets/js/dist/admin-app.min.js',
-			array( 'wp-element', 'wp-api-fetch', 'wp-i18n' ),
+			array( 'wp-element', 'wp-api-fetch', 'wp-i18n', 'wp-date' ),
 			CARTICY_AI_CHECKOUT_VERSION,
 			true
 		);

@@ -3,14 +3,19 @@
  *
  * JSX source compiled by the consuming plugin's webpack/babel build; CSS in
  * css/ is prebuilt and scoped to the .cv-root mount (see mount.js). The JS
- * modules only define exports, so package.json lists the stylesheets as the
- * only files with side effects and a bundle keeps just the components it
- * imports.
+ * modules only define exports, except components/focus.js, which starts
+ * following the reader's input when it loads; package.json lists it and the
+ * stylesheets as the only files with side effects, so a bundle keeps just the
+ * components it imports.
+ *
+ * Date formatting is a separate entry point, '@carticy/admin-ui/date'
+ * (date.js): it needs the '@wordpress/date' external, which this index does not.
  */
 export { adminUiRoot } from './mount';
 export { Button } from './components/Button';
 export { Spinner } from './components/Spinner';
 export { LoadingPanel } from './components/LoadingPanel';
+export { Skeleton } from './components/Skeleton';
 export { AppHeader } from './components/AppHeader';
 export { HeaderUtilities } from './components/HeaderUtilities';
 export { NoticeSlot } from './components/NoticeSlot';

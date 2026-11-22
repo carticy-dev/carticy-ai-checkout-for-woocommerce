@@ -21,18 +21,6 @@
 	margin-top: 28px;
 }
 
-.caic-stats {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 12px;
-}
-
-@media (max-width: 900px) {
-	.caic-stats {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
 /* Compact inline select used as a section filter (its cv-field wrapper has no
    label here, so strip the stacking margins and let the control size to fit). */
 .caic-range {
@@ -99,6 +87,22 @@
 	display: block;
 	border: 1px solid var(--cv-border-1);
 	border-radius: var(--cv-radius-sm);
+}
+
+/* WooCommerce price markup: the regular price of an item on sale reads as
+   struck through and muted, the sale price as the plain current price. The
+   cell positions its absolutely placed screen-reader text, which would
+   otherwise sit outside the table's sideways scroll and widen a phone page. */
+.caic-feed__price {
+	position: relative;
+}
+
+.caic-feed__price del {
+	color: var(--cv-fg-3);
+}
+
+.caic-feed__price ins {
+	text-decoration: none;
 }
 
 .caic-feed__status,

@@ -8,6 +8,7 @@
  * anchor marks that place, and the root is resolved before the first paint.
  */
 import { useEffect, useLayoutEffect, useRef, useState } from '@wordpress/element';
+import { focusElement } from './focus';
 
 /**
  * Resolve the element an overlay portals into.
@@ -197,7 +198,7 @@ export function useModalLayer( { active, panelRef, layerRef, initialFocusRef, on
 		const unlock = lockScroll( doc );
 
 		// The panel is laid out (a sliding drawer starts off-canvas, not hidden), so focus lands in this commit.
-		( initialFocusRef?.current || panel ).focus( { preventScroll: true } );
+		focusElement( initialFocusRef?.current || panel, { preventScroll: true } );
 
 		const onKey = ( event ) => {
 			if ( 'Escape' !== event.key || event.defaultPrevented || openLayers[ openLayers.length - 1 ] !== panel ) {
@@ -222,7 +223,7 @@ export function useModalLayer( { active, panelRef, layerRef, initialFocusRef, on
 			const now = doc.activeElement;
 			const stranded = ! now || now === doc.body || ( wrapper && wrapper.contains( now ) );
 			if ( stranded && opener && opener.isConnected && 'function' === typeof opener.focus ) {
-				opener.focus( { preventScroll: true } );
+				focusElement( opener, { preventScroll: true } );
 			}
 		};
 	}, [ active ] ); // The refs are stable; initialFocusRef is read once, when the layer opens.

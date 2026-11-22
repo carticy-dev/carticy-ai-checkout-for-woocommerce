@@ -5,8 +5,9 @@
  * with optional per-cell render, optional row selection (checkbox column), and
  * optional extra rows rendered full-width below a row (for detail panels or
  * inline forms) via renderRowExtra(row, colSpan). Selection state stays with
- * the consumer, so the component is presentational and reusable. className
- * and other props go to the <table> (inside its scroll container).
+ * the consumer, so the component is presentational and reusable. className,
+ * other props and the ref go to the <table> (inside its scroll container,
+ * the table's parent element).
  *
  * columns: [{ key, header, render?(row), className?, headerClassName?, sortable?, defaultSortDirection? }]
  *
@@ -20,7 +21,7 @@
  * every row in `rows` is selected and mixed when some are; `checked` is what
  * the reader asked for and `ids` are the ids of the rows shown.
  */
-import { Fragment } from '@wordpress/element';
+import { forwardRef, Fragment } from '@wordpress/element';
 import { classes } from './classes';
 
 const SORT_ICONS = {
@@ -80,7 +81,7 @@ function HeaderCell( { col, sort, onSortChange } ) {
 	);
 }
 
-export function Table( {
+export const Table = forwardRef( function Table( {
 	columns = [],
 	rows = [],
 	getRowId = ( row ) => row.id,
@@ -96,12 +97,12 @@ export function Table( {
 	emptyLabel = '',
 	className = '',
 	...rest
-} ) {
+}, ref ) {
 	const colSpan = columns.length + ( selectable ? 1 : 0 );
 
 	return (
 		<div className="cv-table-wrap">
-		<table className={ classes( 'cv-table', className ) } { ...rest }>
+		<table ref={ ref } className={ classes( 'cv-table', className ) } { ...rest }>
 			<thead>
 				<tr>
 					{ selectable && ( onToggleSelectAll ? (
@@ -157,4 +158,4 @@ export function Table( {
 		</table>
 		</div>
 	);
-}
+} );

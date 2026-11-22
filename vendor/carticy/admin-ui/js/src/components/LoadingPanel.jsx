@@ -1,8 +1,10 @@
 /**
- * LoadingPanel — a whole screen or panel waiting for its data: a centered
- * spinner with room around it and a label for screen readers.
+ * LoadingPanel — a whole screen or panel waiting for data whose layout is not
+ * known yet: a centered spinner with room around it and a label for screen
+ * readers.
  *
- * Use the inline Spinner (or Button's `loading`) for busy controls. When the
+ * Content whose layout is known keeps its shape with Skeleton instead; use
+ * the inline Spinner (or Button's `loading`) for busy controls. When the
  * request settles, replace the panel with the result, an EmptyState or a
  * Banner with a retry action.
  */

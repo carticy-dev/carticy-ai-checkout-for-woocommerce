@@ -27,6 +27,7 @@
  * the stack sits above the tallest one, so their buttons stay reachable.
  */
 import { createContext, createPortal, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from '@wordpress/element';
+import { focusElement } from './focus';
 import { CloseIcon } from './icons';
 import { useMountRoot } from './layer';
 
@@ -107,7 +108,10 @@ function ToastItem( { toast, duration, dismissLabel, onDismiss } ) {
 					// Keyboard readers continue at the neighbouring toast instead of the top of the page.
 					const neighbour = node.current?.nextElementSibling || node.current?.previousElementSibling;
 					onDismiss( toast.id );
-					neighbour?.querySelector( '.cv-toast__dismiss' )?.focus();
+					const next = neighbour?.querySelector( '.cv-toast__dismiss' );
+					if ( next ) {
+						focusElement( next );
+					}
 				} }
 			>
 				<CloseIcon />

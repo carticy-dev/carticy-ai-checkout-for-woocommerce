@@ -18,11 +18,12 @@
  * label names the navigation ("On this page"); closeLabel names the drawer's
  * close button. On narrow screens the navigation is a Drawer that opens from
  * the start edge. With one section or fewer, no navigation is shown. Other
- * props go to the root.
+ * props and the ref go to the root.
  */
-import { useEffect, useRef, useState } from '@wordpress/element';
+import { forwardRef, useEffect, useRef, useState } from '@wordpress/element';
 import { classes } from './classes';
 import { Drawer } from './Drawer';
+import { focusElement } from './focus';
 import { headingTag } from './heading';
 import { IconTile } from './icons';
 
@@ -163,7 +164,7 @@ function SectionNav( { label, closeLabel, items, current, onSelect } ) {
 	);
 }
 
-export function SectionLayout( { label, closeLabel, sections, items, headingLevel = 2, className = '', children, ...rest } ) {
+export const SectionLayout = forwardRef( function SectionLayout( { label, closeLabel, sections, items, headingLevel = 2, className = '', children, ...rest }, ref ) {
 	const headings = useRef( new Map() );
 	const targets = sections ? sections.map( ( { id, title } ) => ( { id, label: title } ) ) : items || [];
 	const elementFor = ( id ) => ( sections ? headings.current.get( id ) : targets.find( ( item ) => item.id === id )?.element );
@@ -187,14 +188,14 @@ export function SectionLayout( { label, closeLabel, sections, items, headingLeve
 		if ( ! heading.hasAttribute( 'tabindex' ) ) {
 			heading.setAttribute( 'tabindex', '-1' );
 		}
-		heading.focus( { preventScroll: true } );
+		focusElement( heading, { preventScroll: true } );
 		heading.scrollIntoView( { block: 'start' } );
 		follow.current?.();
 		follow.current = keepInView( heading, body.current );
 	};
 
 	return (
-		<div className={ classes( 'cv-section-layout', navigation && 'cv-section-layout--nav', className ) } { ...rest }>
+		<div ref={ ref } className={ classes( 'cv-section-layout', navigation && 'cv-section-layout--nav', className ) } { ...rest }>
 			{ navigation && <SectionNav label={ label } closeLabel={ closeLabel } items={ targets } current={ current } onSelect={ visit } /> }
 			<div className="cv-section-layout__body" ref={ body }>
 				{ sections
@@ -216,4 +217,4 @@ export function SectionLayout( { label, closeLabel, sections, items, headingLeve
 			</div>
 		</div>
 	);
-}
+} );

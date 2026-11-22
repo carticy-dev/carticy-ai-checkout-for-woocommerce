@@ -28,9 +28,11 @@ css/chrome.css        wp-admin "takeover" layer, gated by the body.cv-takeover c
 css/admin-ui.css      @import entry point (tokens + components) for bundlers
 js/src/index.js       React exports (JSX source, compiled by the consumer)
 js/src/mount.js       adminUiRoot() mount-scoping helper
+js/src/date.js        formatDate(): the site's timezone and date formats
+                      (its own entry point, @carticy/admin-ui/date; see Dates)
 js/src/components/    Screen shell: AppHeader, HeaderUtilities, NoticeSlot,
                       LoadingPanel, SectionLayout, SaveBar
-                      Button, Spinner, Card, StatCard, StatusPill, Chip, Banner,
+                      Button, Spinner, Skeleton, Card, StatCard, StatusPill, Chip, Banner,
                       Tabs, SectionHeader, TextField/TextareaField/SelectField,
                       Toggle/ToggleRow, Modal, EmptyState, Table, SearchBar,
                       BulkActionBar, Pagination, Drawer, ToastProvider/useToast,
@@ -87,10 +89,13 @@ plugin knows them all:
   menu; the plugin keeps one menu entry under WooCommerce.
 - **NoticeSlot** — where the screen's own notices appear: below the header,
   inside the page. See Notices below.
-- **LoadingPanel** — a whole screen or panel waiting for data: a centered
-  spinner with room around it and a screen-reader label. Keep the inline
-  `Spinner` (or `Button loading`) for busy controls. When the request
-  settles, show the result, an `EmptyState` or a `Banner` with a retry.
+- **LoadingPanel** — a whole screen or panel waiting for data whose layout
+  is not known yet: a centered spinner with room around it and a
+  screen-reader label. Content whose layout is known (cards, stat rows,
+  table rows, a chart) keeps its shape with `Skeleton` instead (see
+  Loading). Keep the inline `Spinner` (or `Button loading`) for busy
+  controls. When the request settles, show the result, an `EmptyState` or a
+  `Banner` with a retry.
 - **SectionLayout** — a long screen split into sections: a side navigation
   on wide screens, a Drawer (from the start edge) behind an "On this page"
   button on narrow ones.
@@ -149,6 +154,41 @@ Elsewhere in wp-admin the plugin's notices print through `admin_notices`
 as usual. Don't hide other sources' notices with CSS; the starter plugin
 has a working `Notices` class.
 
+### Loading
+
+Pick the indicator by what the screen already knows:
+
+- **Skeleton** — the layout is known (a card's text, a stat value, table
+  rows, a chart): placeholder shapes hold it, so nothing moves when the
+  data arrives.
+- **LoadingPanel** — the layout is not known yet (a screen or panel on its
+  first load): a centered spinner.
+- **Spinner** or `Button loading` — a control that is busy.
+
+Skeletons are hidden from screen readers. The region they fill carries
+`aria-busy` and names what is loading in a status line that is on the page
+before loading starts, so screen readers announce it:
+
+```jsx
+<section aria-busy={ loading }>
+    <p className="cv-sr-only" role="status">{ loading ? __( 'Loading orders…', 'myplugin' ) : '' }</p>
+    <div className="cv-kpi-strip">
+        <StatCard label={ __( 'Orders', 'myplugin' ) } value={ loading ? <Skeleton width="4ch" /> : stats.orders } />
+        …
+    </div>
+    <Card flush>
+        <Table
+            columns={ loading ? columns.map( ( column ) => ( { ...column, sortable: false, render: () => <Skeleton /> } ) ) : columns }
+            rows={ loading ? [ { id: 1 }, { id: 2 }, { id: 3 } ] : orders }
+        />
+    </Card>
+</section>
+```
+
+Labels the screen already knows (the stat labels, the table headers) stay
+as text; only the values wait. A request that fails replaces the skeletons
+with a `Banner` and a retry.
+
 ### Screen rules
 
 Every Carticy screen follows these, so a store owner can set a plugin up
@@ -170,10 +210,11 @@ without reading documentation:
    or the SKU) and name the search in their empty state.
 6. **Dependent controls** are disabled or hidden while the setting they
    depend on is off.
-7. **Layout:** content sits in cards; stat rows hold two to four equal
-   cards; licence badges show only to unlicensed sites; locked features show
-   one notice per page.
-8. **Dates and times** use the site's timezone and date format.
+7. **Layout:** content sits in cards; stat rows (`.cv-kpi-strip`) hold two
+   to four equal cards; licence badges show only to unlicensed sites; locked
+   features show one notice per page.
+8. **Dates and times** use the site's timezone and date format
+   (`formatDate`, see Dates).
 9. **Destructive actions** come last, styled as danger, and ask to confirm.
 
 The plain-language check reads the plugin's translation template, which
@@ -352,7 +393,20 @@ All components are functional, accept `className` (merged) and pass unknown
 props through to their root element, except where a component names another
 element: the fields pass them to their control, `Toggle` and `ToggleRow` to
 the checkbox, `Table` to the `<table>`, `Tabs` to the tab list, `Modal` and
-`Drawer` to the dialog. Import from `@carticy/admin-ui`.
+`Drawer` to the dialog. `ToastProvider` renders no element of its own.
+Import from `@carticy/admin-ui` (dates from `@carticy/admin-ui/date`).
+
+`ref` reaches the same element as the other props on the components a
+screen focuses or measures: `Button`, `Card`, `StatCard` (the card),
+`Table` (the `<table>`; its scroll container is the parent element),
+`SectionLayout`, `Skeleton`, `Toggle` and `ToggleRow` (the checkbox) and the
+fields (the control).
+
+When a component moves focus itself (SectionLayout to a heading, Modal and
+Drawer into the dialog and back to its opener, Tabs and Segmented to the
+chosen item, a dismissed toast to its neighbour), the focus ring shows only
+if the reader last pressed a key. Safari focuses nothing on a tap or click,
+so without this the ring would follow every tap there.
 
 **Mount**
 - `adminUiRoot( element, { page } )` — adds `cv-root` (and `data-page`) to the
@@ -360,7 +414,7 @@ the checkbox, `Table` to the `<table>`, `Tabs` to the tab list, `Modal` and
 
 **Screen shell** (see Screen layout)
 - `AppHeader({ title, icon?, items?: [{ id, label, href }], current?, navLabel?, actions?, links? })` — `actions` are controls for the whole screen (a `Button size="sm"`), shown before the utility links.
-- `HeaderUtilities({ links: [{ href, label, icon?: 'contact'|'account'|'help'|'docs' }] })`
+- `HeaderUtilities({ links: [{ href, label, icon?: 'contact'|'account'|'help'|'docs' }] })` — links are told apart by their place in `links`, so two may share an address (Help and Upgrade both on the plugin's page).
 - `NoticeSlot({ areaId })` — an empty `display: contents` slot the notice area moves into.
 - `LoadingPanel({ label })`
 - `SectionLayout({ label, closeLabel, sections?: [{ id, title, icon?, content }], headingLevel? = 2, items?: [{ id, label, element }], children? })`: an `h2` heading takes the section-title size, deeper levels the card-title size; a section's `icon` (inline SVG) sits in a small tile before its heading; the navigation shows the title only. On narrow screens the navigation opens in a `Drawer` from the start edge; `closeLabel` names its close button.
@@ -369,13 +423,15 @@ the checkbox, `Table` to the `<table>`, `Tabs` to the tab list, `Modal` and
 **Actions & feedback**
 - `Button({ variant: 'primary'|'secondary'|'tertiary'|'ghost'|'destructive'|'link' = 'secondary', size?: 'sm'|'lg', block?, loading?, icon?, type? = 'button', ...rest })` — primary = near-black; violet is never a button background. `ghost` has no fill or border until hovered (toolbar and row actions); `destructive` is for actions that delete or cannot be undone; `link` reads as a text link. An icon-only button needs an `aria-label`. While `loading` the button shows a spinner and stays focusable: it carries `aria-disabled` and `aria-busy`, looks disabled and ignores clicks, Enter and Space (a submit button does not submit) until `loading` is false. Use `disabled` for an action that is not available at all. A link drawn as a button (`<a className="cv-btn cv-btn--primary">`) keeps its variant's colours in every state inside `.cv-root`, whatever wp-admin applies to links.
 - `Spinner({ ...rest })` — inline spinner; used inside `Button` when `loading`.
+- `Skeleton({ variant?: 'text'|'block' = 'text', lines? = 1, width?, height?, ...rest })` — placeholder shapes for content whose layout is known while its data loads (see Loading). `text` draws `lines` bars, each the height of a line of the surrounding text (inside a `.cv-stat__value` it takes the value's size), the last of several shorter; `block` is one rectangle `height` tall (120px by default), for a chart or an image. `width` and `height` take a CSS length or a number of pixels. Hidden from screen readers; static when the reader reduces motion.
 - `Banner({ tone: 'info'|'success'|'warning'|'critical' = 'info', title?, icon?, actions?, children })` — in-app notice; `critical` gets `role="alert"`. `icon` (inline SVG) is drawn before the text in the tone's colour, in a `.cv-banner__icon` slot.
 - `ToastProvider({ duration? = 5000, max? = 4, dismissLabel? = 'Dismiss', container?, children })` + `useToast()` → `{ show({ id?, tone?, title, description?, duration? }), dismiss(id), success(title, options?), info(…), warning(…), critical(…) }` — short confirmations stacked in the bottom corner on the end side of the reading direction, above a SaveBar or an open Drawer's footer. See Toasts below.
 - `Progress({ value?, max? = 100, label, valueText?, showValue? = true, meta?, tone?: 'warning'|'critical', ...rest })` — `role="progressbar"` with `aria-valuenow/min/max`; leave `value` out for the indeterminate bar (static when the reader reduces motion). `valueText` replaces the shown and announced percentage ("12 of 40 stores").
 
 **Containers & metrics**
-- `Card({ variant?: 'critical'|'active'|'locked', size?, flush?, clickable?, ...rest })` — `flush` removes inner padding (e.g. to host a `Table`).
+- `Card({ variant?: 'critical'|'active'|'locked', size?: 'lg', flush?, clickable?, ...rest })` — `flush` removes inner padding (e.g. to host a `Table`); `size="lg"` rounds the corners further.
 - `StatCard({ value, label, sublabel?, icon?, tone?: 'neutral'|'accent'|'success'|'warning'|'critical' = 'neutral', accent?, onClick?, ...rest })` — a single metric tile; `accent` tints the value violet; `onClick` makes the whole card a button; `icon` sits in a small tile in the top corner, coloured by `tone`.
+- `.cv-kpi-strip` (CSS) — the row for metric tiles, `StatCard`s or compact `.cv-kpi-tile`s (`<div class="cv-kpi-tile"><span class="cv-kpi-tile__num">…</span><span class="cv-kpi-tile__label">…</span></div>`), for any number of them: as many equal tiles per row as fit (150px or wider), two per row at 600px and below, where a last tile on its own takes the whole row.
 - `SectionHeader({ title, headingLevel? = 2, actions? })` — section title with optional `actions` on the end side (a filter control, a Button…). An `h2` takes the section-title size, deeper levels the card-title size. For a line of meta text beside a title, use a `<span className="cv-section__meta">`.
 - `StatusPill({ status, children })` — small status dot+label; `status` maps to `cv-status--{status}` (e.g. `connected`, `expired`). For states that are not about a connection, use the tones by meaning: `success`, `info`, `neutral`, `warning`, `critical`.
 - `Chip({ tone: 'neutral'|'success'|'warning'|'critical' = 'neutral', children })` — compact tabular tag, coloured by meaning like the other tones.
@@ -404,7 +460,7 @@ the checkbox, `Table` to the `<table>`, `Tabs` to the tab list, `Modal` and
 - `EmptyState({ icon?, title?, headingLevel? = 3, size?: 'compact', actions?, meta?, children })` — `children` is the description paragraph; `size="compact"` fits it inside a card.
 
 **Tables & bulk (data screens)**
-- `Table({ columns: [{ key, header, render?(row), className?, headerClassName?, sortable?, defaultSortDirection? }], rows, getRowId? = r => r.id, selectable?, selectedIds?, onToggleSelect?(id), selectLabel? = 'Select', onToggleSelectAll?(checked, ids), selectAllLabel? = 'Select all', sort?: { key, direction: 'asc'|'desc' }, onSortChange?(key, direction), renderRowExtra?(row, colSpan), emptyLabel?, ...rest })` — `render` returns the cell node; `renderRowExtra` adds a full-width row below (detail panels / inline forms). Selection and sort state are owned by the consumer. The table sits in a `.cv-table-wrap` that scrolls sideways on narrow screens; while it scrolls and holds no control, Chrome and Firefox make it a Tab stop (the arrow keys scroll it), drawn with the focus ring.
+- `Table({ columns: [{ key, header, render?(row), className?, headerClassName?, sortable?, defaultSortDirection? }], rows, getRowId? = r => r.id, selectable?, selectedIds?, onToggleSelect?(id), selectLabel? = 'Select', onToggleSelectAll?(checked, ids), selectAllLabel? = 'Select all', sort?: { key, direction: 'asc'|'desc' }, onSortChange?(key, direction), renderRowExtra?(row, colSpan), emptyLabel?, ...rest })` — `render` returns the cell node; `renderRowExtra` adds a full-width row below (detail panels / inline forms). Selection and sort state are owned by the consumer. Headers show as written, in sentence case, in the muted header style (WP_List_Table headers under chrome.css too). The table sits in a `.cv-table-wrap` that scrolls sideways on narrow screens; while it scrolls and holds no control, Chrome and Firefox make it a Tab stop (the arrow keys scroll it), drawn with the focus ring.
   - **Sorting:** with `sort` and `onSortChange`, columns marked `sortable` get a button in their header (`.cv-sort`) and the sorted column carries `aria-sort`. A click on the sorted column flips the direction; another column starts at its `defaultSortDirection` (`'asc'`). The consumer sorts the rows or re-queries.
   - **Select all:** with `selectable` and `onToggleSelectAll`, the selection column's header holds a checkbox: checked when every row in `rows` is selected, mixed (indeterminate) when some are, disabled when there are no rows. `onToggleSelectAll( checked, ids )` gets what the reader asked for and the ids of the rows shown.
   - The selection checkboxes are `.cv-check` (checked, mixed and focus states drawn by the package, whatever wp-admin applies).
@@ -542,6 +598,48 @@ toast.show( { id, tone: 'success', title: __( 'Geocoded 40 stores', 'myplugin' )
   the screen to open the file.
 - The button opens the file picker, for keyboard and pointer alike.
 
+### Dates
+
+`formatDate` shows a moment in the site's timezone and its date and time
+formats (Settings > General) through WordPress's `wp.date`, so a screen
+shows the dates the rest of wp-admin shows. It is its own entry point: it
+needs the `@wordpress/date` external and the `wp-date` script, which the
+rest of the package does not.
+
+```js
+// webpack.config.js, next to the other externals
+'@wordpress/date': 'wp.date',
+```
+
+```php
+// The bundle's script dependencies gain wp-date.
+array( 'wp-element', 'wp-api-fetch', 'wp-i18n', 'wp-date' )
+```
+
+```js
+import { formatDate } from '@carticy/admin-ui/date';
+
+formatDate( order.created );             // "November 21, 2026 10:18 pm"
+formatDate( order.created, 'date' );     // "November 21, 2026"
+formatDate( order.created, 'time' );     // "10:18 pm"
+formatDate( order.created, 'relative' ); // "2 minutes ago", "3 hours from now"
+formatDate( report.day, 'date' );        // a Y-m-d calendar day, shown as that day
+formatDate( order.paidAt ) || __( 'Not paid yet', 'myplugin' );
+```
+
+- The value is a `Date`, a timestamp in milliseconds (PHP's seconds times
+  1000), or an ISO 8601 date and time with its zone (`2026-11-21T16:48:00Z`,
+  `2026-11-21T17:48:00+01:00`; PHP's `gmdate( 'c' )`, or a REST `date_gmt`
+  with `Z` appended).
+- A `Y-m-d` calendar day (a report's day, already in the site's terms)
+  takes the `'date'` style only and is shown without a timezone shift.
+- `null`, `undefined` and `''` give `''`, so the screen words a missing date
+  itself. A string without a zone, a calendar day with another style and an
+  unknown style throw a `RangeError`: a date is never read in the browser's
+  own zone.
+- Month names, formats and the relative words come from WordPress in the
+  reader's admin language; there are no strings to pass.
+
 ### Strings
 
 Components ship neutral English defaults for their screen-reader and helper
@@ -579,6 +677,14 @@ client renders the current state and requests transitions (`transition(
 'step2_viewing', payload )`). A "complete" state must mean the server verified
 it — never client-side click-through progress.
 
+It returns `{ state, data, loading, submitting, error, refetch(), transition( to, payload? ) }`
+and fetches on mount unless `autoFetch` is false. The plugin's REST routes:
+
+- `GET {path}` returns `{ state, …context }`.
+- `POST {path}/transition` takes `{ to, …payload }` and returns
+  `{ state, …context }`, or a 4xx `{ message }` for a transition it refuses;
+  `transition()` then rejects and `error` holds the response.
+
 ---
 
 ## Common pitfalls
@@ -591,7 +697,8 @@ it — never client-side click-through progress.
    `import 'react'`, which isn't installed.
 3. **Missing script deps.** Register the bundle with
    `array( 'wp-element', 'wp-api-fetch', 'wp-i18n' )` so the globals exist
-   before it runs.
+   before it runs, plus `wp-date` (and the `@wordpress/date` external) when
+   it imports `@carticy/admin-ui/date`; without it `formatDate` throws.
 4. **CSS order / shared handles.** Enqueue tokens → components → chrome, each
    with a plugin-unique handle and your plugin version.
 5. **Forgot `cv-root`.** Nothing is styled unless the mount has `cv-root`

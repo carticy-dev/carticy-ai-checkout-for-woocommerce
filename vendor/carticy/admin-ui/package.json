@@ -7,7 +7,8 @@
   "main": "js/src/index.js",
   "style": "css/admin-ui.css",
   "sideEffects": [
-    "*.css"
+    "*.css",
+    "./js/src/components/focus.js"
   ],
   "files": [
     "bin/",
