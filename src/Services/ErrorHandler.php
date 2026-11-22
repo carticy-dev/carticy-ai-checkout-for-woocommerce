@@ -86,10 +86,10 @@ final class ErrorHandler {
 	/**
 	 * Handle an error with logging and user notification
 	 *
-	 * @param string          $error_code Error code.
-	 * @param string          $technical_message Technical error message for logging.
-	 * @param array           $context Additional context for logging.
-	 * @param \Throwable|null $exception Exception if available.
+	 * @param string               $error_code        Error code.
+	 * @param string               $technical_message Technical error message for logging.
+	 * @param array<string, mixed> $context           Additional context for logging.
+	 * @param \Throwable|null      $exception         Exception if available.
 	 * @return \WP_Error
 	 */
 	public function handle_error(
@@ -124,10 +124,10 @@ final class ErrorHandler {
 	/**
 	 * Handle payment error
 	 *
-	 * @param string          $error_code Payment error code.
-	 * @param string          $technical_message Technical error message.
-	 * @param array           $context Additional context.
-	 * @param \Throwable|null $exception Exception if available.
+	 * @param string               $error_code        Payment error code.
+	 * @param string               $technical_message Technical error message.
+	 * @param array<string, mixed> $context           Additional context.
+	 * @param \Throwable|null      $exception         Exception if available.
 	 * @return \WP_Error
 	 */
 	public function handle_payment_error(
@@ -143,11 +143,11 @@ final class ErrorHandler {
 	/**
 	 * Handle API error
 	 *
-	 * @param string          $error_code API error code.
-	 * @param string          $endpoint API endpoint.
-	 * @param string          $technical_message Technical error message.
-	 * @param array           $context Additional context.
-	 * @param \Throwable|null $exception Exception if available.
+	 * @param string               $error_code        API error code.
+	 * @param string               $endpoint          API endpoint.
+	 * @param string               $technical_message Technical error message.
+	 * @param array<string, mixed> $context           Additional context.
+	 * @param \Throwable|null      $exception         Exception if available.
 	 * @return \WP_Error
 	 */
 	public function handle_api_error(
@@ -164,11 +164,11 @@ final class ErrorHandler {
 	/**
 	 * Handle webhook error
 	 *
-	 * @param string          $error_code Webhook error code.
-	 * @param string          $event_type Webhook event type.
-	 * @param string          $technical_message Technical error message.
-	 * @param array           $context Additional context.
-	 * @param \Throwable|null $exception Exception if available.
+	 * @param string               $error_code        Webhook error code.
+	 * @param string               $event_type        Webhook event type.
+	 * @param string               $technical_message Technical error message.
+	 * @param array<string, mixed> $context           Additional context.
+	 * @param \Throwable|null      $exception         Exception if available.
 	 * @return \WP_Error
 	 */
 	public function handle_webhook_error(
@@ -185,9 +185,9 @@ final class ErrorHandler {
 	/**
 	 * Handle validation error
 	 *
-	 * @param string $error_code Validation error code.
-	 * @param array  $failed_fields Failed validation fields.
-	 * @param array  $context Additional context.
+	 * @param string               $error_code    Validation error code.
+	 * @param array<int, string>   $failed_fields Failed validation fields.
+	 * @param array<string, mixed> $context       Additional context.
 	 * @return \WP_Error
 	 */
 	public function handle_validation_error(
@@ -254,10 +254,10 @@ final class ErrorHandler {
 	/**
 	 * Log error with appropriate category
 	 *
-	 * @param string          $error_code Error code.
-	 * @param string          $message Technical message.
-	 * @param array           $context Context.
-	 * @param \Throwable|null $exception Exception.
+	 * @param string               $error_code Error code.
+	 * @param string               $message    Technical message.
+	 * @param array<string, mixed> $context    Context.
+	 * @param \Throwable|null      $exception  Exception.
 	 */
 	private function log_error(
 		string $error_code,
@@ -328,7 +328,7 @@ final class ErrorHandler {
 	 * Get admin notices
 	 *
 	 * @param bool $include_dismissed Include dismissed notices.
-	 * @return array Admin notices.
+	 * @return array<int|string, array<string, mixed>> Admin notices.
 	 */
 	public function get_admin_notices( bool $include_dismissed = false ): array {
 		$notices = get_option( 'carticy_ai_checkout_admin_notices', array() );

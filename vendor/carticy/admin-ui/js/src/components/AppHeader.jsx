@@ -8,7 +8,8 @@
  * current: the id of the section on screen (marked aria-current="page").
  * actions: controls for the whole screen ("Test a search"), shown before the
  * utility links; on narrow screens they move with the links to a row under
- * the brand and wrap there.
+ * the brand and wrap there. Without actions the links stay beside the brand
+ * while both fit on one line, and take that row when the title is longer.
  *
  * The title is the screen's level-one heading; give each section a level-two
  * heading and cards level-three headings.

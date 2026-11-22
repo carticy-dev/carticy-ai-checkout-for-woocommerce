@@ -288,11 +288,12 @@
 .cv-root .cv-notice-dismiss[aria-disabled="true"] { cursor: progress; opacity: .6; }
 
 .cv-loading-panel {
-  display: grid; place-items: center;
+  display: grid; place-items: center; align-content: center; gap: var(--cv-space-3);
   min-height: 10rem; padding: var(--cv-space-8) var(--cv-space-6);
   color: var(--cv-accent);
 }
 .cv-loading-panel .cv-spinner { width: 24px; height: 24px; }
+.cv-loading-panel__label { max-width: 40ch; color: var(--cv-fg-3); text-align: center; }
 
 .cv-section-layout--nav {
   display: grid;
@@ -331,21 +332,22 @@
 .cv-save-bar__actions { display: flex; flex-wrap: wrap; gap: var(--cv-space-2); }
 
 @media (max-width: 782px) {
+  /* The utility links share the brand's row while both fit on one line; a
+     longer title moves them to a row of their own under it, so neither is
+     squeezed. With actions they always take that row and wrap there. The
+     section links come last. */
   .cv-app-header {
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas: "brand utilities" "nav nav";
+    display: flex; flex-wrap: wrap;
     padding: var(--cv-space-3) var(--cv-space-4);
   }
-  /* With actions, the end of the header takes its own row under the brand and wraps there. */
-  .cv-app-header--actions {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "brand" "utilities" "nav";
-  }
-  .cv-app-header--actions .cv-app-header__utilities,
-  .cv-app-header--actions .cv-header-utilities { justify-content: flex-start; }
-  .cv-app-nav__link, .cv-utility-link { min-height: 44px; }
-  /* One row of section links that scrolls sideways, fading at the edges, instead of wrapping. */
+  .cv-app-header__brand { flex: 1 1 auto; }
+  .cv-app-header--actions .cv-app-header__utilities { flex-basis: 100%; }
+  .cv-app-header__utilities, .cv-app-header .cv-header-utilities { justify-content: flex-start; }
+  .cv-app-nav__link, .cv-utility-link, .cv-app-header__actions .cv-btn { min-height: 44px; }
+  /* One row of section links that scrolls sideways, fading at the edges, instead of wrapping.
+     It grows over its negative inline margins to run edge to edge. */
   .cv-app-nav {
+    order: 1; flex: 1 0 100%;
     flex-wrap: nowrap; overflow-x: auto;
     margin-inline: calc(-1 * var(--cv-space-4)); padding-inline: var(--cv-space-4);
     scroll-padding-inline: var(--cv-space-4); scrollbar-width: none;
@@ -522,8 +524,19 @@
 /* ============================================================
    Toggle — 3 sizes + indeterminate
    ============================================================ */
-.cv-toggle { display: inline-block; position: relative; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-.cv-toggle__input { opacity: 0; position: absolute; inset: 0; cursor: pointer; margin: 0; }
+.cv-toggle { display: inline-block; position: relative; isolation: isolate; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+/* The checkbox stays invisible over the whole switch, so a press anywhere on
+   the track or thumb reaches it. The class and type outrank wp-admin's checkbox
+   rules, whose 1rem size, margin and disabled opacity would shrink it back and
+   show it. */
+.cv-toggle .cv-toggle__input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%; min-width: 0;
+  margin: 0; padding: 0; border: 0;
+  opacity: 0; cursor: pointer;
+}
+.cv-toggle .cv-toggle__input[type="checkbox"]:disabled { cursor: not-allowed; }
 .cv-toggle__track {
   display: block;
   width: 36px; height: 20px;
@@ -545,7 +558,9 @@
 .cv-toggle__input:checked + .cv-toggle__track { background: var(--cv-accent); }
 .cv-toggle__input:checked + .cv-toggle__track .cv-toggle__thumb { transform: translateX(16px); }
 .cv-toggle__input:focus-visible + .cv-toggle__track { outline: 2px solid var(--cv-focus-ring-color); outline-offset: 2px; }
-.cv-toggle__input:disabled + .cv-toggle__track { background: var(--cv-bg-subtle); cursor: not-allowed; }
+/* Disabled: on and off stay apart in muted colours, and a row's label dims. */
+.cv-toggle__input:disabled + .cv-toggle__track { background: var(--cv-border-1); }
+.cv-toggle__input:disabled:checked + .cv-toggle__track { background: var(--cv-accent-border); }
 
 /* Sizes */
 .cv-toggle--sm .cv-toggle__track { width: 28px; height: 16px; }
@@ -568,6 +583,8 @@
 }
 .cv-toggle-row__main { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; align-items: center; cursor: pointer; }
 .cv-toggle-row__help { grid-column: 2; margin: 0; font-size: var(--cv-size-meta); line-height: 18px; color: var(--cv-fg-3); }
+:is(.cv-toggle-row, .cv-toggle-row__main):has(> .cv-toggle .cv-toggle__input:disabled) { cursor: not-allowed; }
+.cv-toggle-row:has(.cv-toggle__input:disabled) .cv-toggle-row__label { color: var(--cv-fg-3); }
 
 /* Indeterminate */
 .cv-toggle.is-indeterminate .cv-toggle__track { background: var(--cv-warning); }
@@ -790,6 +807,15 @@
 .cv-root .cv-check:focus-visible, .cv-root .cv-radio:focus-visible {
   outline: 2px solid var(--cv-focus-ring-color); outline-offset: 2px;
 }
+/* Disabled: the toggle's muted palette, on and off kept apart. The opacity
+   resets undo wp-admin's disabled-checkbox opacity on the box and its mark. */
+.cv-root .cv-check:disabled, .cv-root .cv-radio:disabled {
+  opacity: 1; background: var(--cv-bg-subtle); border-color: var(--cv-border-1); cursor: not-allowed;
+}
+.cv-root .cv-check:disabled:is(:checked, :indeterminate), .cv-root .cv-radio:disabled:checked {
+  background: var(--cv-accent-border); border-color: var(--cv-accent-border);
+}
+.cv-root .cv-check:disabled:checked::before, .cv-root .cv-radio:disabled:checked::before { opacity: 1; }
 
 /* File drop zone. The Dropzone opens its picker from its button only, so the
    area does not look clickable; it highlights while a file is dragged over it. */

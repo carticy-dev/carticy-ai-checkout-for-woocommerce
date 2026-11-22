@@ -57,22 +57,6 @@ final class SettingsController extends AbstractAdminController {
 	private WebhookService $webhook;
 
 	/**
-	 * Human-readable labels for the prerequisite check keys.
-	 *
-	 * @var array<string, string>
-	 */
-	private const PREREQUISITE_LABELS = array(
-		'wordpress_version' => 'WordPress Version',
-		'php_version'       => 'PHP Version',
-		'woocommerce'       => 'WooCommerce',
-		'stripe_gateway'    => 'WooCommerce Stripe Gateway',
-		'stripe_keys'       => 'Stripe API Keys',
-		'ssl'               => 'SSL Certificate',
-		'permalinks'        => 'Permalink Structure',
-		'stripe_api'        => 'Stripe API Connection',
-	);
-
-	/**
 	 * Constructor.
 	 *
 	 * @param PrerequisitesChecker $prerequisites Prerequisites checker service.
@@ -278,14 +262,15 @@ final class SettingsController extends AbstractAdminController {
 		$rows = array();
 		foreach ( $this->prerequisites->check_all() as $key => $check ) {
 			$passed = ! empty( $check['passed'] );
-			$action = $check['action'] ?? '';
+			// A passing check has nothing to fix, so its settings link is left out.
+			$action = $passed ? '' : ( $check['action'] ?? '' );
 
 			$rows[] = array(
-				'label'        => self::PREREQUISITE_LABELS[ $key ] ?? ucwords( str_replace( '_', ' ', (string) $key ) ),
+				'label'        => $this->prerequisites->label( (string) $key ),
 				'status'       => $passed ? 'pass' : 'fail',
-				'message'      => (string) ( $check['message'] ?? '' ),
+				'message'      => $check['message'],
 				'action_url'   => '' !== $action ? esc_url_raw( (string) $action ) : '',
-				'action_label' => '' !== $action ? __( 'Fix This', 'carticy-ai-checkout-for-woocommerce' ) : '',
+				'action_label' => '' !== $action ? __( 'Fix this', 'carticy-ai-checkout-for-woocommerce' ) : '',
 			);
 		}
 

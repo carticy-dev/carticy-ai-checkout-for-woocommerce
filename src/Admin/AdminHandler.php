@@ -7,8 +7,6 @@
 
 namespace Carticy\AiCheckout\Admin;
 
-use Carticy\AiCheckout\Services\PrerequisitesChecker;
-
 /**
  * Handles admin area functionality
  */
@@ -18,13 +16,6 @@ final class AdminHandler {
 	 * Mount element id for the React admin app (one bundle, screen chosen by boot).
 	 */
 	private const MOUNT_ID = 'carticy-ai-checkout-admin-root';
-
-	/**
-	 * Prerequisites checker service
-	 *
-	 * @var PrerequisitesChecker
-	 */
-	private PrerequisitesChecker $prerequisites;
 
 	/**
 	 * The plugin's admin screens, keyed by the page hook WordPress returned when each was registered.
@@ -38,11 +29,8 @@ final class AdminHandler {
 
 	/**
 	 * Constructor
-	 *
-	 * @param PrerequisitesChecker $prerequisites Prerequisites checker instance.
 	 */
-	public function __construct( PrerequisitesChecker $prerequisites ) {
-		$this->prerequisites = $prerequisites;
+	public function __construct() {
 		$this->init_hooks();
 	}
 
@@ -169,8 +157,8 @@ final class AdminHandler {
 		// Add Product Feed Manager submenu.
 		$feed = add_submenu_page(
 			'carticy-ai-checkout-for-woocommerce',
-			__( 'Product Feed Manager', 'carticy-ai-checkout-for-woocommerce' ),
-			__( 'Product Feed Manager', 'carticy-ai-checkout-for-woocommerce' ),
+			__( 'Product feed', 'carticy-ai-checkout-for-woocommerce' ),
+			__( 'Product feed', 'carticy-ai-checkout-for-woocommerce' ),
 			'manage_options',
 			'carticy-ai-checkout-product-feed',
 			array( $this, 'render_product_feed_page' )
@@ -182,8 +170,8 @@ final class AdminHandler {
 		// Add Application Wizard submenu.
 		$wizard = add_submenu_page(
 			'carticy-ai-checkout-for-woocommerce',
-			__( 'Application Wizard', 'carticy-ai-checkout-for-woocommerce' ),
-			__( 'Application Wizard', 'carticy-ai-checkout-for-woocommerce' ),
+			__( 'Application wizard', 'carticy-ai-checkout-for-woocommerce' ),
+			__( 'Application wizard', 'carticy-ai-checkout-for-woocommerce' ),
 			'manage_options',
 			'carticy-ai-checkout-application-wizard',
 			array( $this, 'render_application_wizard_page' )
@@ -208,8 +196,8 @@ final class AdminHandler {
 		// Add Logs & Monitoring submenu.
 		$logs = add_submenu_page(
 			'carticy-ai-checkout-for-woocommerce',
-			__( 'Logs & Monitoring', 'carticy-ai-checkout-for-woocommerce' ),
-			__( 'Logs & Monitoring', 'carticy-ai-checkout-for-woocommerce' ),
+			__( 'Logs & monitoring', 'carticy-ai-checkout-for-woocommerce' ),
+			__( 'Logs & monitoring', 'carticy-ai-checkout-for-woocommerce' ),
 			'manage_options',
 			'carticy-ai-checkout-logs',
 			array( $this, 'render_logs_page' )

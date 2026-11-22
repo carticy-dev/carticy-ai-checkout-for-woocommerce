@@ -125,7 +125,7 @@ final class AnalyticsController extends AbstractAdminController {
 			}
 			$rows[] = array(
 				'status' => (string) $status,
-				'label'  => ucfirst( (string) $status ),
+				'label'  => wc_get_order_status_name( (string) $status ),
 				'count'  => (int) $count,
 				'pct'    => $chatgpt_orders > 0 ? round( ( $count / $chatgpt_orders ) * 100, 1 ) : 0.0,
 				'tone'   => self::CHIP_TONES[ $status ] ?? 'neutral',
@@ -144,9 +144,6 @@ final class AnalyticsController extends AbstractAdminController {
 	private function recent_rows( array $orders ): array {
 		$rows = array();
 		foreach ( $orders as $order ) {
-			if ( ! is_object( $order ) || ! method_exists( $order, 'get_id' ) ) {
-				continue;
-			}
 			$date   = $order->get_date_created();
 			$status = $order->get_status();
 			$name   = $order->get_formatted_billing_full_name();

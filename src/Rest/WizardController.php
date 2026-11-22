@@ -24,6 +24,7 @@ use Carticy\AiCheckout\Services\ConformanceTestService;
 use Carticy\AiCheckout\Services\ProductQualityChecker;
 use Carticy\AiCheckout\Services\PrerequisitesChecker;
 use Carticy\AiCheckout\Services\ApiKeyService;
+use Carticy\AiCheckout\Services\TestModeService;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -70,6 +71,13 @@ final class WizardController extends AbstractAdminController {
 	private ApiKeyService $api_key;
 
 	/**
+	 * Test mode service (step 6).
+	 *
+	 * @var TestModeService
+	 */
+	private TestModeService $test_mode;
+
+	/**
 	 * Per-step key map, mirroring ApplicationWizardService::save_step_data().
 	 *
 	 * @var array<int, string>
@@ -87,23 +95,6 @@ final class WizardController extends AbstractAdminController {
 	);
 
 	/**
-	 * Per-step titles, mirroring ApplicationWizard::get_step_title().
-	 *
-	 * @var array<int, string>
-	 */
-	private const STEP_TITLES = array(
-		1 => 'Business Info',
-		2 => 'Product Feed',
-		3 => 'Policies',
-		4 => 'Data Quality',
-		5 => 'Prerequisites',
-		6 => 'Test Setup',
-		7 => 'Integration',
-		8 => 'Run Tests',
-		9 => 'Submit',
-	);
-
-	/**
 	 * Constructor.
 	 *
 	 * @param ApplicationWizardService $wizard        Wizard state + business logic service.
@@ -111,19 +102,22 @@ final class WizardController extends AbstractAdminController {
 	 * @param ProductQualityChecker    $quality       Product quality scoring service.
 	 * @param PrerequisitesChecker     $prerequisites System prerequisites checker.
 	 * @param ApiKeyService            $api_key       API key + webhook secret service.
+	 * @param TestModeService          $test_mode     Test mode service.
 	 */
 	public function __construct(
 		ApplicationWizardService $wizard,
 		ConformanceTestService $conformance,
 		ProductQualityChecker $quality,
 		PrerequisitesChecker $prerequisites,
-		ApiKeyService $api_key
+		ApiKeyService $api_key,
+		TestModeService $test_mode
 	) {
 		$this->wizard        = $wizard;
 		$this->conformance   = $conformance;
 		$this->quality       = $quality;
 		$this->prerequisites = $prerequisites;
 		$this->api_key       = $api_key;
+		$this->test_mode     = $test_mode;
 	}
 
 	/**
@@ -488,7 +482,7 @@ final class WizardController extends AbstractAdminController {
 			'prerequisites'     => $this->prerequisite_rows(),
 			'quality'           => $this->quality_summary(),
 			'product_feed_slug' => 'carticy-ai-checkout-product-feed',
-			'test_mode'         => (bool) get_option( 'carticy_ai_checkout_test_mode', 'yes' ),
+			'test_mode'         => $this->test_mode->is_test_mode(),
 			'robots_enabled'    => 'yes' === get_option( 'carticy_ai_checkout_enable_openai_robots', 'no' ),
 		);
 	}
@@ -519,10 +513,18 @@ final class WizardController extends AbstractAdminController {
 	 * @return string Localized step title.
 	 */
 	private function step_title( int $n ): string {
-		$title = self::STEP_TITLES[ $n ] ?? '';
-
-		// translator domain matches the rest of the plugin; titles live in a const.
-		return '' !== $title ? __( $title, 'carticy-ai-checkout-for-woocommerce' ) : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
+		return match ( $n ) {
+			1 => __( 'Business info', 'carticy-ai-checkout-for-woocommerce' ),
+			2 => __( 'Product feed', 'carticy-ai-checkout-for-woocommerce' ),
+			3 => __( 'Policies', 'carticy-ai-checkout-for-woocommerce' ),
+			4 => __( 'Data quality', 'carticy-ai-checkout-for-woocommerce' ),
+			5 => __( 'Prerequisites', 'carticy-ai-checkout-for-woocommerce' ),
+			6 => __( 'Test setup', 'carticy-ai-checkout-for-woocommerce' ),
+			7 => __( 'Integration', 'carticy-ai-checkout-for-woocommerce' ),
+			8 => __( 'Run tests', 'carticy-ai-checkout-for-woocommerce' ),
+			9 => __( 'Submit', 'carticy-ai-checkout-for-woocommerce' ),
+			default => '',
+		};
 	}
 
 	/**
@@ -538,9 +540,9 @@ final class WizardController extends AbstractAdminController {
 
 			$rows[] = array(
 				'key'        => (string) $key,
-				'label'      => ucwords( str_replace( '_', ' ', (string) $key ) ),
+				'label'      => $this->prerequisites->label( (string) $key ),
 				'passed'     => $passed,
-				'message'    => (string) ( $check['message'] ?? '' ),
+				'message'    => $check['message'],
 				'action_url' => '' !== $action ? esc_url_raw( $action ) : '',
 			);
 		}

@@ -39,12 +39,12 @@ final class WebhookLogger {
 	/**
 	 * Log successful webhook delivery.
 	 *
-	 * @param string $event_type  Webhook event type.
-	 * @param string $url         Webhook URL.
-	 * @param array  $payload     Webhook payload.
-	 * @param int    $status_code HTTP status code.
-	 * @param int    $attempt     Attempt number.
-	 * @param float  $duration    Request duration (unused, kept for API compatibility).
+	 * @param string               $event_type  Webhook event type.
+	 * @param string               $url         Webhook URL.
+	 * @param array<string, mixed> $payload     Webhook payload.
+	 * @param int                  $status_code HTTP status code.
+	 * @param int                  $attempt     Attempt number.
+	 * @param float                $duration    Request duration (unused, kept for API compatibility).
 	 *
 	 * @phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Kept for API compatibility.
 	 */
@@ -72,12 +72,12 @@ final class WebhookLogger {
 	/**
 	 * Log failed webhook delivery.
 	 *
-	 * @param string $event_type    Webhook event type.
-	 * @param string $url           Webhook URL.
-	 * @param array  $payload       Webhook payload.
-	 * @param int    $status_code   HTTP status code.
-	 * @param int    $attempt       Attempt number.
-	 * @param string $error_message Error message (unused, kept for API compatibility).
+	 * @param string               $event_type    Webhook event type.
+	 * @param string               $url           Webhook URL.
+	 * @param array<string, mixed> $payload       Webhook payload.
+	 * @param int                  $status_code   HTTP status code.
+	 * @param int                  $attempt       Attempt number.
+	 * @param string               $error_message Error message (unused, kept for API compatibility).
 	 *
 	 * @phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Kept for API compatibility.
 	 */
@@ -111,7 +111,7 @@ final class WebhookLogger {
 	 * Get webhook delivery statistics.
 	 *
 	 * @param int $hours Number of hours to analyze.
-	 * @return array Webhook statistics.
+	 * @return array<string, mixed> Webhook statistics.
 	 */
 	public function get_statistics( int $hours = 24 ): array {
 		$cache_key = 'carticy_ai_checkout_webhook_stats_' . $hours;
@@ -205,7 +205,7 @@ final class WebhookLogger {
 	 * @param int         $limit        Number of webhooks to retrieve.
 	 * @param string|null $event_type   Filter by event type.
 	 * @param bool|null   $success_only Filter by success/failure.
-	 * @return array Recent webhook entries.
+	 * @return array<int, array<string, mixed>> Recent webhook entries.
 	 */
 	public function get_recent_webhooks(
 		int $limit = 50,
@@ -263,7 +263,7 @@ final class WebhookLogger {
 	/**
 	 * Get failed webhooks that need retry.
 	 *
-	 * @return array Failed webhooks queue.
+	 * @return array<int, array<string, mixed>> Failed webhooks queue.
 	 */
 	public function get_retry_queue(): array {
 		return get_option( 'carticy_ai_checkout_webhook_retry_queue', array() );
@@ -272,10 +272,10 @@ final class WebhookLogger {
 	/**
 	 * Queue webhook for retry.
 	 *
-	 * @param string $event_type   Event type.
-	 * @param string $url          Webhook URL.
-	 * @param array  $payload      Webhook payload.
-	 * @param int    $last_attempt Last attempt number.
+	 * @param string               $event_type   Event type.
+	 * @param string               $url          Webhook URL.
+	 * @param array<string, mixed> $payload      Webhook payload.
+	 * @param int                  $last_attempt Last attempt number.
 	 */
 	private function queue_for_retry(
 		string $event_type,

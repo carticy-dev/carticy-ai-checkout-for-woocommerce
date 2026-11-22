@@ -13,7 +13,6 @@ namespace Carticy\AiCheckout\Services;
 use Carticy\AiCheckout\Interfaces\PaymentProcessorAdapter;
 use WP_Error;
 use WC_Order_Item_Shipping;
-use WC_Gateway_Stripe;
 use WC_Stripe;
 
 /**
@@ -157,9 +156,7 @@ final class StripePaymentAdapter implements PaymentProcessorAdapter {
 				sprintf(
 					'ChatGPT Instant Checkout Order - Session ID: %s',
 					$session_id
-				),
-				false, // Not a customer note.
-				true   // Added by system.
+				)
 			);
 
 			// Manually trigger order_created webhook since woocommerce_new_order already fired.
@@ -176,7 +173,7 @@ final class StripePaymentAdapter implements PaymentProcessorAdapter {
 			if ( $is_fake_token ) {
 				$order->set_status( 'processing', 'Test order completed with fake SharedPaymentToken' );
 				$order->add_order_note( 'Order created for testing purposes using fake SharedPaymentToken (spt_test_xxx)' );
-				$order->update_meta_data( '_chatgpt_payment_completed_at', time() );
+				$order->update_meta_data( '_chatgpt_payment_completed_at', (string) time() );
 				$order->update_meta_data( '_chatgpt_test_order', 'yes' );
 				$order->save();
 
@@ -200,7 +197,7 @@ final class StripePaymentAdapter implements PaymentProcessorAdapter {
 			// Initialize WooCommerce session if not already set (required for REST API context).
 			// WC Stripe Gateway uses wc_add_notice() which requires WC()->session to exist.
 			// In REST API context, WC()->session is null by default, causing fatal errors.
-			if ( ! isset( WC()->session ) || null === WC()->session ) {
+			if ( null === WC()->session ) {
 				WC()->session = new \WC_Session_Handler();
 				WC()->session->init();
 			}
@@ -224,14 +221,6 @@ final class StripePaymentAdapter implements PaymentProcessorAdapter {
 			// - WC()->payment_gateways()->payment_gateways()["stripe"] - does not handle UPE vs Legacy
 			// - new WC_Gateway_Stripe() - bypasses initialization, breaks UPE mode
 			$gateway = WC_Stripe::get_instance()->get_main_stripe_gateway();
-
-			if ( ! $gateway ) {
-				return new WP_Error(
-					'stripe_gateway_unavailable',
-					'Stripe payment gateway is not available',
-					array( 'status' => 500 )
-				);
-			}
 
 			// Wrap payment processing in try-catch to handle gateway exceptions.
 			// Stripe Gateway can throw exceptions for validation errors, API failures, etc.
@@ -287,7 +276,7 @@ final class StripePaymentAdapter implements PaymentProcessorAdapter {
 				if ( $payment_intent_id ) {
 					$order->update_meta_data( '_chatgpt_payment_intent_id', $payment_intent_id );
 				}
-				$order->update_meta_data( '_chatgpt_payment_completed_at', time() );
+				$order->update_meta_data( '_chatgpt_payment_completed_at', (string) time() );
 				$order->save();
 
 				// Reduce stock levels after successful payment.

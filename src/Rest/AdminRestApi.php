@@ -35,12 +35,7 @@ final class AdminRestApi {
 	 * @param array<int, AbstractAdminController> $controllers Admin controllers to register.
 	 */
 	public function __construct( array $controllers ) {
-		$this->controllers = array_values(
-			array_filter(
-				$controllers,
-				static fn( $controller ): bool => $controller instanceof AbstractAdminController
-			)
-		);
+		$this->controllers = array_values( $controllers );
 	}
 
 	/**

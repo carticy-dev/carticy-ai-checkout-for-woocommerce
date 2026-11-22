@@ -18,6 +18,13 @@ use WP_Error;
  */
 final class AuthenticationService {
 	/**
+	 * Test mode service
+	 *
+	 * @var TestModeService
+	 */
+	private TestModeService $test_mode;
+
+	/**
 	 * IP allowlist service
 	 *
 	 * @var IpAllowlistService|null
@@ -30,6 +37,15 @@ final class AuthenticationService {
 	 * @var RateLimitService|null
 	 */
 	private ?RateLimitService $rate_limit = null;
+
+	/**
+	 * Constructor
+	 *
+	 * @param TestModeService $test_mode Test mode service instance.
+	 */
+	public function __construct( TestModeService $test_mode ) {
+		$this->test_mode = $test_mode;
+	}
 
 	/**
 	 * Set IP allowlist service
@@ -66,7 +82,7 @@ final class AuthenticationService {
 	 */
 	public function validate_request_security( WP_REST_Request $request, string $endpoint ): bool|WP_Error {
 		// 1. Check SSL/HTTPS requirement (production only, skip for localhost).
-		if ( ! $this->is_test_mode() && ! is_ssl() && ! $this->is_localhost() ) {
+		if ( ! $this->test_mode->is_test_mode() && ! is_ssl() && ! $this->is_localhost() ) {
 			return new WP_Error(
 				'ssl_required',
 				'HTTPS is required for API requests. All traffic must use TLS 1.2+ on port 443.',
@@ -172,7 +188,7 @@ final class AuthenticationService {
 	 */
 	public function check_permission( WP_REST_Request $request ): bool|WP_Error {
 		// Check SSL requirement in production (skip for localhost).
-		if ( ! $this->is_test_mode() && ! is_ssl() && ! $this->is_localhost() ) {
+		if ( ! $this->test_mode->is_test_mode() && ! is_ssl() && ! $this->is_localhost() ) {
 			return new WP_Error(
 				'ssl_required',
 				'HTTPS is required for API requests',
@@ -203,15 +219,6 @@ final class AuthenticationService {
 		update_option( 'carticy_ai_checkout_api_key', $new_key );
 
 		return $new_key;
-	}
-
-	/**
-	 * Check if test mode is enabled
-	 *
-	 * @return bool True if test mode is enabled.
-	 */
-	private function is_test_mode(): bool {
-		return 'yes' === get_option( 'carticy_ai_checkout_test_mode', 'yes' );
 	}
 
 	/**

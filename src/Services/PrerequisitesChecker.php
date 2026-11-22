@@ -48,52 +48,23 @@ final class PrerequisitesChecker {
 	}
 
 	/**
-	 * Check all prerequisites with admin notice format
+	 * Name of a prerequisite check, as the settings and wizard screens list it.
 	 *
-	 * Returns failed checks in format expected by AdminNotices class.
-	 *
-	 * @return array<int, array{severity: string, requirement: string, message: string, fix_url: string}> Failed prerequisites.
+	 * @param string $key Check key from check_all().
+	 * @return string Translated label.
 	 */
-	public function check_all_prerequisites(): array {
-		$checks = $this->check_all();
-		$issues = array();
-
-		// Define critical vs warning checks.
-		$critical_checks = array( 'woocommerce', 'stripe_gateway', 'ssl', 'permalinks' );
-
-		foreach ( $checks as $key => $check ) {
-			if ( ! $check['passed'] ) {
-				$issues[] = array(
-					'severity'    => in_array( $key, $critical_checks, true ) ? 'error' : 'warning',
-					'requirement' => $this->get_requirement_label( $key ),
-					'message'     => $check['message'],
-					'fix_url'     => $check['action'] ?? '',
-				);
-			}
-		}
-
-		return $issues;
-	}
-
-	/**
-	 * Get human-readable label for requirement key
-	 *
-	 * @param string $key Requirement key.
-	 * @return string Human-readable label.
-	 */
-	private function get_requirement_label( string $key ): string {
-		$labels = array(
-			'wordpress_version' => 'WordPress Version',
-			'php_version'       => 'PHP Version',
-			'woocommerce'       => 'WooCommerce',
-			'stripe_gateway'    => 'WooCommerce Stripe Gateway',
-			'stripe_keys'       => 'Stripe API Keys',
-			'ssl'               => 'SSL Certificate',
-			'permalinks'        => 'Permalink Structure',
-			'stripe_api'        => 'Stripe API Connection',
-		);
-
-		return $labels[ $key ] ?? ucwords( str_replace( '_', ' ', $key ) );
+	public function label( string $key ): string {
+		return match ( $key ) {
+			'wordpress_version' => __( 'WordPress version', 'carticy-ai-checkout-for-woocommerce' ),
+			'php_version'       => __( 'PHP version', 'carticy-ai-checkout-for-woocommerce' ),
+			'woocommerce'       => __( 'WooCommerce', 'carticy-ai-checkout-for-woocommerce' ),
+			'stripe_gateway'    => __( 'WooCommerce Stripe Gateway', 'carticy-ai-checkout-for-woocommerce' ),
+			'stripe_keys'       => __( 'Stripe API keys', 'carticy-ai-checkout-for-woocommerce' ),
+			'ssl'               => __( 'SSL certificate', 'carticy-ai-checkout-for-woocommerce' ),
+			'permalinks'        => __( 'Permalink structure', 'carticy-ai-checkout-for-woocommerce' ),
+			'stripe_api'        => __( 'Stripe API connection', 'carticy-ai-checkout-for-woocommerce' ),
+			default             => $key,
+		};
 	}
 
 	/**

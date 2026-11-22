@@ -12,7 +12,6 @@ use Carticy\AiCheckout\Services\AuthenticationService;
 use Carticy\AiCheckout\Services\StripePaymentAdapter;
 use Carticy\AiCheckout\Services\IdempotencyService;
 use Carticy\AiCheckout\Services\LoggingService;
-use Carticy\AiCheckout\Services\ErrorLogService;
 use Carticy\AiCheckout\Services\PerformanceMetrics;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -66,13 +65,6 @@ final class CheckoutSessionEndpoint {
 	private LoggingService $logging_service;
 
 	/**
-	 * Error log service
-	 *
-	 * @var ErrorLogService
-	 */
-	private ErrorLogService $error_log_service;
-
-	/**
 	 * Performance metrics
 	 *
 	 * @var PerformanceMetrics
@@ -82,21 +74,19 @@ final class CheckoutSessionEndpoint {
 	/**
 	 * Constructor
 	 *
-	 * @param SessionService        $session_service Session service instance.
-	 * @param AuthenticationService $auth_service Authentication service instance.
-	 * @param StripePaymentAdapter  $payment_adapter Payment adapter instance.
+	 * @param SessionService        $session_service     Session service instance.
+	 * @param AuthenticationService $auth_service        Authentication service instance.
+	 * @param StripePaymentAdapter  $payment_adapter     Payment adapter instance.
 	 * @param IdempotencyService    $idempotency_service Idempotency service instance.
-	 * @param LoggingService        $logging_service Logging service instance.
-	 * @param ErrorLogService       $error_log_service Error log service instance.
+	 * @param LoggingService        $logging_service     Logging service instance.
 	 * @param PerformanceMetrics    $performance_metrics Performance metrics instance.
 	 */
-	public function __construct( SessionService $session_service, AuthenticationService $auth_service, StripePaymentAdapter $payment_adapter, IdempotencyService $idempotency_service, LoggingService $logging_service, ErrorLogService $error_log_service, PerformanceMetrics $performance_metrics ) {
+	public function __construct( SessionService $session_service, AuthenticationService $auth_service, StripePaymentAdapter $payment_adapter, IdempotencyService $idempotency_service, LoggingService $logging_service, PerformanceMetrics $performance_metrics ) {
 		$this->session_service     = $session_service;
 		$this->auth_service        = $auth_service;
 		$this->payment_adapter     = $payment_adapter;
 		$this->idempotency_service = $idempotency_service;
 		$this->logging_service     = $logging_service;
-		$this->error_log_service   = $error_log_service;
 		$this->performance_metrics = $performance_metrics;
 		$this->register_routes();
 	}

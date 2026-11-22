@@ -30,9 +30,9 @@ final class IdempotencyService {
 	/**
 	 * Check if request has already been processed
 	 *
-	 * @param WP_REST_Request $request REST API request.
+	 * @param WP_REST_Request $request  REST API request.
 	 * @param string          $endpoint Endpoint identifier.
-	 * @return array|null Cached response if exists, null otherwise.
+	 * @return array<string, mixed>|null Cached response if exists, null otherwise.
 	 */
 	public function check_idempotency( WP_REST_Request $request, string $endpoint ): ?array {
 		$idempotency_key = $request->get_header( 'idempotency-key' );
@@ -115,7 +115,7 @@ final class IdempotencyService {
 	 * Get normalized request parameters for comparison
 	 *
 	 * @param WP_REST_Request $request REST API request.
-	 * @return array Normalized request parameters.
+	 * @return array<string, mixed> Normalized request parameters.
 	 */
 	private function get_request_params( WP_REST_Request $request ): array {
 		// Get JSON body parameters.

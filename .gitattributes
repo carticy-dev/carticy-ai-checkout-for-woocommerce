@@ -23,8 +23,12 @@
 /phpcs.xml export-ignore
 /.phpcs.xml export-ignore
 /phpstan.neon export-ignore
+/phpstan-loader.neon export-ignore
 /webpack.config.js export-ignore
 /babel.config.js export-ignore
+
+# Development scripts and static-analysis files
+/bin export-ignore
 
 # Test infrastructure
 /tests export-ignore

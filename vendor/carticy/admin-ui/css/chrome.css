@@ -259,6 +259,23 @@ body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio):checked::before {
 	border-radius: 999px;
 	background: var(--cv-fg-on-action);
 }
+/* Disabled: as .cv-check / .cv-radio, without wp-admin's opacity. */
+body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check, .cv-toggle__input):disabled,
+body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio):disabled {
+	opacity: 1;
+	background: var(--cv-bg-subtle);
+	border-color: var(--cv-border-1);
+	cursor: not-allowed;
+}
+body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check, .cv-toggle__input):disabled:checked,
+body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio):disabled:checked {
+	background: var(--cv-accent-border);
+	border-color: var(--cv-accent-border);
+}
+body.cv-takeover .cv-root input[type="checkbox"]:not(.cv-check, .cv-toggle__input):disabled:checked::before,
+body.cv-takeover .cv-root input[type="radio"]:not(.cv-radio):disabled:checked::before {
+	opacity: 1;
+}
 
 /* --- WP_List_Table -----------------------------------------------
    Core hardcodes the wp-list-table class; adopt the cv-table skin

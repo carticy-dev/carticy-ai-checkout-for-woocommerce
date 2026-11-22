@@ -1,0 +1,12 @@
+<?php
+/** Analysis-only corrections to the bundled WooCommerce stubs. */
+abstract class WC_Session {}
+
+class WooCommerce {
+	/**
+	 * Null until a session is loaded, as in a REST request (WooCommerce::initialize_session()).
+	 *
+	 * @var WC_Session|null
+	 */
+	public $session;
+}

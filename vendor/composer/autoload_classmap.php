@@ -23,7 +23,6 @@ return array(
     'Carticy\\AiCheckout\\Rest\\SettingsController' => $baseDir . '/src/Rest/SettingsController.php',
     'Carticy\\AiCheckout\\Rest\\WizardController' => $baseDir . '/src/Rest/WizardController.php',
     'Carticy\\AiCheckout\\Services\\AnalyticsService' => $baseDir . '/src/Services/AnalyticsService.php',
-    'Carticy\\AiCheckout\\Services\\ApiDebugLogger' => $baseDir . '/src/Services/ApiDebugLogger.php',
     'Carticy\\AiCheckout\\Services\\ApiKeyService' => $baseDir . '/src/Services/ApiKeyService.php',
     'Carticy\\AiCheckout\\Services\\ApplicationWizardService' => $baseDir . '/src/Services/ApplicationWizardService.php',
     'Carticy\\AiCheckout\\Services\\AuthenticationService' => $baseDir . '/src/Services/AuthenticationService.php',

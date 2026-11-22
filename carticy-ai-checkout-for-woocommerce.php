@@ -168,11 +168,11 @@ function carticy_ai_checkout_init(): void {
 						?>
 						<?php if ( $is_installed ) : ?>
 							<a href="<?php echo esc_url( admin_url( 'plugins.php' ) ); ?>" class="button button-small" style="margin-left: 10px;">
-								<?php esc_html_e( 'Activate Plugin', 'carticy-ai-checkout-for-woocommerce' ); ?>
+								<?php esc_html_e( 'Activate plugin', 'carticy-ai-checkout-for-woocommerce' ); ?>
 							</a>
 						<?php else : ?>
 							<a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=woocommerce-gateway-stripe' ) ); ?>" class="button button-small" style="margin-left: 10px;">
-								<?php esc_html_e( 'Install Plugin', 'carticy-ai-checkout-for-woocommerce' ); ?>
+								<?php esc_html_e( 'Install plugin', 'carticy-ai-checkout-for-woocommerce' ); ?>
 							</a>
 						<?php endif; ?>
 					</p>

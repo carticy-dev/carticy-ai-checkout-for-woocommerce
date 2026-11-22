@@ -19,7 +19,6 @@ use Carticy\AiCheckout\Services\LoggingService;
 use Carticy\AiCheckout\Services\ErrorLogService;
 use Carticy\AiCheckout\Services\WebhookLogger;
 use Carticy\AiCheckout\Services\PerformanceMetrics;
-use Carticy\AiCheckout\Services\SessionService;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -59,13 +58,6 @@ final class LogsController extends AbstractAdminController {
 	private PerformanceMetrics $performance_metrics;
 
 	/**
-	 * Session service (kept for parity with the page's dependencies).
-	 *
-	 * @var SessionService
-	 */
-	private SessionService $session;
-
-	/**
 	 * Error categories exposed by the error-log filter.
 	 */
 	private const ERROR_CATEGORIES = array( 'payment', 'api', 'webhook', 'validation', 'system' );
@@ -82,20 +74,17 @@ final class LogsController extends AbstractAdminController {
 	 * @param ErrorLogService    $error_log           Error log service.
 	 * @param WebhookLogger      $webhook_logger      Webhook logger.
 	 * @param PerformanceMetrics $performance_metrics Performance metrics service.
-	 * @param SessionService     $session             Session service.
 	 */
 	public function __construct(
 		LoggingService $logging,
 		ErrorLogService $error_log,
 		WebhookLogger $webhook_logger,
-		PerformanceMetrics $performance_metrics,
-		SessionService $session
+		PerformanceMetrics $performance_metrics
 	) {
 		$this->logging             = $logging;
 		$this->error_log           = $error_log;
 		$this->webhook_logger      = $webhook_logger;
 		$this->performance_metrics = $performance_metrics;
-		$this->session             = $session;
 	}
 
 	/**

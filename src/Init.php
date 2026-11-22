@@ -27,7 +27,6 @@ use Carticy\AiCheckout\Services\ErrorLogService;
 use Carticy\AiCheckout\Services\WebhookLogger;
 use Carticy\AiCheckout\Services\PerformanceMetrics;
 use Carticy\AiCheckout\Services\TestModeService;
-use Carticy\AiCheckout\Services\ApiDebugLogger;
 use Carticy\AiCheckout\Services\MockSimulator;
 use Carticy\AiCheckout\Services\ConformanceTestService;
 use Carticy\AiCheckout\Api\ProductFeedEndpoint;
@@ -146,7 +145,15 @@ final class Init {
 		$this->container->register(
 			'ip_allowlist',
 			function ( Container $c ): IpAllowlistService {
-				return new IpAllowlistService( $c->get( 'logging' ) );
+				return new IpAllowlistService( $c->get( 'logging' ), $c->get( 'test_mode' ) );
+			}
+		);
+
+		// Register Test Mode Service.
+		$this->container->register(
+			'test_mode',
+			function ( Container $c ): TestModeService {
+				return new TestModeService();
 			}
 		);
 
@@ -162,7 +169,7 @@ final class Init {
 		$this->container->register(
 			'auth',
 			function ( Container $c ): AuthenticationService {
-				$auth_service = new AuthenticationService();
+				$auth_service = new AuthenticationService( $c->get( 'test_mode' ) );
 				$auth_service->set_ip_allowlist_service( $c->get( 'ip_allowlist' ) );
 				$auth_service->set_rate_limit_service( $c->get( 'rate_limit' ) );
 				return $auth_service;
@@ -181,7 +188,7 @@ final class Init {
 		$this->container->register(
 			'webhook',
 			function ( Container $c ): WebhookService {
-				return new WebhookService( $c->get( 'webhook_logger' ) );
+				return new WebhookService( $c->get( 'webhook_logger' ), $c->get( 'test_mode' ) );
 			}
 		);
 
@@ -227,7 +234,6 @@ final class Init {
 					$c->get( 'stripe_payment' ),
 					$c->get( 'idempotency' ),
 					$c->get( 'logging' ),
-					$c->get( 'error_log' ),
 					$c->get( 'performance_metrics' )
 				);
 			}
@@ -237,7 +243,7 @@ final class Init {
 		$this->container->register(
 			'admin',
 			function ( Container $c ): AdminHandler {
-				return new AdminHandler( $c->get( 'prerequisites' ) );
+				return new AdminHandler();
 			}
 		);
 
@@ -285,8 +291,7 @@ final class Init {
 					$c->get( 'logging' ),
 					$c->get( 'error_log' ),
 					$c->get( 'webhook_logger' ),
-					$c->get( 'performance_metrics' ),
-					$c->get( 'session' )
+					$c->get( 'performance_metrics' )
 				);
 			}
 		);
@@ -306,7 +311,8 @@ final class Init {
 					$c->get( 'conformance_test' ),
 					$c->get( 'product_quality' ),
 					$c->get( 'prerequisites' ),
-					$c->get( 'api_key' )
+					$c->get( 'api_key' ),
+					$c->get( 'test_mode' )
 				);
 			}
 		);
@@ -326,22 +332,6 @@ final class Init {
 			}
 		);
 
-		// Register Test Mode Service.
-		$this->container->register(
-			'test_mode',
-			function ( Container $c ): TestModeService {
-				return new TestModeService();
-			}
-		);
-
-		// Register API Debug Logger.
-		$this->container->register(
-			'api_debug_logger',
-			function ( Container $c ): ApiDebugLogger {
-				return new ApiDebugLogger( $c->get( 'logging' ), $c->get( 'test_mode' ) );
-			}
-		);
-
 		// Register Mock Simulator.
 		$this->container->register(
 			'mock_simulator',
@@ -354,7 +344,7 @@ final class Init {
 		$this->container->register(
 			'conformance_test',
 			function ( Container $c ): ConformanceTestService {
-				return new ConformanceTestService( $c->get( 'mock_simulator' ) );
+				return new ConformanceTestService( $c->get( 'mock_simulator' ), $c->get( 'test_mode' ) );
 			}
 		);
 		// phpcs:enable Generic.CodeAnalysis.UnusedFunctionParameter.Found
@@ -489,7 +479,7 @@ final class Init {
 	public function add_cron_schedules( array $schedules ): array {
 		$schedules['every_15_minutes'] = array(
 			'interval' => 15 * MINUTE_IN_SECONDS,
-			'display'  => __( 'Every 15 Minutes', 'carticy-ai-checkout-for-woocommerce' ),
+			'display'  => __( 'Every 15 minutes', 'carticy-ai-checkout-for-woocommerce' ),
 		);
 
 		return $schedules;

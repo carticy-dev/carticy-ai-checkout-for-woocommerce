@@ -208,7 +208,7 @@ final class AnalyticsService {
 	 * Get recent ChatGPT orders
 	 *
 	 * @param int $limit Number of orders to retrieve.
-	 * @return array Array of WC_Order objects.
+	 * @return array<int, \WC_Order> Array of WC_Order objects.
 	 */
 	public function get_recent_chatgpt_orders( int $limit = 10 ): array {
 		$orders = wc_get_orders(
@@ -229,7 +229,7 @@ final class AnalyticsService {
 	 * Get ChatGPT order statistics by status
 	 *
 	 * @param int $days Number of days to look back.
-	 * @return array Order counts grouped by status.
+	 * @return array<string, int> Order counts grouped by status.
 	 */
 	public function get_order_stats_by_status( int $days = 30 ): array {
 		$date_after = gmdate( 'Y-m-d H:i:s', strtotime( "-{$days} days" ) );

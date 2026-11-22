@@ -37,12 +37,21 @@ final class WebhookService {
 	private WebhookLogger $webhook_logger;
 
 	/**
+	 * Test mode service
+	 *
+	 * @var TestModeService
+	 */
+	private TestModeService $test_mode;
+
+	/**
 	 * Constructor
 	 *
-	 * @param WebhookLogger $webhook_logger Webhook logger instance.
+	 * @param WebhookLogger   $webhook_logger Webhook logger instance.
+	 * @param TestModeService $test_mode      Test mode service instance.
 	 */
-	public function __construct( WebhookLogger $webhook_logger ) {
+	public function __construct( WebhookLogger $webhook_logger, TestModeService $test_mode ) {
 		$this->webhook_logger = $webhook_logger;
+		$this->test_mode      = $test_mode;
 	}
 
 	/**
@@ -88,8 +97,7 @@ final class WebhookService {
 		$this->mark_webhook_attempting( $order_id, $event_type, $status );
 
 		// Get webhook configuration (check test mode for correct URL).
-		$is_test_mode = get_option( 'carticy_ai_checkout_test_mode', false );
-		if ( $is_test_mode ) {
+		if ( $this->test_mode->is_test_mode() ) {
 			$webhook_url = get_option( 'carticy_ai_checkout_test_webhook_url', '' );
 		} else {
 			$webhook_url = get_option( 'carticy_ai_checkout_webhook_url', '' );

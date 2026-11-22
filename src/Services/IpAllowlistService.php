@@ -24,12 +24,21 @@ final class IpAllowlistService {
 	private LoggingService $logging_service;
 
 	/**
+	 * Test mode service
+	 *
+	 * @var TestModeService
+	 */
+	private TestModeService $test_mode;
+
+	/**
 	 * Constructor
 	 *
-	 * @param LoggingService $logging_service Logging service instance.
+	 * @param LoggingService  $logging_service Logging service instance.
+	 * @param TestModeService $test_mode       Test mode service instance.
 	 */
-	public function __construct( LoggingService $logging_service ) {
+	public function __construct( LoggingService $logging_service, TestModeService $test_mode ) {
 		$this->logging_service = $logging_service;
+		$this->test_mode       = $test_mode;
 	}
 
 	/**
@@ -38,11 +47,6 @@ final class IpAllowlistService {
 	 * @link https://platform.openai.com/docs/bots
 	 */
 	private const OPENAI_IP_RANGES_URL = 'https://openai.com/chatgpt-connectors.json';
-
-	/**
-	 * Option key for storing IP ranges
-	 */
-	private const OPTION_IP_RANGES = 'carticy_ai_checkout_openai_ip_ranges';
 
 	/**
 	 * Option key for backup IP ranges
@@ -90,7 +94,7 @@ final class IpAllowlistService {
 	/**
 	 * Fetch OpenAI IP ranges from chatgpt-connectors.json
 	 *
-	 * @return array Array of CIDR blocks.
+	 * @return array<int, string> Array of CIDR blocks.
 	 */
 	public function fetch_openai_ip_ranges(): array {
 		// Check transient cache first.
@@ -155,7 +159,7 @@ final class IpAllowlistService {
 	 * Get fallback IP ranges
 	 *
 	 * @param string $error_message Error message to log.
-	 * @return array Fallback IP ranges.
+	 * @return array<int, string> Fallback IP ranges.
 	 */
 	private function get_fallback_ranges( string $error_message ): array {
 		// Log error (only in debug mode to avoid log spam).
@@ -181,7 +185,7 @@ final class IpAllowlistService {
 	 */
 	public function is_ip_allowed( string $ip_address ): bool {
 		// Skip validation in test mode.
-		if ( $this->is_test_mode() ) {
+		if ( $this->test_mode->is_test_mode() ) {
 			return true;
 		}
 
@@ -241,7 +245,7 @@ final class IpAllowlistService {
 	/**
 	 * Get current IP ranges
 	 *
-	 * @return array Current IP ranges.
+	 * @return array<int, string> Current IP ranges.
 	 */
 	public function get_current_ranges(): array {
 		return $this->fetch_openai_ip_ranges();
@@ -287,15 +291,6 @@ final class IpAllowlistService {
 
 		// Check if IP is in range.
 		return ( $ip_long & $mask_long ) === $subnet_long;
-	}
-
-	/**
-	 * Check if test mode is enabled
-	 *
-	 * @return bool True if test mode enabled.
-	 */
-	private function is_test_mode(): bool {
-		return 'yes' === get_option( 'carticy_ai_checkout_test_mode', 'yes' );
 	}
 
 	/**

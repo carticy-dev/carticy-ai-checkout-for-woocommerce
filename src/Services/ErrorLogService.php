@@ -48,9 +48,9 @@ final class ErrorLogService {
 	/**
 	 * Log payment error.
 	 *
-	 * @param string          $message   Error message.
-	 * @param array           $context   Additional context.
-	 * @param \Throwable|null $exception Exception if available.
+	 * @param string               $message   Error message.
+	 * @param array<string, mixed> $context   Additional context.
+	 * @param \Throwable|null      $exception Exception if available.
 	 */
 	public function log_payment_error(
 		string $message,
@@ -68,10 +68,10 @@ final class ErrorLogService {
 	/**
 	 * Log API error.
 	 *
-	 * @param string          $message   Error message.
-	 * @param string          $endpoint  API endpoint.
-	 * @param array           $context   Additional context.
-	 * @param \Throwable|null $exception Exception if available.
+	 * @param string               $message   Error message.
+	 * @param string               $endpoint  API endpoint.
+	 * @param array<string, mixed> $context   Additional context.
+	 * @param \Throwable|null      $exception Exception if available.
 	 */
 	public function log_api_error(
 		string $message,
@@ -92,10 +92,10 @@ final class ErrorLogService {
 	/**
 	 * Log webhook error.
 	 *
-	 * @param string          $message    Error message.
-	 * @param string          $event_type Webhook event type.
-	 * @param array           $context    Additional context.
-	 * @param \Throwable|null $exception  Exception if available.
+	 * @param string               $message    Error message.
+	 * @param string               $event_type Webhook event type.
+	 * @param array<string, mixed> $context    Additional context.
+	 * @param \Throwable|null      $exception  Exception if available.
 	 */
 	public function log_webhook_error(
 		string $message,
@@ -116,9 +116,9 @@ final class ErrorLogService {
 	/**
 	 * Log validation error.
 	 *
-	 * @param string $message       Error message.
-	 * @param array  $failed_fields Failed validation fields.
-	 * @param array  $context       Additional context.
+	 * @param string               $message       Error message.
+	 * @param array<int, string>   $failed_fields Failed validation fields.
+	 * @param array<string, mixed> $context       Additional context.
 	 */
 	public function log_validation_error(
 		string $message,
@@ -139,9 +139,9 @@ final class ErrorLogService {
 	/**
 	 * Log system error.
 	 *
-	 * @param string          $message   Error message.
-	 * @param array           $context   Additional context.
-	 * @param \Throwable|null $exception Exception if available.
+	 * @param string               $message   Error message.
+	 * @param array<string, mixed> $context   Additional context.
+	 * @param \Throwable|null      $exception Exception if available.
 	 */
 	public function log_system_error(
 		string $message,
@@ -159,10 +159,10 @@ final class ErrorLogService {
 	/**
 	 * Log SharedPaymentToken error.
 	 *
-	 * @param string $error_code    Stripe error code.
-	 * @param string $error_message Error message.
-	 * @param string $order_id      Order ID.
-	 * @param array  $context       Additional context.
+	 * @param string               $error_code    Stripe error code.
+	 * @param string               $error_message Error message.
+	 * @param string               $order_id      Order ID.
+	 * @param array<string, mixed> $context       Additional context.
 	 */
 	public function log_shared_payment_token_error(
 		string $error_code,
@@ -187,8 +187,8 @@ final class ErrorLogService {
 	/**
 	 * Log authentication failure.
 	 *
-	 * @param string $reason  Failure reason.
-	 * @param array  $context Additional context.
+	 * @param string               $reason  Failure reason.
+	 * @param array<string, mixed> $context Additional context.
 	 */
 	public function log_authentication_failure(
 		string $reason,
@@ -207,9 +207,9 @@ final class ErrorLogService {
 	/**
 	 * Log session error.
 	 *
-	 * @param string $session_id Session ID.
-	 * @param string $message    Error message.
-	 * @param array  $context    Additional context.
+	 * @param string               $session_id Session ID.
+	 * @param string               $message    Error message.
+	 * @param array<string, mixed> $context    Additional context.
 	 */
 	public function log_session_error(
 		string $session_id,
@@ -228,9 +228,9 @@ final class ErrorLogService {
 	/**
 	 * Log shipping calculation error.
 	 *
-	 * @param string $message Error message.
-	 * @param array  $address Shipping address.
-	 * @param array  $context Additional context.
+	 * @param string               $message Error message.
+	 * @param array<string, mixed> $address Shipping address.
+	 * @param array<string, mixed> $context Additional context.
 	 */
 	public function log_shipping_error(
 		string $message,
@@ -253,8 +253,8 @@ final class ErrorLogService {
 	/**
 	 * Log product feed error.
 	 *
-	 * @param string $message Error message.
-	 * @param array  $context Additional context.
+	 * @param string               $message Error message.
+	 * @param array<string, mixed> $context Additional context.
 	 */
 	public function log_product_feed_error(
 		string $message,
@@ -271,7 +271,7 @@ final class ErrorLogService {
 	 * Get error statistics from transient cache.
 	 *
 	 * @param int $hours Number of hours to analyze.
-	 * @return array Error statistics by category.
+	 * @return array<string, int> Error statistics by category.
 	 */
 	public function get_error_statistics( int $hours = 24 ): array {
 		$cache_key = 'carticy_ai_checkout_error_stats_' . $hours;
@@ -327,7 +327,7 @@ final class ErrorLogService {
 	 *
 	 * @param int         $limit    Number of errors to retrieve.
 	 * @param string|null $category Filter by category.
-	 * @return array Recent error entries.
+	 * @return array<int, array<string, mixed>> Recent error entries.
 	 */
 	public function get_recent_errors( int $limit = 50, ?string $category = null ): array {
 		$log_files = $this->logger->get_log_files( 'carticy-errors' );

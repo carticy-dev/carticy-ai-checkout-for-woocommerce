@@ -1,18 +1,21 @@
 parameters:
     level: 6
+    dynamicConstantNames:
+        - WC_VERSION
+        - WP_DEBUG
+    bootstrapFiles:
+        - bin/phpstan-bootstrap.php
+    stubFiles:
+        - bin/stubs/wordpress.stub
+        - bin/stubs/woocommerce.stub
     paths:
         - src
-    excludePaths:
-        - vendor
-        - tests
-    bootstrapFiles:
+        - uninstall.php
+    scanFiles:
         - carticy-ai-checkout-for-woocommerce.php
-    ignoreErrors:
-        # WordPress and WooCommerce functions may not be recognized
-        - '#Function (add_action|add_filter|register_rest_route|wc_get_product|wc_create_order) not found#'
-        - '#Access to an undefined property WC_Product#'
-        - '#Access to an undefined property WC_Order#'
-    scanDirectories:
-        - vendor
+        - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+        - vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
+        - bin/stubs/stripe.stub
+    tmpDir: .cache/phpstan
     parallel:
         maximumNumberOfProcesses: 4

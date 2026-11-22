@@ -9,13 +9,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-22T15:46:52+00:00\n"
+"POT-Creation-Date: 2026-11-22T19:26:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.10.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: carticy-ai-checkout-for-woocommerce\n"
 
 #. Plugin Name of the plugin
-#: C:\wamp64\www\woo\wp-content\plugins\carticy-ai-checkout-for-woocommerce\carticy-ai-checkout-for-woocommerce.php
+#: carticy-ai-checkout-for-woocommerce.php
 #: carticy-ai-checkout-for-woocommerce.php:104
 #: carticy-ai-checkout-for-woocommerce.php:126
 #: carticy-ai-checkout-for-woocommerce.php:161
@@ -23,22 +23,22 @@ msgid "AI Checkout for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: C:\wamp64\www\woo\wp-content\plugins\carticy-ai-checkout-for-woocommerce\carticy-ai-checkout-for-woocommerce.php
+#: carticy-ai-checkout-for-woocommerce.php
 msgid "https://carticy.com/plugins/ai-checkout-for-woocommerce/"
 msgstr ""
 
 #. Description of the plugin
-#: C:\wamp64\www\woo\wp-content\plugins\carticy-ai-checkout-for-woocommerce\carticy-ai-checkout-for-woocommerce.php
+#: carticy-ai-checkout-for-woocommerce.php
 msgid "ChatGPT Instant Checkout integration for WooCommerce using OpenAI Agentic Commerce Protocol"
 msgstr ""
 
 #. Author of the plugin
-#: C:\wamp64\www\woo\wp-content\plugins\carticy-ai-checkout-for-woocommerce\carticy-ai-checkout-for-woocommerce.php
+#: carticy-ai-checkout-for-woocommerce.php
 msgid "alikhallad"
 msgstr ""
 
 #. Author URI of the plugin
-#: C:\wamp64\www\woo\wp-content\plugins\carticy-ai-checkout-for-woocommerce\carticy-ai-checkout-for-woocommerce.php
+#: carticy-ai-checkout-for-woocommerce.php
 msgid "https://alikhallad.com"
 msgstr ""
 
@@ -68,83 +68,86 @@ msgid "requires WooCommerce Stripe Gateway to be installed and active."
 msgstr ""
 
 #: carticy-ai-checkout-for-woocommerce.php:171
-msgid "Activate Plugin"
+msgid "Activate plugin"
 msgstr ""
 
 #: carticy-ai-checkout-for-woocommerce.php:175
-msgid "Install Plugin"
+msgid "Install plugin"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:158
+#: src/Admin/AdminHandler.php:146
 msgid "Carticy AI Checkout"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:159
+#: src/Admin/AdminHandler.php:147
 #: assets/js/src/admin-app/App.jsx:46
 msgid "AI Checkout"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:172
+#: src/Admin/AdminHandler.php:160
+#: src/Admin/AdminHandler.php:161
+#: src/Rest/WizardController.php:518
+#: assets/js/src/admin-app/App.jsx:21
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:276
+msgid "Product feed"
+msgstr ""
+
 #: src/Admin/AdminHandler.php:173
-msgid "Product Feed Manager"
-msgstr ""
-
-#: src/Admin/AdminHandler.php:185
-#: src/Admin/AdminHandler.php:186
+#: src/Admin/AdminHandler.php:174
 #: assets/js/src/admin-app/App.jsx:22
-msgid "Application Wizard"
+msgid "Application wizard"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:198
-#: src/Admin/AdminHandler.php:199
+#: src/Admin/AdminHandler.php:186
+#: src/Admin/AdminHandler.php:187
 #: assets/js/src/admin-app/App.jsx:23
 msgid "Analytics"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:211
-#: src/Admin/AdminHandler.php:212
+#: src/Admin/AdminHandler.php:199
+#: src/Admin/AdminHandler.php:200
 #: assets/js/src/admin-app/App.jsx:24
 #: assets/js/src/admin-app/screens/Logs.jsx:112
-msgid "Logs & Monitoring"
+msgid "Logs & monitoring"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:386
+#: src/Admin/AdminHandler.php:374
 msgid "Source"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:418
+#: src/Admin/AdminHandler.php:406
 msgid "ChatGPT Instant Checkout"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:420
+#: src/Admin/AdminHandler.php:408
 msgid "AI"
 msgstr ""
 
-#: src/Init.php:492
-msgid "Every 15 Minutes"
+#: src/Init.php:482
+msgid "Every 15 minutes"
 msgstr ""
 
-#: src/Rest/AnalyticsController.php:158
+#: src/Rest/AnalyticsController.php:155
 msgid "Guest"
 msgstr ""
 
-#: src/Rest/LogsController.php:433
+#: src/Rest/LogsController.php:422
 msgid "Error statistics cache cleared."
 msgstr ""
 
-#: src/Rest/LogsController.php:437
+#: src/Rest/LogsController.php:426
 msgid "Webhook statistics cache cleared."
 msgstr ""
 
-#: src/Rest/LogsController.php:441
+#: src/Rest/LogsController.php:430
 msgid "Performance metrics cache cleared."
 msgstr ""
 
-#: src/Rest/LogsController.php:445
+#: src/Rest/LogsController.php:434
 msgid "Webhook retry queue cleared."
 msgstr ""
 
-#: src/Rest/LogsController.php:450
+#: src/Rest/LogsController.php:439
 msgid "Unknown cache target."
 msgstr ""
 
@@ -190,67 +193,100 @@ msgid_plural "%d product quality scores recalculated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Rest/SettingsController.php:170
+#: src/Rest/SettingsController.php:154
 msgid "API key regenerated successfully."
 msgstr ""
 
-#: src/Rest/SettingsController.php:184
+#: src/Rest/SettingsController.php:168
 msgid "Webhook secret regenerated successfully."
 msgstr ""
 
-#: src/Rest/SettingsController.php:209
+#: src/Rest/SettingsController.php:193
 msgid "Failed to send test webhook. Verify your webhook URL and secret are configured."
 msgstr ""
 
-#: src/Rest/SettingsController.php:216
+#: src/Rest/SettingsController.php:200
 msgid "Test webhook sent. Check that it arrived at your webhook URL."
 msgstr ""
 
-#: src/Rest/SettingsController.php:232
+#: src/Rest/SettingsController.php:216
 msgid "Failed to refresh IP ranges. Unable to fetch fresh ranges from OpenAI; using cached ranges."
 msgstr ""
 
-#: src/Rest/SettingsController.php:240
+#: src/Rest/SettingsController.php:224
 msgid "IP ranges refreshed successfully!"
 msgstr ""
 
-#: src/Rest/SettingsController.php:288
+#: src/Rest/SettingsController.php:272
 #: assets/js/src/admin-app/screens/Wizard.jsx:326
-msgid "Fix This"
+msgid "Fix this"
 msgstr ""
 
-#: src/Rest/WizardController.php:212
+#: src/Rest/WizardController.php:206
 msgid "Invalid step."
 msgstr ""
 
-#: src/Rest/WizardController.php:367
+#: src/Rest/WizardController.php:361
 msgid "A test ID is required."
 msgstr ""
 
-#: src/Rest/WizardController.php:377
+#: src/Rest/WizardController.php:371
 msgid "Test could not be run."
 msgstr ""
 
 #. translators: %d: number of temporary products removed.
-#: src/Rest/WizardController.php:398
+#: src/Rest/WizardController.php:392
 msgid "Cleaned up %d test product."
 msgid_plural "Cleaned up %d test products."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Rest/WizardController.php:407
+#: src/Rest/WizardController.php:401
 msgid "Invalid conformance action."
 msgstr ""
 
-#: src/Rest/WizardController.php:427
+#: src/Rest/WizardController.php:421
 msgid "Invalid results structure: missing summary."
 msgstr ""
 
-#: src/Rest/WizardController.php:435
+#: src/Rest/WizardController.php:429
 msgid "Invalid results structure: missing tests."
 msgstr ""
 
-#: src/Rest/WizardController.php:577
+#: src/Rest/WizardController.php:517
+msgid "Business info"
+msgstr ""
+
+#: src/Rest/WizardController.php:519
+msgid "Policies"
+msgstr ""
+
+#: src/Rest/WizardController.php:520
+msgid "Data quality"
+msgstr ""
+
+#: src/Rest/WizardController.php:521
+#: assets/js/src/admin-app/screens/Settings.jsx:28
+msgid "Prerequisites"
+msgstr ""
+
+#: src/Rest/WizardController.php:522
+msgid "Test setup"
+msgstr ""
+
+#: src/Rest/WizardController.php:523
+msgid "Integration"
+msgstr ""
+
+#: src/Rest/WizardController.php:524
+msgid "Run tests"
+msgstr ""
+
+#: src/Rest/WizardController.php:525
+msgid "Submit"
+msgstr ""
+
+#: src/Rest/WizardController.php:579
 msgid "No products are enabled for ChatGPT checkout yet."
 msgstr ""
 
@@ -276,16 +312,17 @@ msgstr ""
 
 #: src/Services/ApplicationWizardService.php:173
 #: assets/js/src/admin-app/screens/Wizard.jsx:291
-msgid "Terms of Service URL"
+msgid "Terms of service URL"
 msgstr ""
 
 #: src/Services/ApplicationWizardService.php:174
 #: assets/js/src/admin-app/screens/Wizard.jsx:292
-msgid "Privacy Policy URL"
+msgid "Privacy policy URL"
 msgstr ""
 
 #: src/Services/ApplicationWizardService.php:179
-msgid "Return/Refund Policy URL"
+#: assets/js/src/admin-app/screens/Wizard.jsx:293
+msgid "Return and refund policy URL"
 msgstr ""
 
 #. translators: %s: policy name
@@ -309,6 +346,40 @@ msgstr ""
 #: src/Services/ApplicationWizardService.php:216
 #: src/Services/ApplicationWizardService.php:253
 msgid "%1$s returned HTTP %2$d. Please ensure the page is publicly accessible."
+msgstr ""
+
+#: src/Services/PrerequisitesChecker.php:58
+#: assets/js/src/admin-app/screens/Logs.jsx:530
+msgid "WordPress version"
+msgstr ""
+
+#: src/Services/PrerequisitesChecker.php:59
+#: assets/js/src/admin-app/screens/Logs.jsx:528
+msgid "PHP version"
+msgstr ""
+
+#: src/Services/PrerequisitesChecker.php:60
+msgid "WooCommerce"
+msgstr ""
+
+#: src/Services/PrerequisitesChecker.php:61
+msgid "WooCommerce Stripe Gateway"
+msgstr ""
+
+#: src/Services/PrerequisitesChecker.php:62
+msgid "Stripe API keys"
+msgstr ""
+
+#: src/Services/PrerequisitesChecker.php:63
+msgid "SSL certificate"
+msgstr ""
+
+#: src/Services/PrerequisitesChecker.php:64
+msgid "Permalink structure"
+msgstr ""
+
+#: src/Services/PrerequisitesChecker.php:65
+msgid "Stripe API connection"
 msgstr ""
 
 #: src/Services/ProductQualityChecker.php:58
@@ -378,30 +449,6 @@ msgstr ""
 msgid "Only 1 image (multiple recommended)"
 msgstr ""
 
-#: src/Services/TestModeService.php:93
-msgid "Failed to update test mode. Please try again."
-msgstr ""
-
-#: src/Services/TestModeService.php:172
-msgid "TEST MODE ACTIVE - Using Test Stripe Keys"
-msgstr ""
-
-#: src/Services/TestModeService.php:183
-msgid "Test Mode"
-msgstr ""
-
-#: src/Services/TestModeService.php:186
-msgid "Production Mode"
-msgstr ""
-
-#: src/Services/TestModeService.php:197
-msgid "TEST"
-msgstr ""
-
-#: src/Services/TestModeService.php:197
-msgid "LIVE"
-msgstr ""
-
 #: assets/js/src/admin-app/api.js:23
 #: assets/js/src/admin-app/api.js:27
 msgid "Something went wrong. Please try again."
@@ -410,11 +457,6 @@ msgstr ""
 #: assets/js/src/admin-app/App.jsx:20
 #: assets/js/src/admin-app/screens/Settings.jsx:165
 msgid "Settings"
-msgstr ""
-
-#: assets/js/src/admin-app/App.jsx:21
-#: assets/js/src/admin-app/screens/ProductFeed.jsx:276
-msgid "Product Feed"
 msgstr ""
 
 #: assets/js/src/admin-app/App.jsx:48
@@ -430,19 +472,19 @@ msgid "Date range"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Analytics.jsx:36
-msgid "Last 7 Days"
+msgid "Last 7 days"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Analytics.jsx:37
-msgid "Last 30 Days"
+msgid "Last 30 days"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Analytics.jsx:38
-msgid "Last 90 Days"
+msgid "Last 90 days"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Analytics.jsx:49
-msgid "ChatGPT Orders"
+msgid "ChatGPT orders"
 msgstr ""
 
 #. translators: %s: revenue amount.
@@ -452,11 +494,11 @@ msgid "Revenue: %s"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Analytics.jsx:56
-msgid "Regular Orders"
+msgid "Regular orders"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Analytics.jsx:63
-msgid "ChatGPT Conversion"
+msgid "ChatGPT conversion"
 msgstr ""
 
 #. translators: 1: orders placed through ChatGPT, 2: all orders.
@@ -519,7 +561,7 @@ msgid "Loading analytics…"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Analytics.jsx:116
-msgid "ChatGPT Order Status Distribution"
+msgid "ChatGPT orders by status"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Analytics.jsx:122
@@ -527,7 +569,7 @@ msgid "No status data for the selected range."
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Analytics.jsx:128
-msgid "Recent ChatGPT Orders"
+msgid "Recent ChatGPT orders"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Analytics.jsx:133
@@ -535,23 +577,23 @@ msgid "No ChatGPT orders found in the selected date range."
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:31
-msgid "API Logs"
+msgid "API logs"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:32
-msgid "Error Logs"
+msgid "Error logs"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:33
-msgid "Webhook Activity"
+msgid "Webhook activity"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:34
-msgid "Session Status"
+msgid "Session status"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:38
-msgid "All Categories"
+msgid "All categories"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:39
@@ -634,7 +676,7 @@ msgid "Details"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:224
-msgid "API Context"
+msgid "API context"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:232
@@ -654,7 +696,7 @@ msgid "Category"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:276
-msgid "Error Details"
+msgid "Error details"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:283
@@ -668,7 +710,7 @@ msgid "Clear cache"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:296
-msgid "Error Statistics (Last 24 Hours)"
+msgid "Errors in the last 24 hours"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:312
@@ -709,11 +751,11 @@ msgid "Failed"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:369
-msgid "Webhook Statistics (Last 24 Hours)"
+msgid "Webhooks in the last 24 hours"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:375
-msgid "Total Sent"
+msgid "Total sent"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:376
@@ -721,15 +763,15 @@ msgid "Successful"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:378
-msgid "Retry Rate"
+msgid "Retry rate"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:384
-msgid "Failed Webhooks (Retry Queue)"
+msgid "Failed webhooks waiting to retry"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:392
-msgid "Clear Queue"
+msgid "Clear queue"
 msgstr ""
 
 #. translators: %d: number of webhooks waiting to be sent again.
@@ -785,15 +827,15 @@ msgid "Slowest"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:479
-msgid "Session Status Overview"
+msgid "Session status overview"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:482
-msgid "Active Sessions"
+msgid "Active sessions"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:483
-msgid "Total Sessions"
+msgid "Total sessions"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:484
@@ -810,7 +852,7 @@ msgid "Expired"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:490
-msgid "Recent Sessions"
+msgid "Recent sessions"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:496
@@ -818,27 +860,27 @@ msgid "No active sessions found."
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:500
-msgid "API Performance (Last 24 Hours)"
+msgid "API performance in the last 24 hours"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:502
-msgid "Total Requests"
+msgid "Total requests"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:503
-msgid "Avg Duration"
+msgid "Average duration"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:504
-msgid "Slowest Request"
+msgid "Slowest request"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:505
-msgid "Avg Memory"
+msgid "Average memory"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:506
-msgid "Avg DB Queries"
+msgid "Average database queries"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:511
@@ -846,27 +888,19 @@ msgid "Performance by request"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:525
-msgid "System Health"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Logs.jsx:528
-msgid "PHP Version"
+msgid "System health"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:529
-msgid "Memory Limit"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Logs.jsx:530
-msgid "WordPress Version"
+msgid "Memory limit"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:531
-msgid "WooCommerce Version"
+msgid "WooCommerce version"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:533
-msgid "Object Cache"
+msgid "Object cache"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Logs.jsx:536
@@ -956,20 +990,20 @@ msgid "Preview"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:251
-msgid "Total Products"
+msgid "Total products"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:252
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:266
-msgid "ChatGPT Enabled"
+msgid "Enabled for ChatGPT"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:253
-msgid "Avg Quality"
+msgid "Average quality"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:254
-msgid "With Issues"
+msgid "With issues"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:261
@@ -977,11 +1011,11 @@ msgid "ChatGPT status"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:265
-msgid "All Products"
+msgid "All products"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:267
-msgid "ChatGPT Disabled"
+msgid "Disabled for ChatGPT"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:274
@@ -1001,11 +1035,11 @@ msgid "Clear"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:308
-msgid "Regenerate Feed"
+msgid "Regenerate feed"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:315
-msgid "Recalculate Quality"
+msgid "Recalculate quality"
 msgstr ""
 
 #. translators: %d: number of selected products.
@@ -1014,11 +1048,11 @@ msgid "%d selected"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:331
-msgid "Enable Selected"
+msgid "Enable selected"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:339
-msgid "Disable Selected"
+msgid "Disable selected"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:352
@@ -1038,15 +1072,11 @@ msgid "No products found."
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:379
-msgid "Feed Preview"
+msgid "Feed preview"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:383
 msgid "Loading the preview…"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Settings.jsx:28
-msgid "Prerequisites"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:29
@@ -1105,7 +1135,7 @@ msgid "When enabled, SSL and IP allowlist checks are bypassed and Stripe test ke
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:191
-msgid "OpenAI Webhook URL"
+msgid "OpenAI webhook URL"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:192
@@ -1115,11 +1145,11 @@ msgstr ""
 #: assets/js/src/admin-app/screens/Settings.jsx:197
 #: assets/js/src/admin-app/screens/Settings.jsx:213
 #: assets/js/src/admin-app/screens/Settings.jsx:265
-msgid "Save Changes"
+msgid "Save changes"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:198
-msgid "Send Test Webhook"
+msgid "Send test webhook"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:206
@@ -1132,12 +1162,12 @@ msgid "OpenAI IP ranges loaded: %d"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:214
-msgid "Refresh IP Ranges"
+msgid "Refresh IP ranges"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:223
 #: assets/js/src/admin-app/screens/Wizard.jsx:368
-msgid "API Key (Bearer Token)"
+msgid "API key (bearer token)"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:228
@@ -1157,11 +1187,11 @@ msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:234
 #: assets/js/src/admin-app/screens/Wizard.jsx:374
-msgid "Webhook Secret (HMAC)"
+msgid "Webhook secret (HMAC)"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:245
-msgid "Product Feed URL"
+msgid "Product feed URL"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Settings.jsx:251
@@ -1194,11 +1224,11 @@ msgid "Loading the wizard…"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:246
-msgid "OpenAI Application Wizard"
+msgid "OpenAI application wizard"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:247
-msgid "Restart Wizard"
+msgid "Restart wizard"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:257
@@ -1207,24 +1237,24 @@ msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:272
 #: assets/js/src/admin-app/screens/Wizard.jsx:487
-msgid "Business Name"
+msgid "Business name"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:273
-msgid "Business Entity Type"
+msgid "Business entity type"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:273
-msgid "e.g. LLC, Sole Proprietor, Corporation"
+msgid "For example LLC, sole proprietor or corporation"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:274
-msgid "Contact Name"
+msgid "Contact name"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:275
 #: assets/js/src/admin-app/screens/Wizard.jsx:488
-msgid "Contact Email"
+msgid "Contact email"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:276
@@ -1233,11 +1263,11 @@ msgid "Store URL"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:282
-msgid "Your product feed exposes ChatGPT-enabled products to OpenAI. Configure which products are included and review feed quality on the Product Feed screen."
+msgid "Your product feed exposes ChatGPT-enabled products to OpenAI. Configure which products are included and review feed quality on the Product feed screen."
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:284
-msgid "Open Product Feed"
+msgid "Open product feed"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:291
@@ -1246,15 +1276,11 @@ msgid "Required."
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:293
-msgid "Return / Refund Policy URL"
-msgstr ""
-
-#: assets/js/src/admin-app/screens/Wizard.jsx:293
 msgid "Optional for digital-only stores."
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:300
-msgid "Average Product Quality"
+msgid "Average product quality"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:300
@@ -1288,7 +1314,7 @@ msgid "When test mode is on, conformance tests run against Stripe test keys and 
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:349
-msgid "Test Webhook URL"
+msgid "Test webhook URL"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:350
@@ -1296,7 +1322,7 @@ msgid "Where sample webhooks are sent while testing."
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:360
-msgid "Save Test Setup"
+msgid "Save test setup"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:380
@@ -1304,7 +1330,7 @@ msgid "Download the generated application config to attach to your OpenAI mercha
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:382
-msgid "Download JSON Config"
+msgid "Download JSON configuration"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:401
@@ -1312,7 +1338,7 @@ msgid "Run the 17 ACP conformance tests. All blocking tests must pass before sub
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:403
-msgid "Run All Tests"
+msgid "Run all tests"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:409
@@ -1348,7 +1374,7 @@ msgid "No result for this test yet."
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:480
-msgid "Application Summary"
+msgid "Application summary"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:483
@@ -1360,11 +1386,11 @@ msgid "Value"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:490
-msgid "Terms of Service"
+msgid "Terms of service"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:491
-msgid "Privacy Policy"
+msgid "Privacy policy"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:496
@@ -1377,7 +1403,7 @@ msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:517
 #: assets/js/src/admin-app/screens/Wizard.jsx:526
-msgid "Save & Next"
+msgid "Save and continue"
 msgstr ""
 
 #: assets/js/src/admin-app/screens/Wizard.jsx:529

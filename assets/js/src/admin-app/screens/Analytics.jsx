@@ -33,9 +33,9 @@ export default function Analytics() {
 			value={ days }
 			onChange={ ( e ) => setDays( e.target.value ) }
 			options={ [
-				{ value: '7', label: __( 'Last 7 Days', 'carticy-ai-checkout-for-woocommerce' ) },
-				{ value: '30', label: __( 'Last 30 Days', 'carticy-ai-checkout-for-woocommerce' ) },
-				{ value: '90', label: __( 'Last 90 Days', 'carticy-ai-checkout-for-woocommerce' ) },
+				{ value: '7', label: __( 'Last 7 days', 'carticy-ai-checkout-for-woocommerce' ) },
+				{ value: '30', label: __( 'Last 30 days', 'carticy-ai-checkout-for-woocommerce' ) },
+				{ value: '90', label: __( 'Last 90 days', 'carticy-ai-checkout-for-woocommerce' ) },
 			] }
 		/>
 	);
@@ -46,21 +46,21 @@ export default function Analytics() {
 		{
 			key: 'chatgpt',
 			accent: true,
-			label: __( 'ChatGPT Orders', 'carticy-ai-checkout-for-woocommerce' ),
+			label: __( 'ChatGPT orders', 'carticy-ai-checkout-for-woocommerce' ),
 			value: ( kpis ) => kpis.chatgpt_orders,
 			/* translators: %s: revenue amount. */
 			sublabel: ( kpis ) => sprintf( __( 'Revenue: %s', 'carticy-ai-checkout-for-woocommerce' ), kpis.chatgpt_revenue ),
 		},
 		{
 			key: 'regular',
-			label: __( 'Regular Orders', 'carticy-ai-checkout-for-woocommerce' ),
+			label: __( 'Regular orders', 'carticy-ai-checkout-for-woocommerce' ),
 			value: ( kpis ) => kpis.regular_orders,
 			/* translators: %s: revenue amount. */
 			sublabel: ( kpis ) => sprintf( __( 'Revenue: %s', 'carticy-ai-checkout-for-woocommerce' ), kpis.regular_revenue ),
 		},
 		{
 			key: 'conversion',
-			label: __( 'ChatGPT Conversion', 'carticy-ai-checkout-for-woocommerce' ),
+			label: __( 'ChatGPT conversion', 'carticy-ai-checkout-for-woocommerce' ),
 			value: ( kpis ) => kpis.conversion_rate + '%',
 			/* translators: 1: orders placed through ChatGPT, 2: all orders. */
 			sublabel: ( kpis ) => sprintf( _n( '%1$d of %2$d order', '%1$d of %2$d orders', kpis.total_orders, 'carticy-ai-checkout-for-woocommerce' ), kpis.chatgpt_orders, kpis.total_orders ),
@@ -113,7 +113,7 @@ export default function Analytics() {
 			{ data && (
 				<>
 					<section className="cv-section">
-						<SectionHeader title={ __( 'ChatGPT Order Status Distribution', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<SectionHeader title={ __( 'ChatGPT orders by status', 'carticy-ai-checkout-for-woocommerce' ) } />
 						<Card flush>
 							<Table
 								columns={ statusColumns }
@@ -125,7 +125,7 @@ export default function Analytics() {
 					</section>
 
 					<section className="cv-section">
-						<SectionHeader title={ __( 'Recent ChatGPT Orders', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<SectionHeader title={ __( 'Recent ChatGPT orders', 'carticy-ai-checkout-for-woocommerce' ) } />
 						<Card flush>
 							<Table
 								columns={ orderColumns }

@@ -77,10 +77,13 @@ plugin knows them all:
 
 - **AppHeader** — brand (the screen's `h1`), one link per section, then the
   screen-wide `actions` and the utility links at the end. On narrow screens
-  the section links move to a row of their own that scrolls sideways, and
-  `actions` move with the utility links to a row under the brand, wrapping
-  there. The plugin owns the routes behind `href`. Moving between sections
-  is navigation: links with `aria-current="page"`, never `Tabs`.
+  the section links move to a row of their own that scrolls sideways; the
+  utility links stay beside the brand while both fit on one line, and a
+  longer title moves them to a row under the brand instead of squeezing
+  either. `actions` always take that row with the utility links, wrapping
+  there. Every link and action in the header is a 44px touch target there.
+  The plugin owns the routes behind `href`. Moving between sections is
+  navigation: links with `aria-current="page"`, never `Tabs`.
 - **HeaderUtilities** (inside AppHeader, or alone) — Contact us, Account and
   similar destinations as labelled links with an icon. Pass trusted URLs
   from the server; an empty `href` leaves a link out, so omit destinations
@@ -91,7 +94,11 @@ plugin knows them all:
   inside the page. See Notices below.
 - **LoadingPanel** — a whole screen or panel waiting for data whose layout
   is not known yet: a centered spinner with room around it and a
-  screen-reader label. Content whose layout is known (cards, stat rows,
+  screen-reader label. With `showLabel` the label also shows under the
+  spinner: use it when the wait is a step the reader should see named
+  ("Checking for a consent platform…"), typically a check against another
+  site or service that can take a few seconds; a plain first load keeps the
+  spinner alone. Content whose layout is known (cards, stat rows,
   table rows, a chart) keeps its shape with `Skeleton` instead (see
   Loading). Keep the inline `Spinner` (or `Button loading`) for busy
   controls. When the request settles, show the result, an `EmptyState` or a
@@ -162,7 +169,8 @@ Pick the indicator by what the screen already knows:
   rows, a chart): placeholder shapes hold it, so nothing moves when the
   data arrives.
 - **LoadingPanel** — the layout is not known yet (a screen or panel on its
-  first load): a centered spinner.
+  first load): a centered spinner, with its label under it when the wait
+  needs naming (`showLabel`).
 - **Spinner** or `Button loading` — a control that is busy.
 
 Skeletons are hidden from screen readers. The region they fill carries
@@ -416,7 +424,7 @@ so without this the ring would follow every tap there.
 - `AppHeader({ title, icon?, items?: [{ id, label, href }], current?, navLabel?, actions?, links? })` — `actions` are controls for the whole screen (a `Button size="sm"`), shown before the utility links.
 - `HeaderUtilities({ links: [{ href, label, icon?: 'contact'|'account'|'help'|'docs' }] })` — links are told apart by their place in `links`, so two may share an address (Help and Upgrade both on the plugin's page).
 - `NoticeSlot({ areaId })` — an empty `display: contents` slot the notice area moves into.
-- `LoadingPanel({ label })`
+- `LoadingPanel({ label, showLabel? = false })` — `role="status"`; `label` is read by screen readers, and with `showLabel` it also shows under the spinner (once, so it is not announced twice).
 - `SectionLayout({ label, closeLabel, sections?: [{ id, title, icon?, content }], headingLevel? = 2, items?: [{ id, label, element }], children? })`: an `h2` heading takes the section-title size, deeper levels the card-title size; a section's `icon` (inline SVG) sits in a small tile before its heading; the navigation shows the title only. On narrow screens the navigation opens in a `Drawer` from the start edge; `closeLabel` names its close button.
 - `SaveBar({ label, message?, children })`
 
@@ -451,8 +459,9 @@ so without this the ring would follow every tap there.
 - `FormSection({ title, icon?, description?, actions?, variant?: 'plain'|'card' = 'plain', tone?: 'neutral'|'accent'|'success'|'warning'|'critical' = 'neutral', headingLevel? = 3, children })` — one titled group in a long form: an icon tile, the title, an optional one-line description and actions, then the fields with even spacing. It is a labelled group (`role="group"`, named by the title). Plain sections are divided by a hairline; `card` sections are white cards (`.cv-card`), for a grey surface such as `Drawer surface="subtle"`. Keep `tone` neutral unless the colour says something, such as the state of what the section edits.
 - `Combobox({ label, options: [{ value, label, description?, disabled? }], value, onChange, multiple?, placeholder?, help?, error?, required?, requiredLabel? = 'Required', disabled?, filter? = true, onInputChange?(query), loading?, loadingLabel? = 'Loading…', noResultsLabel? = 'No matches', removeLabel?(label), clearLabel? = 'Clear selection', 'aria-describedby'?, ...rest })` — a searchable picker (WAI-ARIA 1.2 combobox with a listbox popup). `value` is one value or `null`; with `multiple` it is an array and the chosen options show as chips in the field. Label, help, error and `required` work as in the fields above (`required` sets `aria-required`, so the empty text field never blocks a form). Other props go to the `.cv-field` root. See Combobox below.
 - `Dropzone({ onFiles(files), onReject?(rejections), accept?, maxSize?, multiple?, disabled?, label?, help?, buttonLabel? = 'Choose file', messages?, ...rest })` — a drop area plus a "Choose file" button. `help` is a line under the label (accepted types, size limit), read with the button. It checks the files and hands the accepted ones to `onFiles`; it never reads them. See Dropzone below.
-- `Toggle({ size?, indeterminate?, ...checkboxProps })` — pass `checked` + `onChange`.
+- `Toggle({ size?, indeterminate?, ...checkboxProps })` — pass `checked` + `onChange`. The checkbox covers the whole switch, so a press anywhere on the track or thumb changes it; the focus ring is drawn on the track. `disabled` draws on and off in muted colours (and dims a ToggleRow's label) whatever wp-admin applies to checkboxes, with or without the takeover.
 - `ToggleRow({ label, help?, ...toggleProps })` — a labelled full-width toggle row; `help` is a line under the label, outside it, so the label names the switch and the help is read once as its description (`aria-describedby`).
+- `.cv-check` / `.cv-radio` (CSS) — a checkbox or radio in the package look: checked, mixed, focus and disabled states drawn by the package whatever wp-admin applies, disabled in the toggle's muted colours (grey off, light violet on). Under the takeover, bare checkboxes and radios in the mount take the same look, without the mixed mark; give a mixed checkbox the class.
 
 **Overlays & empty**
 - `Modal({ open, onClose, title?, size?: 'sm'|'md'|'lg'|'xl' = 'md', footer?, dismissible? = true, closeLabel? = 'Close', initialFocusRef?, container?, ...rest, children })` — a centred dialog for a short decision. It behaves like a Drawer (focus moves in and stays inside, the page does not scroll, focus returns on close, portal into the closest `.cv-root` above the wp-admin toolbar), so a Modal opened from a Drawer sits above it and Escape closes the Modal only. Closes on Escape and a scrim click when `dismissible`. The title names the dialog (`aria-labelledby`); without a title pass an `aria-label`. Other props go to the dialog element.
@@ -463,7 +472,7 @@ so without this the ring would follow every tap there.
 - `Table({ columns: [{ key, header, render?(row), className?, headerClassName?, sortable?, defaultSortDirection? }], rows, getRowId? = r => r.id, selectable?, selectedIds?, onToggleSelect?(id), selectLabel? = 'Select', onToggleSelectAll?(checked, ids), selectAllLabel? = 'Select all', sort?: { key, direction: 'asc'|'desc' }, onSortChange?(key, direction), renderRowExtra?(row, colSpan), emptyLabel?, ...rest })` — `render` returns the cell node; `renderRowExtra` adds a full-width row below (detail panels / inline forms). Selection and sort state are owned by the consumer. Headers show as written, in sentence case, in the muted header style (WP_List_Table headers under chrome.css too). The table sits in a `.cv-table-wrap` that scrolls sideways on narrow screens; while it scrolls and holds no control, Chrome and Firefox make it a Tab stop (the arrow keys scroll it), drawn with the focus ring.
   - **Sorting:** with `sort` and `onSortChange`, columns marked `sortable` get a button in their header (`.cv-sort`) and the sorted column carries `aria-sort`. A click on the sorted column flips the direction; another column starts at its `defaultSortDirection` (`'asc'`). The consumer sorts the rows or re-queries.
   - **Select all:** with `selectable` and `onToggleSelectAll`, the selection column's header holds a checkbox: checked when every row in `rows` is selected, mixed (indeterminate) when some are, disabled when there are no rows. `onToggleSelectAll( checked, ids )` gets what the reader asked for and the ids of the rows shown.
-  - The selection checkboxes are `.cv-check` (checked, mixed and focus states drawn by the package, whatever wp-admin applies).
+  - The selection checkboxes are `.cv-check` (checked, mixed, disabled and focus states drawn by the package, whatever wp-admin applies).
 - `SearchBar({ value, onChange(value), onSubmit(value), onClear?, placeholder?, submitLabel?, clearLabel?, 'aria-label'?, ...rest })` — keep the typed value separate from the applied query (submit re-queries). The field shows a search icon, takes the room beside its buttons and is named by `aria-label` (or the placeholder).
 - `BulkActionBar({ label, children, ...rest })` — the strip above a table when rows are selected; render it conditionally, pass action Buttons as children.
 

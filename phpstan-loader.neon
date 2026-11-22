@@ -1,0 +1,11 @@
+includes:
+    - phpstan.neon
+
+parameters:
+    scanDirectories:
+        - src
+    # The main file must load on every PHP version the plugin header accepts.
+    phpVersion:
+        min: 80000
+        max: 80499
+    tmpDir: .cache/phpstan-loader

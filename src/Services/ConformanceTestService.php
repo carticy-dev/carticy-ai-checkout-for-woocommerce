@@ -35,17 +35,26 @@ final class ConformanceTestService {
 	/**
 	 * Test results
 	 *
-	 * @var array
+	 * @var array<int, array<string, mixed>>
 	 */
 	private array $test_results = array();
 
 	/**
+	 * Test mode service
+	 *
+	 * @var TestModeService
+	 */
+	private TestModeService $test_mode;
+
+	/**
 	 * Constructor
 	 *
-	 * @param MockSimulator $mock_simulator Mock simulator instance.
+	 * @param MockSimulator   $mock_simulator Mock simulator instance.
+	 * @param TestModeService $test_mode      Test mode service instance.
 	 */
-	public function __construct( MockSimulator $mock_simulator ) {
+	public function __construct( MockSimulator $mock_simulator, TestModeService $test_mode ) {
 		$this->mock_simulator = $mock_simulator;
+		$this->test_mode      = $test_mode;
 	}
 
 	/**
@@ -72,10 +81,10 @@ final class ConformanceTestService {
 	 * IMPORTANT: Manually calls check_permission() to ensure all security
 	 * checks run (authentication, IP allowlist, rate limiting, etc.).
 	 *
-	 * @param string $endpoint Endpoint path (e.g., 'checkout_sessions' or 'checkout_sessions/{id}/complete').
-	 * @param string $method HTTP method (POST, GET).
-	 * @param array  $data Request data.
-	 * @return array Response data in simulate_request format.
+	 * @param string               $endpoint Endpoint path (e.g., 'checkout_sessions' or 'checkout_sessions/{id}/complete').
+	 * @param string               $method   HTTP method (POST, GET).
+	 * @param array<string, mixed> $data     Request data.
+	 * @return array{success: bool, status_code: int, body: mixed} Response data in simulate_request format.
 	 */
 	private function call_endpoint_directly( string $endpoint, string $method, array $data ): array {
 		$checkout_endpoint = $this->get_checkout_endpoint();
@@ -179,27 +188,27 @@ final class ConformanceTestService {
 	/**
 	 * Get list of all available tests
 	 *
-	 * @return array List of test IDs and names.
+	 * @return array<string, string> List of test IDs and names.
 	 */
 	public function get_test_list(): array {
 		return array(
-			'test_1'  => 'Session Creation With Shipping Address',
-			'test_2'  => 'Session Creation Without Shipping Address',
-			'test_3'  => 'Shipping Option Updates and Total Recalculation',
-			'test_4'  => 'SharedPaymentToken Processing',
-			'test_5'  => 'Order Completion with 201 Created Status',
-			'test_6'  => 'Webhook Emission (order_created, order_updated)',
-			'test_7'  => 'Error Scenarios (missing, out_of_stock, payment_declined)',
-			'test_8'  => 'Idempotency-Key Validation',
-			'test_9'  => 'Security Requirements (TLS, Bearer Token, HMAC)',
-			'test_10' => 'Product Feed Endpoint Accessibility',
-			'test_11' => 'Product Feed Data Quality',
-			'test_12' => 'Product Feed Cache and Refresh Mechanism',
-			'test_13' => 'API-Version Header Validation',
-			'test_14' => 'Rate Limiting Enforcement',
-			'test_15' => 'Robots.txt Configuration for OpenAI Crawlers',
-			'test_16' => 'IP Allowlist Configuration',
-			'test_17' => 'Production Prerequisites Validation',
+			'test_1'  => 'Session creation with shipping address',
+			'test_2'  => 'Session creation without shipping address',
+			'test_3'  => 'Shipping option updates and total recalculation',
+			'test_4'  => 'SharedPaymentToken processing',
+			'test_5'  => 'Order completion with 201 Created status',
+			'test_6'  => 'Webhook emission (order_created, order_updated)',
+			'test_7'  => 'Error scenarios (missing, out_of_stock, payment_declined)',
+			'test_8'  => 'Idempotency-Key validation',
+			'test_9'  => 'Security requirements (TLS, bearer token, HMAC)',
+			'test_10' => 'Product feed endpoint accessibility',
+			'test_11' => 'Product feed data quality',
+			'test_12' => 'Product feed cache and refresh mechanism',
+			'test_13' => 'API-Version header validation',
+			'test_14' => 'Rate limiting enforcement',
+			'test_15' => 'Robots.txt configuration for OpenAI crawlers',
+			'test_16' => 'IP allowlist configuration',
+			'test_17' => 'Production prerequisites validation',
 		);
 	}
 
@@ -207,7 +216,7 @@ final class ConformanceTestService {
 	 * Run a single test by ID
 	 *
 	 * @param string $test_id Test identifier (test_1, test_2, etc.).
-	 * @return array Test result.
+	 * @return array<string, mixed> Test result.
 	 */
 	public function run_single_test( string $test_id ): array {
 		$this->test_results = array();
@@ -279,7 +288,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_1_session_creation_with_address(): void {
-		$test_name = 'Session Creation With Shipping Address';
+		$test_name = 'Session creation with shipping address';
 
 		$request = $this->mock_simulator->generate_create_session_request( 'valid_order' );
 		$result  = $this->call_endpoint_directly( 'checkout_sessions', 'POST', $request );
@@ -298,17 +307,17 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_2_session_creation_without_address(): void {
-		$test_name = 'Session Creation Without Shipping Address';
+		$test_name = 'Session creation without shipping address';
 
 		$request = $this->mock_simulator->generate_create_session_request( 'missing_address' );
 		$result  = $this->call_endpoint_directly( 'checkout_sessions', 'POST', $request );
 
 		// When no shipping address provided, shipping_options key should NOT exist.
 		// Not even as empty array - the key itself should be absent from response.
+		$body   = is_array( $result['body'] ) ? $result['body'] : array();
 		$passed = $result['success']
-			&& isset( $result['body']['id'] )
-			&& ! isset( $result['body']['shipping_options'] )
-			&& ! array_key_exists( 'shipping_options', $result['body'] ?? array() );
+			&& isset( $body['id'] )
+			&& ! array_key_exists( 'shipping_options', $body );
 
 		$this->add_result( $test_name, $passed, $request, $result );
 	}
@@ -319,7 +328,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_3_shipping_option_updates(): void {
-		$test_name = 'Shipping Option Updates and Total Recalculation';
+		$test_name = 'Shipping option updates and total recalculation';
 
 		// Create session using direct endpoint call.
 		$create_request = $this->mock_simulator->generate_create_session_request( 'valid_order' );
@@ -353,7 +362,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_4_shared_payment_token(): void {
-		$test_name = 'SharedPaymentToken Processing';
+		$test_name = 'SharedPaymentToken processing';
 
 		// Create session using direct endpoint call (faster than HTTP).
 		$create_request = $this->mock_simulator->generate_create_session_request( 'valid_order' );
@@ -401,7 +410,7 @@ final class ConformanceTestService {
 		$stripe_configured = class_exists( 'WC_Gateway_Stripe' );
 		if ( $stripe_configured ) {
 			$stripe_settings   = get_option( 'woocommerce_stripe_settings', array() );
-			$is_test_mode      = get_option( 'carticy_ai_checkout_test_mode', false );
+			$is_test_mode      = $this->test_mode->is_test_mode();
 			$stripe_configured = $is_test_mode
 				? ! empty( $stripe_settings['test_secret_key'] ?? '' )
 				: ! empty( $stripe_settings['secret_key'] ?? '' );
@@ -450,7 +459,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_5_order_completion(): void {
-		$test_name = 'Order Completion with 201 Created Status';
+		$test_name = 'Order completion with 201 Created status';
 
 		// Create session using direct endpoint call (faster than HTTP).
 		$create_request = $this->mock_simulator->generate_create_session_request( 'valid_order' );
@@ -473,7 +482,6 @@ final class ConformanceTestService {
 
 		// Validate response format first.
 		$response_valid = $complete_result['success']
-			&& isset( $complete_result['status_code'] )
 			&& ( 201 === $complete_result['status_code'] || 200 === $complete_result['status_code'] )
 			&& isset( $complete_result['body']['order_id'] )
 			&& isset( $complete_result['body']['status'] );
@@ -514,10 +522,10 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_6_webhook_emission(): void {
-		$test_name = 'Webhook Emission (order_created, order_updated)';
+		$test_name = 'Webhook emission (order_created, order_updated)';
 
 		// Check webhook configuration.
-		$is_test_mode = get_option( 'carticy_ai_checkout_test_mode', false );
+		$is_test_mode = $this->test_mode->is_test_mode();
 		if ( $is_test_mode ) {
 			$webhook_url = get_option( 'carticy_ai_checkout_test_webhook_url', '' );
 		} else {
@@ -616,7 +624,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_7_error_scenarios(): void {
-		$test_name = 'Error Scenarios (missing, out_of_stock, payment_declined)';
+		$test_name = 'Error scenarios (missing, out_of_stock, payment_declined)';
 
 		$error_tests = array();
 
@@ -729,7 +737,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_8_idempotency(): void {
-		$test_name = 'Idempotency-Key Validation';
+		$test_name = 'Idempotency-Key validation';
 
 		$idempotency_key = 'test_idem_' . wp_generate_password( 16, false );
 		$headers         = array(
@@ -785,12 +793,12 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_9_security_requirements(): void {
-		$test_name = 'Security Requirements (TLS, Bearer Token, HMAC)';
+		$test_name = 'Security requirements (TLS, bearer token, HMAC)';
 
 		$security_checks = array();
 
 		// Check if test mode is active or on localhost.
-		$is_test_mode = get_option( 'carticy_ai_checkout_test_mode', false );
+		$is_test_mode = $this->test_mode->is_test_mode();
 		$http_host    = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
 		$is_localhost = in_array( $http_host, array( 'localhost', '127.0.0.1', '::1' ), true )
 			|| str_contains( $http_host, '.local' );
@@ -840,7 +848,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_10_feed_endpoint_accessibility(): void {
-		$test_name = 'Product Feed Endpoint Accessibility';
+		$test_name = 'Product feed endpoint accessibility';
 
 		$feed_url = rest_url( 'carticy-ai-checkout/v1/products' );
 
@@ -908,7 +916,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_11_feed_data_quality(): void {
-		$test_name = 'Product Feed Data Quality';
+		$test_name = 'Product feed data quality';
 
 		$feed_url = rest_url( 'carticy-ai-checkout/v1/products' );
 		$response = wp_remote_get(
@@ -983,7 +991,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_12_feed_refresh_mechanism(): void {
-		$test_name = 'Product Feed Cache and Refresh Mechanism';
+		$test_name = 'Product feed cache and refresh mechanism';
 
 		$checks = array();
 
@@ -1020,7 +1028,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_13_api_version_header(): void {
-		$test_name = 'API-Version Header Validation';
+		$test_name = 'API-Version header validation';
 
 		$checks = array();
 
@@ -1042,7 +1050,7 @@ final class ConformanceTestService {
 			$request_with_version,
 			array() // No API-Version header.
 		);
-		$checks['without_version_handled'] = true; // We accept requests without version for now.
+		$checks['without_version_handled'] = $result_without_version['success'];
 
 		// Test 3: Request with INVALID API-Version (future version).
 		$result_invalid_version = $this->mock_simulator->simulate_request(
@@ -1052,7 +1060,7 @@ final class ConformanceTestService {
 			array( 'API-Version' => '9999-99-99' ) // Invalid future version.
 		);
 		// Should still work - we don't reject unknown versions, just log them.
-		$checks['invalid_version_handled'] = true;
+		$checks['invalid_version_handled'] = $result_invalid_version['success'];
 
 		$passed = $checks['with_version_succeeds']
 			&& $checks['without_version_handled']
@@ -1067,7 +1075,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_14_rate_limiting(): void {
-		$test_name = 'Rate Limiting Enforcement';
+		$test_name = 'Rate limiting enforcement';
 
 		$checks = array();
 
@@ -1107,12 +1115,10 @@ final class ConformanceTestService {
 		$checks['requests_sent']         = $test_requests;
 		$checks['successful_requests']   = $success_count;
 		$checks['test_duration_seconds'] = round( microtime( true ) - $start_time, 2 );
-		$checks['rate_limit_enabled']    = $rate_limit_enabled;
 
-		// Pass if rate limiting is enabled and requests are processed normally.
-		// We're not triggering the actual limit (would take 100+ requests),
-		// just verifying the rate limiting service is active and working.
-		$passed = $rate_limit_enabled && $success_count === $test_requests;
+		// Rate limiting is enabled (checked above); pass when the burst is processed
+		// normally. The actual limit is not triggered (it would take 100+ requests).
+		$passed = $success_count === $test_requests;
 
 		$message = '';
 		if ( $passed ) {
@@ -1138,7 +1144,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_15_robots_txt_configuration(): void {
-		$test_name = 'Robots.txt Configuration for OpenAI Crawlers';
+		$test_name = 'Robots.txt configuration for OpenAI crawlers';
 
 		// Check for physical robots.txt file in WordPress root.
 		// Use get_home_path() for proper WordPress root detection.
@@ -1245,11 +1251,11 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_16_ip_allowlist(): void {
-		$test_name = 'IP Allowlist Configuration';
+		$test_name = 'IP allowlist configuration';
 
 		$checks = array();
 
-		$is_test_mode        = get_option( 'carticy_ai_checkout_test_mode', false );
+		$is_test_mode        = $this->test_mode->is_test_mode();
 		$checks['test_mode'] = $is_test_mode;
 
 		// In test mode, IP allowlist should be bypassed.
@@ -1277,7 +1283,7 @@ final class ConformanceTestService {
 
 		$message = '';
 		if ( $ip_allowlist_enabled && ! $checks['openai_ips_cached'] ) {
-			$message = 'IP allowlist enabled but OpenAI IP ranges not cached. Run Settings > Refresh IP Ranges.';
+			$message = 'IP allowlist enabled but OpenAI IP ranges not cached. Run Settings > Refresh IP ranges.';
 		}
 
 		$this->add_result( $test_name, $passed, array(), $checks, $message, false );
@@ -1289,7 +1295,7 @@ final class ConformanceTestService {
 	 * @return void
 	 */
 	private function test_17_production_prerequisites(): void {
-		$test_name = 'Production Prerequisites Validation';
+		$test_name = 'Production prerequisites validation';
 
 		$checks = array();
 
@@ -1298,7 +1304,7 @@ final class ConformanceTestService {
 		$checks['api_key_configured'] = ! empty( $api_key );
 
 		// Check webhook URL configured.
-		$is_test_mode = get_option( 'carticy_ai_checkout_test_mode', false );
+		$is_test_mode = $this->test_mode->is_test_mode();
 		if ( $is_test_mode ) {
 			$webhook_url = get_option( 'carticy_ai_checkout_test_webhook_url', '' );
 		} else {
@@ -1313,17 +1319,12 @@ final class ConformanceTestService {
 		// Check WooCommerce Stripe Gateway is active.
 		$checks['wc_stripe_gateway_active'] = class_exists( 'WC_Gateway_Stripe' );
 
-		// Check Stripe keys configured.
-		if ( $checks['wc_stripe_gateway_active'] ) {
-			$stripe_settings = get_option( 'woocommerce_stripe_settings', array() );
-			if ( $is_test_mode ) {
-				$checks['stripe_test_key_configured'] = ! empty( $stripe_settings['test_secret_key'] ?? '' );
-			} else {
-				$checks['stripe_live_key_configured'] = ! empty( $stripe_settings['secret_key'] ?? '' );
-			}
-		} else {
-			$checks['stripe_keys_configured'] = false;
-		}
+		// Check the Stripe secret key for the current mode is configured.
+		$stripe_settings                  = get_option( 'woocommerce_stripe_settings', array() );
+		$stripe_key                       = $is_test_mode ? 'test_secret_key' : 'secret_key';
+		$checks['stripe_keys_configured'] = $checks['wc_stripe_gateway_active']
+			&& is_array( $stripe_settings )
+			&& ! empty( $stripe_settings[ $stripe_key ] );
 
 		// Check at least one product enabled for ChatGPT.
 		$products                       = wc_get_products(
@@ -1345,28 +1346,28 @@ final class ConformanceTestService {
 			&& $checks['webhook_url_configured']
 			&& $checks['webhook_secret_configured']
 			&& $checks['wc_stripe_gateway_active']
-			&& ( $checks['stripe_test_key_configured'] ?? $checks['stripe_live_key_configured'] ?? false )
+			&& $checks['stripe_keys_configured']
 			&& $checks['has_enabled_products'];
 
 		$message = '';
 		$missing = array();
 		if ( ! $checks['api_key_configured'] ) {
-			$missing[] = 'API Key';
+			$missing[] = 'API key';
 		}
 		if ( ! $checks['webhook_url_configured'] ) {
 			$missing[] = 'Webhook URL';
 		}
 		if ( ! $checks['webhook_secret_configured'] ) {
-			$missing[] = 'Webhook Secret';
+			$missing[] = 'Webhook secret';
 		}
 		if ( ! $checks['wc_stripe_gateway_active'] ) {
-			$missing[] = 'WooCommerce Stripe Gateway Plugin';
+			$missing[] = 'WooCommerce Stripe Gateway plugin';
 		}
-		if ( ! ( $checks['stripe_test_key_configured'] ?? $checks['stripe_live_key_configured'] ?? false ) ) {
-			$missing[] = 'Stripe API Keys';
+		if ( ! $checks['stripe_keys_configured'] ) {
+			$missing[] = 'Stripe API keys';
 		}
 		if ( ! $checks['has_enabled_products'] ) {
-			$missing[] = 'Enabled Products';
+			$missing[] = 'Enabled products';
 		}
 
 		if ( ! empty( $missing ) ) {
@@ -1402,7 +1403,7 @@ final class ConformanceTestService {
 	/**
 	 * Get test results
 	 *
-	 * @return array Test results with summary.
+	 * @return array<string, mixed> Test results with summary.
 	 */
 	public function get_results(): array {
 		$total  = count( $this->test_results );
@@ -1442,33 +1443,6 @@ final class ConformanceTestService {
 		return wp_json_encode( $this->get_results(), JSON_PRETTY_PRINT );
 	}
 
-	/**
-	 * Get test status badge HTML
-	 *
-	 * @param array $results Test results.
-	 * @return string HTML badge.
-	 */
-	public function get_status_badge( array $results ): string {
-		$all_passed = $results['summary']['all_passed'] ?? false;
-		$pass_rate  = $results['summary']['pass_rate'] ?? 0;
-
-		if ( $all_passed ) {
-			$color = '#5cb85c';
-			$label = '✓ All Tests Passed';
-		} elseif ( $pass_rate >= 50 ) {
-			$color = '#f0ad4e';
-			$label = sprintf( '⚠ %d%% Passing', $pass_rate );
-		} else {
-			$color = '#d9534f';
-			$label = sprintf( '✗ %d%% Passing', $pass_rate );
-		}
-
-		return sprintf(
-			'<span class="conformance-badge" style="background: %s; color: #fff; padding: 5px 12px; border-radius: 4px; font-weight: bold;">%s</span>',
-			esc_attr( $color ),
-			esc_html( $label )
-		);
-	}
 
 	/**
 	 * Check if a specific crawler is blocked in robots.txt
@@ -1543,7 +1517,7 @@ final class ConformanceTestService {
 	private function create_temporary_test_product(): int {
 		$product = new \WC_Product_Simple();
 		$product->set_name( 'Test Product - Out of Stock (Auto-generated)' );
-		$product->set_regular_price( 10 );
+		$product->set_regular_price( '10' );
 		$product->set_sku( 'TEST-OOS-' . time() );
 		$product->set_stock_status( 'outofstock' );
 		$product->set_manage_stock( false );

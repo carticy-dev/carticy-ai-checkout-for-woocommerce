@@ -13,7 +13,7 @@
         'carticy/admin-ui' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '9976892f9878142c55046c0c79bc0b2faf5b2128',
+            'reference' => '38808bec02d1566014d653dd1101fcc5c9bcb8b8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../carticy/admin-ui',
             'aliases' => array(

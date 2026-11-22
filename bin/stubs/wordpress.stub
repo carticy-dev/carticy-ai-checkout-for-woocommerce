@@ -1,0 +1,11 @@
+<?php
+/** Analysis-only corrections to the bundled WordPress stubs. */
+class WP_REST_Request {
+	/**
+	 * Core documents an array, but returns null until a JSON body has been
+	 * parsed (wp-includes/rest-api/class-wp-rest-request.php, WordPress 6.9).
+	 *
+	 * @return array<string, mixed>|null
+	 */
+	public function get_json_params() {}
+}

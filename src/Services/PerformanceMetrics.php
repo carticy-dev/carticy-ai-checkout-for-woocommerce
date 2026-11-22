@@ -65,7 +65,7 @@ final class PerformanceMetrics {
 	 * Get performance statistics.
 	 *
 	 * @param int $hours Number of hours to analyze.
-	 * @return array Performance statistics.
+	 * @return array<string, mixed> Performance statistics.
 	 */
 	public function get_statistics( int $hours = 24 ): array {
 		$cache_key = 'carticy_ai_checkout_performance_stats_' . $hours;
@@ -175,9 +175,7 @@ final class PerformanceMetrics {
 
 		// Calculate average per endpoint
 		foreach ( $stats['by_endpoint'] as $endpoint => &$data ) {
-			if ( $data['count'] > 0 ) {
-				$data['average_duration'] = round( $data['total_duration'] / $data['count'], 3 );
-			}
+			$data['average_duration'] = round( $data['total_duration'] / $data['count'], 3 );
 		}
 
 		// Sort endpoints by slowest first
@@ -197,7 +195,7 @@ final class PerformanceMetrics {
 	/**
 	 * Get system health metrics.
 	 *
-	 * @return array System health data.
+	 * @return array<string, mixed> System health data.
 	 */
 	public function get_system_health(): array {
 		return array(
@@ -254,7 +252,7 @@ final class PerformanceMetrics {
 	/**
 	 * Get cache status.
 	 *
-	 * @return array Cache status information.
+	 * @return array{object_cache: bool, opcode_cache: bool} Cache status information.
 	 */
 	private function get_cache_status(): array {
 		$status = array(

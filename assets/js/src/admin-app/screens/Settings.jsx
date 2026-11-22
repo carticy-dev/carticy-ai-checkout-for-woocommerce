@@ -188,14 +188,14 @@ export default function Settings() {
 						/>
 						<TextField
 							type="url"
-							label={ __( 'OpenAI Webhook URL', 'carticy-ai-checkout-for-woocommerce' ) }
+							label={ __( 'OpenAI webhook URL', 'carticy-ai-checkout-for-woocommerce' ) }
 							help={ __( 'Unique webhook URL provided by OpenAI during merchant onboarding (required for production).', 'carticy-ai-checkout-for-woocommerce' ) }
 							value={ settings.webhook_url }
 							onChange={ ( e ) => setOption( 'webhook_url' )( e.target.value ) }
 						/>
 						<div className="caic-actions">
-							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ __( 'Save Changes', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
-							<Button loading={ 'test_webhook' === busy } onClick={ testWebhook }>{ __( 'Send Test Webhook', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ __( 'Save changes', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button loading={ 'test_webhook' === busy } onClick={ testWebhook }>{ __( 'Send test webhook', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 					</Card>
 				) }
@@ -210,8 +210,8 @@ export default function Settings() {
 							onChange={ ( e ) => setOption( 'enable_ip_allowlist' )( e.target.checked ) }
 						/>
 						<div className="caic-actions">
-							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ __( 'Save Changes', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
-							<Button loading={ 'ip' === busy } onClick={ refreshIpRanges }>{ __( 'Refresh IP Ranges', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ __( 'Save changes', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button loading={ 'ip' === busy } onClick={ refreshIpRanges }>{ __( 'Refresh IP ranges', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 					</Card>
 				) }
@@ -220,7 +220,7 @@ export default function Settings() {
 					<Card>
 						<TextField
 							readOnly
-							label={ __( 'API Key (Bearer Token)', 'carticy-ai-checkout-for-woocommerce' ) }
+							label={ __( 'API key (bearer token)', 'carticy-ai-checkout-for-woocommerce' ) }
 							value={ data.api_key }
 							onFocus={ ( e ) => e.target.select() }
 						/>
@@ -231,7 +231,7 @@ export default function Settings() {
 
 						<TextField
 							readOnly
-							label={ __( 'Webhook Secret (HMAC)', 'carticy-ai-checkout-for-woocommerce' ) }
+							label={ __( 'Webhook secret (HMAC)', 'carticy-ai-checkout-for-woocommerce' ) }
 							value={ data.webhook_secret }
 							onFocus={ ( e ) => e.target.select() }
 						/>
@@ -242,7 +242,7 @@ export default function Settings() {
 
 						<TextField
 							readOnly
-							label={ __( 'Product Feed URL', 'carticy-ai-checkout-for-woocommerce' ) }
+							label={ __( 'Product feed URL', 'carticy-ai-checkout-for-woocommerce' ) }
 							value={ data.product_feed_url }
 							onFocus={ ( e ) => e.target.select() }
 						/>
@@ -262,7 +262,7 @@ export default function Settings() {
 							onChange={ ( e ) => setOption( 'delete_data_on_uninstall' )( e.target.checked ) }
 						/>
 						<div className="caic-actions">
-							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ __( 'Save Changes', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ __( 'Save changes', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 					</Card>
 				) }

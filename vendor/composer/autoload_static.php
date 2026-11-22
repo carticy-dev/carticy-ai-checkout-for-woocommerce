@@ -38,7 +38,6 @@ class ComposerStaticInita6e21aff272f91cc8d7f0fe7f0342f81
         'Carticy\\AiCheckout\\Rest\\SettingsController' => __DIR__ . '/../..' . '/src/Rest/SettingsController.php',
         'Carticy\\AiCheckout\\Rest\\WizardController' => __DIR__ . '/../..' . '/src/Rest/WizardController.php',
         'Carticy\\AiCheckout\\Services\\AnalyticsService' => __DIR__ . '/../..' . '/src/Services/AnalyticsService.php',
-        'Carticy\\AiCheckout\\Services\\ApiDebugLogger' => __DIR__ . '/../..' . '/src/Services/ApiDebugLogger.php',
         'Carticy\\AiCheckout\\Services\\ApiKeyService' => __DIR__ . '/../..' . '/src/Services/ApiKeyService.php',
         'Carticy\\AiCheckout\\Services\\ApplicationWizardService' => __DIR__ . '/../..' . '/src/Services/ApplicationWizardService.php',
         'Carticy\\AiCheckout\\Services\\AuthenticationService' => __DIR__ . '/../..' . '/src/Services/AuthenticationService.php',

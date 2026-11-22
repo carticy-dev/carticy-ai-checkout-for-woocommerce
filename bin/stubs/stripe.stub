@@ -1,0 +1,17 @@
+<?php
+/**
+ * Analysis-only declarations from WooCommerce Stripe Gateway, which the plugin
+ * requires but which has no published stubs. Signatures verified against
+ * WooCommerce Stripe Gateway 10.8.5 (includes/class-wc-stripe.php).
+ */
+class WC_Stripe {
+	/** @return WC_Stripe */
+	public static function get_instance() {}
+
+	/**
+	 * The UPE or legacy gateway the store has enabled; both extend WC_Payment_Gateway_CC.
+	 *
+	 * @return WC_Payment_Gateway_CC
+	 */
+	public function get_main_stripe_gateway() {}
+}

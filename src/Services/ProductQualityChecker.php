@@ -156,7 +156,7 @@ final class ProductQualityChecker {
 		// Also check custom brand taxonomy if it exists.
 		if ( ! $has_brand && taxonomy_exists( 'product_brand' ) ) {
 			$terms = get_the_terms( $product->get_id(), 'product_brand' );
-			if ( $terms && ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+			if ( $terms && ! is_wp_error( $terms ) ) {
 				$has_brand = true;
 			}
 		}

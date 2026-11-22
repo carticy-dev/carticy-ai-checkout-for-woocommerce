@@ -23,9 +23,9 @@ final class OrderNotesService {
 	/**
 	 * Add order created note
 	 *
-	 * @param \WC_Order $order Order object.
-	 * @param string    $session_id Checkout session ID.
-	 * @param array     $metadata Additional metadata.
+	 * @param \WC_Order            $order      Order object.
+	 * @param string               $session_id Checkout session ID.
+	 * @param array<string, mixed> $metadata   Additional metadata.
 	 */
 	public function add_order_created_note( \WC_Order $order, string $session_id, array $metadata = array() ): void {
 		$note = sprintf(
@@ -51,9 +51,9 @@ final class OrderNotesService {
 	/**
 	 * Add payment processing note
 	 *
-	 * @param \WC_Order $order Order object.
-	 * @param string    $payment_method Payment method used.
-	 * @param array     $payment_details Payment details.
+	 * @param \WC_Order            $order           Order object.
+	 * @param string               $payment_method  Payment method used.
+	 * @param array<string, mixed> $payment_details Payment details.
 	 */
 	public function add_payment_processing_note(
 		\WC_Order $order,
@@ -91,8 +91,8 @@ final class OrderNotesService {
 	/**
 	 * Add payment success note
 	 *
-	 * @param \WC_Order $order Order object.
-	 * @param array     $payment_result Payment result data.
+	 * @param \WC_Order            $order          Order object.
+	 * @param array<string, mixed> $payment_result Payment result data.
 	 */
 	public function add_payment_success_note( \WC_Order $order, array $payment_result = array() ): void {
 		$note = sprintf(
@@ -140,8 +140,8 @@ final class OrderNotesService {
 	/**
 	 * Add shipping calculated note
 	 *
-	 * @param \WC_Order $order Order object.
-	 * @param array     $shipping_method Selected shipping method.
+	 * @param \WC_Order            $order           Order object.
+	 * @param array<string, mixed> $shipping_method Selected shipping method.
 	 */
 	public function add_shipping_calculated_note( \WC_Order $order, array $shipping_method ): void {
 		$note = sprintf(
@@ -172,9 +172,9 @@ final class OrderNotesService {
 	/**
 	 * Add webhook received note
 	 *
-	 * @param \WC_Order $order Order object.
-	 * @param string    $event_type Webhook event type.
-	 * @param array     $webhook_data Webhook data.
+	 * @param \WC_Order            $order        Order object.
+	 * @param string               $event_type   Webhook event type.
+	 * @param array<string, mixed> $webhook_data Webhook data.
 	 */
 	public function add_webhook_received_note(
 		\WC_Order $order,
@@ -277,9 +277,9 @@ final class OrderNotesService {
 	/**
 	 * Add session validation note
 	 *
-	 * @param \WC_Order $order Order object.
-	 * @param bool      $is_valid Whether session is valid.
-	 * @param array     $validation_details Validation details.
+	 * @param \WC_Order            $order              Order object.
+	 * @param bool                 $is_valid           Whether session is valid.
+	 * @param array<string, mixed> $validation_details Validation details.
 	 */
 	public function add_session_validation_note(
 		\WC_Order $order,
@@ -315,8 +315,8 @@ final class OrderNotesService {
 	/**
 	 * Add inventory update note
 	 *
-	 * @param \WC_Order $order Order object.
-	 * @param array     $inventory_changes Inventory changes.
+	 * @param \WC_Order            $order             Order object.
+	 * @param array<string, mixed> $inventory_changes Inventory changes.
 	 */
 	public function add_inventory_update_note( \WC_Order $order, array $inventory_changes ): void {
 		$note = sprintf(

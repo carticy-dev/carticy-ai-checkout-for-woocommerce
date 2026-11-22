@@ -18,10 +18,10 @@ import Wizard from './screens/Wizard';
 
 const SECTIONS = [
 	{ id: 'settings', label: __( 'Settings', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-for-woocommerce' },
-	{ id: 'product-feed', label: __( 'Product Feed', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-product-feed' },
-	{ id: 'wizard', label: __( 'Application Wizard', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-application-wizard' },
+	{ id: 'product-feed', label: __( 'Product feed', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-product-feed' },
+	{ id: 'wizard', label: __( 'Application wizard', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-application-wizard' },
 	{ id: 'analytics', label: __( 'Analytics', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-analytics' },
-	{ id: 'logs', label: __( 'Logs & Monitoring', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-logs' },
+	{ id: 'logs', label: __( 'Logs & monitoring', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-logs' },
 ];
 
 const SCREENS = {

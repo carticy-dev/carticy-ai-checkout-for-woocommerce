@@ -185,7 +185,7 @@ final class ProductFeedController extends AbstractAdminController {
 
 		$query       = new \WP_Query( $args );
 		$total       = (int) $query->found_posts;
-		$total_pages = $per_page > 0 ? (int) ceil( $total / $per_page ) : 0;
+		$total_pages = (int) ceil( $total / $per_page );
 
 		$rows = array();
 		foreach ( $query->posts as $post ) {
@@ -354,7 +354,7 @@ final class ProductFeedController extends AbstractAdminController {
 			return null;
 		}
 
-		$image_id  = $product->get_image_id();
+		$image_id  = (int) $product->get_image_id();
 		$image_url = $image_id ? (string) wp_get_attachment_image_url( $image_id, 'thumbnail' ) : '';
 		$sku       = $product->get_sku();
 

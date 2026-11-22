@@ -248,10 +248,10 @@ export default function ProductFeed() {
 	// The tile labels and table headers show at once; their values wait for the
 	// page of products.
 	const tiles = [
-		{ key: 'total', accent: true, label: __( 'Total Products', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.total_products },
-		{ key: 'enabled', label: __( 'ChatGPT Enabled', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.chatgpt_enabled },
-		{ key: 'quality', label: __( 'Avg Quality', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.avg_quality + '%' },
-		{ key: 'issues', label: __( 'With Issues', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.products_with_issues },
+		{ key: 'total', accent: true, label: __( 'Total products', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.total_products },
+		{ key: 'enabled', label: __( 'Enabled for ChatGPT', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.chatgpt_enabled },
+		{ key: 'quality', label: __( 'Average quality', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.avg_quality + '%' },
+		{ key: 'issues', label: __( 'With issues', 'carticy-ai-checkout-for-woocommerce' ), value: ( s ) => s.products_with_issues },
 	];
 	const placeholderColumns = columns.map( ( column ) => ( { ...column, render: () => <Skeleton /> } ) );
 
@@ -262,9 +262,9 @@ export default function ProductFeed() {
 			value={ chatgpt }
 			onChange={ ( e ) => { setPaged( 1 ); setChatgpt( e.target.value ); } }
 			options={ [
-				{ value: '', label: __( 'All Products', 'carticy-ai-checkout-for-woocommerce' ) },
-				{ value: 'enabled', label: __( 'ChatGPT Enabled', 'carticy-ai-checkout-for-woocommerce' ) },
-				{ value: 'disabled', label: __( 'ChatGPT Disabled', 'carticy-ai-checkout-for-woocommerce' ) },
+				{ value: '', label: __( 'All products', 'carticy-ai-checkout-for-woocommerce' ) },
+				{ value: 'enabled', label: __( 'Enabled for ChatGPT', 'carticy-ai-checkout-for-woocommerce' ) },
+				{ value: 'disabled', label: __( 'Disabled for ChatGPT', 'carticy-ai-checkout-for-woocommerce' ) },
 			] }
 		/>
 	);
@@ -273,7 +273,7 @@ export default function ProductFeed() {
 		<div className="caic-stack" aria-busy={ loading }>
 			<p className="cv-sr-only" role="status">{ loading ? __( 'Loading products…', 'carticy-ai-checkout-for-woocommerce' ) : '' }</p>
 			<section className="cv-section">
-				<SectionHeader title={ __( 'Product Feed', 'carticy-ai-checkout-for-woocommerce' ) } />
+				<SectionHeader title={ __( 'Product feed', 'carticy-ai-checkout-for-woocommerce' ) } />
 
 				{ error && <Banner tone="critical">{ error.message }</Banner> }
 				{ notice && <Banner tone={ notice.tone }>{ notice.message }</Banner> }
@@ -305,14 +305,14 @@ export default function ProductFeed() {
 							loading={ busy === 'regenerate' }
 							onClick={ regenerate }
 						>
-							{ __( 'Regenerate Feed', 'carticy-ai-checkout-for-woocommerce' ) }
+							{ __( 'Regenerate feed', 'carticy-ai-checkout-for-woocommerce' ) }
 						</Button>
 						<Button
 							variant="secondary"
 							loading={ busy === 'recalculate' }
 							onClick={ recalculate }
 						>
-							{ __( 'Recalculate Quality', 'carticy-ai-checkout-for-woocommerce' ) }
+							{ __( 'Recalculate quality', 'carticy-ai-checkout-for-woocommerce' ) }
 						</Button>
 					</div>
 				</div>
@@ -328,7 +328,7 @@ export default function ProductFeed() {
 							loading={ busy === 'bulk-enable' }
 							onClick={ bulk( 'enable' ) }
 						>
-							{ __( 'Enable Selected', 'carticy-ai-checkout-for-woocommerce' ) }
+							{ __( 'Enable selected', 'carticy-ai-checkout-for-woocommerce' ) }
 						</Button>
 						<Button
 							variant="secondary"
@@ -336,7 +336,7 @@ export default function ProductFeed() {
 							loading={ busy === 'bulk-disable' }
 							onClick={ bulk( 'disable' ) }
 						>
-							{ __( 'Disable Selected', 'carticy-ai-checkout-for-woocommerce' ) }
+							{ __( 'Disable selected', 'carticy-ai-checkout-for-woocommerce' ) }
 						</Button>
 					</BulkActionBar>
 				) }
@@ -376,7 +376,7 @@ export default function ProductFeed() {
 			<Modal
 				open={ null !== preview }
 				onClose={ () => setPreview( null ) }
-				title={ __( 'Feed Preview', 'carticy-ai-checkout-for-woocommerce' ) }
+				title={ __( 'Feed preview', 'carticy-ai-checkout-for-woocommerce' ) }
 				size="lg"
 				closeLabel={ __( 'Close', 'carticy-ai-checkout-for-woocommerce' ) }
 			>

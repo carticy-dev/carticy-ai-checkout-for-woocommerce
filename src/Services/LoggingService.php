@@ -56,12 +56,12 @@ final class LoggingService {
 	/**
 	 * Log API request/response.
 	 *
-	 * @param string $endpoint      Endpoint path.
-	 * @param string $method        HTTP method.
-	 * @param array  $request_data  Request data.
-	 * @param array  $response_data Response data.
-	 * @param int    $status_code   HTTP status code.
-	 * @param float  $duration      Request duration in seconds.
+	 * @param string               $endpoint      Endpoint path.
+	 * @param string               $method        HTTP method.
+	 * @param array<string, mixed> $request_data  Request data.
+	 * @param array<string, mixed> $response_data Response data.
+	 * @param int                  $status_code   HTTP status code.
+	 * @param float                $duration      Request duration in seconds.
 	 */
 	public function log_api_request(
 		string $endpoint,
@@ -111,10 +111,10 @@ final class LoggingService {
 	/**
 	 * Log error with context.
 	 *
-	 * @param string          $message   Error message.
-	 * @param string          $category  Error category (payment, api, webhook, validation, system).
-	 * @param array           $context   Additional context.
-	 * @param \Throwable|null $exception Exception if available.
+	 * @param string               $message   Error message.
+	 * @param string               $category  Error category (payment, api, webhook, validation, system).
+	 * @param array<string, mixed> $context   Additional context.
+	 * @param \Throwable|null      $exception Exception if available.
 	 */
 	public function log_error(
 		string $message,
@@ -159,12 +159,12 @@ final class LoggingService {
 	/**
 	 * Log webhook activity.
 	 *
-	 * @param string $event_type     Webhook event type.
-	 * @param string $url            Webhook URL.
-	 * @param array  $payload        Webhook payload.
-	 * @param int    $status_code    Response status code.
-	 * @param int    $attempt_number Retry attempt number.
-	 * @param bool   $success        Whether webhook delivery succeeded.
+	 * @param string               $event_type     Webhook event type.
+	 * @param string               $url            Webhook URL.
+	 * @param array<string, mixed> $payload        Webhook payload.
+	 * @param int                  $status_code    Response status code.
+	 * @param int                  $attempt_number Retry attempt number.
+	 * @param bool                 $success        Whether webhook delivery succeeded.
 	 */
 	public function log_webhook(
 		string $event_type,
@@ -211,9 +211,9 @@ final class LoggingService {
 	/**
 	 * Log performance metrics.
 	 *
-	 * @param string $operation Operation name.
-	 * @param float  $duration  Duration in seconds.
-	 * @param array  $metrics   Additional metrics.
+	 * @param string               $operation Operation name.
+	 * @param float                $duration  Duration in seconds.
+	 * @param array<string, mixed> $metrics   Additional metrics.
 	 */
 	public function log_performance(
 		string $operation,
@@ -248,8 +248,8 @@ final class LoggingService {
 	/**
 	 * Log debug information.
 	 *
-	 * @param string $message Debug message.
-	 * @param array  $context Context data.
+	 * @param string               $message Debug message.
+	 * @param array<string, mixed> $context Context data.
 	 */
 	public function debug( string $message, array $context = array() ): void {
 		if ( ! $this->debug_enabled ) {
@@ -274,7 +274,7 @@ final class LoggingService {
 	 * Get log files for a specific context.
 	 *
 	 * @param string $context Log context.
-	 * @return array Array of log file paths.
+	 * @return array<int, string> Array of log file paths.
 	 */
 	public function get_log_files( string $context ): array {
 		$log_dir = WC_LOG_DIR;
@@ -306,7 +306,7 @@ final class LoggingService {
 	 * @param string $file_path Path to log file.
 	 * @param int    $limit     Maximum number of entries to return.
 	 * @param int    $offset    Offset for pagination.
-	 * @return array Array of log entries.
+	 * @return array<int, array<string, mixed>> Array of log entries.
 	 */
 	public function parse_log_file( string $file_path, int $limit = 100, int $offset = 0 ): array {
 		global $wp_filesystem;
@@ -376,8 +376,8 @@ final class LoggingService {
 	/**
 	 * Sanitize sensitive data before logging.
 	 *
-	 * @param array $data Data to sanitize.
-	 * @return array Sanitized data.
+	 * @param array<string, mixed> $data Data to sanitize.
+	 * @return array<string, mixed> Sanitized data.
 	 */
 	private function sanitize_sensitive_data( array $data ): array {
 		$sensitive_keys = array(
@@ -415,7 +415,7 @@ final class LoggingService {
 	/**
 	 * Get available log contexts.
 	 *
-	 * @return array Array of log contexts.
+	 * @return array<string, string> Array of log contexts.
 	 */
 	public function get_log_contexts(): array {
 		return array(

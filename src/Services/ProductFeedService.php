@@ -9,6 +9,7 @@ namespace Carticy\AiCheckout\Services;
 
 use WC_Product;
 use WC_Product_Variable;
+use WC_Product_Variation;
 
 /**
  * Generates product feed in OpenAI Product Feed Spec format
@@ -110,7 +111,7 @@ final class ProductFeedService {
 	 */
 	private function map_product( WC_Product $product, ?WC_Product $parent_product = null ): array {
 		$product_id   = $product->get_id();
-		$is_variation = $product->is_type( 'variation' );
+		$is_variation = $product instanceof WC_Product_Variation;
 
 		// Build title (include variation attributes if applicable).
 		$title = $product->get_name();
@@ -128,9 +129,9 @@ final class ProductFeedService {
 		$availability = $this->map_availability( $product );
 
 		// Get image URL.
-		$image_id = $product->get_image_id();
+		$image_id = (int) $product->get_image_id();
 		if ( ! $image_id && $parent_product ) {
-			$image_id = $parent_product->get_image_id();
+			$image_id = (int) $parent_product->get_image_id();
 		}
 		$image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'full' ) : '';
 
@@ -300,11 +301,11 @@ final class ProductFeedService {
 	 * ACP requires variant attributes as top-level fields (color, size, etc.)
 	 * NOT as a nested array. This method maps WooCommerce attributes to ACP fields.
 	 *
-	 * @param WC_Product           $product Product object (variation).
-	 * @param array<string, mixed> $mapped Mapped product array (passed by reference).
+	 * @param WC_Product_Variation $product Variation.
+	 * @param array<string, mixed> $mapped  Mapped product array (passed by reference).
 	 * @return void
 	 */
-	private function map_variant_attributes( WC_Product $product, array &$mapped ): void {
+	private function map_variant_attributes( WC_Product_Variation $product, array &$mapped ): void {
 		$variation_attributes = $product->get_variation_attributes();
 
 		// ACP standard variant fields mapping.

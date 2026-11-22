@@ -57,7 +57,7 @@ final class ApplicationWizardService {
 	/**
 	 * Get wizard data from transient
 	 *
-	 * @return array Wizard data.
+	 * @return array<string, mixed> Wizard data.
 	 */
 	public function get_wizard_data(): array {
 		$user_id = get_current_user_id();
@@ -81,7 +81,7 @@ final class ApplicationWizardService {
 	/**
 	 * Save wizard data to transient
 	 *
-	 * @param array $data Wizard data.
+	 * @param array<string, mixed> $data Wizard data.
 	 * @return bool True on success.
 	 */
 	public function save_wizard_data( array $data ): bool {
@@ -92,8 +92,8 @@ final class ApplicationWizardService {
 	/**
 	 * Save step data
 	 *
-	 * @param int   $step Step number.
-	 * @param array $data Step data.
+	 * @param int                  $step Step number.
+	 * @param array<string, mixed> $data Step data.
 	 * @return bool True on success.
 	 */
 	public function save_step_data( int $step, array $data ): bool {
@@ -130,8 +130,8 @@ final class ApplicationWizardService {
 	/**
 	 * Validate business information
 	 *
-	 * @param array $data Business info data.
-	 * @return array|bool Validation errors or true if valid.
+	 * @param array<string, mixed> $data Business info data.
+	 * @return array<string, string>|bool Validation errors or true if valid.
 	 */
 	public function validate_business_info( array $data ): array|bool {
 		$errors = array();
@@ -162,21 +162,21 @@ final class ApplicationWizardService {
 	/**
 	 * Validate policy URLs
 	 *
-	 * @param array $data Policy URLs data.
-	 * @return array|bool Validation errors or true if valid.
+	 * @param array<string, mixed> $data Policy URLs data.
+	 * @return array<string, string>|bool Validation errors or true if valid.
 	 */
 	public function validate_policies( array $data ): array|bool {
 		$errors = array();
 
 		// Required policy URLs (Terms and Privacy are required, Return/Refund is optional).
 		$required_policies = array(
-			'terms_of_service' => __( 'Terms of Service URL', 'carticy-ai-checkout-for-woocommerce' ),
-			'privacy_policy'   => __( 'Privacy Policy URL', 'carticy-ai-checkout-for-woocommerce' ),
+			'terms_of_service' => __( 'Terms of service URL', 'carticy-ai-checkout-for-woocommerce' ),
+			'privacy_policy'   => __( 'Privacy policy URL', 'carticy-ai-checkout-for-woocommerce' ),
 		);
 
 		// Optional policies (for businesses that don't have them, e.g., digital-only stores).
 		$optional_policies = array(
-			'return_policy' => __( 'Return/Refund Policy URL', 'carticy-ai-checkout-for-woocommerce' ),
+			'return_policy' => __( 'Return and refund policy URL', 'carticy-ai-checkout-for-woocommerce' ),
 		);
 
 		// Validate required policies.
@@ -267,7 +267,7 @@ final class ApplicationWizardService {
 	/**
 	 * Generate application data for OpenAI submission
 	 *
-	 * @return array Application data.
+	 * @return array<string, mixed> Application data.
 	 */
 	public function generate_application_data(): array {
 		$wizard_data   = $this->get_wizard_data();

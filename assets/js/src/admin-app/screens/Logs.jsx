@@ -28,14 +28,14 @@ import { apiGet, apiPost, useBusy } from '../api';
 import TablePagination from '../TablePagination';
 
 const SUB_TABS = [
-	{ id: 'api', label: __( 'API Logs', 'carticy-ai-checkout-for-woocommerce' ) },
-	{ id: 'errors', label: __( 'Error Logs', 'carticy-ai-checkout-for-woocommerce' ) },
-	{ id: 'webhooks', label: __( 'Webhook Activity', 'carticy-ai-checkout-for-woocommerce' ) },
-	{ id: 'sessions', label: __( 'Session Status', 'carticy-ai-checkout-for-woocommerce' ) },
+	{ id: 'api', label: __( 'API logs', 'carticy-ai-checkout-for-woocommerce' ) },
+	{ id: 'errors', label: __( 'Error logs', 'carticy-ai-checkout-for-woocommerce' ) },
+	{ id: 'webhooks', label: __( 'Webhook activity', 'carticy-ai-checkout-for-woocommerce' ) },
+	{ id: 'sessions', label: __( 'Session status', 'carticy-ai-checkout-for-woocommerce' ) },
 ];
 
 const ERROR_CATEGORIES = [
-	{ value: '', label: __( 'All Categories', 'carticy-ai-checkout-for-woocommerce' ) },
+	{ value: '', label: __( 'All categories', 'carticy-ai-checkout-for-woocommerce' ) },
 	{ value: 'payment', label: __( 'Payment', 'carticy-ai-checkout-for-woocommerce' ) },
 	{ value: 'api', label: __( 'API', 'carticy-ai-checkout-for-woocommerce' ) },
 	{ value: 'webhook', label: __( 'Webhook', 'carticy-ai-checkout-for-woocommerce' ) },
@@ -109,7 +109,7 @@ export default function Logs() {
 	return (
 		<div className="caic-stack">
 			<section className="cv-section">
-				<SectionHeader title={ __( 'Logs & Monitoring', 'carticy-ai-checkout-for-woocommerce' ) } />
+				<SectionHeader title={ __( 'Logs & monitoring', 'carticy-ai-checkout-for-woocommerce' ) } />
 				<Tabs tabs={ SUB_TABS } activeId={ tab } onChange={ setTab } label={ __( 'Log types', 'carticy-ai-checkout-for-woocommerce' ) } />
 				{ 'api' === tab && <ApiTab /> }
 				{ 'errors' === tab && <ErrorsTab /> }
@@ -221,7 +221,7 @@ function ApiTab() {
 		{
 			key: 'context',
 			header: __( 'Details', 'carticy-ai-checkout-for-woocommerce' ),
-			render: ( row ) => <ContextButton context={ row.context } title={ __( 'API Context', 'carticy-ai-checkout-for-woocommerce' ) } />,
+			render: ( row ) => <ContextButton context={ row.context } title={ __( 'API context', 'carticy-ai-checkout-for-woocommerce' ) } />,
 		},
 	];
 
@@ -273,7 +273,7 @@ function ErrorsTab() {
 		{
 			key: 'context',
 			header: __( 'Context', 'carticy-ai-checkout-for-woocommerce' ),
-			render: ( row ) => <ContextButton context={ row.context } title={ __( 'Error Details', 'carticy-ai-checkout-for-woocommerce' ) } />,
+			render: ( row ) => <ContextButton context={ row.context } title={ __( 'Error details', 'carticy-ai-checkout-for-woocommerce' ) } />,
 		},
 	];
 
@@ -293,7 +293,7 @@ function ErrorsTab() {
 
 	return (
 		<>
-			<SectionHeader title={ __( 'Error Statistics (Last 24 Hours)', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } actions={ actions } />
+			<SectionHeader title={ __( 'Errors in the last 24 hours', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } actions={ actions } />
 			{ notice && <Banner tone="success">{ notice }</Banner> }
 			<TabShell loading={ loading } error={ error }>
 				{ data && (
@@ -366,22 +366,22 @@ function WebhooksTab() {
 
 	return (
 		<>
-			<SectionHeader title={ __( 'Webhook Statistics (Last 24 Hours)', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } actions={ actions } />
+			<SectionHeader title={ __( 'Webhooks in the last 24 hours', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } actions={ actions } />
 			{ notice && <Banner tone="success">{ notice }</Banner> }
 			<TabShell loading={ loading } error={ error }>
 				{ data && (
 					<>
 						<div className="cv-kpi-strip">
-							<StatCard value={ data.statistics.total_sent || 0 } label={ __( 'Total Sent', 'carticy-ai-checkout-for-woocommerce' ) } />
+							<StatCard value={ data.statistics.total_sent || 0 } label={ __( 'Total sent', 'carticy-ai-checkout-for-woocommerce' ) } />
 							<StatCard accent value={ data.statistics.total_success || 0 } label={ __( 'Successful', 'carticy-ai-checkout-for-woocommerce' ) } />
 							<StatCard value={ data.statistics.total_failed || 0 } label={ __( 'Failed', 'carticy-ai-checkout-for-woocommerce' ) } />
-							<StatCard value={ ( data.statistics.retry_rate || 0 ) + '%' } label={ __( 'Retry Rate', 'carticy-ai-checkout-for-woocommerce' ) } />
+							<StatCard value={ ( data.statistics.retry_rate || 0 ) + '%' } label={ __( 'Retry rate', 'carticy-ai-checkout-for-woocommerce' ) } />
 						</div>
 
 						{ data.retry_queue.length > 0 && (
 							<Banner
 								tone="warning"
-								title={ __( 'Failed Webhooks (Retry Queue)', 'carticy-ai-checkout-for-woocommerce' ) }
+								title={ __( 'Failed webhooks waiting to retry', 'carticy-ai-checkout-for-woocommerce' ) }
 								actions={ (
 									<Button
 										variant="destructive"
@@ -389,7 +389,7 @@ function WebhooksTab() {
 										loading={ 'retry-queue' === busy }
 										onClick={ clearQueue }
 									>
-										{ __( 'Clear Queue', 'carticy-ai-checkout-for-woocommerce' ) }
+										{ __( 'Clear queue', 'carticy-ai-checkout-for-woocommerce' ) }
 									</Button>
 								) }
 							>
@@ -476,18 +476,18 @@ function SessionsTab() {
 		<TabShell loading={ loading } error={ error }>
 			{ data && (
 				<>
-					<SectionHeader title={ __( 'Session Status Overview', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } actions={ actions } />
+					<SectionHeader title={ __( 'Session status overview', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } actions={ actions } />
 					{ notice && <Banner tone="success">{ notice }</Banner> }
 					<div className="cv-kpi-strip">
-						<StatCard accent value={ data.active_count } label={ __( 'Active Sessions', 'carticy-ai-checkout-for-woocommerce' ) } />
-						<StatCard value={ data.total_count } label={ __( 'Total Sessions', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<StatCard accent value={ data.active_count } label={ __( 'Active sessions', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<StatCard value={ data.total_count } label={ __( 'Total sessions', 'carticy-ai-checkout-for-woocommerce' ) } />
 						<StatCard value={ data.status_counts.completed || 0 } label={ __( 'Completed', 'carticy-ai-checkout-for-woocommerce' ) } />
 						<StatCard value={ data.status_counts.failed || 0 } label={ __( 'Failed', 'carticy-ai-checkout-for-woocommerce' ) } />
 						<StatCard value={ data.status_counts.cancelled || 0 } label={ __( 'Cancelled', 'carticy-ai-checkout-for-woocommerce' ) } />
 						<StatCard value={ data.status_counts.expired || 0 } label={ __( 'Expired', 'carticy-ai-checkout-for-woocommerce' ) } />
 					</div>
 
-					<SectionHeader title={ __( 'Recent Sessions', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } />
+					<SectionHeader title={ __( 'Recent sessions', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } />
 					<Card flush>
 						<Table
 							columns={ sessionColumns }
@@ -497,13 +497,13 @@ function SessionsTab() {
 						/>
 					</Card>
 
-					<SectionHeader title={ __( 'API Performance (Last 24 Hours)', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } />
+					<SectionHeader title={ __( 'API performance in the last 24 hours', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } />
 					<div className="cv-kpi-strip">
-						<StatCard value={ data.performance.api_requests.total || 0 } label={ __( 'Total Requests', 'carticy-ai-checkout-for-woocommerce' ) } />
-						<StatCard value={ ( data.performance.api_requests.average_duration || 0 ) + 's' } label={ __( 'Avg Duration', 'carticy-ai-checkout-for-woocommerce' ) } />
-						<StatCard value={ ( data.performance.api_requests.slowest_duration || 0 ) + 's' } label={ __( 'Slowest Request', 'carticy-ai-checkout-for-woocommerce' ) } />
-						<StatCard value={ ( data.performance.api_requests.average_memory || 0 ) + ' MB' } label={ __( 'Avg Memory', 'carticy-ai-checkout-for-woocommerce' ) } />
-						<StatCard value={ data.performance.api_requests.average_db_queries || 0 } label={ __( 'Avg DB Queries', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<StatCard value={ data.performance.api_requests.total || 0 } label={ __( 'Total requests', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<StatCard value={ ( data.performance.api_requests.average_duration || 0 ) + 's' } label={ __( 'Average duration', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<StatCard value={ ( data.performance.api_requests.slowest_duration || 0 ) + 's' } label={ __( 'Slowest request', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<StatCard value={ ( data.performance.api_requests.average_memory || 0 ) + ' MB' } label={ __( 'Average memory', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<StatCard value={ data.performance.api_requests.average_db_queries || 0 } label={ __( 'Average database queries', 'carticy-ai-checkout-for-woocommerce' ) } />
 					</div>
 
 					{ Object.keys( data.performance.by_endpoint || {} ).length > 0 && (
@@ -522,15 +522,15 @@ function SessionsTab() {
 						</>
 					) }
 
-					<SectionHeader title={ __( 'System Health', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } />
+					<SectionHeader title={ __( 'System health', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } />
 					<Card>
 						<dl className="cv-dl">
-							<HealthRow label={ __( 'PHP Version', 'carticy-ai-checkout-for-woocommerce' ) } value={ data.system_health.php_version } />
-							<HealthRow label={ __( 'Memory Limit', 'carticy-ai-checkout-for-woocommerce' ) } value={ data.system_health.memory_limit } />
-							<HealthRow label={ __( 'WordPress Version', 'carticy-ai-checkout-for-woocommerce' ) } value={ data.system_health.wordpress_version } />
-							<HealthRow label={ __( 'WooCommerce Version', 'carticy-ai-checkout-for-woocommerce' ) } value={ data.system_health.woocommerce_version } />
+							<HealthRow label={ __( 'PHP version', 'carticy-ai-checkout-for-woocommerce' ) } value={ data.system_health.php_version } />
+							<HealthRow label={ __( 'Memory limit', 'carticy-ai-checkout-for-woocommerce' ) } value={ data.system_health.memory_limit } />
+							<HealthRow label={ __( 'WordPress version', 'carticy-ai-checkout-for-woocommerce' ) } value={ data.system_health.wordpress_version } />
+							<HealthRow label={ __( 'WooCommerce version', 'carticy-ai-checkout-for-woocommerce' ) } value={ data.system_health.woocommerce_version } />
 							<div className="cv-dl__row">
-								<dt className="cv-dl__label">{ __( 'Object Cache', 'carticy-ai-checkout-for-woocommerce' ) }</dt>
+								<dt className="cv-dl__label">{ __( 'Object cache', 'carticy-ai-checkout-for-woocommerce' ) }</dt>
 								<dd className="cv-dl__value">
 									<Chip tone={ data.system_health.cache_status.object_cache ? 'success' : 'neutral' }>
 										{ data.system_health.cache_status.object_cache ? __( 'Active', 'carticy-ai-checkout-for-woocommerce' ) : __( 'Inactive', 'carticy-ai-checkout-for-woocommerce' ) }

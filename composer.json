@@ -21,7 +21,10 @@
         "wp-coding-standards/wpcs": "^3.0",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
         "phpcsstandards/phpcsutils": "^1.0",
-        "phpcsstandards/phpcsextra": "^1.0"
+        "phpcsstandards/phpcsextra": "^1.0",
+        "phpstan/phpstan": "2.3.5",
+        "php-stubs/wordpress-stubs": "6.9.4",
+        "php-stubs/woocommerce-stubs": "10.9.4"
     },
     "autoload": {
         "psr-4": {
@@ -39,7 +42,11 @@
         "format": "@lint:fix",
         "compat": "phpcs -p . --standard=PHPCompatibilityWP --runtime-set testVersion 8.0- --ignore=vendor,node_modules,tests",
         "test": "phpunit",
-        "test:coverage": "phpunit --coverage-html coverage"
+        "test:coverage": "phpunit --coverage-html coverage",
+        "analyze": [
+            "phpstan analyse --memory-limit=1G",
+            "phpstan analyse --configuration=phpstan-loader.neon --memory-limit=1G carticy-ai-checkout-for-woocommerce.php"
+        ]
     },
     "config": {
         "allow-plugins": {

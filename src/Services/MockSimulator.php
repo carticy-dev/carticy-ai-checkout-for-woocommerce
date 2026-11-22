@@ -44,7 +44,7 @@ final class MockSimulator {
 	 * Generate mock create session request
 	 *
 	 * @param string $scenario Test scenario.
-	 * @return array Mock request data.
+	 * @return array<string, mixed> Mock request data.
 	 */
 	public function generate_create_session_request( string $scenario = 'valid_order' ): array {
 		$base_request = array(
@@ -62,7 +62,7 @@ final class MockSimulator {
 	 * Generate mock update session request
 	 *
 	 * @param string $scenario Test scenario.
-	 * @return array Mock request data.
+	 * @return array<string, mixed> Mock request data.
 	 */
 	public function generate_update_session_request( string $scenario = 'valid_order' ): array {
 		return array(
@@ -76,7 +76,7 @@ final class MockSimulator {
 	 * Generate mock complete session request
 	 *
 	 * @param string $scenario Test scenario.
-	 * @return array Mock request data.
+	 * @return array<string, mixed> Mock request data.
 	 */
 	public function generate_complete_session_request( string $scenario = 'valid_order' ): array {
 		return array(
@@ -111,7 +111,7 @@ final class MockSimulator {
 	 * Get test items based on scenario
 	 *
 	 * @param string $scenario Test scenario.
-	 * @return array Test items.
+	 * @return array<int, array{sku: string, quantity: int}> Test items.
 	 */
 	private function get_test_items( string $scenario ): array {
 		// Get a valid test product SKU from the store.
@@ -223,37 +223,9 @@ final class MockSimulator {
 	}
 
 	/**
-	 * Get an out-of-stock product SKU
-	 *
-	 * @return string|null Product SKU or null if none found.
-	 */
-	private function get_out_of_stock_product_sku(): ?string {
-		$products = wc_get_products(
-			array(
-				'limit'        => 1,
-				'status'       => 'publish',
-				'stock_status' => 'outofstock',
-				'return'       => 'ids',
-			)
-		);
-
-		if ( empty( $products ) ) {
-			return null;
-		}
-
-		$product = wc_get_product( $products[0] );
-		if ( ! $product ) {
-			return null;
-		}
-
-		$sku = $product->get_sku();
-		return $sku ? $sku : 'PRODUCT-' . $product->get_id();
-	}
-
-	/**
 	 * Get test shipping address
 	 *
-	 * @return array Shipping address data.
+	 * @return array<string, string> Shipping address data.
 	 */
 	private function get_test_shipping_address(): array {
 		return array(
@@ -272,7 +244,7 @@ final class MockSimulator {
 	/**
 	 * Get test billing address
 	 *
-	 * @return array Billing address data.
+	 * @return array<string, string> Billing address data.
 	 */
 	private function get_test_billing_address(): array {
 		return array(
@@ -293,7 +265,7 @@ final class MockSimulator {
 	/**
 	 * Get test buyer info
 	 *
-	 * @return array Buyer information.
+	 * @return array<string, string> Buyer information.
 	 */
 	private function get_test_buyer_info(): array {
 		return array(
@@ -307,11 +279,11 @@ final class MockSimulator {
 	/**
 	 * Simulate API request
 	 *
-	 * @param string $endpoint API endpoint.
-	 * @param string $method   HTTP method.
-	 * @param array  $data     Request data.
-	 * @param array  $headers  Request headers.
-	 * @return array Response data.
+	 * @param string                $endpoint API endpoint.
+	 * @param string                $method   HTTP method.
+	 * @param array<string, mixed>  $data     Request data.
+	 * @param array<string, string> $headers  Request headers.
+	 * @return array<string, mixed> Response data.
 	 */
 	public function simulate_request( string $endpoint, string $method, array $data, array $headers = array() ): array {
 		$base_url = rest_url( 'carticy-ai-checkout/v1/' );
@@ -355,151 +327,6 @@ final class MockSimulator {
 			'status_code' => $status_code,
 			'body'        => $decoded ? $decoded : $body,
 			'headers'     => wp_remote_retrieve_headers( $response )->getAll(),
-		);
-	}
-
-	/**
-	 * Run test scenario
-	 *
-	 * @param string $scenario Test scenario.
-	 * @return array Test results.
-	 */
-	public function run_test_scenario( string $scenario ): array {
-		$results = array();
-
-		// Step 1: Create session.
-		$create_request = $this->generate_create_session_request( $scenario );
-		$create_result  = $this->simulate_request( 'checkout_sessions', 'POST', $create_request );
-
-		$results['create_session'] = array(
-			'request'  => $create_request,
-			'response' => $create_result,
-		);
-
-		if ( ! $create_result['success'] ) {
-			return $results;
-		}
-
-		$session_id = $create_result['body']['id'] ?? null;
-		if ( ! $session_id ) {
-			return $results;
-		}
-
-		// Step 2: Update session (optional).
-		if ( 'missing_address' !== $scenario ) {
-			$update_request = $this->generate_update_session_request( $scenario );
-			$update_result  = $this->simulate_request(
-				"checkout_sessions/{$session_id}",
-				'POST',
-				$update_request
-			);
-
-			$results['update_session'] = array(
-				'request'  => $update_request,
-				'response' => $update_result,
-			);
-		}
-
-		// Step 3: Complete session (if payment scenario).
-		if ( ! in_array( $scenario, array( 'invalid_sku', 'out_of_stock', 'missing_address', 'invalid_quantity' ), true ) ) {
-			$complete_request = $this->generate_complete_session_request( $scenario );
-			$complete_result  = $this->simulate_request(
-				"checkout_sessions/{$session_id}/complete",
-				'POST',
-				$complete_request
-			);
-
-			$results['complete_session'] = array(
-				'request'  => $complete_request,
-				'response' => $complete_result,
-			);
-		}
-
-		return $results;
-	}
-
-	/**
-	 * Get test products from WooCommerce
-	 *
-	 * Returns only products that are enabled for ChatGPT and have stock.
-	 *
-	 * @param int $limit Number of products to retrieve.
-	 * @return array Product data for testing.
-	 */
-	public function get_test_products( int $limit = 5 ): array {
-		$all_products = wc_get_products(
-			array(
-				'limit'        => -1,
-				'status'       => 'publish',
-				'stock_status' => 'instock',
-			)
-		);
-
-		$test_products = array();
-		$count         = 0;
-
-		foreach ( $all_products as $product ) {
-			// Only include products enabled for ChatGPT.
-			$enabled = get_post_meta( $product->get_id(), '_carticy_ai_checkout_enabled', true );
-			if ( 'yes' !== $enabled ) {
-				continue;
-			}
-
-			// Skip if not purchasable.
-			if ( ! $product->is_purchasable() ) {
-				continue;
-			}
-
-			$product_sku     = $product->get_sku();
-			$test_products[] = array(
-				'sku'   => $product_sku ? $product_sku : 'PRODUCT-' . $product->get_id(),
-				'name'  => $product->get_name(),
-				'price' => $product->get_price(),
-				'stock' => $product->get_stock_status(),
-			);
-
-			++$count;
-			if ( $count >= $limit ) {
-				break;
-			}
-		}
-
-		return $test_products;
-	}
-
-	/**
-	 * Validate mock data format
-	 *
-	 * @param array  $data Mock data.
-	 * @param string $type Data type (create_session, update_session, complete_session).
-	 * @return array{valid: bool, errors: array}
-	 */
-	public function validate_mock_data( array $data, string $type ): array {
-		$errors = array();
-
-		switch ( $type ) {
-			case 'create_session':
-				if ( empty( $data['items'] ) ) {
-					$errors[] = 'Missing required field: items';
-				}
-				break;
-
-			case 'update_session':
-				if ( empty( $data['items'] ) && empty( $data['shipping_address'] ) && empty( $data['billing_address'] ) ) {
-					$errors[] = 'At least one update field required';
-				}
-				break;
-
-			case 'complete_session':
-				if ( empty( $data['payment']['token'] ) ) {
-					$errors[] = 'Missing required field: payment.token';
-				}
-				break;
-		}
-
-		return array(
-			'valid'  => empty( $errors ),
-			'errors' => $errors,
 		);
 	}
 }
