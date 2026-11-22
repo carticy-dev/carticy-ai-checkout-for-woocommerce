@@ -87,6 +87,7 @@
   padding: 8px 16px;
   border-radius: var(--cv-radius-sm);
   border: 1px solid transparent;
+  color: var(--cv-btn-color);
   cursor: pointer;
   white-space: nowrap;
   text-decoration: none;
@@ -96,30 +97,36 @@
 }
 .cv-btn:focus-visible { outline: 2px solid var(--cv-focus-ring-color); outline-offset: 2px; }
 
-.cv-btn--primary { background: var(--cv-action); color: var(--cv-action-text); border-color: var(--cv-action); }
+/* Variants set --cv-btn-color rather than color, so an anchor drawn as a button
+   can pin it in every state: wp-admin colours a:hover, a:focus and a:active
+   (and rounds and rings a focused link) with more weight than a variant class. */
+.cv-root a.cv-btn { color: var(--cv-btn-color); border-radius: var(--cv-radius-sm); box-shadow: none; }
+
+.cv-btn--primary { background: var(--cv-action); --cv-btn-color: var(--cv-action-text); border-color: var(--cv-action); }
 .cv-btn--primary:hover { background: var(--cv-action-hover); border-color: var(--cv-action-hover); }
 .cv-btn--primary:active { background: var(--cv-action-active); border-color: var(--cv-action-active); }
 
-.cv-btn--secondary { background: var(--cv-bg-surface); color: var(--cv-fg-1); border-color: var(--cv-border-2); }
+.cv-btn--secondary { background: var(--cv-bg-surface); --cv-btn-color: var(--cv-fg-1); border-color: var(--cv-border-2); }
 .cv-btn--secondary:hover { background: var(--cv-bg-hover); border-color: var(--cv-border-3); }
 .cv-btn--secondary:active { background: var(--cv-bg-subtle); }
 
-.cv-btn--tertiary { background: transparent; color: var(--cv-fg-1); border-color: transparent; padding: 8px 12px; }
+.cv-btn--tertiary { background: transparent; --cv-btn-color: var(--cv-fg-1); border-color: transparent; padding: 8px 12px; }
 .cv-btn--tertiary:hover { text-decoration: underline; }
 
-.cv-btn--destructive { background: var(--cv-critical); color: var(--cv-fg-on-action); border-color: var(--cv-critical); }
+.cv-btn--destructive { background: var(--cv-critical); --cv-btn-color: var(--cv-fg-on-action); border-color: var(--cv-critical); }
 .cv-btn--destructive:hover { background: var(--cv-critical-hover); border-color: var(--cv-critical-hover); }
 
-.cv-btn--link { background: transparent; border-color: transparent; color: var(--cv-fg-1); padding: 0; height: auto; line-height: inherit; text-decoration: underline; }
-.cv-btn--link:hover { color: var(--cv-fg-2); }
+.cv-btn--link { background: transparent; border-color: transparent; --cv-btn-color: var(--cv-fg-1); padding: 0; height: auto; line-height: inherit; text-decoration: underline; }
+.cv-btn--link:hover { --cv-btn-color: var(--cv-fg-2); }
 
 /* Ghost button: no fill or border until hovered (toolbar and row actions). */
-.cv-btn--ghost { background: transparent; color: var(--cv-fg-2); border-color: transparent; }
-.cv-btn--ghost:hover { background: var(--cv-bg-subtle); color: var(--cv-fg-1); }
+.cv-btn--ghost { background: transparent; --cv-btn-color: var(--cv-fg-2); border-color: transparent; }
+.cv-btn--ghost:hover { background: var(--cv-bg-subtle); --cv-btn-color: var(--cv-fg-1); }
 .cv-btn--ghost:active { background: var(--cv-bg-muted); }
 
-.cv-btn[disabled], .cv-btn--disabled { background: var(--cv-bg-subtle); color: var(--cv-fg-4); border-color: var(--cv-border-1); cursor: not-allowed; }
-.cv-btn--ghost[disabled] { background: transparent; border-color: transparent; }
+/* aria-disabled: unavailable but still focusable (a loading Button). */
+.cv-btn[disabled], .cv-btn[aria-disabled="true"], .cv-btn--disabled { background: var(--cv-bg-subtle); --cv-btn-color: var(--cv-fg-4); border-color: var(--cv-border-1); cursor: not-allowed; }
+.cv-btn--ghost:is([disabled], [aria-disabled="true"]) { background: transparent; border-color: transparent; }
 
 .cv-btn--sm { padding: 6px 12px; font-size: var(--cv-size-meta); line-height: 18px; }
 .cv-btn--lg { padding: 12px 20px; font-size: 15px; line-height: 22px; }
@@ -140,8 +147,9 @@
 .cv-icon-btn:focus-visible { outline: 2px solid var(--cv-focus-ring-color); outline-offset: 2px; }
 .cv-icon-btn svg { width: 16px; height: 16px; }
 
-/* Loading button — keeps width, swaps icon for spinner */
-.cv-btn--loading { pointer-events: none; opacity: 0.85; }
+/* Loading button: drawn as disabled (it carries aria-disabled), with a spinner
+   in place of its icon and the busy cursor. */
+.cv-btn.cv-btn--loading { cursor: progress; opacity: 0.85; }
 .cv-spinner {
   width: 14px; height: 14px;
   border: 2px solid currentColor;
@@ -896,6 +904,9 @@
    dense table (or a nowrap actions cell) scrolls inside its card on narrow
    viewports instead of overflowing the card edge. */
 .cv-table-wrap { width: 100%; overflow-x: auto; border-radius: inherit; }
+/* A wrap that scrolls and holds no control is a Tab stop in Chrome and Firefox
+   (the arrow keys scroll it); its ring sits inside the card's edge. */
+.cv-table-wrap:focus-visible { outline: 2px solid var(--cv-focus-ring-color); outline-offset: -2px; }
 /* Selection column, actions cell, empty state, and below-row extra rows. */
 .cv-table__check { width: 36px; text-align: center; }
 .cv-table__check input { margin: 0; vertical-align: middle; }
@@ -1026,8 +1037,10 @@
 /* ============================================================
    Stepper (onboarding)
    ============================================================ */
-.cv-stepper { display: flex; align-items: center; gap: 0; }
-.cv-stepper__step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 0 0 auto; }
+.cv-stepper { display: flex; align-items: flex-start; gap: 0; }
+/* Steps narrow (their labels wrap) before the rail outgrows its column; the
+   numbers stay on one line. */
+.cv-stepper__step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 0 1 auto; }
 .cv-stepper__num {
   width: 24px; height: 24px;
   border-radius: 999px;
@@ -1040,9 +1053,31 @@
 .cv-stepper__num svg { width: 14px; height: 14px; }
 .cv-stepper__step.is-active .cv-stepper__num { background: var(--cv-accent); color: var(--cv-fg-on-action); border-color: var(--cv-accent); }
 .cv-stepper__step.is-done   .cv-stepper__num { background: var(--cv-success); color: var(--cv-fg-on-action); border-color: var(--cv-success); }
-.cv-stepper__label { font-size: var(--cv-size-micro); color: var(--cv-fg-3); text-transform: none; letter-spacing: 0; font-weight: 500; }
+.cv-stepper__label { font-size: var(--cv-size-micro); color: var(--cv-fg-3); text-transform: none; letter-spacing: 0; font-weight: 500; text-align: center; }
 .cv-stepper__step.is-active .cv-stepper__label { color: var(--cv-fg-1); }
 .cv-stepper__connector { flex: 1; height: 1px; background: var(--cv-border-1); margin-inline: 12px; max-width: 80px; align-self: flex-start; margin-top: 12px; }
+.cv-stepper__summary { display: none; }
+/* Phones and narrow tablets: a progress track with one segment per step, under
+   the current step's label and "Step n of total". The step labels stay in the
+   page for screen readers, which read the steps as on wide screens. */
+@media (max-width: 782px) {
+  .cv-stepper { flex-wrap: wrap; gap: 4px; }
+  .cv-stepper__summary {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px;
+    flex: 0 0 100%; margin-bottom: 6px;
+  }
+  .cv-stepper__current { font-size: var(--cv-size-body); font-weight: 600; color: var(--cv-fg-1); }
+  .cv-stepper__count { font-size: var(--cv-size-meta); color: var(--cv-fg-3); }
+  .cv-stepper__connector { display: none; }
+  .cv-stepper__step { flex: 1 1 0; }
+  .cv-stepper__num { width: 100%; height: 4px; border: 0; background: var(--cv-bg-muted); font-size: 0; }
+  .cv-stepper__num svg { display: none; }
+  .cv-stepper__label {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+}
 
 /* ============================================================
    Toast / notification

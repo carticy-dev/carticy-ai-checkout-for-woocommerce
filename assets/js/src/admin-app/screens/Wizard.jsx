@@ -11,6 +11,7 @@
  */
 
 import { useState, useEffect } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import {
 	Stepper,
 	Card,
@@ -26,7 +27,7 @@ import {
 	TextField,
 	ToggleRow,
 } from '@carticy/admin-ui';
-import { boot, apiGet, apiPost, useBusy, t } from '../api';
+import { boot, apiGet, apiPost, useBusy } from '../api';
 
 // Conformance test IDs are test_1..test_17; 1-10 and 17 are blocking.
 const TEST_IDS = Array.from( { length: 17 }, ( _, i ) => 'test_' + ( i + 1 ) );
@@ -117,7 +118,7 @@ export default function Wizard() {
 
 	const resetWizard = run( 'reset', async () => {
 		// eslint-disable-next-line no-alert
-		if ( ! window.confirm( t( 'Are you sure you want to restart the wizard? All progress will be lost.' ) ) ) {
+		if ( ! window.confirm( __( 'Are you sure you want to restart the wizard? All progress will be lost.', 'carticy-ai-checkout-for-woocommerce' ) ) ) {
 			return;
 		}
 		setNotice( null );
@@ -134,7 +135,7 @@ export default function Wizard() {
 		setNotice( null );
 		try {
 			await apiPost( '/wizard/settings', payload );
-			setNotice( { tone: 'success', message: t( 'Saved.' ) } );
+			setNotice( { tone: 'success', message: __( 'Saved.', 'carticy-ai-checkout-for-woocommerce' ) } );
 		} catch ( e ) {
 			setNotice( { tone: 'critical', message: e.message } );
 		}
@@ -145,7 +146,7 @@ export default function Wizard() {
 		try {
 			const r = await apiPost( path, {} );
 			setData( ( prev ) => ( { ...prev, [ fieldName ]: r[ fieldName ] } ) );
-			setNotice( { tone: 'success', message: t( 'Regenerated.' ) } );
+			setNotice( { tone: 'success', message: __( 'Regenerated.', 'carticy-ai-checkout-for-woocommerce' ) } );
 		} catch ( e ) {
 			setNotice( { tone: 'critical', message: e.message } );
 		}
@@ -154,8 +155,8 @@ export default function Wizard() {
 	const copy = ( value ) => () => {
 		if ( navigator.clipboard ) {
 			navigator.clipboard.writeText( value )
-				.then( () => setNotice( { tone: 'success', message: t( 'Copied to clipboard.' ) } ) )
-				.catch( () => setNotice( { tone: 'critical', message: t( 'Copy failed. Please copy manually.' ) } ) );
+				.then( () => setNotice( { tone: 'success', message: __( 'Copied to clipboard.', 'carticy-ai-checkout-for-woocommerce' ) } ) )
+				.catch( () => setNotice( { tone: 'critical', message: __( 'Copy failed. Please copy manually.', 'carticy-ai-checkout-for-woocommerce' ) } ) );
 		}
 	};
 
@@ -229,23 +230,23 @@ export default function Wizard() {
 		return (
 			<div className="caic-stack">
 				<section className="cv-section">
-					<LoadingPanel label={ t( 'Loading the wizard…' ) } />
+					<LoadingPanel label={ __( 'Loading the wizard…', 'carticy-ai-checkout-for-woocommerce' ) } />
 				</section>
 			</div>
 		);
 	}
 
 	const current = data.current_step;
-	const steps = data.steps.map( ( s ) => ( { id: String( s.n ), label: t( s.title ) } ) );
+	const steps = data.steps.map( ( s ) => ( { id: String( s.n ), label: s.title } ) );
 
 	return (
 		<div className="caic-stack">
 			<section className="cv-section">
 				<SectionHeader
-					title={ t( 'OpenAI Application Wizard' ) }
-					actions={ <Button variant="link" loading={ 'reset' === busy } onClick={ resetWizard }>{ t( 'Restart Wizard' ) }</Button> }
+					title={ __( 'OpenAI Application Wizard', 'carticy-ai-checkout-for-woocommerce' ) }
+					actions={ <Button variant="link" loading={ 'reset' === busy } onClick={ resetWizard }>{ __( 'Restart Wizard', 'carticy-ai-checkout-for-woocommerce' ) }</Button> }
 				/>
-				<Stepper steps={ steps } activeId={ String( current ) } doneLabel={ t( 'Completed' ) } />
+				<Stepper steps={ steps } activeId={ String( current ) } doneLabel={ __( 'Completed', 'carticy-ai-checkout-for-woocommerce' ) } />
 
 				{ notice && <Banner tone={ notice.tone }>{ notice.message }</Banner> }
 
@@ -253,7 +254,7 @@ export default function Wizard() {
 
 				<div className="caic-actions">
 					{ current > 1 && (
-						<Button loading={ 'prev' === busy } onClick={ () => navigate( 'prev' )() }>{ t( 'Back' ) }</Button>
+						<Button loading={ 'prev' === busy } onClick={ () => navigate( 'prev' )() }>{ __( 'Back', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 					) }
 					{ renderNext( current ) }
 				</div>
@@ -268,39 +269,39 @@ export default function Wizard() {
 			case 1:
 				return (
 					<Card>
-						<TextField label={ t( 'Business Name' ) } value={ form.business_name || '' } onChange={ field( 'business_name' ) } error={ errors.business_name } />
-						<TextField label={ t( 'Business Entity Type' ) } help={ t( 'e.g. LLC, Sole Proprietor, Corporation' ) } value={ form.business_entity || '' } onChange={ field( 'business_entity' ) } error={ errors.business_entity } />
-						<TextField label={ t( 'Contact Name' ) } value={ form.contact_name || '' } onChange={ field( 'contact_name' ) } error={ errors.contact_name } />
-						<TextField type="email" label={ t( 'Contact Email' ) } value={ form.contact_email || '' } onChange={ field( 'contact_email' ) } error={ errors.contact_email } />
-						<TextField type="url" label={ t( 'Store URL' ) } value={ form.store_url || '' } onChange={ field( 'store_url' ) } error={ errors.store_url } />
+						<TextField label={ __( 'Business Name', 'carticy-ai-checkout-for-woocommerce' ) } value={ form.business_name || '' } onChange={ field( 'business_name' ) } error={ errors.business_name } />
+						<TextField label={ __( 'Business Entity Type', 'carticy-ai-checkout-for-woocommerce' ) } help={ __( 'e.g. LLC, Sole Proprietor, Corporation', 'carticy-ai-checkout-for-woocommerce' ) } value={ form.business_entity || '' } onChange={ field( 'business_entity' ) } error={ errors.business_entity } />
+						<TextField label={ __( 'Contact Name', 'carticy-ai-checkout-for-woocommerce' ) } value={ form.contact_name || '' } onChange={ field( 'contact_name' ) } error={ errors.contact_name } />
+						<TextField type="email" label={ __( 'Contact Email', 'carticy-ai-checkout-for-woocommerce' ) } value={ form.contact_email || '' } onChange={ field( 'contact_email' ) } error={ errors.contact_email } />
+						<TextField type="url" label={ __( 'Store URL', 'carticy-ai-checkout-for-woocommerce' ) } value={ form.store_url || '' } onChange={ field( 'store_url' ) } error={ errors.store_url } />
 					</Card>
 				);
 			case 2:
 				return (
 					<Card>
-						<p>{ t( 'Your product feed exposes ChatGPT-enabled products to OpenAI. Configure which products are included and review feed quality on the Product Feed screen.' ) }</p>
+						<p>{ __( 'Your product feed exposes ChatGPT-enabled products to OpenAI. Configure which products are included and review feed quality on the Product Feed screen.', 'carticy-ai-checkout-for-woocommerce' ) }</p>
 						<div className="caic-actions">
-							<a className="cv-btn cv-btn--secondary" href={ ( boot.adminUrl || '/wp-admin/' ) + 'admin.php?page=' + ( data.product_feed_slug || 'carticy-ai-checkout-product-feed' ) }>{ t( 'Open Product Feed' ) }</a>
+							<a className="cv-btn cv-btn--secondary" href={ ( boot.adminUrl || '/wp-admin/' ) + 'admin.php?page=' + ( data.product_feed_slug || 'carticy-ai-checkout-product-feed' ) }>{ __( 'Open Product Feed', 'carticy-ai-checkout-for-woocommerce' ) }</a>
 						</div>
 					</Card>
 				);
 			case 3:
 				return (
 					<Card>
-						<TextField type="url" label={ t( 'Terms of Service URL' ) } help={ t( 'Required.' ) } value={ form.terms_of_service || '' } onChange={ field( 'terms_of_service' ) } error={ errors.terms_of_service } />
-						<TextField type="url" label={ t( 'Privacy Policy URL' ) } help={ t( 'Required.' ) } value={ form.privacy_policy || '' } onChange={ field( 'privacy_policy' ) } error={ errors.privacy_policy } />
-						<TextField type="url" label={ t( 'Return / Refund Policy URL' ) } help={ t( 'Optional for digital-only stores.' ) } value={ form.return_policy || '' } onChange={ field( 'return_policy' ) } error={ errors.return_policy } />
+						<TextField type="url" label={ __( 'Terms of Service URL', 'carticy-ai-checkout-for-woocommerce' ) } help={ __( 'Required.', 'carticy-ai-checkout-for-woocommerce' ) } value={ form.terms_of_service || '' } onChange={ field( 'terms_of_service' ) } error={ errors.terms_of_service } />
+						<TextField type="url" label={ __( 'Privacy Policy URL', 'carticy-ai-checkout-for-woocommerce' ) } help={ __( 'Required.', 'carticy-ai-checkout-for-woocommerce' ) } value={ form.privacy_policy || '' } onChange={ field( 'privacy_policy' ) } error={ errors.privacy_policy } />
+						<TextField type="url" label={ __( 'Return / Refund Policy URL', 'carticy-ai-checkout-for-woocommerce' ) } help={ __( 'Optional for digital-only stores.', 'carticy-ai-checkout-for-woocommerce' ) } value={ form.return_policy || '' } onChange={ field( 'return_policy' ) } error={ errors.return_policy } />
 					</Card>
 				);
 			case 4:
 				return (
 					<>
 						<div className="caic-stats">
-							<StatCard accent value={ data.quality.score + '%' } label={ t( 'Average Product Quality' ) } sublabel={ t( 'Across ChatGPT-enabled products' ) } />
+							<StatCard accent value={ data.quality.score + '%' } label={ __( 'Average Product Quality', 'carticy-ai-checkout-for-woocommerce' ) } sublabel={ __( 'Across ChatGPT-enabled products', 'carticy-ai-checkout-for-woocommerce' ) } />
 						</div>
 						{ data.quality.issues.length > 0 && (
 							<Card>
-								<p className="cv-help">{ t( 'Issues found in your product data:' ) }</p>
+								<p className="cv-help">{ __( 'Issues found in your product data:', 'carticy-ai-checkout-for-woocommerce' ) }</p>
 								<ul className="caic-issues">
 									{ data.quality.issues.map( ( issue, i ) => <li key={ i }>{ issue }</li> ) }
 								</ul>
@@ -313,16 +314,16 @@ export default function Wizard() {
 					<Card flush>
 						<Table
 							columns={ [
-								{ key: 'label', header: t( 'Requirement' ) },
-								{ key: 'status', header: t( 'Status' ), render: ( row ) => <Chip tone={ row.passed ? 'success' : 'critical' }>{ row.passed ? t( 'Pass' ) : t( 'Fail' ) }</Chip> },
+								{ key: 'label', header: __( 'Requirement', 'carticy-ai-checkout-for-woocommerce' ) },
+								{ key: 'status', header: __( 'Status', 'carticy-ai-checkout-for-woocommerce' ), render: ( row ) => <Chip tone={ row.passed ? 'success' : 'critical' }>{ row.passed ? __( 'Pass', 'carticy-ai-checkout-for-woocommerce' ) : __( 'Fail', 'carticy-ai-checkout-for-woocommerce' ) }</Chip> },
 								{
 									key: 'message',
-									header: t( 'Details' ),
+									header: __( 'Details', 'carticy-ai-checkout-for-woocommerce' ),
 									render: ( row ) => (
 										<>
 											{ row.message }
 											{ row.action_url && (
-												<>{ ' ' }<a href={ row.action_url } target="_blank" rel="noreferrer">{ t( 'Fix This' ) }</a></>
+												<>{ ' ' }<a href={ row.action_url } target="_blank" rel="noreferrer">{ __( 'Fix This', 'carticy-ai-checkout-for-woocommerce' ) }</a></>
 											) }
 										</>
 									),
@@ -330,7 +331,7 @@ export default function Wizard() {
 							] }
 							rows={ data.prerequisites }
 							getRowId={ ( row ) => row.key }
-							emptyLabel={ t( 'No prerequisite checks available.' ) }
+							emptyLabel={ __( 'No prerequisite checks available.', 'carticy-ai-checkout-for-woocommerce' ) }
 						/>
 					</Card>
 				);
@@ -338,15 +339,15 @@ export default function Wizard() {
 				return (
 					<Card>
 						<ToggleRow
-							label={ t( 'Enable test mode' ) }
-							help={ t( 'When test mode is on, conformance tests run against Stripe test keys and the test webhook URL.' ) }
+							label={ __( 'Enable test mode', 'carticy-ai-checkout-for-woocommerce' ) }
+							help={ __( 'When test mode is on, conformance tests run against Stripe test keys and the test webhook URL.', 'carticy-ai-checkout-for-woocommerce' ) }
 							checked={ !! form.test_mode }
 							onChange={ ( e ) => setForm( ( prev ) => ( { ...prev, test_mode: e.target.checked } ) ) }
 						/>
 						<TextField
 							type="url"
-							label={ t( 'Test Webhook URL' ) }
-							help={ t( 'Endpoint that receives sample webhooks while testing.' ) }
+							label={ __( 'Test Webhook URL', 'carticy-ai-checkout-for-woocommerce' ) }
+							help={ __( 'Where sample webhooks are sent while testing.', 'carticy-ai-checkout-for-woocommerce' ) }
 							value={ form.test_webhook_url || '' }
 							onChange={ field( 'test_webhook_url' ) }
 						/>
@@ -356,7 +357,7 @@ export default function Wizard() {
 								loading={ 'settings' === busy }
 								onClick={ saveSettings( { test_mode: !! form.test_mode, test_webhook_url: form.test_webhook_url || '' }, 'settings' ) }
 							>
-								{ t( 'Save Test Setup' ) }
+								{ __( 'Save Test Setup', 'carticy-ai-checkout-for-woocommerce' ) }
 							</Button>
 						</div>
 					</Card>
@@ -364,21 +365,21 @@ export default function Wizard() {
 			case 7:
 				return (
 					<Card>
-						<TextField readOnly label={ t( 'API Key (Bearer Token)' ) } value={ data.api_key } onFocus={ ( e ) => e.target.select() } />
+						<TextField readOnly label={ __( 'API Key (Bearer Token)', 'carticy-ai-checkout-for-woocommerce' ) } value={ data.api_key } onFocus={ ( e ) => e.target.select() } />
 						<div className="caic-actions">
-							<Button onClick={ copy( data.api_key ) }>{ t( 'Copy' ) }</Button>
-							<Button loading={ 'api_key' === busy } onClick={ regenerate( 'api_key', '/wizard/regenerate-api-key', 'api_key' ) }>{ t( 'Regenerate' ) }</Button>
+							<Button onClick={ copy( data.api_key ) }>{ __( 'Copy', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button loading={ 'api_key' === busy } onClick={ regenerate( 'api_key', '/wizard/regenerate-api-key', 'api_key' ) }>{ __( 'Regenerate', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 
-						<TextField readOnly label={ t( 'Webhook Secret (HMAC)' ) } value={ data.webhook_secret } onFocus={ ( e ) => e.target.select() } />
+						<TextField readOnly label={ __( 'Webhook Secret (HMAC)', 'carticy-ai-checkout-for-woocommerce' ) } value={ data.webhook_secret } onFocus={ ( e ) => e.target.select() } />
 						<div className="caic-actions">
-							<Button onClick={ copy( data.webhook_secret ) }>{ t( 'Copy' ) }</Button>
-							<Button loading={ 'webhook_secret' === busy } onClick={ regenerate( 'webhook_secret', '/wizard/regenerate-webhook-secret', 'webhook_secret' ) }>{ t( 'Regenerate' ) }</Button>
+							<Button onClick={ copy( data.webhook_secret ) }>{ __( 'Copy', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button loading={ 'webhook_secret' === busy } onClick={ regenerate( 'webhook_secret', '/wizard/regenerate-webhook-secret', 'webhook_secret' ) }>{ __( 'Regenerate', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 
-						<p className="cv-help">{ t( 'Download the generated application config to attach to your OpenAI merchant submission.' ) }</p>
+						<p className="cv-help">{ __( 'Download the generated application config to attach to your OpenAI merchant submission.', 'carticy-ai-checkout-for-woocommerce' ) }</p>
 						<div className="caic-actions">
-							<Button variant="primary" onClick={ downloadConfig }>{ t( 'Download JSON Config' ) }</Button>
+							<Button variant="primary" onClick={ downloadConfig }>{ __( 'Download JSON Config', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 					</Card>
 				);
@@ -397,26 +398,26 @@ export default function Wizard() {
 		return (
 			<>
 				<Card>
-					<p>{ t( 'Run the 17 ACP conformance tests. All blocking tests must pass before submitting your application.' ) }</p>
+					<p>{ __( 'Run the 17 ACP conformance tests. All blocking tests must pass before submitting your application.', 'carticy-ai-checkout-for-woocommerce' ) }</p>
 					<div className="caic-actions">
-						<Button variant="primary" loading={ running } onClick={ runAllTests }>{ t( 'Run All Tests' ) }</Button>
+						<Button variant="primary" loading={ running } onClick={ runAllTests }>{ __( 'Run All Tests', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 					</div>
 				</Card>
 				<Card flush>
 					<Table
 						columns={ [
-							{ key: 'n', header: t( 'Test' ), render: ( row ) => '#' + row.n },
-							{ key: 'result', header: t( 'Result' ), render: ( row ) => renderTestChip( row.id ) },
+							{ key: 'n', header: __( 'Test', 'carticy-ai-checkout-for-woocommerce' ), render: ( row ) => '#' + row.n },
+							{ key: 'result', header: __( 'Result', 'carticy-ai-checkout-for-woocommerce' ), render: ( row ) => renderTestChip( row.id ) },
 							{
 								key: 'actions',
-								header: t( 'Actions' ),
+								header: __( 'Actions', 'carticy-ai-checkout-for-woocommerce' ),
 								render: ( row ) => {
 									const state = testResults[ row.id ];
 									return (
 										<>
-											<Button size="sm" loading={ row.id === busy } onClick={ () => reRunOne( row.id )() }>{ t( 'Run' ) }</Button>
+											<Button size="sm" loading={ row.id === busy } onClick={ () => reRunOne( row.id )() }>{ __( 'Run', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 											{ state && 'done' === state.status && (
-												<>{ ' ' }<Button size="sm" variant="link" onClick={ () => setModalTest( row.id ) }>{ t( 'View' ) }</Button></>
+												<>{ ' ' }<Button size="sm" variant="link" onClick={ () => setModalTest( row.id ) }>{ __( 'View', 'carticy-ai-checkout-for-woocommerce' ) }</Button></>
 											) }
 										</>
 									);
@@ -438,32 +439,32 @@ export default function Wizard() {
 		const blocking = BLOCKING_TESTS.includes( n );
 
 		if ( ! state ) {
-			return <Chip>{ blocking ? t( 'Blocking' ) : t( 'Optional' ) }</Chip>;
+			return <Chip>{ blocking ? __( 'Blocking', 'carticy-ai-checkout-for-woocommerce' ) : __( 'Optional', 'carticy-ai-checkout-for-woocommerce' ) }</Chip>;
 		}
 		if ( 'running' === state.status ) {
-			return <Chip tone="warning"><Spinner /> { t( 'Running…' ) }</Chip>;
+			return <Chip tone="warning"><Spinner /> { __( 'Running…', 'carticy-ai-checkout-for-woocommerce' ) }</Chip>;
 		}
 		if ( 'error' === state.status ) {
-			return <Chip tone="critical">{ t( 'Error' ) }</Chip>;
+			return <Chip tone="critical">{ __( 'Error', 'carticy-ai-checkout-for-woocommerce' ) }</Chip>;
 		}
-		return <Chip tone={ state.result.passed ? 'success' : 'critical' }>{ state.result.passed ? t( 'Pass' ) : t( 'Fail' ) }</Chip>;
+		return <Chip tone={ state.result.passed ? 'success' : 'critical' }>{ state.result.passed ? __( 'Pass', 'carticy-ai-checkout-for-woocommerce' ) : __( 'Fail', 'carticy-ai-checkout-for-woocommerce' ) }</Chip>;
 	}
 
 	function renderTestModal( id ) {
 		const state = testResults[ id ];
 		const result = state && state.result ? state.result : null;
 		return (
-			<Modal open onClose={ () => setModalTest( null ) } title={ result ? result.name : id } size="lg" closeLabel={ t( 'Close' ) }>
+			<Modal open onClose={ () => setModalTest( null ) } title={ result ? result.name : id } size="lg" closeLabel={ __( 'Close', 'carticy-ai-checkout-for-woocommerce' ) }>
 				{ result ? (
 					<>
 						{ result.message && <p>{ result.message }</p> }
-						<SectionHeader title={ t( 'Request' ) } headingLevel={ 3 } />
+						<SectionHeader title={ __( 'Request', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } />
 						<pre className="caic-pre">{ JSON.stringify( result.request, null, 2 ) }</pre>
-						<SectionHeader title={ t( 'Response' ) } headingLevel={ 3 } />
+						<SectionHeader title={ __( 'Response', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } />
 						<pre className="caic-pre">{ JSON.stringify( result.response, null, 2 ) }</pre>
 					</>
 				) : (
-					<p>{ t( 'No result for this test yet.' ) }</p>
+					<p>{ __( 'No result for this test yet.', 'carticy-ai-checkout-for-woocommerce' ) }</p>
 				) }
 			</Modal>
 		);
@@ -476,24 +477,24 @@ export default function Wizard() {
 		return (
 			<>
 				<Card>
-					<SectionHeader title={ t( 'Application Summary' ) } headingLevel={ 3 } />
+					<SectionHeader title={ __( 'Application Summary', 'carticy-ai-checkout-for-woocommerce' ) } headingLevel={ 3 } />
 					<Table
 						columns={ [
-							{ key: 'label', header: t( 'Field' ) },
-							{ key: 'value', header: t( 'Value' ) },
+							{ key: 'label', header: __( 'Field', 'carticy-ai-checkout-for-woocommerce' ) },
+							{ key: 'value', header: __( 'Value', 'carticy-ai-checkout-for-woocommerce' ) },
 						] }
 						rows={ [
-							{ label: t( 'Business Name' ), value: bi.business_name || '—' },
-							{ label: t( 'Contact Email' ), value: bi.contact_email || '—' },
-							{ label: t( 'Store URL' ), value: bi.store_url || '—' },
-							{ label: t( 'Terms of Service' ), value: data.data.policies.terms_of_service || '—' },
-							{ label: t( 'Privacy Policy' ), value: data.data.policies.privacy_policy || '—' },
+							{ label: __( 'Business Name', 'carticy-ai-checkout-for-woocommerce' ), value: bi.business_name || '—' },
+							{ label: __( 'Contact Email', 'carticy-ai-checkout-for-woocommerce' ), value: bi.contact_email || '—' },
+							{ label: __( 'Store URL', 'carticy-ai-checkout-for-woocommerce' ), value: bi.store_url || '—' },
+							{ label: __( 'Terms of Service', 'carticy-ai-checkout-for-woocommerce' ), value: data.data.policies.terms_of_service || '—' },
+							{ label: __( 'Privacy Policy', 'carticy-ai-checkout-for-woocommerce' ), value: data.data.policies.privacy_policy || '—' },
 						] }
 						getRowId={ ( row ) => row.label }
 					/>
 				</Card>
-				<Banner tone="info" title={ t( 'Manual submission required' ) }>
-					{ t( 'There is no automated submission API. Submit your application through the OpenAI merchant web form at chatgpt.com/merchants, attaching the JSON config downloaded in the Integration step.' ) }
+				<Banner tone="info" title={ __( 'Manual submission required', 'carticy-ai-checkout-for-woocommerce' ) }>
+					{ __( 'There is no automated submission API. Submit your application through the OpenAI merchant web form at chatgpt.com/merchants, attaching the JSON config downloaded in the Integration step.', 'carticy-ai-checkout-for-woocommerce' ) }
 				</Banner>
 			</>
 		);
@@ -513,7 +514,7 @@ export default function Wizard() {
 					contact_name: form.contact_name || '',
 					contact_email: form.contact_email || '',
 					store_url: form.store_url || '',
-				} ) }>{ t( 'Save & Next' ) }</Button>
+				} ) }>{ __( 'Save & Next', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 			);
 		}
 		if ( 3 === step ) {
@@ -522,9 +523,9 @@ export default function Wizard() {
 					terms_of_service: form.terms_of_service || '',
 					privacy_policy: form.privacy_policy || '',
 					return_policy: form.return_policy || '',
-				} ) }>{ t( 'Save & Next' ) }</Button>
+				} ) }>{ __( 'Save & Next', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 			);
 		}
-		return <Button variant="primary" loading={ 'next' === busy } onClick={ () => recordAndNext( step )() }>{ t( 'Next' ) }</Button>;
+		return <Button variant="primary" loading={ 'next' === busy } onClick={ () => recordAndNext( step )() }>{ __( 'Next', 'carticy-ai-checkout-for-woocommerce' ) }</Button>;
 	}
 }

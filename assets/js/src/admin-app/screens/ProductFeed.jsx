@@ -9,6 +9,7 @@
  */
 
 import { useState, useEffect, useCallback } from '@wordpress/element';
+import { __, _n, sprintf } from '@wordpress/i18n';
 import {
 	Card,
 	Chip,
@@ -24,7 +25,7 @@ import {
 	Modal,
 	EmptyState,
 } from '@carticy/admin-ui';
-import { apiGet, apiPost, useBusy, t } from '../api';
+import { apiGet, apiPost, useBusy } from '../api';
 import TablePagination from '../TablePagination';
 
 /**
@@ -35,15 +36,15 @@ import TablePagination from '../TablePagination';
  */
 function qualityChip( score ) {
 	if ( score >= 80 ) {
-		return { tone: 'success', label: t( 'Excellent' ) };
+		return { tone: 'success', label: __( 'Excellent', 'carticy-ai-checkout-for-woocommerce' ) };
 	}
 	if ( score >= 60 ) {
-		return { tone: 'warning', label: t( 'Good' ) };
+		return { tone: 'warning', label: __( 'Good', 'carticy-ai-checkout-for-woocommerce' ) };
 	}
 	if ( score >= 40 ) {
-		return { tone: 'warning', label: t( 'Fair' ) };
+		return { tone: 'warning', label: __( 'Fair', 'carticy-ai-checkout-for-woocommerce' ) };
 	}
-	return { tone: 'critical', label: t( 'Poor' ) };
+	return { tone: 'critical', label: __( 'Poor', 'carticy-ai-checkout-for-woocommerce' ) };
 }
 
 export default function ProductFeed() {
@@ -141,27 +142,26 @@ export default function ProductFeed() {
 	const columns = [
 		{
 			key: 'image',
-			header: t( 'Image' ),
-			className: 'caic-feed__image',
+			header: __( 'Image', 'carticy-ai-checkout-for-woocommerce' ),
 			render: ( row ) =>
 				row.image
-					? <img src={ row.image } alt="" width={ 40 } height={ 40 } />
+					? <img className="caic-feed__image" src={ row.image } alt="" width={ 40 } height={ 40 } />
 					: '—',
 		},
 		{
 			key: 'name',
-			header: t( 'Product' ),
+			header: __( 'Product', 'carticy-ai-checkout-for-woocommerce' ),
 			render: ( row ) => <strong>{ row.name }</strong>,
 		},
-		{ key: 'sku', header: t( 'SKU' ), render: ( row ) => row.sku || '—' },
-		{ key: 'price', header: t( 'Price' ) },
+		{ key: 'sku', header: __( 'SKU', 'carticy-ai-checkout-for-woocommerce' ), render: ( row ) => row.sku || '—' },
+		{ key: 'price', header: __( 'Price', 'carticy-ai-checkout-for-woocommerce' ) },
 		{
 			key: 'chatgpt',
-			header: t( 'ChatGPT' ),
+			header: __( 'ChatGPT', 'carticy-ai-checkout-for-woocommerce' ),
 			render: ( row ) => (
 				<div className="caic-feed__status">
 					<Chip tone={ row.enabled ? 'success' : 'neutral' }>
-						{ row.enabled ? t( 'Enabled' ) : t( 'Disabled' ) }
+						{ row.enabled ? __( 'Enabled', 'carticy-ai-checkout-for-woocommerce' ) : __( 'Disabled', 'carticy-ai-checkout-for-woocommerce' ) }
 					</Chip>
 					<Button
 						variant="tertiary"
@@ -169,14 +169,14 @@ export default function ProductFeed() {
 						loading={ busy === 'toggle-' + row.id }
 						onClick={ toggleRow( row.id ) }
 					>
-						{ row.enabled ? t( 'Disable' ) : t( 'Enable' ) }
+						{ row.enabled ? __( 'Disable', 'carticy-ai-checkout-for-woocommerce' ) : __( 'Enable', 'carticy-ai-checkout-for-woocommerce' ) }
 					</Button>
 				</div>
 			),
 		},
 		{
 			key: 'quality',
-			header: t( 'Quality Score' ),
+			header: __( 'Quality Score', 'carticy-ai-checkout-for-woocommerce' ),
 			render: ( row ) => {
 				const chip = qualityChip( row.quality_score );
 				const count = row.quality_issues.length;
@@ -184,13 +184,19 @@ export default function ProductFeed() {
 					<div className="caic-feed__quality">
 						<Chip tone={ chip.tone }>{ row.quality_score }% - { chip.label }</Chip>
 						{ count > 0 && (
-							<button
-								type="button"
-								className="caic-feed__issues-toggle"
+							<Button
+								variant="link"
+								size="sm"
+								aria-expanded={ expandedId === row.id }
+								aria-controls={ 'caic-issues-' + row.id }
 								onClick={ () => setExpandedId( expandedId === row.id ? null : row.id ) }
 							>
-								{ t( '%d issues' ).replace( '%d', count ) }
-							</button>
+								{ sprintf(
+									/* translators: %d: number of problems found in the product's data. */
+									_n( '%d issue', '%d issues', count, 'carticy-ai-checkout-for-woocommerce' ),
+									count
+								) }
+							</Button>
 						) }
 					</div>
 				);
@@ -198,15 +204,14 @@ export default function ProductFeed() {
 		},
 		{
 			key: 'actions',
-			header: t( 'Actions' ),
-			className: 'caic-feed__actions',
+			header: __( 'Actions', 'carticy-ai-checkout-for-woocommerce' ),
 			render: ( row ) => (
 				<Button
 					variant="secondary"
 					size="sm"
 					onClick={ openPreview( row.id ) }
 				>
-					{ t( 'Preview' ) }
+					{ __( 'Preview', 'carticy-ai-checkout-for-woocommerce' ) }
 				</Button>
 			),
 		},
@@ -217,9 +222,9 @@ export default function ProductFeed() {
 			return null;
 		}
 		return (
-			<tr className="caic-feed__issues-row">
+			<tr className="cv-table__row-extra">
 				<td colSpan={ colSpan }>
-					<ul className="caic-feed__issues-list">
+					<ul id={ 'caic-issues-' + row.id } className="caic-feed__issues-list">
 						{ row.quality_issues.map( ( issue, i ) => (
 							<li key={ i }>{ issue }</li>
 						) ) }
@@ -235,13 +240,13 @@ export default function ProductFeed() {
 	const chatgptFilter = (
 		<SelectField
 			className="caic-range"
-			aria-label={ t( 'ChatGPT status' ) }
+			aria-label={ __( 'ChatGPT status', 'carticy-ai-checkout-for-woocommerce' ) }
 			value={ chatgpt }
 			onChange={ ( e ) => { setPaged( 1 ); setChatgpt( e.target.value ); } }
 			options={ [
-				{ value: '', label: t( 'All Products' ) },
-				{ value: 'enabled', label: t( 'ChatGPT Enabled' ) },
-				{ value: 'disabled', label: t( 'ChatGPT Disabled' ) },
+				{ value: '', label: __( 'All Products', 'carticy-ai-checkout-for-woocommerce' ) },
+				{ value: 'enabled', label: __( 'ChatGPT Enabled', 'carticy-ai-checkout-for-woocommerce' ) },
+				{ value: 'disabled', label: __( 'ChatGPT Disabled', 'carticy-ai-checkout-for-woocommerce' ) },
 			] }
 		/>
 	);
@@ -249,17 +254,17 @@ export default function ProductFeed() {
 	return (
 		<div className="caic-stack">
 			<section className="cv-section">
-				<SectionHeader title={ t( 'Product Feed' ) } />
+				<SectionHeader title={ __( 'Product Feed', 'carticy-ai-checkout-for-woocommerce' ) } />
 
 				{ error && <Banner tone="critical">{ error.message }</Banner> }
 				{ notice && <Banner tone={ notice.tone }>{ notice.message }</Banner> }
 
 				{ stats && (
 					<div className="caic-stats">
-						<StatCard accent value={ stats.total_products } label={ t( 'Total Products' ) } />
-						<StatCard value={ stats.chatgpt_enabled } label={ t( 'ChatGPT Enabled' ) } />
-						<StatCard value={ stats.avg_quality + '%' } label={ t( 'Avg Quality' ) } />
-						<StatCard value={ stats.products_with_issues } label={ t( 'With Issues' ) } />
+						<StatCard accent value={ stats.total_products } label={ __( 'Total Products', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<StatCard value={ stats.chatgpt_enabled } label={ __( 'ChatGPT Enabled', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<StatCard value={ stats.avg_quality + '%' } label={ __( 'Avg Quality', 'carticy-ai-checkout-for-woocommerce' ) } />
+						<StatCard value={ stats.products_with_issues } label={ __( 'With Issues', 'carticy-ai-checkout-for-woocommerce' ) } />
 					</div>
 				) }
 			</section>
@@ -271,9 +276,9 @@ export default function ProductFeed() {
 						onChange={ setSearch }
 						onSubmit={ submitSearch }
 						onClear={ clearSearch }
-						placeholder={ t( 'Search by name or SKU…' ) }
-						submitLabel={ t( 'Search' ) }
-						clearLabel={ t( 'Clear' ) }
+						placeholder={ __( 'Search by name or SKU…', 'carticy-ai-checkout-for-woocommerce' ) }
+						submitLabel={ __( 'Search', 'carticy-ai-checkout-for-woocommerce' ) }
+						clearLabel={ __( 'Clear', 'carticy-ai-checkout-for-woocommerce' ) }
 					/>
 					{ chatgptFilter }
 					<div className="caic-feed__toolbar-actions">
@@ -282,21 +287,22 @@ export default function ProductFeed() {
 							loading={ busy === 'regenerate' }
 							onClick={ regenerate }
 						>
-							{ t( 'Regenerate Feed' ) }
+							{ __( 'Regenerate Feed', 'carticy-ai-checkout-for-woocommerce' ) }
 						</Button>
 						<Button
 							variant="secondary"
 							loading={ busy === 'recalculate' }
 							onClick={ recalculate }
 						>
-							{ t( 'Recalculate Quality' ) }
+							{ __( 'Recalculate Quality', 'carticy-ai-checkout-for-woocommerce' ) }
 						</Button>
 					</div>
 				</div>
 
 				{ selectedIds.length > 0 && (
 					<BulkActionBar
-						label={ t( '%d selected' ).replace( '%d', selectedIds.length ) }
+						/* translators: %d: number of selected products. */
+						label={ sprintf( __( '%d selected', 'carticy-ai-checkout-for-woocommerce' ), selectedIds.length ) }
 					>
 						<Button
 							variant="secondary"
@@ -304,7 +310,7 @@ export default function ProductFeed() {
 							loading={ busy === 'bulk-enable' }
 							onClick={ bulk( 'enable' ) }
 						>
-							{ t( 'Enable Selected' ) }
+							{ __( 'Enable Selected', 'carticy-ai-checkout-for-woocommerce' ) }
 						</Button>
 						<Button
 							variant="secondary"
@@ -312,17 +318,17 @@ export default function ProductFeed() {
 							loading={ busy === 'bulk-disable' }
 							onClick={ bulk( 'disable' ) }
 						>
-							{ t( 'Disable Selected' ) }
+							{ __( 'Disable Selected', 'carticy-ai-checkout-for-woocommerce' ) }
 						</Button>
 					</BulkActionBar>
 				) }
 
-				{ ! data && ! error && <LoadingPanel label={ t( 'Loading products…' ) } /> }
+				{ ! data && ! error && <LoadingPanel label={ __( 'Loading products…', 'carticy-ai-checkout-for-woocommerce' ) } /> }
 
 				{ data && data.rows.length === 0 && (
 					<Card flush>
-						<EmptyState title={ t( 'No products found' ) }>
-							{ t( 'No products match the current filters.' ) }
+						<EmptyState title={ __( 'No products found', 'carticy-ai-checkout-for-woocommerce' ) }>
+							{ __( 'No products match the current filters.', 'carticy-ai-checkout-for-woocommerce' ) }
 						</EmptyState>
 					</Card>
 				) }
@@ -336,9 +342,9 @@ export default function ProductFeed() {
 							selectable
 							selectedIds={ selectedIds }
 							onToggleSelect={ toggleSelect }
-							selectLabel={ t( 'Select product' ) }
+							selectLabel={ __( 'Select product', 'carticy-ai-checkout-for-woocommerce' ) }
 							renderRowExtra={ renderRowExtra }
-							emptyLabel={ t( 'No products found.' ) }
+							emptyLabel={ __( 'No products found.', 'carticy-ai-checkout-for-woocommerce' ) }
 						/>
 						<TablePagination page={ pagination.current_page } total={ pagination.total_pages } onChange={ setPaged } />
 					</Card>
@@ -348,11 +354,11 @@ export default function ProductFeed() {
 			<Modal
 				open={ null !== preview }
 				onClose={ () => setPreview( null ) }
-				title={ t( 'Feed Preview' ) }
+				title={ __( 'Feed Preview', 'carticy-ai-checkout-for-woocommerce' ) }
 				size="lg"
-				closeLabel={ t( 'Close' ) }
+				closeLabel={ __( 'Close', 'carticy-ai-checkout-for-woocommerce' ) }
 			>
-				{ preview && preview.loading && <LoadingPanel label={ t( 'Loading the preview…' ) } /> }
+				{ preview && preview.loading && <LoadingPanel label={ __( 'Loading the preview…', 'carticy-ai-checkout-for-woocommerce' ) } /> }
 				{ preview && preview.error && <Banner tone="critical">{ preview.error }</Banner> }
 				{ preview && undefined !== preview.feed && <pre className="caic-pre">{ preview.feed }</pre> }
 			</Modal>

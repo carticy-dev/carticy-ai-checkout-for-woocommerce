@@ -213,7 +213,7 @@ final class SettingsController extends AbstractAdminController {
 
 		return $this->ok(
 			array(
-				'message' => __( 'Test webhook sent successfully! Check your webhook endpoint logs.', 'carticy-ai-checkout-for-woocommerce' ),
+				'message' => __( 'Test webhook sent. Check that it arrived at your webhook URL.', 'carticy-ai-checkout-for-woocommerce' ),
 			)
 		);
 	}

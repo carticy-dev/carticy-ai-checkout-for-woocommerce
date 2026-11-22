@@ -4,7 +4,7 @@
  */
 
 import { Pagination } from '@carticy/admin-ui';
-import { t } from './api';
+import { __, sprintf } from '@wordpress/i18n';
 
 export default function TablePagination( { page, total, onChange } ) {
 	if ( total <= 1 ) {
@@ -17,11 +17,13 @@ export default function TablePagination( { page, total, onChange } ) {
 				page={ page }
 				total={ total }
 				onChange={ onChange }
-				summary={ t( 'Page %1$d of %2$d' ).replace( '%1$d', page ).replace( '%2$d', total ) }
-				label={ t( 'Pagination' ) }
-				previousLabel={ t( 'Previous' ) }
-				nextLabel={ t( 'Next' ) }
-				pageLabel={ ( number ) => t( 'Page %d' ).replace( '%d', number ) }
+				/* translators: 1: current page number, 2: number of pages. */
+				summary={ sprintf( __( 'Page %1$d of %2$d', 'carticy-ai-checkout-for-woocommerce' ), page, total ) }
+				label={ __( 'Pagination', 'carticy-ai-checkout-for-woocommerce' ) }
+				previousLabel={ __( 'Previous', 'carticy-ai-checkout-for-woocommerce' ) }
+				nextLabel={ __( 'Next', 'carticy-ai-checkout-for-woocommerce' ) }
+				/* translators: %d: page number. */
+				pageLabel={ ( number ) => sprintf( __( 'Page %d', 'carticy-ai-checkout-for-woocommerce' ), number ) }
 			/>
 		</div>
 	);

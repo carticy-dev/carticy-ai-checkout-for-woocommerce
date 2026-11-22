@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-22T12:25:45+00:00\n"
+"POT-Creation-Date: 2026-11-22T14:24:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: carticy-ai-checkout-for-woocommerce\n"
@@ -75,43 +75,48 @@ msgstr ""
 msgid "Install Plugin"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:155
+#: src/Admin/AdminHandler.php:158
 msgid "Carticy AI Checkout"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:156
+#: src/Admin/AdminHandler.php:159
+#: assets/js/src/admin-app/App.jsx:46
 msgid "AI Checkout"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:167
-#: src/Admin/AdminHandler.php:168
+#: src/Admin/AdminHandler.php:172
+#: src/Admin/AdminHandler.php:173
 msgid "Product Feed Manager"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:177
-#: src/Admin/AdminHandler.php:178
+#: src/Admin/AdminHandler.php:185
+#: src/Admin/AdminHandler.php:186
+#: assets/js/src/admin-app/App.jsx:22
 msgid "Application Wizard"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:187
-#: src/Admin/AdminHandler.php:188
+#: src/Admin/AdminHandler.php:198
+#: src/Admin/AdminHandler.php:199
+#: assets/js/src/admin-app/App.jsx:23
 msgid "Analytics"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:197
-#: src/Admin/AdminHandler.php:198
+#: src/Admin/AdminHandler.php:211
+#: src/Admin/AdminHandler.php:212
+#: assets/js/src/admin-app/App.jsx:24
+#: assets/js/src/admin-app/screens/Logs.jsx:113
 msgid "Logs & Monitoring"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:390
+#: src/Admin/AdminHandler.php:386
 msgid "Source"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:422
+#: src/Admin/AdminHandler.php:418
 msgid "ChatGPT Instant Checkout"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:424
+#: src/Admin/AdminHandler.php:420
 msgid "AI"
 msgstr ""
 
@@ -198,7 +203,7 @@ msgid "Failed to send test webhook. Verify your webhook URL and secret are confi
 msgstr ""
 
 #: src/Rest/SettingsController.php:216
-msgid "Test webhook sent successfully! Check your webhook endpoint logs."
+msgid "Test webhook sent. Check that it arrived at your webhook URL."
 msgstr ""
 
 #: src/Rest/SettingsController.php:232
@@ -210,6 +215,7 @@ msgid "IP ranges refreshed successfully!"
 msgstr ""
 
 #: src/Rest/SettingsController.php:288
+#: assets/js/src/admin-app/screens/Wizard.jsx:326
 msgid "Fix This"
 msgstr ""
 
@@ -269,10 +275,12 @@ msgid "Valid store URL is required."
 msgstr ""
 
 #: src/Services/ApplicationWizardService.php:173
+#: assets/js/src/admin-app/screens/Wizard.jsx:291
 msgid "Terms of Service URL"
 msgstr ""
 
 #: src/Services/ApplicationWizardService.php:174
+#: assets/js/src/admin-app/screens/Wizard.jsx:292
 msgid "Privacy Policy URL"
 msgstr ""
 
@@ -392,4 +400,1002 @@ msgstr ""
 
 #: src/Services/TestModeService.php:197
 msgid "LIVE"
+msgstr ""
+
+#: assets/js/src/admin-app/api.js:23
+#: assets/js/src/admin-app/api.js:27
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: assets/js/src/admin-app/App.jsx:20
+#: assets/js/src/admin-app/screens/Settings.jsx:165
+msgid "Settings"
+msgstr ""
+
+#: assets/js/src/admin-app/App.jsx:21
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:257
+msgid "Product Feed"
+msgstr ""
+
+#: assets/js/src/admin-app/App.jsx:48
+msgid "AI Checkout sections"
+msgstr ""
+
+#: assets/js/src/admin-app/App.jsx:54
+msgid "Unknown screen."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:32
+msgid "Date range"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:36
+msgid "Last 7 Days"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:37
+msgid "Last 30 Days"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:38
+msgid "Last 90 Days"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:44
+#: assets/js/src/admin-app/screens/Analytics.jsx:54
+#: assets/js/src/admin-app/screens/Logs.jsx:218
+#: assets/js/src/admin-app/screens/Logs.jsx:351
+#: assets/js/src/admin-app/screens/Logs.jsx:445
+#: assets/js/src/admin-app/screens/Settings.jsx:138
+#: assets/js/src/admin-app/screens/Wizard.jsx:318
+msgid "Status"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:45
+#: assets/js/src/admin-app/screens/Logs.jsx:465
+msgid "Count"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:46
+msgid "Percentage"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:50
+msgid "Order"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:51
+msgid "Date"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:52
+msgid "Customer"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:53
+msgid "Total"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:60
+msgid "Performance"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:64
+msgid "Loading analytics…"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:71
+msgid "ChatGPT Orders"
+msgstr ""
+
+#. translators: %s: revenue amount.
+#: assets/js/src/admin-app/screens/Analytics.jsx:73
+#: assets/js/src/admin-app/screens/Analytics.jsx:79
+msgid "Revenue: %s"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:77
+msgid "Regular Orders"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:83
+msgid "ChatGPT Conversion"
+msgstr ""
+
+#. translators: 1: orders placed through ChatGPT, 2: all orders.
+#: assets/js/src/admin-app/screens/Analytics.jsx:85
+msgid "%1$d of %2$d order"
+msgid_plural "%1$d of %2$d orders"
+msgstr[0] ""
+msgstr[1] ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:89
+msgid "ChatGPT AOV"
+msgstr ""
+
+#. translators: %s: average order value of other orders.
+#: assets/js/src/admin-app/screens/Analytics.jsx:91
+msgid "Regular: %s"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:100
+msgid "ChatGPT Order Status Distribution"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:106
+msgid "No status data for the selected range."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:112
+msgid "Recent ChatGPT Orders"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Analytics.jsx:117
+msgid "No ChatGPT orders found in the selected date range."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:30
+msgid "API Logs"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:31
+msgid "Error Logs"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:32
+msgid "Webhook Activity"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:33
+msgid "Session Status"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:37
+msgid "All Categories"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:38
+msgid "Payment"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:39
+#: assets/js/src/admin-app/screens/Settings.jsx:31
+msgid "API"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:40
+msgid "Webhook"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:41
+msgid "Validation"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:42
+msgid "System"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:114
+msgid "Log types"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:160
+msgid "No data"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:166
+msgid "View context"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:171
+#: assets/js/src/admin-app/screens/Logs.jsx:276
+msgid "Context"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:173
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:359
+#: assets/js/src/admin-app/screens/Wizard.jsx:457
+msgid "Close"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:194
+msgid "Loading logs…"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:204
+#: assets/js/src/admin-app/screens/Logs.jsx:267
+#: assets/js/src/admin-app/screens/Logs.jsx:348
+msgid "Timestamp"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:207
+msgid "Level"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:210
+#: assets/js/src/admin-app/screens/Logs.jsx:464
+#: assets/js/src/admin-app/screens/Wizard.jsx:461
+msgid "Request"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:213
+msgid "Method"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:221
+#: assets/js/src/admin-app/screens/Logs.jsx:273
+#: assets/js/src/admin-app/screens/Settings.jsx:147
+msgid "Message"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:224
+#: assets/js/src/admin-app/screens/Wizard.jsx:321
+msgid "Details"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:225
+msgid "API Context"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:233
+msgid "No API logs found"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:234
+msgid "Logs will appear here when API requests are made."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:243
+msgid "No API logs found."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:270
+msgid "Category"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:277
+msgid "Error Details"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:284
+msgid "Error category"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:290
+#: assets/js/src/admin-app/screens/Logs.jsx:364
+#: assets/js/src/admin-app/screens/Logs.jsx:472
+msgid "Clear cache"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:297
+msgid "Error Statistics (Last 24 Hours)"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:313
+#: assets/js/src/admin-app/screens/Logs.jsx:319
+msgid "No errors found."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:313
+msgid "This is good!"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:349
+msgid "Event Type"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:350
+msgid "URL"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:352
+msgid "Attempt"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:355
+#: assets/js/src/admin-app/screens/Wizard.jsx:410
+msgid "Result"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:357
+msgid "Success"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:357
+#: assets/js/src/admin-app/screens/Logs.jsx:378
+#: assets/js/src/admin-app/screens/Logs.jsx:486
+#: assets/js/src/admin-app/screens/Settings.jsx:141
+msgid "Failed"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:370
+msgid "Webhook Statistics (Last 24 Hours)"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:376
+msgid "Total Sent"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:377
+msgid "Successful"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:379
+msgid "Retry Rate"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:385
+msgid "Failed Webhooks (Retry Queue)"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:393
+msgid "Clear Queue"
+msgstr ""
+
+#. translators: %d: number of webhooks waiting to be sent again.
+#: assets/js/src/admin-app/screens/Logs.jsx:399
+msgid "%d webhook is waiting to be sent again"
+msgid_plural "%d webhooks are waiting to be sent again"
+msgstr[0] ""
+msgstr[1] ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:407
+#: assets/js/src/admin-app/screens/Logs.jsx:415
+msgid "No webhook activity found."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:408
+msgid "Webhooks are only sent for orders created through ChatGPT Instant Checkout."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:440
+msgid "Session ID"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:452
+msgid "Items"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:453
+msgid "Created"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:454
+msgid "Last Updated"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:455
+msgid "Expires"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:458
+msgid "Shipping"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:459
+msgid "Yes"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:466
+#: assets/js/src/admin-app/screens/Logs.jsx:504
+msgid "Avg Duration"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:467
+msgid "Slowest"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:480
+msgid "Session Status Overview"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:483
+msgid "Active Sessions"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:484
+msgid "Total Sessions"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:485
+#: assets/js/src/admin-app/screens/Wizard.jsx:249
+msgid "Completed"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:487
+msgid "Cancelled"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:488
+msgid "Expired"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:491
+msgid "Recent Sessions"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:497
+msgid "No active sessions found."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:501
+msgid "API Performance (Last 24 Hours)"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:503
+msgid "Total Requests"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:505
+msgid "Slowest Request"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:506
+msgid "Avg Memory"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:507
+msgid "Avg DB Queries"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:512
+msgid "Performance by request"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:526
+msgid "System Health"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:529
+msgid "PHP Version"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:530
+msgid "Memory Limit"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:531
+msgid "WordPress Version"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:532
+msgid "WooCommerce Version"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:534
+msgid "Object Cache"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:537
+#: assets/js/src/admin-app/screens/Logs.jsx:545
+msgid "Active"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:537
+#: assets/js/src/admin-app/screens/Logs.jsx:545
+msgid "Inactive"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Logs.jsx:542
+msgid "OPCache"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:39
+msgid "Excellent"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:42
+msgid "Good"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:45
+msgid "Fair"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:47
+msgid "Poor"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:145
+msgid "Image"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:153
+msgid "Product"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:156
+msgid "SKU"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:157
+msgid "Price"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:160
+msgid "ChatGPT"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:164
+msgid "Enabled"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:164
+msgid "Disabled"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:172
+msgid "Disable"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:172
+msgid "Enable"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:179
+msgid "Quality Score"
+msgstr ""
+
+#. translators: %d: number of problems found in the product's data.
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:196
+msgid "%d issue"
+msgid_plural "%d issues"
+msgstr[0] ""
+msgstr[1] ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:207
+#: assets/js/src/admin-app/screens/Wizard.jsx:413
+msgid "Actions"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:214
+msgid "Preview"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:243
+msgid "ChatGPT status"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:247
+msgid "All Products"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:248
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:265
+msgid "ChatGPT Enabled"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:249
+msgid "ChatGPT Disabled"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:264
+msgid "Total Products"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:266
+msgid "Avg Quality"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:267
+msgid "With Issues"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:279
+msgid "Search by name or SKU…"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:280
+msgid "Search"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:281
+msgid "Clear"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:290
+msgid "Regenerate Feed"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:297
+msgid "Recalculate Quality"
+msgstr ""
+
+#. translators: %d: number of selected products.
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:305
+msgid "%d selected"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:313
+msgid "Enable Selected"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:321
+msgid "Disable Selected"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:326
+msgid "Loading products…"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:330
+msgid "No products found"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:331
+msgid "No products match the current filters."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:345
+msgid "Select product"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:347
+msgid "No products found."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:357
+msgid "Feed Preview"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/ProductFeed.jsx:361
+msgid "Loading the preview…"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:28
+msgid "Prerequisites"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:29
+msgid "General"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:30
+msgid "Security"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:32
+msgid "Uninstall"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:66
+msgid "Settings saved."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:107
+#: assets/js/src/admin-app/screens/Wizard.jsx:158
+msgid "Copied to clipboard."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:108
+#: assets/js/src/admin-app/screens/Wizard.jsx:159
+msgid "Copy failed. Please copy manually."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:128
+msgid "Loading settings…"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:135
+msgid "Check"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:141
+msgid "OK"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:166
+msgid "Settings sections"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:176
+#: assets/js/src/admin-app/screens/Wizard.jsx:334
+msgid "No prerequisite checks available."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:184
+msgid "Enable plugin-wide test mode"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:185
+msgid "When enabled, SSL and IP allowlist checks are bypassed and Stripe test keys are used."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:191
+msgid "OpenAI Webhook URL"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:192
+msgid "Unique webhook URL provided by OpenAI during merchant onboarding (required for production)."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:197
+#: assets/js/src/admin-app/screens/Settings.jsx:213
+#: assets/js/src/admin-app/screens/Settings.jsx:265
+msgid "Save Changes"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:198
+msgid "Send Test Webhook"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:206
+msgid "Only allow requests from OpenAI IP addresses"
+msgstr ""
+
+#. translators: %d: number of OpenAI IP ranges loaded.
+#: assets/js/src/admin-app/screens/Settings.jsx:208
+msgid "OpenAI IP ranges loaded: %d"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:214
+msgid "Refresh IP Ranges"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:223
+#: assets/js/src/admin-app/screens/Wizard.jsx:368
+msgid "API Key (Bearer Token)"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:228
+#: assets/js/src/admin-app/screens/Settings.jsx:239
+#: assets/js/src/admin-app/screens/Settings.jsx:250
+#: assets/js/src/admin-app/screens/Wizard.jsx:370
+#: assets/js/src/admin-app/screens/Wizard.jsx:376
+msgid "Copy"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:229
+#: assets/js/src/admin-app/screens/Settings.jsx:240
+#: assets/js/src/admin-app/screens/Wizard.jsx:371
+#: assets/js/src/admin-app/screens/Wizard.jsx:377
+msgid "Regenerate"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:234
+#: assets/js/src/admin-app/screens/Wizard.jsx:374
+msgid "Webhook Secret (HMAC)"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:245
+msgid "Product Feed URL"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:251
+#: assets/js/src/admin-app/screens/Wizard.jsx:420
+msgid "View"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:259
+msgid "Remove all plugin data when uninstalling"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Settings.jsx:260
+msgid "When enabled, all settings, transients, and metadata are permanently deleted on uninstall."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:121
+msgid "Are you sure you want to restart the wizard? All progress will be lost."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:138
+msgid "Saved."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:149
+msgid "Regenerated."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:233
+msgid "Loading the wizard…"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:246
+msgid "OpenAI Application Wizard"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:247
+msgid "Restart Wizard"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:257
+msgid "Back"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:272
+#: assets/js/src/admin-app/screens/Wizard.jsx:487
+msgid "Business Name"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:273
+msgid "Business Entity Type"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:273
+msgid "e.g. LLC, Sole Proprietor, Corporation"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:274
+msgid "Contact Name"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:275
+#: assets/js/src/admin-app/screens/Wizard.jsx:488
+msgid "Contact Email"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:276
+#: assets/js/src/admin-app/screens/Wizard.jsx:489
+msgid "Store URL"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:282
+msgid "Your product feed exposes ChatGPT-enabled products to OpenAI. Configure which products are included and review feed quality on the Product Feed screen."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:284
+msgid "Open Product Feed"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:291
+#: assets/js/src/admin-app/screens/Wizard.jsx:292
+msgid "Required."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:293
+msgid "Return / Refund Policy URL"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:293
+msgid "Optional for digital-only stores."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:300
+msgid "Average Product Quality"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:300
+msgid "Across ChatGPT-enabled products"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:304
+msgid "Issues found in your product data:"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:317
+msgid "Requirement"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:318
+#: assets/js/src/admin-app/screens/Wizard.jsx:450
+msgid "Pass"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:318
+#: assets/js/src/admin-app/screens/Wizard.jsx:450
+msgid "Fail"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:342
+msgid "Enable test mode"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:343
+msgid "When test mode is on, conformance tests run against Stripe test keys and the test webhook URL."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:349
+msgid "Test Webhook URL"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:350
+msgid "Where sample webhooks are sent while testing."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:360
+msgid "Save Test Setup"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:380
+msgid "Download the generated application config to attach to your OpenAI merchant submission."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:382
+msgid "Download JSON Config"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:401
+msgid "Run the 17 ACP conformance tests. All blocking tests must pass before submitting your application."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:403
+msgid "Run All Tests"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:409
+msgid "Test"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:418
+msgid "Run"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:442
+msgid "Blocking"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:442
+msgid "Optional"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:445
+msgid "Running…"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:448
+msgid "Error"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:463
+msgid "Response"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:467
+msgid "No result for this test yet."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:480
+msgid "Application Summary"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:483
+msgid "Field"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:484
+msgid "Value"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:490
+msgid "Terms of Service"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:491
+msgid "Privacy Policy"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:496
+msgid "Manual submission required"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:497
+msgid "There is no automated submission API. Submit your application through the OpenAI merchant web form at chatgpt.com/merchants, attaching the JSON config downloaded in the Integration step."
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:517
+#: assets/js/src/admin-app/screens/Wizard.jsx:526
+msgid "Save & Next"
+msgstr ""
+
+#: assets/js/src/admin-app/screens/Wizard.jsx:529
+#: assets/js/src/admin-app/TablePagination.jsx:24
+msgid "Next"
+msgstr ""
+
+#. translators: 1: current page number, 2: number of pages.
+#: assets/js/src/admin-app/TablePagination.jsx:21
+msgid "Page %1$d of %2$d"
+msgstr ""
+
+#: assets/js/src/admin-app/TablePagination.jsx:22
+msgid "Pagination"
+msgstr ""
+
+#: assets/js/src/admin-app/TablePagination.jsx:23
+msgid "Previous"
+msgstr ""
+
+#. translators: %d: page number.
+#: assets/js/src/admin-app/TablePagination.jsx:26
+msgid "Page %d"
 msgstr ""

@@ -329,8 +329,8 @@ on wp-admin's gray. Three pieces:
    surface) and your app renders a `cv-page` (centered, max-width) inside it.
 2. **Body class + chrome.css:** add `cv-takeover` via `admin_body_class` on
    your screens only, and enqueue `css/chrome.css`. It removes wp-admin's
-   content gutters, paints the full content column with the app surface (so a
-   tall admin sidebar never reveals gray below short pages), hides `#wpfooter`,
+   content gutters, paints the page floor with the app surface (so a tall
+   admin menu never reveals gray below a short screen), hides `#wpfooter`,
    and keeps notices printed straight into the page hidden until WordPress
    moves them into the notice area (see Notices) — all gated by the body
    class, so the rest of wp-admin is untouched.
@@ -367,7 +367,7 @@ the checkbox, `Table` to the `<table>`, `Tabs` to the tab list, `Modal` and
 - `SaveBar({ label, message?, children })`
 
 **Actions & feedback**
-- `Button({ variant: 'primary'|'secondary'|'tertiary'|'ghost'|'destructive'|'link' = 'secondary', size?: 'sm'|'lg', block?, loading?, icon?, type? = 'button', ...rest })` — primary = near-black; violet is never a button background. `ghost` has no fill or border until hovered (toolbar and row actions); `destructive` is for actions that delete or cannot be undone; `link` reads as a text link. An icon-only button needs an `aria-label`.
+- `Button({ variant: 'primary'|'secondary'|'tertiary'|'ghost'|'destructive'|'link' = 'secondary', size?: 'sm'|'lg', block?, loading?, icon?, type? = 'button', ...rest })` — primary = near-black; violet is never a button background. `ghost` has no fill or border until hovered (toolbar and row actions); `destructive` is for actions that delete or cannot be undone; `link` reads as a text link. An icon-only button needs an `aria-label`. While `loading` the button shows a spinner and stays focusable: it carries `aria-disabled` and `aria-busy`, looks disabled and ignores clicks, Enter and Space (a submit button does not submit) until `loading` is false. Use `disabled` for an action that is not available at all. A link drawn as a button (`<a className="cv-btn cv-btn--primary">`) keeps its variant's colours in every state inside `.cv-root`, whatever wp-admin applies to links.
 - `Spinner({ ...rest })` — inline spinner; used inside `Button` when `loading`.
 - `Banner({ tone: 'info'|'success'|'warning'|'critical' = 'info', title?, icon?, actions?, children })` — in-app notice; `critical` gets `role="alert"`. `icon` (inline SVG) is drawn before the text in the tone's colour, in a `.cv-banner__icon` slot.
 - `ToastProvider({ duration? = 5000, max? = 4, dismissLabel? = 'Dismiss', container?, children })` + `useToast()` → `{ show({ id?, tone?, title, description?, duration? }), dismiss(id), success(title, options?), info(…), warning(…), critical(…) }` — short confirmations stacked in the bottom corner on the end side of the reading direction, above a SaveBar or an open Drawer's footer. See Toasts below.
@@ -404,7 +404,7 @@ the checkbox, `Table` to the `<table>`, `Tabs` to the tab list, `Modal` and
 - `EmptyState({ icon?, title?, headingLevel? = 3, size?: 'compact', actions?, meta?, children })` — `children` is the description paragraph; `size="compact"` fits it inside a card.
 
 **Tables & bulk (data screens)**
-- `Table({ columns: [{ key, header, render?(row), className?, headerClassName?, sortable?, defaultSortDirection? }], rows, getRowId? = r => r.id, selectable?, selectedIds?, onToggleSelect?(id), selectLabel? = 'Select', onToggleSelectAll?(checked, ids), selectAllLabel? = 'Select all', sort?: { key, direction: 'asc'|'desc' }, onSortChange?(key, direction), renderRowExtra?(row, colSpan), emptyLabel?, ...rest })` — `render` returns the cell node; `renderRowExtra` adds a full-width row below (detail panels / inline forms). Selection and sort state are owned by the consumer. The table sits in a `.cv-table-wrap` that scrolls sideways on narrow screens.
+- `Table({ columns: [{ key, header, render?(row), className?, headerClassName?, sortable?, defaultSortDirection? }], rows, getRowId? = r => r.id, selectable?, selectedIds?, onToggleSelect?(id), selectLabel? = 'Select', onToggleSelectAll?(checked, ids), selectAllLabel? = 'Select all', sort?: { key, direction: 'asc'|'desc' }, onSortChange?(key, direction), renderRowExtra?(row, colSpan), emptyLabel?, ...rest })` — `render` returns the cell node; `renderRowExtra` adds a full-width row below (detail panels / inline forms). Selection and sort state are owned by the consumer. The table sits in a `.cv-table-wrap` that scrolls sideways on narrow screens; while it scrolls and holds no control, Chrome and Firefox make it a Tab stop (the arrow keys scroll it), drawn with the focus ring.
   - **Sorting:** with `sort` and `onSortChange`, columns marked `sortable` get a button in their header (`.cv-sort`) and the sorted column carries `aria-sort`. A click on the sorted column flips the direction; another column starts at its `defaultSortDirection` (`'asc'`). The consumer sorts the rows or re-queries.
   - **Select all:** with `selectable` and `onToggleSelectAll`, the selection column's header holds a checkbox: checked when every row in `rows` is selected, mixed (indeterminate) when some are, disabled when there are no rows. `onToggleSelectAll( checked, ids )` gets what the reader asked for and the ids of the rows shown.
   - The selection checkboxes are `.cv-check` (checked, mixed and focus states drawn by the package, whatever wp-admin applies).
@@ -412,7 +412,7 @@ the checkbox, `Table` to the `<table>`, `Tabs` to the tab list, `Modal` and
 - `BulkActionBar({ label, children, ...rest })` — the strip above a table when rows are selected; render it conditionally, pass action Buttons as children.
 
 **Onboarding**
-- `Stepper({ steps: [{ id, label }], activeId, doneLabel? = 'Completed', ...rest })` — numbered step rail with completed/active states. The active step carries `aria-current="step"`; a completed step shows a check icon and is announced with `doneLabel` (pass a translated string).
+- `Stepper({ steps: [{ id, label }], activeId, doneLabel? = 'Completed', progressLabel?(number, total) = 'Step n of total', ...rest })` — numbered step rail with completed/active states. The active step carries `aria-current="step"`; a completed step shows a check icon and is announced with `doneLabel` (pass a translated string). Labels wrap before the rail outgrows its column. At 782px and below it becomes a progress track, one segment per step (done, current and upcoming in their colours), under the current step's label and `progressLabel` (pass a translated string, e.g. `( n, total ) => sprintf( __( 'Step %1$d of %2$d', 'myplugin' ), n, total )`); screen readers read the steps as on wide screens.
 - `useServerOnboarding( path, { autoFetch? } )` — see below.
 
 ### Drawer
@@ -440,8 +440,10 @@ const nameRef = useRef( null );
   scrim; the consumer sets `open` to false.
 - A modal dialog (`role="dialog"`, `aria-modal="true"`, labelled by the
   title). On open, focus moves to `initialFocusRef` or the close button; Tab
-  and Shift+Tab stay inside; the page behind does not scroll. On close, focus
-  returns to the element that opened it.
+  and Shift+Tab stay inside, in the browser's own order (a radio group is one
+  stop, and a scroll container with no control inside, such as a wide
+  table's, is one too), wrapping round at the ends; the page behind does not
+  scroll. On close, focus returns to the element that opened it.
 - Renders through a portal into the closest `.cv-root` (or `container`), so
   tokens apply and no card or table clips it. The layer sits above the
   wp-admin toolbar.
@@ -544,8 +546,8 @@ toast.show( { id, tone: 'success', title: __( 'Geocoded 40 stores', 'myplugin' )
 
 Components ship neutral English defaults for their screen-reader and helper
 strings (`closeLabel`, `dismissLabel`, `pageLabel`, `noResultsLabel`,
-`requiredLabel`, `doneLabel`, `messages`…). Pass translated strings from your
-plugin's text domain.
+`requiredLabel`, `doneLabel`, `progressLabel`, `messages`…). Pass translated
+strings from your plugin's text domain.
 
 ---
 

@@ -67,17 +67,69 @@ const FOCUSABLE = [
 ].join( ',' );
 
 /**
- * The elements Tab can reach inside a container, in document order. Elements
- * without a box (inside a collapsed or display:none part) are left out, because
- * focusing them silently fails and would let focus escape the trap.
+ * True when the element scrolls on an axis its content overflows. Chrome and
+ * Firefox make such a scroll container a Tab stop of its own, so a reader can
+ * scroll a wide table with the arrow keys; the trap follows Chrome's rule,
+ * which counts it only while nothing inside it takes focus.
+ *
+ * @param {HTMLElement} element A rendered element without a tabindex.
+ * @return {boolean} Whether it scrolls.
+ */
+function scrollsOverflow( element ) {
+	const overflowsX = element.scrollWidth > element.clientWidth;
+	const overflowsY = element.scrollHeight > element.clientHeight;
+	if ( ! overflowsX && ! overflowsY ) {
+		return false;
+	}
+	const style = element.ownerDocument.defaultView.getComputedStyle( element );
+	const scrolls = ( overflow ) => 'auto' === overflow || 'scroll' === overflow;
+	return ( overflowsX && scrolls( style.overflowX ) ) || ( overflowsY && scrolls( style.overflowY ) );
+}
+
+/**
+ * The Tab stops inside a container, in document order: focusable controls and
+ * scroll containers with no Tab stop inside them. Elements without a box
+ * (inside a collapsed or display:none part) are left out, because focusing
+ * them silently fails and would let focus escape the trap.
  *
  * @param {HTMLElement} container The element to search.
- * @return {HTMLElement[]} Focusable descendants.
+ * @return {HTMLElement[]} Tab stops among the container's descendants.
+ */
+function tabStopsIn( container ) {
+	const stops = [];
+	for ( const element of container.children ) {
+		if ( element.hidden || element.inert ) {
+			continue;
+		}
+		const inner = tabStopsIn( element );
+		const rendered = element.getClientRects().length > 0;
+		if ( rendered && element.matches( FOCUSABLE ) && element.tabIndex >= 0 ) {
+			stops.push( element, ...inner );
+		} else if ( rendered && ! inner.length && ! element.hasAttribute( 'tabindex' ) && scrollsOverflow( element ) ) {
+			stops.push( element );
+		} else {
+			stops.push( ...inner );
+		}
+	}
+	return stops;
+}
+
+/**
+ * The Tab order inside a container. A named radio group is one stop, as the
+ * browser treats it: its checked radio, or its first one while none is checked.
+ *
+ * @param {HTMLElement} container The element to search.
+ * @return {HTMLElement[]} Tab stops, in document order.
  */
 function tabbableIn( container ) {
-	return Array.from( container.querySelectorAll( FOCUSABLE ) ).filter(
-		( element ) => element.tabIndex >= 0 && ! element.closest( '[hidden], [inert]' ) && element.getClientRects().length > 0
-	);
+	const stops = tabStopsIn( container );
+	return stops.filter( ( element ) => {
+		if ( 'radio' !== element.type || ! element.name ) {
+			return true;
+		}
+		const group = stops.filter( ( other ) => 'radio' === other.type && other.name === element.name && other.form === element.form );
+		return element === ( group.find( ( radio ) => radio.checked ) || group[ 0 ] );
+	} );
 }
 
 /** True when the reader asked the system to reduce motion. */
@@ -88,7 +140,12 @@ export function prefersReducedMotion() {
 /** Open modal layers (drawers and modals), oldest first; only the last one answers Escape. */
 const openLayers = [];
 
-/** Keep Tab and Shift+Tab inside the panel the listener is attached to. */
+/**
+ * Keep Tab and Shift+Tab inside the panel the listener is attached to. While a
+ * Tab stop lies ahead in the panel the browser moves focus itself, so its own
+ * order holds (radio groups, scroll containers, anything focused that the list
+ * does not know); past the last stop, or before the first, focus wraps round.
+ */
 function trapTab( event ) {
 	const panel = event.currentTarget;
 	if ( 'Tab' !== event.key ) {
@@ -100,16 +157,11 @@ function trapTab( event ) {
 		panel.focus( { preventScroll: true } );
 		return;
 	}
-	const first = tabbable[ 0 ];
-	const last = tabbable[ tabbable.length - 1 ];
 	const current = panel.ownerDocument.activeElement;
-	const inList = tabbable.includes( current );
-	if ( event.shiftKey && ( current === first || ! inList ) ) {
+	const ahead = event.shiftKey ? Node.DOCUMENT_POSITION_PRECEDING : Node.DOCUMENT_POSITION_FOLLOWING;
+	if ( ! tabbable.some( ( element ) => current.compareDocumentPosition( element ) & ahead ) ) {
 		event.preventDefault();
-		last.focus();
-	} else if ( ! event.shiftKey && ( current === last || ! inList ) ) {
-		event.preventDefault();
-		first.focus();
+		( event.shiftKey ? tabbable[ tabbable.length - 1 ] : tabbable[ 0 ] ).focus();
 	}
 }
 

@@ -232,9 +232,9 @@ final class AdminHandler {
 		}
 
 		// Unified Carticy admin design system (carticy/admin-ui): tokens +
-		// components, scoped to the .cv-root mount added by the local
-		// layout-wrapper template. Plugin-unique handles by design so other
-		// Carticy plugins can carry their own version side by side.
+		// components, scoped to the .cv-root mount the React app marks.
+		// Plugin-unique handles by design so other Carticy plugins can carry
+		// their own version side by side.
 		wp_enqueue_style(
 			'carticy-ai-checkout-admin-ui-tokens',
 			plugin_dir_url( dirname( __DIR__ ) ) . 'vendor/carticy/admin-ui/css/tokens.css',
@@ -274,7 +274,9 @@ final class AdminHandler {
 	 *
 	 * One bundle serves every migrated screen; the boot object names the screen
 	 * to render and carries any screen-specific config. React, api-fetch and i18n
-	 * resolve to the WordPress script globals declared as dependencies.
+	 * resolve to the WordPress script globals declared as dependencies; the
+	 * bundle's strings are translated through wp-i18n from the plugin's
+	 * languages folder or its translate.wordpress.org pack.
 	 *
 	 * @param string               $screen      Screen key the bundle should render.
 	 * @param array<string, mixed> $screen_data Screen-specific boot config.
@@ -287,6 +289,7 @@ final class AdminHandler {
 			CARTICY_AI_CHECKOUT_VERSION,
 			true
 		);
+		wp_set_script_translations( 'carticy-ai-checkout-admin-app', 'carticy-ai-checkout-for-woocommerce', plugin_dir_path( dirname( __DIR__ ) ) . 'languages' );
 
 		wp_localize_script(
 			'carticy-ai-checkout-admin-app',
@@ -297,7 +300,6 @@ final class AdminHandler {
 				'screen'        => $screen,
 				'version'       => defined( 'CARTICY_AI_CHECKOUT_VERSION' ) ? CARTICY_AI_CHECKOUT_VERSION : '',
 				'adminUrl'      => admin_url(),
-				'i18n'          => array(),
 				$screen         => $screen_data,
 			)
 		);

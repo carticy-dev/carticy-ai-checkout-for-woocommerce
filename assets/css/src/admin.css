@@ -1,29 +1,12 @@
 /**
  * Admin Styles for AI Checkout for WooCommerce
  *
- * Plugin-specific styles only. Layout, tokens, and shared components come
- * from the unified Carticy admin design system (carticy/admin-ui,
- * .cv-root-scoped tokens.css + components.css), which replaced the retired
- * design-system/admin-layout/admin-components packages.
+ * Plugin-specific layout helpers only. Tokens and components come from the
+ * shared Carticy admin design system (carticy/admin-ui), scoped to the
+ * .cv-root mount.
  *
  * @package Carticy\AiCheckout
  */
-
-/* All styles scoped under .carticy-ai-checkout to avoid conflicts */
-
-/* Legacy-token bridge: --carticy-* references in this stylesheet and in the
-   page-scoped stylesheets rendered inside the .carticy-ai-checkout shell
-   (e.g. admin-product-manager.css) resolve to the unified design-system
-   tokens (with static fallbacks so a missing tokens.css cannot blank the
-   admin). Remove a mapping only after removing its last usage. */
-.carticy-ai-checkout {
-	--carticy-base: var(--cv-bg-surface, #ffffff);
-	--carticy-grey-light: var(--cv-border-1, #f3f4f6);
-	--carticy-primary: var(--cv-action, #0f172a);
-	--carticy-radius: var(--cv-radius-sm, 4px);
-	--carticy-shade-50: var(--cv-bg-subtle, #f3f4ff);
-	--carticy-shadow-sm: var(--cv-shadow-card, 0 1px 3px rgba(0, 0, 0, 0.1));
-}
 
 /* ========================================
 	Screen content: the design-system page frame (.cv-page) in a narrower
@@ -125,64 +108,12 @@
 	gap: 8px;
 }
 
-.caic-feed__actions {
-	display: flex;
-	gap: 6px;
-}
-
-.caic-feed__issues-toggle {
-	cursor: pointer;
-}
-
 .caic-feed__issues-list,
 .caic-issues {
 	margin: 8px 0 0 18px;
 }
 
-.caic-feed__issues-row td {
-	background: var(--cv-bg-subtle);
-}
-
-/* ========================================
-	Settings Page Layout (Plugin-Specific)
-	======================================== */
-
-/* Tab panels sit below the cv-tabs strip; cards inside stack vertically. */
-.carticy-ai-checkout .tab-content {
-	padding-top: 24px;
-}
-
-.carticy-ai-checkout .tab-content .cv-card {
-	margin-bottom: 24px;
-}
-
-/* Stacked field blocks inside settings cards (label + control + help). */
-.carticy-ai-checkout .carticy-field + .carticy-field {
-	margin-top: 20px;
-}
-
-/* Readonly Input Fields */
+/* Read-only fields (generated keys) read as values to copy, not inputs to edit. */
 .carticy-ai-checkout input[readonly] {
-	background-color: var(--carticy-shade-50, #F3F4FF);
-	cursor: not-allowed;
-}
-
-/* IP Ranges List */
-.carticy-ai-checkout .ip-ranges-list {
-	background: #FAFBFF;
-	border: 1px solid var(--carticy-grey-light, #F3F4F6);
-	padding: 15px;
-	border-radius: 4px;
-	max-height: 300px;
-	overflow-y: auto;
-}
-
-.carticy-ai-checkout .ip-ranges-list code {
-	background: var(--carticy-base, #FFFFFF);
-	padding: 4px 8px;
-	border: 1px solid var(--carticy-grey-light, #F3F4F6);
-	border-radius: 3px;
-	font-size: 13px;
-	display: inline-block;
-	margin: 3px 5px 3px 0;
+	background-color: var(--cv-bg-subtle);
 }

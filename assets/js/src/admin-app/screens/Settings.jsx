@@ -9,6 +9,7 @@
  */
 
 import { useState, useEffect } from '@wordpress/element';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	Card,
 	Banner,
@@ -21,14 +22,14 @@ import {
 	SectionHeader,
 	Table,
 } from '@carticy/admin-ui';
-import { apiGet, apiPost, useBusy, t } from '../api';
+import { apiGet, apiPost, useBusy } from '../api';
 
 const SUB_TABS = [
-	{ id: 'prerequisites', label: 'Prerequisites' },
-	{ id: 'general', label: 'General' },
-	{ id: 'security', label: 'Security' },
-	{ id: 'api', label: 'API' },
-	{ id: 'uninstall', label: 'Uninstall' },
+	{ id: 'prerequisites', label: __( 'Prerequisites', 'carticy-ai-checkout-for-woocommerce' ) },
+	{ id: 'general', label: __( 'General', 'carticy-ai-checkout-for-woocommerce' ) },
+	{ id: 'security', label: __( 'Security', 'carticy-ai-checkout-for-woocommerce' ) },
+	{ id: 'api', label: __( 'API', 'carticy-ai-checkout-for-woocommerce' ) },
+	{ id: 'uninstall', label: __( 'Uninstall', 'carticy-ai-checkout-for-woocommerce' ) },
 ];
 
 export default function Settings() {
@@ -62,7 +63,7 @@ export default function Settings() {
 		try {
 			const r = await apiPost( '/settings', settings );
 			applyResponse( r );
-			setNotice( { tone: 'success', message: t( 'Settings saved.' ) } );
+			setNotice( { tone: 'success', message: __( 'Settings saved.', 'carticy-ai-checkout-for-woocommerce' ) } );
 		} catch ( e ) {
 			setNotice( { tone: 'critical', message: e.message } );
 		}
@@ -103,8 +104,8 @@ export default function Settings() {
 	const copy = ( value ) => () => {
 		if ( navigator.clipboard ) {
 			navigator.clipboard.writeText( value )
-				.then( () => setNotice( { tone: 'success', message: t( 'Copied to clipboard.' ) } ) )
-				.catch( () => setNotice( { tone: 'critical', message: t( 'Copy failed. Please copy manually.' ) } ) );
+				.then( () => setNotice( { tone: 'success', message: __( 'Copied to clipboard.', 'carticy-ai-checkout-for-woocommerce' ) } ) )
+				.catch( () => setNotice( { tone: 'critical', message: __( 'Copy failed. Please copy manually.', 'carticy-ai-checkout-for-woocommerce' ) } ) );
 		}
 	};
 
@@ -124,28 +125,26 @@ export default function Settings() {
 		return (
 			<div className="caic-stack">
 				<section className="cv-section">
-					<LoadingPanel label={ t( 'Loading settings…' ) } />
+					<LoadingPanel label={ __( 'Loading settings…', 'carticy-ai-checkout-for-woocommerce' ) } />
 				</section>
 			</div>
 		);
 	}
 
-	const subTabs = SUB_TABS.map( ( tab ) => ( { id: tab.id, label: t( tab.label ) } ) );
-
 	const prerequisiteColumns = [
-		{ key: 'label', header: t( 'Check' ) },
+		{ key: 'label', header: __( 'Check', 'carticy-ai-checkout-for-woocommerce' ) },
 		{
 			key: 'status',
-			header: t( 'Status' ),
+			header: __( 'Status', 'carticy-ai-checkout-for-woocommerce' ),
 			render: ( row ) => (
 				<StatusPill status={ 'pass' === row.status ? 'connected' : 'expired' }>
-					{ 'pass' === row.status ? t( 'OK' ) : t( 'Failed' ) }
+					{ 'pass' === row.status ? __( 'OK', 'carticy-ai-checkout-for-woocommerce' ) : __( 'Failed', 'carticy-ai-checkout-for-woocommerce' ) }
 				</StatusPill>
 			),
 		},
 		{
 			key: 'message',
-			header: t( 'Message' ),
+			header: __( 'Message', 'carticy-ai-checkout-for-woocommerce' ),
 			render: ( row ) => (
 				<>
 					{ row.message }
@@ -163,8 +162,8 @@ export default function Settings() {
 	return (
 		<div className="caic-stack">
 			<section className="cv-section">
-				<SectionHeader title={ t( 'Settings' ) } />
-				<Tabs tabs={ subTabs } activeId={ active } onChange={ setActive } label={ t( 'Settings sections' ) } />
+				<SectionHeader title={ __( 'Settings', 'carticy-ai-checkout-for-woocommerce' ) } />
+				<Tabs tabs={ SUB_TABS } activeId={ active } onChange={ setActive } label={ __( 'Settings sections', 'carticy-ai-checkout-for-woocommerce' ) } />
 
 				{ notice && <Banner tone={ notice.tone }>{ notice.message }</Banner> }
 
@@ -174,7 +173,7 @@ export default function Settings() {
 							columns={ prerequisiteColumns }
 							rows={ data.prerequisites }
 							getRowId={ ( row ) => row.label }
-							emptyLabel={ t( 'No prerequisite checks available.' ) }
+							emptyLabel={ __( 'No prerequisite checks available.', 'carticy-ai-checkout-for-woocommerce' ) }
 						/>
 					</Card>
 				) }
@@ -182,21 +181,21 @@ export default function Settings() {
 				{ 'general' === active && (
 					<Card>
 						<ToggleRow
-							label={ t( 'Enable plugin-wide test mode' ) }
-							help={ t( 'When enabled, SSL and IP allowlist checks are bypassed and Stripe test keys are used.' ) }
+							label={ __( 'Enable plugin-wide test mode', 'carticy-ai-checkout-for-woocommerce' ) }
+							help={ __( 'When enabled, SSL and IP allowlist checks are bypassed and Stripe test keys are used.', 'carticy-ai-checkout-for-woocommerce' ) }
 							checked={ settings.test_mode }
 							onChange={ ( e ) => setOption( 'test_mode' )( e.target.checked ) }
 						/>
 						<TextField
 							type="url"
-							label={ t( 'OpenAI Webhook URL' ) }
-							help={ t( 'Unique webhook URL provided by OpenAI during merchant onboarding (required for production).' ) }
+							label={ __( 'OpenAI Webhook URL', 'carticy-ai-checkout-for-woocommerce' ) }
+							help={ __( 'Unique webhook URL provided by OpenAI during merchant onboarding (required for production).', 'carticy-ai-checkout-for-woocommerce' ) }
 							value={ settings.webhook_url }
 							onChange={ ( e ) => setOption( 'webhook_url' )( e.target.value ) }
 						/>
 						<div className="caic-actions">
-							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ t( 'Save Changes' ) }</Button>
-							<Button loading={ 'test_webhook' === busy } onClick={ testWebhook }>{ t( 'Send Test Webhook' ) }</Button>
+							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ __( 'Save Changes', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button loading={ 'test_webhook' === busy } onClick={ testWebhook }>{ __( 'Send Test Webhook', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 					</Card>
 				) }
@@ -204,14 +203,15 @@ export default function Settings() {
 				{ 'security' === active && (
 					<Card>
 						<ToggleRow
-							label={ t( 'Only allow requests from OpenAI IP addresses' ) }
-							help={ t( 'OpenAI IP ranges loaded: %s' ).replace( '%s', String( data.ip_allowlist.count ) ) }
+							label={ __( 'Only allow requests from OpenAI IP addresses', 'carticy-ai-checkout-for-woocommerce' ) }
+							/* translators: %d: number of OpenAI IP ranges loaded. */
+							help={ sprintf( __( 'OpenAI IP ranges loaded: %d', 'carticy-ai-checkout-for-woocommerce' ), data.ip_allowlist.count ) }
 							checked={ settings.enable_ip_allowlist }
 							onChange={ ( e ) => setOption( 'enable_ip_allowlist' )( e.target.checked ) }
 						/>
 						<div className="caic-actions">
-							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ t( 'Save Changes' ) }</Button>
-							<Button loading={ 'ip' === busy } onClick={ refreshIpRanges }>{ t( 'Refresh IP Ranges' ) }</Button>
+							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ __( 'Save Changes', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button loading={ 'ip' === busy } onClick={ refreshIpRanges }>{ __( 'Refresh IP Ranges', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 					</Card>
 				) }
@@ -220,35 +220,35 @@ export default function Settings() {
 					<Card>
 						<TextField
 							readOnly
-							label={ t( 'API Key (Bearer Token)' ) }
+							label={ __( 'API Key (Bearer Token)', 'carticy-ai-checkout-for-woocommerce' ) }
 							value={ data.api_key }
 							onFocus={ ( e ) => e.target.select() }
 						/>
 						<div className="caic-actions">
-							<Button onClick={ copy( data.api_key ) }>{ t( 'Copy' ) }</Button>
-							<Button loading={ 'api_key' === busy } onClick={ regenerate( 'api_key', '/settings/regenerate-api-key', 'api_key' ) }>{ t( 'Regenerate' ) }</Button>
+							<Button onClick={ copy( data.api_key ) }>{ __( 'Copy', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button loading={ 'api_key' === busy } onClick={ regenerate( 'api_key', '/settings/regenerate-api-key', 'api_key' ) }>{ __( 'Regenerate', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 
 						<TextField
 							readOnly
-							label={ t( 'Webhook Secret (HMAC)' ) }
+							label={ __( 'Webhook Secret (HMAC)', 'carticy-ai-checkout-for-woocommerce' ) }
 							value={ data.webhook_secret }
 							onFocus={ ( e ) => e.target.select() }
 						/>
 						<div className="caic-actions">
-							<Button onClick={ copy( data.webhook_secret ) }>{ t( 'Copy' ) }</Button>
-							<Button loading={ 'webhook_secret' === busy } onClick={ regenerate( 'webhook_secret', '/settings/regenerate-webhook-secret', 'webhook_secret' ) }>{ t( 'Regenerate' ) }</Button>
+							<Button onClick={ copy( data.webhook_secret ) }>{ __( 'Copy', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<Button loading={ 'webhook_secret' === busy } onClick={ regenerate( 'webhook_secret', '/settings/regenerate-webhook-secret', 'webhook_secret' ) }>{ __( 'Regenerate', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 
 						<TextField
 							readOnly
-							label={ t( 'Product Feed URL' ) }
+							label={ __( 'Product Feed URL', 'carticy-ai-checkout-for-woocommerce' ) }
 							value={ data.product_feed_url }
 							onFocus={ ( e ) => e.target.select() }
 						/>
 						<div className="caic-actions">
-							<Button onClick={ copy( data.product_feed_url ) }>{ t( 'Copy' ) }</Button>
-							<a className="cv-btn cv-btn--secondary" href={ data.product_feed_url } target="_blank" rel="noreferrer">{ t( 'View' ) }</a>
+							<Button onClick={ copy( data.product_feed_url ) }>{ __( 'Copy', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
+							<a className="cv-btn cv-btn--secondary" href={ data.product_feed_url } target="_blank" rel="noreferrer">{ __( 'View', 'carticy-ai-checkout-for-woocommerce' ) }</a>
 						</div>
 					</Card>
 				) }
@@ -256,13 +256,13 @@ export default function Settings() {
 				{ 'uninstall' === active && (
 					<Card>
 						<ToggleRow
-							label={ t( 'Remove all plugin data when uninstalling' ) }
-							help={ t( 'When enabled, all settings, transients, and metadata are permanently deleted on uninstall.' ) }
+							label={ __( 'Remove all plugin data when uninstalling', 'carticy-ai-checkout-for-woocommerce' ) }
+							help={ __( 'When enabled, all settings, transients, and metadata are permanently deleted on uninstall.', 'carticy-ai-checkout-for-woocommerce' ) }
 							checked={ settings.delete_data_on_uninstall }
 							onChange={ ( e ) => setOption( 'delete_data_on_uninstall' )( e.target.checked ) }
 						/>
 						<div className="caic-actions">
-							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ t( 'Save Changes' ) }</Button>
+							<Button variant="primary" loading={ 'save' === busy } onClick={ saveSettings }>{ __( 'Save Changes', 'carticy-ai-checkout-for-woocommerce' ) }</Button>
 						</div>
 					</Card>
 				) }

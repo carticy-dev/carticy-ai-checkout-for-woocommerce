@@ -5,6 +5,8 @@
     "scripts": {
         "build": "webpack --mode production && npm run i18n:pot",
         "dev": "webpack --mode development --watch",
+        "lint": "npm run lint:copy && npm run lint:php",
+        "lint:copy": "node vendor/carticy/admin-ui/bin/check-copy.mjs copy-check.json",
         "lint:php": "composer run lint",
         "fix:php": "composer run format",
         "test:php": "composer run test",

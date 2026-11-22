@@ -36,20 +36,22 @@
    the background in sync with --cv-bg-page in tokens.css.
    ============================================================ */
 
+/* The page floor is the app surface. wp-admin's columns end where their
+   content or the viewport does, so when the admin menu is taller than the
+   app, the page below shows the body; painting the body (the canvas) covers
+   every height. The admin bar and menu paint their own backgrounds. */
+body.cv-takeover {
+	background: #F6F7F7; /* --cv-bg-page */
+}
+
 /* Full-bleed content area: drop wp-admin's gutters so the app shell
    paints edge to edge. Covers both desktop (20px) and the <=782px
    responsive (10px) paddings. */
 body.cv-takeover #wpcontent {
 	padding-inline-start: 0;
-	/* Paint the full-height content column, not just #wpbody-content: when the
-	   wp-admin sidebar is taller than the app content, this is what keeps the
-	   app surface taking over the whole area instead of revealing wp-admin's
-	   gray below short pages. */
-	background: #F6F7F7; /* --cv-bg-page */
 }
 body.cv-takeover #wpbody-content {
 	padding-bottom: 0;
-	background: #F6F7F7; /* --cv-bg-page */
 }
 
 /* The app shell owns the floor: hide WordPress's own footer. */

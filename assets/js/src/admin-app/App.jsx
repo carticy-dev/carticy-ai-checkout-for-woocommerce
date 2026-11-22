@@ -7,7 +7,8 @@
  */
 
 import { AppHeader, Banner } from '@carticy/admin-ui';
-import { boot, t } from './api';
+import { __ } from '@wordpress/i18n';
+import { boot } from './api';
 import { CartIcon } from './icons';
 import Analytics from './screens/Analytics';
 import Settings from './screens/Settings';
@@ -16,11 +17,11 @@ import ProductFeed from './screens/ProductFeed';
 import Wizard from './screens/Wizard';
 
 const SECTIONS = [
-	{ id: 'settings', label: 'Settings', slug: 'carticy-ai-checkout-for-woocommerce' },
-	{ id: 'product-feed', label: 'Product Feed', slug: 'carticy-ai-checkout-product-feed' },
-	{ id: 'wizard', label: 'Application Wizard', slug: 'carticy-ai-checkout-application-wizard' },
-	{ id: 'analytics', label: 'Analytics', slug: 'carticy-ai-checkout-analytics' },
-	{ id: 'logs', label: 'Logs & Monitoring', slug: 'carticy-ai-checkout-logs' },
+	{ id: 'settings', label: __( 'Settings', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-for-woocommerce' },
+	{ id: 'product-feed', label: __( 'Product Feed', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-product-feed' },
+	{ id: 'wizard', label: __( 'Application Wizard', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-application-wizard' },
+	{ id: 'analytics', label: __( 'Analytics', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-analytics' },
+	{ id: 'logs', label: __( 'Logs & Monitoring', 'carticy-ai-checkout-for-woocommerce' ), slug: 'carticy-ai-checkout-logs' },
 ];
 
 const SCREENS = {
@@ -35,22 +36,22 @@ export default function App() {
 	const Screen = SCREENS[ boot.screen ];
 	const items = SECTIONS.map( ( section ) => ( {
 		id: section.id,
-		label: t( section.label ),
+		label: section.label,
 		href: ( boot.adminUrl || '/wp-admin/' ) + 'admin.php?page=' + section.slug,
 	} ) );
 
 	return (
 		<>
 			<AppHeader
-				title={ t( 'AI Checkout' ) }
+				title={ __( 'AI Checkout', 'carticy-ai-checkout-for-woocommerce' ) }
 				icon={ <CartIcon /> }
-				navLabel={ t( 'AI Checkout sections' ) }
+				navLabel={ __( 'AI Checkout sections', 'carticy-ai-checkout-for-woocommerce' ) }
 				items={ items }
 				current={ boot.screen }
 			/>
 
 			<main className="cv-page caic-content">
-				{ Screen ? <Screen /> : <Banner tone="critical">{ t( 'Unknown screen.' ) }</Banner> }
+				{ Screen ? <Screen /> : <Banner tone="critical">{ __( 'Unknown screen.', 'carticy-ai-checkout-for-woocommerce' ) }</Banner> }
 			</main>
 		</>
 	);

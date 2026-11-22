@@ -1,5 +1,5 @@
 /**
- * Shared admin helpers: boot data, translations, and a thin REST client.
+ * Shared admin helpers: boot data and a thin REST client.
  *
  * The boot object is localized by AdminHandler when it enqueues the React
  * bundle. @wordpress/api-fetch sends the wp_rest nonce automatically, so no
@@ -8,20 +8,9 @@
 
 import apiFetch from '@wordpress/api-fetch';
 import { useState, useRef, useEffect } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 export const boot = window.carticyAiCheckoutAdmin || {};
-
-const strings = boot.i18n || {};
-
-/**
- * Translate via the PHP-localized boot map, falling back to the English source.
- *
- * @param {string} text Source string.
- * @return {string} Localized string.
- */
-export function t( text ) {
-	return Object.prototype.hasOwnProperty.call( strings, text ) ? strings[ text ] : text;
-}
 
 function nsPath( path ) {
 	return '/' + ( boot.restNamespace || 'carticy-ai-checkout-admin/v1' ) + path;
@@ -31,11 +20,11 @@ function normalize( error ) {
 	if ( error && typeof error === 'object' ) {
 		return {
 			code: error.code || 'error',
-			message: error.message || t( 'Something went wrong. Please try again.' ),
+			message: error.message || __( 'Something went wrong. Please try again.', 'carticy-ai-checkout-for-woocommerce' ),
 			data: error.data || {},
 		};
 	}
-	return { code: 'error', message: t( 'Something went wrong. Please try again.' ), data: {} };
+	return { code: 'error', message: __( 'Something went wrong. Please try again.', 'carticy-ai-checkout-for-woocommerce' ), data: {} };
 }
 
 export function apiGet( path ) {
