@@ -22,7 +22,6 @@ class ComposerStaticInita6e21aff272f91cc8d7f0fe7f0342f81
 
     public static $classMap = array (
         'Carticy\\AiCheckout\\Admin\\AdminHandler' => __DIR__ . '/../..' . '/src/Admin/AdminHandler.php',
-        'Carticy\\AiCheckout\\Admin\\AdminNotices' => __DIR__ . '/../..' . '/src/Admin/AdminNotices.php',
         'Carticy\\AiCheckout\\Api\\CheckoutSessionEndpoint' => __DIR__ . '/../..' . '/src/Api/CheckoutSessionEndpoint.php',
         'Carticy\\AiCheckout\\Api\\ProductFeedEndpoint' => __DIR__ . '/../..' . '/src/Api/ProductFeedEndpoint.php',
         'Carticy\\AiCheckout\\Core\\Activator' => __DIR__ . '/../..' . '/src/Core/Activator.php',
@@ -42,7 +41,6 @@ class ComposerStaticInita6e21aff272f91cc8d7f0fe7f0342f81
         'Carticy\\AiCheckout\\Services\\ApplicationWizardService' => __DIR__ . '/../..' . '/src/Services/ApplicationWizardService.php',
         'Carticy\\AiCheckout\\Services\\AuthenticationService' => __DIR__ . '/../..' . '/src/Services/AuthenticationService.php',
         'Carticy\\AiCheckout\\Services\\ConformanceTestService' => __DIR__ . '/../..' . '/src/Services/ConformanceTestService.php',
-        'Carticy\\AiCheckout\\Services\\ErrorHandler' => __DIR__ . '/../..' . '/src/Services/ErrorHandler.php',
         'Carticy\\AiCheckout\\Services\\ErrorLogService' => __DIR__ . '/../..' . '/src/Services/ErrorLogService.php',
         'Carticy\\AiCheckout\\Services\\IdempotencyService' => __DIR__ . '/../..' . '/src/Services/IdempotencyService.php',
         'Carticy\\AiCheckout\\Services\\IpAllowlistService' => __DIR__ . '/../..' . '/src/Services/IpAllowlistService.php',

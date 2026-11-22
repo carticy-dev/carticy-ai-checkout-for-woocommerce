@@ -43,8 +43,8 @@ final class AdminHandler {
 		add_action( 'admin_menu', array( $this, 'add_menu_pages' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 
-		// Hide third-party admin notices on plugin pages.
-		add_action( 'in_admin_header', array( $this, 'hide_unrelated_notices' ), 99 );
+		// Last, so notices added by other code earlier in the header are removed too.
+		add_action( 'in_admin_header', array( $this, 'hide_unrelated_notices' ), PHP_INT_MAX );
 		add_filter( 'admin_body_class', array( $this, 'add_takeover_body_class' ) );
 
 		// Cache-bust all of this plugin's assets by file mtime: the enqueue
@@ -64,13 +64,11 @@ final class AdminHandler {
 	}
 
 	/**
-	 * Hide third-party admin notices on plugin pages
+	 * Keep the plugin screens free of other sources' notices
 	 *
-	 * Removes all WordPress core and third-party plugin notices on Carticy admin pages
-	 * to maintain clean, branded UI. Only affects plugin pages, not other WordPress areas.
-	 *
-	 * Uses the in_admin_header hook with priority 99 to ensure it runs after most plugins
-	 * have registered their notices but before they are rendered.
+	 * The React screens draw their own header and status, and the plugin prints
+	 * no notices of its own on them, so every notice callback is removed there.
+	 * The rest of wp-admin is untouched.
 	 *
 	 * @return void
 	 */
@@ -79,13 +77,9 @@ final class AdminHandler {
 			return;
 		}
 
-		// Remove all third-party admin notice hooks.
-		// This suppresses WordPress core, WooCommerce, Stripe, and all other plugin notices.
-		remove_all_actions( 'admin_notices' );
-		remove_all_actions( 'all_admin_notices' );
-
-		// Note: Plugin's own notices using add_settings_error() will still display
-		// via the settings_errors() WordPress core function, which is separate from admin_notices.
+		foreach ( array( 'admin_notices', 'all_admin_notices', 'network_admin_notices', 'user_admin_notices' ) as $hook ) {
+			remove_all_actions( $hook );
+		}
 	}
 
 	/**

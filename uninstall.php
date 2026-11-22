@@ -39,7 +39,6 @@ function carticy_ai_checkout_uninstall_delete_options(): void {
 		'carticy_ai_checkout_webhook_url',
 		'carticy_ai_checkout_enable_ip_allowlist',
 		'carticy_ai_checkout_test_bypass_ip',
-		'carticy_ai_checkout_admin_notices',
 		'carticy_ai_checkout_application_data',
 		'carticy_ai_checkout_openai_ip_ranges',
 		'carticy_ai_checkout_openai_ip_ranges_last_updated',

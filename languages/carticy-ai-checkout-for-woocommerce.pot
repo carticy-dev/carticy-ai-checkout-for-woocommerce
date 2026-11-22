@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-22T19:26:23+00:00\n"
+"POT-Creation-Date: 2026-11-22T20:23:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: carticy-ai-checkout-for-woocommerce\n"
@@ -75,51 +75,51 @@ msgstr ""
 msgid "Install plugin"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:146
+#: src/Admin/AdminHandler.php:140
 msgid "Carticy AI Checkout"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:147
+#: src/Admin/AdminHandler.php:141
 #: assets/js/src/admin-app/App.jsx:46
 msgid "AI Checkout"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:160
-#: src/Admin/AdminHandler.php:161
+#: src/Admin/AdminHandler.php:154
+#: src/Admin/AdminHandler.php:155
 #: src/Rest/WizardController.php:518
 #: assets/js/src/admin-app/App.jsx:21
 #: assets/js/src/admin-app/screens/ProductFeed.jsx:276
 msgid "Product feed"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:173
-#: src/Admin/AdminHandler.php:174
+#: src/Admin/AdminHandler.php:167
+#: src/Admin/AdminHandler.php:168
 #: assets/js/src/admin-app/App.jsx:22
 msgid "Application wizard"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:186
-#: src/Admin/AdminHandler.php:187
+#: src/Admin/AdminHandler.php:180
+#: src/Admin/AdminHandler.php:181
 #: assets/js/src/admin-app/App.jsx:23
 msgid "Analytics"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:199
-#: src/Admin/AdminHandler.php:200
+#: src/Admin/AdminHandler.php:193
+#: src/Admin/AdminHandler.php:194
 #: assets/js/src/admin-app/App.jsx:24
 #: assets/js/src/admin-app/screens/Logs.jsx:112
 msgid "Logs & monitoring"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:374
+#: src/Admin/AdminHandler.php:368
 msgid "Source"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:406
+#: src/Admin/AdminHandler.php:400
 msgid "ChatGPT Instant Checkout"
 msgstr ""
 
-#: src/Admin/AdminHandler.php:408
+#: src/Admin/AdminHandler.php:402
 msgid "AI"
 msgstr ""
 
@@ -217,7 +217,7 @@ msgstr ""
 msgid "IP ranges refreshed successfully!"
 msgstr ""
 
-#: src/Rest/SettingsController.php:272
+#: src/Rest/SettingsController.php:273
 #: assets/js/src/admin-app/screens/Wizard.jsx:326
 msgid "Fix this"
 msgstr ""

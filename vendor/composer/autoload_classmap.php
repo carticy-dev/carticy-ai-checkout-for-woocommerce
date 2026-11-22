@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Carticy\\AiCheckout\\Admin\\AdminHandler' => $baseDir . '/src/Admin/AdminHandler.php',
-    'Carticy\\AiCheckout\\Admin\\AdminNotices' => $baseDir . '/src/Admin/AdminNotices.php',
     'Carticy\\AiCheckout\\Api\\CheckoutSessionEndpoint' => $baseDir . '/src/Api/CheckoutSessionEndpoint.php',
     'Carticy\\AiCheckout\\Api\\ProductFeedEndpoint' => $baseDir . '/src/Api/ProductFeedEndpoint.php',
     'Carticy\\AiCheckout\\Core\\Activator' => $baseDir . '/src/Core/Activator.php',
@@ -27,7 +26,6 @@ return array(
     'Carticy\\AiCheckout\\Services\\ApplicationWizardService' => $baseDir . '/src/Services/ApplicationWizardService.php',
     'Carticy\\AiCheckout\\Services\\AuthenticationService' => $baseDir . '/src/Services/AuthenticationService.php',
     'Carticy\\AiCheckout\\Services\\ConformanceTestService' => $baseDir . '/src/Services/ConformanceTestService.php',
-    'Carticy\\AiCheckout\\Services\\ErrorHandler' => $baseDir . '/src/Services/ErrorHandler.php',
     'Carticy\\AiCheckout\\Services\\ErrorLogService' => $baseDir . '/src/Services/ErrorLogService.php',
     'Carticy\\AiCheckout\\Services\\IdempotencyService' => $baseDir . '/src/Services/IdempotencyService.php',
     'Carticy\\AiCheckout\\Services\\IpAllowlistService' => $baseDir . '/src/Services/IpAllowlistService.php',
