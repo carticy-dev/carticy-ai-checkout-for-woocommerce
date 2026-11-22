@@ -7,18 +7,18 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:carticy-dev/admin-ui.git",
-                "reference": "38808bec02d1566014d653dd1101fcc5c9bcb8b8"
+                "reference": "2ad7962e54de8782e40f3b6718ed1e857b494955"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/carticy-dev/admin-ui/zipball/38808bec02d1566014d653dd1101fcc5c9bcb8b8",
-                "reference": "38808bec02d1566014d653dd1101fcc5c9bcb8b8",
+                "url": "https://api.github.com/repos/carticy-dev/admin-ui/zipball/2ad7962e54de8782e40f3b6718ed1e857b494955",
+                "reference": "2ad7962e54de8782e40f3b6718ed1e857b494955",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0"
             },
-            "time": "2026-11-22T18:20:46+00:00",
+            "time": "2026-11-22T20:13:02+00:00",
             "default-branch": true,
             "type": "library",
             "extra": {

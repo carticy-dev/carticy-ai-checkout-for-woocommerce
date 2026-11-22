@@ -343,7 +343,7 @@
   .cv-app-header__brand { flex: 1 1 auto; }
   .cv-app-header--actions .cv-app-header__utilities { flex-basis: 100%; }
   .cv-app-header__utilities, .cv-app-header .cv-header-utilities { justify-content: flex-start; }
-  .cv-app-nav__link, .cv-utility-link, .cv-app-header__actions .cv-btn { min-height: 44px; }
+  .cv-app-nav__link, .cv-utility-link, .cv-app-header__actions .cv-btn, .cv-banner__actions .cv-btn { min-height: 44px; }
   /* One row of section links that scrolls sideways, fading at the edges, instead of wrapping.
      It grows over its negative inline margins to run edge to edge. */
   .cv-app-nav {
@@ -636,17 +636,24 @@
    Banner — an in-app notice, coloured by its tone
    ============================================================ */
 .cv-banner {
-  display: flex; align-items: flex-start; gap: 12px;
+  container-type: inline-size;
+  display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px;
   padding: 14px 16px;
   border: 1px solid var(--cv-border-1);
   border-inline-start-width: 3px;
   border-radius: var(--cv-radius-sm);
   background: var(--cv-bg-surface);
 }
-.cv-banner__body { flex: 1; }
+.cv-banner__body { flex: 1 1 0; min-width: 0; }
 .cv-banner__title { font-weight: 600; color: var(--cv-fg-1); font-size: var(--cv-size-body); margin: 0; }
 .cv-banner__desc  { color: var(--cv-fg-2); font-size: var(--cv-size-meta); margin: 4px 0 0; }
-.cv-banner__actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.cv-banner__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: none; }
+/* A narrow banner (a phone, or a narrow card) keeps its text full width and
+   puts the actions on their own row, lined up with the text after the icon. */
+@container (max-width: 36rem) {
+  .cv-banner__actions { flex-basis: 100%; }
+  .cv-banner__icon ~ .cv-banner__actions { flex-basis: calc(100% - 32px); margin-inline-start: 32px; }
+}
 /* Icon: drawn in the tone's colour, top-aligned with the first line. */
 .cv-banner__icon { display: inline-grid; place-items: center; flex: none; width: 20px; height: 20px; color: var(--cv-fg-2); }
 .cv-banner__icon svg { width: 20px; height: 20px; }
